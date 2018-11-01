@@ -15,4 +15,4 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 
 3. **g3dvtk**
 
-基于VTK的Geo3DML实现。
+可选。基于VTK实现了Geo3DML的几何数据结构。
