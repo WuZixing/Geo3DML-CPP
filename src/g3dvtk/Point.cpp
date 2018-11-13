@@ -54,8 +54,11 @@ vtkPolyData* Point::GetPolyData() {
 	return polyData_;
 }
 
-void Point::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Point::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
+	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
+		return false;
+	}
 	double bounds[6] = { 0 };
 	polyData_->GetBounds(bounds);
 	minX = bounds[0];
@@ -64,4 +67,5 @@ void Point::GetBoundingBox(double& minX, double& minY, double& minZ, double& max
 	maxY = bounds[3];
 	minZ = bounds[4];
 	maxZ = bounds[5];
+	return true;
 }

@@ -79,19 +79,22 @@ SceneStyle& Project::GetSceneStyle() {
 	return sceneStyle_;
 }
 
-void Project::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Project::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
-	size_t numberOfModels = models_.size();
-	if (numberOfModels < 1) {
-		minX = maxX = 0;
-		minY = maxY = 0;
-		minZ = maxZ = 0;
-		return;
+	size_t i = 0, numberOfModels = models_.size();
+	for (; i < numberOfModels; ++i) {
+		if (models_[i]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ)) {
+			break;
+		}
 	}
-	models_[0]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+	if (i >= numberOfModels) {
+		return false;
+	}
 	double x[2], y[2], z[2];
-	for (size_t i = 1; i < numberOfModels; ++i) {
-		models_[i]->GetBoundingBox(x[0], y[0], z[0], x[1], y[1], z[1]);
+	for (++i; i < numberOfModels; ++i) {
+		if (!models_[i]->GetBoundingBox(x[0], y[0], z[0], x[1], y[1], z[1])) {
+			continue;
+		}
 		if (x[0] < minX) {
 			minX = x[0];
 		}
@@ -111,4 +114,5 @@ void Project::GetBoundingBox(double& minX, double& minY, double& minZ, double& m
 			maxZ = z[1];
 		}
 	}
+	return true;
 }

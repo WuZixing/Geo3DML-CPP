@@ -20,7 +20,7 @@ namespace g3dvtk {
 
 		/// @name Methods inherited from geo3dml::Shape.
 		//@{
-		virtual void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		virtual bool GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
 		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t);
 		//@}

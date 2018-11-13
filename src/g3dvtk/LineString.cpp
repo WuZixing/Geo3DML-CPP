@@ -58,8 +58,11 @@ geo3dml::ShapeProperty* LineString::GetProperty(geo3dml::ShapeProperty::Sampling
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-void LineString::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool LineString::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
+	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
+		return false;
+	}
 	double bounds[6] = {0};
 	polyData_->GetBounds(bounds);
 	minX = bounds[0];
@@ -68,4 +71,5 @@ void LineString::GetBoundingBox(double& minX, double& minY, double& minZ, double
 	maxY = bounds[3];
 	minZ = bounds[4];
 	maxZ = bounds[5];
+	return true;
 }

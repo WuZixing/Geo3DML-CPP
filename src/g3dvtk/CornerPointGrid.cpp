@@ -234,8 +234,11 @@ geo3dml::ShapeProperty* CornerPointGrid::GetProperty(geo3dml::ShapeProperty::Sam
 	return shapeHelper_.GetProperty(t, GetID(), cells_);
 }
 
-void CornerPointGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool CornerPointGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
+	if (cells_ == NULL || cells_->GetNumberOfPoints() < 1) {
+		return false;
+	}
 	double bounds[6] = {0};
 	cells_->GetBounds(bounds);
 	minX = bounds[0];
@@ -244,4 +247,5 @@ void CornerPointGrid::GetBoundingBox(double& minX, double& minY, double& minZ, d
 	maxY = bounds[3];
 	minZ = bounds[4];
 	maxZ = bounds[5];
+	return true;
 }

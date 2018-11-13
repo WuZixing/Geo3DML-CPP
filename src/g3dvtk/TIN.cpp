@@ -86,8 +86,11 @@ geo3dml::ShapeProperty* TIN::GetProperty(geo3dml::ShapeProperty::SamplingTarget 
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-void TIN::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool TIN::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
+	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
+		return false;
+	}
 	double bounds[6] = { 0 };
 	polyData_->GetBounds(bounds);
 	minX = bounds[0];
@@ -96,4 +99,5 @@ void TIN::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX,
 	maxY = bounds[3];
 	minZ = bounds[4];
 	maxZ = bounds[5];
+	return true;
 }

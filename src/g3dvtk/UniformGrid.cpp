@@ -81,7 +81,11 @@ geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::Samplin
 	return shapeHelper_.GetProperty(t, GetID(), uniformGrid_);
 }
 
-void UniformGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool UniformGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+	g3d_lock_guard lck(mtx_);
+	if (uniformGrid_ == NULL || uniformGrid_->GetNumberOfPoints() < 1) {
+		return false;
+	}
 	double bounds[6] = { 0 };
 	uniformGrid_->GetBounds(bounds);
 	minX = bounds[0];
@@ -90,4 +94,5 @@ void UniformGrid::GetBoundingBox(double& minX, double& minY, double& minZ, doubl
 	maxY = bounds[3];
 	minZ = bounds[4];
 	maxZ = bounds[5];
+	return true;
 }

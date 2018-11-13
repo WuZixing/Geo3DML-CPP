@@ -33,7 +33,15 @@ namespace geo3dml {
 		std::string GetParentModel();
 		//@}
 
-		void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		/// Compute bounding box of the feature class.
+		/// @param minX Output the minimum X coordinate.
+		/// @param minY Output the minimum Y coordinate.
+		/// @param minZ Output the minimum X coordinate.
+		/// @param maxX Output the maximum X coordinate.
+		/// @param maxY Output the maximum Y coordinate.
+		/// @param maxZ Output the maximum Z coordinate.
+		/// @return In case of an empty feature class, it will return false.
+		bool GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
 
 	private:
 		std::string name_;
