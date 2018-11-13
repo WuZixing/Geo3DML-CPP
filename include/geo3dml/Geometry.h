@@ -29,6 +29,8 @@ namespace geo3dml {
 		Shape* GetShape();
 		//@}
 
+		void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+
 	private:
 		std::string name_;
 		int lodLevel_;

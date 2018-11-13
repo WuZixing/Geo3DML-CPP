@@ -33,6 +33,8 @@ namespace geo3dml {
 		std::string GetParentModel();
 		//@}
 
+		void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+
 	private:
 		std::string name_;
 		std::string parentModelId_;

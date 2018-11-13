@@ -95,3 +95,9 @@ std::vector<std::string> Feature::GetFieldNames() {
 	}
 	return names;
 }
+
+void Feature::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+	minX = maxX = 0;
+	minY = maxY = 0;
+	minZ = maxZ = 0;
+}

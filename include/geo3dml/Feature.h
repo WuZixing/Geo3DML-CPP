@@ -34,6 +34,8 @@ namespace geo3dml {
 		std::vector<std::string> GetFieldNames();
 		//@}
 
+		void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+
 	private:
 		std::string name_;
 		std::string parentFeatureClassId_;

@@ -33,8 +33,9 @@ std::string Model::ModelTypeToName(Model::ModelType t) {
 
 Model::Model() {
 	type_ = Other;
-	for (int i = 0; i < 6; ++i) {
+	for (int i = 0; i < 3; ++i) {
 		box_[i] = 0;
+		box_[i + 3] = -1;
 	}
 }
 
@@ -114,6 +115,43 @@ void Model::SetBoundingBox(double minX, double minY, double minZ, double maxX, d
 
 void Model::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
+	if (box_[0] > box_[3]) {
+		if (featureClasses_.empty()) {
+			Context* ctx = GetContext();
+			if (ctx != NULL && !ctx->IsDone()) {
+				ctx->LoadMoreData();
+			}
+		}
+		size_t numberOfFeatureClasses = featureClasses_.size();
+		if (numberOfFeatureClasses < 1) {
+			minX = maxX = 0;
+			minY = maxY = 0;
+			minZ = maxZ = 0;
+			return;
+		}
+		featureClasses_[0]->GetBoundingBox(box_[0], box_[1], box_[2], box_[3], box_[4], box_[5]);
+		for (size_t i = 1; i < numberOfFeatureClasses; ++i) {
+			featureClasses_[0]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+			if (minX < box_[0]) {
+				box_[0] = minX;
+			}
+			if (minY < box_[1]) {
+				box_[1] = minY;
+			}
+			if (minZ < box_[2]) {
+				box_[2] = minZ;
+			}
+			if (maxX > box_[3]) {
+				box_[3] = maxX;
+			}
+			if (maxY > box_[4]) {
+				box_[4] = maxY;
+			}
+			if (maxZ > box_[5]) {
+				box_[5] = maxZ;
+			}
+		}
+	}
 	minX = box_[0];
 	minY = box_[1];
 	minZ = box_[2];

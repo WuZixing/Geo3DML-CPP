@@ -28,6 +28,8 @@ namespace geo3dml {
 		Model* RemoveModelAt(int i);
 		//@}
 
+		void GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+
 		SceneStyle& GetSceneStyle();
 
 	private:

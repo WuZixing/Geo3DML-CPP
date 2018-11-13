@@ -80,3 +80,14 @@ geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::Samplin
 	g3d_lock_guard lck(mtx_);
 	return shapeHelper_.GetProperty(t, GetID(), uniformGrid_);
 }
+
+void UniformGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+	double bounds[6] = { 0 };
+	uniformGrid_->GetBounds(bounds);
+	minX = bounds[0];
+	maxX = bounds[1];
+	minY = bounds[2];
+	maxY = bounds[3];
+	minZ = bounds[4];
+	maxZ = bounds[5];
+}

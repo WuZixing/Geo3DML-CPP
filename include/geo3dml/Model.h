@@ -66,7 +66,7 @@ namespace geo3dml {
 		std::string name_;
 		ModelType type_;
 		std::vector<FeatureClass*> featureClasses_;
-		double box_[6];
+		double box_[6];	///< [minX, minY, minZ, maxX, maxY, maxZ]
 		// metadata
 		std::string dateStamp_;
 		std::string description_;

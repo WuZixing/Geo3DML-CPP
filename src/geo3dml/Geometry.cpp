@@ -45,3 +45,14 @@ Shape* Geometry::GetShape() {
 	std::lock_guard<std::mutex> lck(mtx_);
 	return shape_;
 }
+
+void Geometry::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+	std::lock_guard<std::mutex> lck(mtx_);
+	if (shape_ != NULL) {
+		shape_->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+	} else {
+		minX = maxX = 0;
+		minY = maxY = 0;
+		minZ = maxZ = 0;
+	}
+}
