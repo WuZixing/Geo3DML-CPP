@@ -96,11 +96,11 @@ std::vector<std::string> Feature::GetFieldNames() {
 	return names;
 }
 
-bool Feature::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Feature::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
 	size_t i =0, numberOfGeometries = geometries_.size();
 	for (; i < numberOfGeometries; ++i) {
-		if (geometries_[i]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ)) {
+		if (geometries_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
 			break;
 		}
 	}
@@ -109,7 +109,7 @@ bool Feature::GetBoundingBox(double& minX, double& minY, double& minZ, double& m
 	}
 	double x[2], y[2], z[2];
 	for (++i; i < numberOfGeometries; ++i) {
-		if (!geometries_[i]->GetBoundingBox(x[0], y[0], z[0], x[1], y[1], z[1])) {
+		if (!geometries_[i]->GetMinimumBoundingRectangle(x[0], y[0], z[0], x[1], y[1], z[1])) {
 			continue;
 		}
 		if (x[0] < minX) {

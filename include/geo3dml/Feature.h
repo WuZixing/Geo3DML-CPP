@@ -34,7 +34,7 @@ namespace geo3dml {
 		std::vector<std::string> GetFieldNames();
 		//@}
 
-		/// Compute bounding box of the feature.
+		/// Compute the minimum bounding rectangle of the feature.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
 		/// @param minZ Output the minimum X coordinate.
@@ -42,7 +42,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of a feature without any valid shape, it will return false.
-		bool GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
 
 	private:
 		std::string name_;

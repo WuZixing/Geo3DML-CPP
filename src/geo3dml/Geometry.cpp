@@ -46,10 +46,10 @@ Shape* Geometry::GetShape() {
 	return shape_;
 }
 
-bool Geometry::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Geometry::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	std::lock_guard<std::mutex> lck(mtx_);
 	if (shape_ != NULL) {
-		return shape_->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+		return shape_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
 	} else {
 		return false;
 	}

@@ -29,7 +29,7 @@ namespace geo3dml {
 		Shape* GetShape();
 		//@}
 
-		/// Compute bounding box of the geometry.
+		/// Compute the minimum bounding rectangle of the geometry.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
 		/// @param minZ Output the minimum X coordinate.
@@ -37,7 +37,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of a geometry without a valid shape, it will return false.
-		bool GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
 
 	private:
 		std::string name_;

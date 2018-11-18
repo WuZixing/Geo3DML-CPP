@@ -103,7 +103,7 @@ FeatureClass* Model::GetFeatureClassAt(int i) {
 	return featureClasses_.at(i);
 }
 
-void Model::SetBoundingBox(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
+void Model::SetMinimumBoundingRectangle(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
 	g3d_lock_guard lck(mtx_);
 	box_[0] = minX;
 	box_[1] = minY;
@@ -113,7 +113,7 @@ void Model::SetBoundingBox(double minX, double minY, double minZ, double maxX, d
 	box_[5] = maxZ;
 }
 
-bool Model::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Model::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
 	if (box_[0] > box_[3]) {
 		if (featureClasses_.empty()) {
@@ -124,7 +124,7 @@ bool Model::GetBoundingBox(double& minX, double& minY, double& minZ, double& max
 		}
 		size_t i = 0, numberOfFeatureClasses = featureClasses_.size();
 		for (; i < numberOfFeatureClasses; ++i) {
-			if (featureClasses_[i]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ)) {
+			if (featureClasses_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
 				break;
 			}
 		}
@@ -133,7 +133,7 @@ bool Model::GetBoundingBox(double& minX, double& minY, double& minZ, double& max
 		}
 		double x[2], y[2], z[2];
 		for (++i; i < numberOfFeatureClasses; ++i) {
-			if (!featureClasses_[i]->GetBoundingBox(x[0], y[0], z[0], x[1], y[1], z[1])) {
+			if (!featureClasses_[i]->GetMinimumBoundingRectangle(x[0], y[0], z[0], x[1], y[1], z[1])) {
 				continue;
 			}
 			if (x[0] < minX) {

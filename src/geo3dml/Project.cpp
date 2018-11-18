@@ -79,11 +79,11 @@ SceneStyle& Project::GetSceneStyle() {
 	return sceneStyle_;
 }
 
-bool Project::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
 	size_t i = 0, numberOfModels = models_.size();
 	for (; i < numberOfModels; ++i) {
-		if (models_[i]->GetBoundingBox(minX, minY, minZ, maxX, maxY, maxZ)) {
+		if (models_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
 			break;
 		}
 	}
@@ -92,7 +92,7 @@ bool Project::GetBoundingBox(double& minX, double& minY, double& minZ, double& m
 	}
 	double x[2], y[2], z[2];
 	for (++i; i < numberOfModels; ++i) {
-		if (!models_[i]->GetBoundingBox(x[0], y[0], z[0], x[1], y[1], z[1])) {
+		if (!models_[i]->GetMinimumBoundingRectangle(x[0], y[0], z[0], x[1], y[1], z[1])) {
 			continue;
 		}
 		if (x[0] < minX) {

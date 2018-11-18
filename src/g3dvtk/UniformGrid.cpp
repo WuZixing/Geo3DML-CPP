@@ -81,7 +81,7 @@ geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::Samplin
 	return shapeHelper_.GetProperty(t, GetID(), uniformGrid_);
 }
 
-bool UniformGrid::GetBoundingBox(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
 	g3d_lock_guard lck(mtx_);
 	if (uniformGrid_ == NULL || uniformGrid_->GetNumberOfPoints() < 1) {
 		return false;
