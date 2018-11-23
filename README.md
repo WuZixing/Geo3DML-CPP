@@ -26,7 +26,7 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 > ```
 > include_directories(${G3DXML_INCLUDE_DIRS})
 > ...
-> > target_link_libraries(${xxx} ${G3DXML_LIBRARIES})
+> target_link_libraries(${xxx} ${G3DXML_LIBRARIES})
 > ```
 
 
