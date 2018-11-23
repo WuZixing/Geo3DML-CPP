@@ -21,7 +21,7 @@ Geo3DML C++ SDK.
 
 Geo3DML XML文件读写库。仅支持UTF8编码。
 
-编译&链接：：
+编译&链接：
 
 > ```
 > include_directories(${G3DXML_INCLUDE_DIRS})
@@ -34,7 +34,7 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 
 可选。基于VTK实现了Geo3DML的几何数据结构。
 
-编译&链接：：
+编译&链接：
 
 > ```
 > set(USE_G3DVTK_LIBRARIES ON)
