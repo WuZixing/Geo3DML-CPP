@@ -21,7 +21,7 @@ void LineString::AddVertex(double x, double y, double z) {
 	if (pts->GetNumberOfPoints() > 1) {
 		vtkIdType previousPt = lastPt - 1;
 		vtkSmartPointer<vtkIdList> ptList = vtkSmartPointer<vtkIdList>::New();
-		ptList->Allocate(1);
+		ptList->Allocate(2);
 		ptList->InsertNextId(previousPt);
 		ptList->InsertNextId(lastPt);
 		polyData_->InsertNextCell(VTK_LINE, ptList);
