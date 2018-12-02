@@ -14,7 +14,7 @@ namespace g3dvtk {
 		void BindDataSet(vtkDataSetAttributes* ds);
 
 	public:
-		virtual ShapeProperty& AddField(const geo3dml::Field& f);
+		virtual bool AddField(const geo3dml::Field& f);
 
 		/// @name Attribute setting / getting methods for target elements by field name.
 		//@{

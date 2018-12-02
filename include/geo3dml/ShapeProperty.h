@@ -50,7 +50,7 @@ namespace geo3dml {
 		const Version& VersionInfo();
 
 		//@{
-		virtual ShapeProperty& AddField(const Field& f);
+		virtual bool AddField(const Field& f);
 		virtual int GetFieldCount();
 		virtual const Field& GetFieldAt(int i);
 		/// @brief Get field's index.

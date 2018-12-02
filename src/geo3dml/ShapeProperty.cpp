@@ -104,10 +104,21 @@ const Version& ShapeProperty::VersionInfo() {
 	return versionInfo_;
 }
 
-ShapeProperty& ShapeProperty::AddField(const Field& f) {
+bool ShapeProperty::AddField(const Field& f) {
 	g3d_lock_guard lck(mtx_);
-	fields_.push_back(f);
-	return *this;
+	std::vector<Field>::const_iterator citor = fields_.cbegin();
+	while (citor != fields_.cend()) {
+		if (citor->Name() == f.Name()) {
+			break;
+		}
+		++citor;
+	}
+	if (citor == fields_.cend()) {
+		fields_.push_back(f);
+		return true;
+	} else {
+		return false;
+	}
 }
 
 int ShapeProperty::GetFieldCount() {

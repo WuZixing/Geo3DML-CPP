@@ -25,11 +25,21 @@ void ShapeProperty::BindDataSet(vtkDataSetAttributes* ds) {
 	dataSet_ = ds;
 }
 
-ShapeProperty& ShapeProperty::AddField(const geo3dml::Field& f) {
+bool ShapeProperty::AddField(const geo3dml::Field& f) {
 	g3d_lock_guard lck(mtx_);
-	geo3dml::ShapeProperty::AddField(f);
-	size_t fieldIndex = GetFieldCount() - 1;
-	vtkAbstractArray* dataArray = dataSet_->GetAbstractArray((int)fieldIndex);
+	switch (f.DataType()) {
+	case geo3dml::Field::Boolean:
+	case geo3dml::Field::Double:
+	case geo3dml::Field::Integer:
+	case geo3dml::Field::Text:
+		break;
+	default:
+		return false;
+	}
+	if (!geo3dml::ShapeProperty::AddField(f)) {
+		return false;
+	}
+	vtkAbstractArray* dataArray = dataSet_->GetAbstractArray(f.Name().c_str());
 	if (dataArray == NULL) {
 		switch (f.DataType()) {
 		case geo3dml::Field::Boolean: {
@@ -59,10 +69,8 @@ ShapeProperty& ShapeProperty::AddField(const geo3dml::Field& f) {
 		default:
 			break;
 		}
-	} else {
-		dataArray->SetName(f.Name().c_str());
 	}
-	return *this;
+	return true;
 }
 
 double ShapeProperty::DoubleValue(const std::string& field, int targetIndex) {
