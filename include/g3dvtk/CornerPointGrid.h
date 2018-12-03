@@ -27,9 +27,9 @@ namespace g3dvtk {
 			double bottomBackLeft[3], double bottomBackRight[3],
 			double topFrontLeft[3], double topFrontRight[3],
 			double topBackLeft[3], double topBackRight[3],
-			bool beValied = true
+			bool beValid = true
 		);
-		virtual void SetCellValidation(int i, int j, int k, bool isValied = true);
+		virtual void SetCellValidation(int i, int j, int k, bool isValid = true);
 		virtual void GetPillarAt(int i, int j, double headPos[3], double tailPos[3]);
 		virtual void GetCellAt(int i, int j, int k,
 			double bottomFrontLeft[3], double bottomFrontRight[3],
@@ -55,7 +55,7 @@ namespace g3dvtk {
 		/// Prviate non-lock implementation of GetDimensions.
 		void InnerGetDimensions(int& i, int& j, int& k);
 		/// Private non-lock implementation of SetCellValidation.
-		void InnerSetCellValidation(int i, int j, int k, bool isValied = true);
+		void InnerSetCellValidation(int i, int j, int k, bool isValid = true);
 
 	private:
 		const unsigned char Cell_Invalid = 0;

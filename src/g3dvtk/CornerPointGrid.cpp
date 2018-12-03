@@ -79,7 +79,7 @@ void CornerPointGrid::AddNextCell(
 	double bottomBackLeft[3], double bottomBackRight[3],
 	double topFrontLeft[3], double topFrontRight[3],
 	double topBackLeft[3], double topBackRight[3],
-	bool beValied
+	bool beValid
 ) {
 	g3d_lock_guard lck(mtx_);
 	int dimI = 0, dimJ = 0, dimK = 0;
@@ -145,22 +145,22 @@ void CornerPointGrid::AddNextCell(
 		}
 	}
 	// validation
-	InnerSetCellValidation(i, j, k, beValied);
+	InnerSetCellValidation(i, j, k, beValid);
 }
 
-void CornerPointGrid::SetCellValidation(int i, int j, int k, bool isValied) {
+void CornerPointGrid::SetCellValidation(int i, int j, int k, bool isValid) {
 	g3d_lock_guard lck(mtx_);
-	InnerSetCellValidation(i, j, k, isValied);
+	InnerSetCellValidation(i, j, k, isValid);
 }
 
-void CornerPointGrid::InnerSetCellValidation(int i, int j, int k, bool isValied) {
+void CornerPointGrid::InnerSetCellValidation(int i, int j, int k, bool isValid) {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	InnerGetDimensions(dimI, dimJ, dimK);
 	dimI += 1;
 	dimJ += 1;
 	dimK += 1;
 	int ptId = k * dimJ * dimI + j * dimI + i;
-	blankPoints_->SetValue(ptId, isValied ? Cell_Valid : Cell_Invalid);
+	blankPoints_->SetValue(ptId, isValid ? Cell_Valid : Cell_Invalid);
 }
 
 void CornerPointGrid::GetCellAt(int i, int j, int k,
