@@ -3,8 +3,6 @@
 #include <geo3dml/CornerPointGrid.h>
 #include <vtkPolyData.h>
 #include <vtkStructuredGrid.h>
-#include <vtkBlankStructuredGrid.h>
-#include <vtkUnsignedCharArray.h>
 #include <g3dvtk/ShapeHelper.h>
 
 namespace g3dvtk {
@@ -49,7 +47,6 @@ namespace g3dvtk {
 	public:
 		vtkPolyData* GetPillars();
 		vtkStructuredGrid* GetStructuredGrid();
-		vtkBlankStructuredGrid* GetBlankStructuredGrid();
 
 	private:
 		/// Prviate non-lock implementation of GetDimensions.
@@ -58,14 +55,8 @@ namespace g3dvtk {
 		void InnerSetCellValidation(int i, int j, int k, bool isValid = true);
 
 	private:
-		const unsigned char Cell_Invalid = 0;
-		const unsigned char Cell_Valid = 1;
-
-	private:
 		vtkSmartPointer<vtkPolyData> pillars_;
 		vtkSmartPointer<vtkStructuredGrid> cells_;
-		vtkSmartPointer<vtkBlankStructuredGrid> blankCells_;
-		vtkSmartPointer<vtkUnsignedCharArray> blankPoints_;
 		ShapeHelper shapeHelper_;
 	};
 }

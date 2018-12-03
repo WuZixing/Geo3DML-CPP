@@ -46,6 +46,7 @@ void UniformGrid::SetCellValidation(int i, int j, int k, bool beValid) {
 	} else {
 		uniformGrid_->BlankCell(cellId);
 	}
+	uniformGrid_->Modified();
 }
 
 bool UniformGrid::IsCellValid(int i, int j, int k) {

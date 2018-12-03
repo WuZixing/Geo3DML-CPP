@@ -33,19 +33,6 @@ bool CornerPointGrid::Init(int dimI, int dimJ, int dimK) {
 	cells_ = vtkSmartPointer<vtkStructuredGrid>::New();
 	cells_->SetDimensions(dimI + 1, dimJ + 1, dimK + 1);	// vtkStructuredGrid needs to know dimensions in vertices.
 	cells_->SetPoints(pts);
-
-	blankPoints_ = vtkSmartPointer<vtkUnsignedCharArray>::New();
-	blankPoints_->SetName("_blankPoints");
-	blankPoints_->SetNumberOfComponents(1);
-	blankPoints_->SetNumberOfTuples(numberOfPoints);
-	blankPoints_->FillValue(Cell_Valid);
-	vtkPointData* ptData = cells_->GetPointData();
-	ptData->AddArray(blankPoints_);
-	blankCells_ = vtkSmartPointer<vtkBlankStructuredGrid>::New();
-	blankCells_->SetArrayName(blankPoints_->GetName());
-	blankCells_->SetMinBlankingValue(0);
-	blankCells_->SetMaxBlankingValue(0.5);
-	blankCells_->SetInputData(cells_);
 	return true;
 }
 
@@ -151,16 +138,17 @@ void CornerPointGrid::AddNextCell(
 void CornerPointGrid::SetCellValidation(int i, int j, int k, bool isValid) {
 	g3d_lock_guard lck(mtx_);
 	InnerSetCellValidation(i, j, k, isValid);
+	cells_->Modified();
 }
 
 void CornerPointGrid::InnerSetCellValidation(int i, int j, int k, bool isValid) {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	InnerGetDimensions(dimI, dimJ, dimK);
-	dimI += 1;
-	dimJ += 1;
-	dimK += 1;
-	int ptId = k * dimJ * dimI + j * dimI + i;
-	blankPoints_->SetValue(ptId, isValid ? Cell_Valid : Cell_Invalid);
+	if (isValid) {
+		cells_->UnBlankCell(k * dimJ * dimI + j * dimI + i);
+	} else {
+		cells_->BlankCell(k* dimJ * dimI + j * dimI + i);
+	}
 }
 
 void CornerPointGrid::GetCellAt(int i, int j, int k,
@@ -194,7 +182,7 @@ void CornerPointGrid::GetCellAt(int i, int j, int k,
 	pts->GetPoint(indexOfTopBackLeft, topBackLeft);
 	pts->GetPoint(indexOfTopBackRight, topBackRight);
 	// validation
-	isValid = blankPoints_->GetValue(baseIndex) == Cell_Valid;
+	isValid = cells_->IsCellVisible(k * dimJ * dimI + j * dimI + i);
 }
 
 void CornerPointGrid::GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) {
@@ -217,11 +205,6 @@ vtkPolyData* CornerPointGrid::GetPillars() {
 vtkStructuredGrid* CornerPointGrid::GetStructuredGrid() {
 	g3d_lock_guard lck(mtx_);
 	return cells_;
-}
-
-vtkBlankStructuredGrid* CornerPointGrid::GetBlankStructuredGrid() {
-	g3d_lock_guard lck(mtx_);
-	return blankCells_;
 }
 
 void CornerPointGrid::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {

@@ -73,8 +73,10 @@ static int _wstat(const wchar_t* path, struct _stat* info)
 #    ifndef _MSC_VER
 #      ifdef HAVE__STAT64
 #        define stat(x,y) _stat64(x,y)
+#        define wstat(x,y) _wstat64(x,y)
 #      else
 #        define stat(x,y) _stat(x,y)
+#        define wstat(x,y) _wstat(x,y)
 #      endif
 #    endif
 #    define HAVE_STAT
@@ -84,8 +86,10 @@ static int _wstat(const wchar_t* path, struct _stat* info)
 #    if defined(_WIN32) || defined (__DJGPP__) && !defined (__CYGWIN__)
 #      ifdef HAVE__STAT64
 #        define stat _stat64
+#        define wstat _wstat64
 #      else
 #        define stat _stat
+#        define wstat _wstat
 #      endif
 #    endif
 #  endif
@@ -657,7 +661,7 @@ xmlWrapStatUtf8(const char *path,struct stat *info)
     wPath = __xmlIOWin32UTF8ToWChar(path);
     if (wPath)
     {
-       retval = _wstat(wPath,info);
+       retval = wstat(wPath,info);
        xmlFree(wPath);
     }
     /* maybe path in native encoding */
