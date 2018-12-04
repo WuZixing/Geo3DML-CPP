@@ -102,6 +102,7 @@ ShapeProperty& ShapeProperty::DoubleValue(const std::string& field, int targetIn
 		return *this;
 	}
 	doubleArray->InsertValue(targetIndex, v);
+	doubleArray->Modified();
 	return *this;
 }
 
@@ -134,6 +135,7 @@ ShapeProperty& ShapeProperty::TextValue(const std::string& field, int targetInde
 		return *this;
 	}
 	stringArray->InsertValue(targetIndex, v.c_str());
+	stringArray->Modified();
 	return *this;
 }
 
@@ -166,6 +168,7 @@ ShapeProperty& ShapeProperty::IntValue(const std::string& field, int targetIndex
 		return *this;
 	}
 	intArray->InsertValue(targetIndex, v);
+	intArray->Modified();
 	return *this;
 }
 
@@ -198,6 +201,7 @@ ShapeProperty& ShapeProperty::BooleanValue(const std::string& field, int targetI
 		return *this;
 	}
 	charArray->InsertValue(targetIndex, v ? (unsigned char)1 : (unsigned char)0);
+	charArray->Modified();
 	return *this;
 }
 
@@ -229,6 +233,7 @@ ShapeProperty& ShapeProperty::DoubleValue(int fieldIndex, int targetIndex, doubl
 		return *this;
 	}
 	doubleArray->InsertValue(targetIndex, v);
+	doubleArray->Modified();
 	return *this;
 }
 
@@ -260,6 +265,7 @@ ShapeProperty& ShapeProperty::TextValue(int fieldIndex, int targetIndex, const s
 		return *this;
 	}
 	stringArray->InsertValue(targetIndex, v.c_str());
+	stringArray->Modified();
 	return *this;
 }
 
@@ -291,6 +297,7 @@ ShapeProperty& ShapeProperty::IntValue(int fieldIndex, int targetIndex, int v) {
 		return *this;
 	}
 	intArray->InsertValue(targetIndex, v);
+	intArray->Modified();
 	return *this;
 }
 
@@ -322,6 +329,7 @@ ShapeProperty& ShapeProperty::BooleanValue(int fieldIndex, int targetIndex, bool
 		return *this;
 	}
 	charArray->InsertValue(targetIndex, v ? (unsigned char)1 : (unsigned char)0);
+	charArray->Modified();
 	return *this;
 }
 
