@@ -18,6 +18,7 @@ void MultiPoint::AddPoint(double x, double y, double z) {
 	g3d_lock_guard lck(mtx_);
 	vtkIdType ptIndex = polyData_->GetPoints()->InsertNextPoint(x, y, z);
 	polyData_->InsertNextCell(VTK_VERTEX, 1, &ptIndex);
+	polyData_->Modified();
 }
 
 int MultiPoint::GetPointCount() {

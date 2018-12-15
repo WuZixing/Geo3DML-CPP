@@ -23,6 +23,7 @@ void Point::SetPosition(double x, double y, double z) {
 		vtkIdType ptIndex = pts->InsertNextPoint(x, y, z);
 		polyData_->InsertNextCell(VTK_VERTEX, 1, &ptIndex);
 	}
+	polyData_->Modified();
 }
 
 void Point::GetPosition(double& x, double& y, double& z) {

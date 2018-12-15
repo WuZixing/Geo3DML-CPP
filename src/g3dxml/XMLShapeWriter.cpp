@@ -24,13 +24,18 @@ bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output) {
 			if (point != NULL) {
 				WritePoint(point, output);
 			} else {
-				geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(shape);
-				if (cornerGrid != NULL) {
-					WriteCornerPointGrid(cornerGrid, output);
+				geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(shape);
+				if (mPoint != NULL) {
+					WriteMultiPoint(mPoint, output);
 				} else {
-					geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(shape);
-					if (rectGrid != NULL) {
-						WriteUniformGrid(rectGrid, output);
+					geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(shape);
+					if (cornerGrid != NULL) {
+						WriteCornerPointGrid(cornerGrid, output);
+					} else {
+						geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(shape);
+						if (rectGrid != NULL) {
+							WriteUniformGrid(rectGrid, output);
+						}
 					}
 				}
 			}
@@ -89,6 +94,21 @@ void XMLShapeWriter::WritePoint(geo3dml::Point* point, std::ostream& output) {
 	point->GetPosition(x, y, z);
 	output << "<gml:pos srsDimension=\"3\">" << x << " " << y << " " << z << "</gml:pos>" << std::endl;
 	output << "</gml:Point>" << std::endl;
+}
+
+void XMLShapeWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output) {
+	output << "<gml:MultiPoint gml:id=\"" << mPoint->GetID() << "\">" << std::endl
+		<< "<gml:pointMembers>" << std::endl;
+	double x = 0, y = 0, z = 0;
+	int ptNum = mPoint->GetPointCount();
+	for (int i = 0; i < ptNum; ++i) {
+		mPoint->GetPointAt(i, x, y, z);
+		output << "<gml:Point gml:id=\"" << i << "\">" << std::endl 
+			<< "<gml:pos srsDimension=\"3\">" << x << " " << y << " " << z << "</gml:pos>" << std::endl 
+			<< "</gml:Point>" << std::endl;
+	}
+	output << "</gml:pointMembers>" << std::endl
+		<< "</gml:MultiPoint>" << std::endl;
 }
 
 void XMLShapeWriter::WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output) {

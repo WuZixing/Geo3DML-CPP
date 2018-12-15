@@ -5,6 +5,7 @@
 #include <g3dxml/XMLGeoDiscreteCoverageReader.h>
 #include <g3dxml/XMLLineStringReader.h>
 #include <g3dxml/XMLPointReader.h>
+#include <g3dxml/XMLMultiPointReader.h>
 
 using namespace g3dxml;
 
@@ -112,6 +113,13 @@ geo3dml::Shape* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				shape = pointReader.ReadPoint(reader);
 				if (shape == NULL) {
 					SetStatus(false, pointReader.Error());
+					break;
+				}
+			} else if (_stricmp(localName, XMLMultiPointReader::Element.c_str()) == 0) {
+				XMLMultiPointReader mPointReader(g3dFactory_);
+				shape = mPointReader.ReadMultiPoint(reader);
+				if (shape == NULL) {
+					SetStatus(false, mPointReader.Error());
 					break;
 				}
 			}
