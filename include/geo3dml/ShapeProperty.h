@@ -61,12 +61,16 @@ namespace geo3dml {
 
 		/// @name Attribute setting / getting methods for target elements by field name.
 		//@{
+		virtual void FillDoubleValue(const std::string field, int numberOfValues, double v) = 0;
 		virtual double DoubleValue(const std::string& field, int targetIndex) = 0;
 		virtual ShapeProperty& DoubleValue(const std::string& field, int targetIndex, double v) = 0;
+		virtual void FillTextValue(const std::string& field, int numberOfValues, const std::string& v) = 0;
 		virtual std::string TextValue(const std::string& field, int targetIndex) = 0;
 		virtual ShapeProperty& TextValue(const std::string& field, int targetIndex, const std::string& v) = 0;
+		virtual void FillIntValue(const std::string& field, int numberOfValues, int v) = 0;
 		virtual int IntValue(const std::string& field, int targetIndex) = 0;
 		virtual ShapeProperty& IntValue(const std::string& field, int targetIndex, int v) = 0;
+		virtual void FillBooleanValue(const std::string& field, int numberOfValues, bool v) = 0;
 		virtual bool BooleanValue(const std::string& field, int targetIndex) = 0;
 		virtual ShapeProperty& BooleanValue(const std::string& field, int targetIndex, bool v) = 0;
 		//@}
