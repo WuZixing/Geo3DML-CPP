@@ -10,6 +10,7 @@
 #include "UniformGrid.h"
 #include "LineString.h"
 #include "Point.h"
+#include "MultiPoint.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -35,6 +36,7 @@ namespace geo3dml {
 		/// @name shape (goemetry) objects.
 		//@{
 		virtual Point* NewPoint() = 0;
+		virtual MultiPoint* NewMultiPoint() = 0;
 		virtual LineString* NewLineString() = 0;
 		virtual TIN* NewTIN() = 0;
 		virtual CornerPointGrid* NewCornerPointGrid() = 0;

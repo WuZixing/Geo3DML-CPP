@@ -5,6 +5,7 @@
 #include <g3dvtk/LineString.h>
 #include <g3dvtk/ShapeProperty.h>
 #include <g3dvtk/Point.h>
+#include <g3dvtk/MultiPoint.h>
 
 using namespace g3dvtk;
 
@@ -38,6 +39,10 @@ geo3dml::Feature* ObjectFactory::NewFeature() {
 
 geo3dml::Point* ObjectFactory::NewPoint() {
 	return new Point();
+}
+
+geo3dml::MultiPoint* ObjectFactory::NewMultiPoint() {
+	return new MultiPoint();
 }
 
 geo3dml::LineString* ObjectFactory::NewLineString() {
