@@ -25,6 +25,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/ShapeProperty.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/LineString.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Point.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiPoint.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC

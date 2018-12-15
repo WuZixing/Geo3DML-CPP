@@ -22,6 +22,7 @@ list(APPEND G3DVTK_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/LineString.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ShapeHelper.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/Point.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiPoint.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})
