@@ -8,6 +8,7 @@ using namespace g3dvtk;
 
 ShapeProperty::ShapeProperty() {
 	dataSet_ = vtkDataSetAttributes::New();
+	baseIndexOfFields_ = dataSet_->GetNumberOfArrays();
 }
 
 ShapeProperty::~ShapeProperty() {
@@ -17,6 +18,7 @@ ShapeProperty::~ShapeProperty() {
 void ShapeProperty::BindDataSet(vtkDataSetAttributes* ds) {
 	g3d_lock_guard lck(mtx_);
 	// substitue ds for dataset_.
+	baseIndexOfFields_ = ds->GetNumberOfArrays();
 	int arrayNum = dataSet_->GetNumberOfArrays();
 	for (int i = 0; i < arrayNum; ++i) {
 		ds->AddArray(dataSet_->GetAbstractArray(i));
@@ -291,58 +293,135 @@ ShapeProperty& ShapeProperty::BooleanValue(const std::string& field, int targetI
 
 double ShapeProperty::DoubleValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	// vtkDatasetAttributes may hava a default attibute of ghost cells, so the actual field index in vtkDatasetAttributes may not equal to this fieldIndex,
-	// which means check field by name is the safe way to visit the right attibute.
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return DoubleValue(field.Name(), targetIndex);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		return 0;
+	}
+	vtkDoubleArray* doubleArray = vtkDoubleArray::SafeDownCast(ary);
+	if (doubleArray != NULL) {
+		return doubleArray->GetValue(targetIndex);
+	} else {
+		return 0;
+	}
 }
 
 ShapeProperty& ShapeProperty::DoubleValue(int fieldIndex, int targetIndex, double v) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return DoubleValue(field.Name(), targetIndex, v);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		vtkSmartPointer<vtkDoubleArray> dataArray = vtkSmartPointer<vtkDoubleArray>::New();
+		dataArray->SetNumberOfComponents(1);
+		dataSet_->AddArray(dataArray);
+		ary = dataArray.Get();
+	}
+	vtkDoubleArray* doubleArray = vtkDoubleArray::SafeDownCast(ary);
+	if (doubleArray == NULL) {
+		return *this;
+	}
+	doubleArray->InsertValue(targetIndex, v);
+	doubleArray->Modified();
+	return *this;
 }
 
 std::string ShapeProperty::TextValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return TextValue(field.Name(), targetIndex);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		return "";
+	}
+	vtkStringArray* stringArray = vtkStringArray::SafeDownCast(ary);
+	if (stringArray != NULL) {
+		return stringArray->GetValue(targetIndex);
+	} else {
+		return "";
+	}
 }
 
 ShapeProperty& ShapeProperty::TextValue(int fieldIndex, int targetIndex, const std::string& v) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return TextValue(field.Name(), targetIndex, v);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		vtkSmartPointer<vtkStringArray> dataArray = vtkSmartPointer<vtkStringArray>::New();
+		dataArray->SetNumberOfComponents(1);
+		dataSet_->AddArray(dataArray);
+		ary = dataArray;
+	}
+	vtkStringArray* stringArray = vtkStringArray::SafeDownCast(ary);
+	if (stringArray == NULL) {
+		return *this;
+	}
+	stringArray->InsertValue(targetIndex, v.c_str());
+	stringArray->Modified();
+	return *this;
 }
 
 int ShapeProperty::IntValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return IntValue(field.Name(), targetIndex);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		return 0;
+	}
+	vtkIntArray* intArray = vtkIntArray::SafeDownCast(ary);
+	if (intArray != NULL) {
+		return intArray->GetValue(targetIndex);
+	} else {
+		return 0;
+	}
 }
 
 ShapeProperty& ShapeProperty::IntValue(int fieldIndex, int targetIndex, int v) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return IntValue(field.Name(), targetIndex, v);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		vtkSmartPointer<vtkIntArray> dataArray = vtkSmartPointer<vtkIntArray>::New();
+		dataArray->SetNumberOfComponents(1);
+		dataSet_->AddArray(dataArray);
+		ary = dataArray.Get();
+	}
+	vtkIntArray* intArray = vtkIntArray::SafeDownCast(ary);
+	if (intArray == NULL) {
+		return *this;
+	}
+	intArray->InsertValue(targetIndex, v);
+	intArray->Modified();
+	return *this;
 }
 
 bool ShapeProperty::BooleanValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return BooleanValue(field.Name(), targetIndex);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		return false;
+	}
+	vtkUnsignedCharArray* charArray = vtkUnsignedCharArray::SafeDownCast(ary);
+	if (charArray != NULL) {
+		return charArray->GetValue(targetIndex);
+	} else {
+		return false;
+	}
 }
 
 ShapeProperty& ShapeProperty::BooleanValue(int fieldIndex, int targetIndex, bool v) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	return BooleanValue(field.Name(), targetIndex, v);
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
+	if (ary == NULL) {
+		vtkSmartPointer<vtkUnsignedCharArray> dataArray = vtkSmartPointer<vtkUnsignedCharArray>::New();
+		dataArray->SetNumberOfComponents(1);
+		dataSet_->AddArray(dataArray);
+		ary = dataArray.Get();
+	}
+	vtkUnsignedCharArray* charArray = vtkUnsignedCharArray::SafeDownCast(ary);
+	if (charArray == NULL) {
+		return *this;
+	}
+	charArray->InsertValue(targetIndex, v ? (unsigned char)1 : (unsigned char)0);
+	charArray->Modified();
+	return *this;
 }
 
 int ShapeProperty::GetValueCount(int fieldIndex) {
 	g3d_lock_guard lck(mtx_);
-	const geo3dml::Field& field = GetFieldAt(fieldIndex);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.Name().c_str());
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(baseIndexOfFields_ + fieldIndex);
 	if (ary != NULL) {
 		return ary->GetNumberOfTuples();
 	} else {

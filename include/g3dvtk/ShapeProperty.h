@@ -48,5 +48,6 @@ namespace g3dvtk {
 
 	private:
 		vtkSmartPointer<vtkDataSetAttributes> dataSet_;
+		int baseIndexOfFields_;	///!< vtkDatasetAttributes may hava some default attibutes for ghost cells etc., additional fields would be appended to the existing fields.
 	};
 }
