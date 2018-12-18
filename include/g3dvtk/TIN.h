@@ -32,7 +32,6 @@ namespace g3dvtk {
 
 	private:
 		vtkSmartPointer<vtkPolyData> polyData_;
-		vtkSmartPointer<vtkIdList> triBuf_;
 		ShapeHelper shapeHelper_;
 	};
 }

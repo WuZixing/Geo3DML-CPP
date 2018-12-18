@@ -1,4 +1,5 @@
 #include <g3dvtk/TIN.h>
+#include <vtkCellArray.h>
 
 using namespace g3dvtk;
 
@@ -8,8 +9,6 @@ TIN::TIN() {
 	vtkSmartPointer<vtkCellArray> polys = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetPolys(polys);
-	triBuf_ = vtkSmartPointer<vtkIdList>::New();
-	triBuf_->Allocate(3);
 }
 
 TIN::~TIN() {
@@ -49,11 +48,11 @@ void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
 		// invalid vertex index.
 		return;
 	}
-	triBuf_->Reset();
-	triBuf_->InsertId(0, vertex1);
-	triBuf_->InsertId(1, vertex2);
-	triBuf_->InsertId(2, vertex3);
-	polyData_->InsertNextCell(VTK_TRIANGLE, triBuf_);
+	vtkIdType vertices[3];
+	vertices[0] = vertex1;
+	vertices[1] = vertex2;
+	vertices[2] = vertex3;
+	polyData_->InsertNextCell(VTK_TRIANGLE, 3, vertices);
 }
 
 int TIN::GetTriangleCount() {
@@ -63,10 +62,11 @@ int TIN::GetTriangleCount() {
 
 void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) {
 	g3d_lock_guard lck(mtx_);
-	polyData_->GetPolys()->GetCell(i, triBuf_);
-	vertex1 = triBuf_->GetId(0);
-	vertex2 = triBuf_->GetId(1);
-	vertex3 = triBuf_->GetId(2);
+	vtkIdType n = 0, *pts = NULL;
+	polyData_->GetCell(i, pts);
+	vertex1 = pts[1];	// pts[0] is the count of points.
+	vertex2 = pts[2];
+	vertex3 = pts[3];
 }
 
 vtkPolyData* TIN::GetPolyData() {
