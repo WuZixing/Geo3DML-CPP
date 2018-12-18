@@ -8,6 +8,8 @@ TIN::TIN() {
 	vtkSmartPointer<vtkCellArray> polys = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetPolys(polys);
+	triBuf_ = vtkSmartPointer<vtkIdList>::New();
+	triBuf_->Allocate(3);
 }
 
 TIN::~TIN() {
@@ -47,12 +49,11 @@ void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
 		// invalid vertex index.
 		return;
 	}
-	vtkSmartPointer<vtkIdList> ptList = vtkSmartPointer<vtkIdList>::New();
-	ptList->Allocate(3);
-	ptList->InsertNextId(vertex1);
-	ptList->InsertNextId(vertex2);
-	ptList->InsertNextId(vertex3);
-	polyData_->InsertNextCell(VTK_TRIANGLE, ptList);
+	triBuf_->Reset();
+	triBuf_->InsertId(0, vertex1);
+	triBuf_->InsertId(1, vertex2);
+	triBuf_->InsertId(2, vertex3);
+	polyData_->InsertNextCell(VTK_TRIANGLE, triBuf_);
 }
 
 int TIN::GetTriangleCount() {
@@ -62,13 +63,10 @@ int TIN::GetTriangleCount() {
 
 void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) {
 	g3d_lock_guard lck(mtx_);
-	vtkSmartPointer<vtkIdList> ptList = vtkSmartPointer<vtkIdList>::New();
-	polyData_->GetCellPoints(i, ptList);
-	if (ptList->GetNumberOfIds() == 3) {
-		vertex1 = ptList->GetId(0);
-		vertex2 = ptList->GetId(1);
-		vertex3 = ptList->GetId(2);
-	}
+	polyData_->GetPolys()->GetCell(i, triBuf_);
+	vertex1 = triBuf_->GetId(0);
+	vertex2 = triBuf_->GetId(1);
+	vertex3 = triBuf_->GetId(2);
 }
 
 vtkPolyData* TIN::GetPolyData() {
