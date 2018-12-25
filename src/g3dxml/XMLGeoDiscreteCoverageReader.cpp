@@ -19,6 +19,7 @@ bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr read
 	geo3dml::ShapeProperty* shapeProperty = g3dFactory_->NewShapeProperty();
 	std::string coverageName;
 	std::string coverageId = XMLReaderHelper::AttributeGMLID(reader);
+	shapeProperty->SetID(coverageId);
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -32,8 +33,6 @@ bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr read
 					SetStatus(false, targetName);
 					break;
 				}
-				shapeProperty->SetID(coverageId);
-				shapeProperty->Name(coverageName);
 				toShape->SetProperty(shapeProperty, geo3dml::ShapeProperty::NameToSamplingTarget(targetName));
 			} else if (_stricmp(localName, "name") == 0) {
 				if (!XMLReaderHelper::TextNode(reader, "name", coverageName)) {
@@ -172,6 +171,15 @@ bool XMLGeoDiscreteCoverageReader::ReadFieldValues(xmlTextReaderPtr reader, geo3
 				if (XMLReaderHelper::TextNode(reader, "Count", str)) {
 					int v = atoi(str.c_str());
 					shapeProperty->IntValue(fieldIndex, valueIndex++, v);
+				} else {
+					SetStatus(false, str);
+					break;
+				}
+			} else if (_stricmp(localName, "Text") == 0) {
+				// string value
+				std::string str;
+				if (XMLReaderHelper::TextNode(reader, "Text", str)) {
+					shapeProperty->TextValue(fieldIndex, valueIndex++, str);
 				} else {
 					SetStatus(false, str);
 					break;

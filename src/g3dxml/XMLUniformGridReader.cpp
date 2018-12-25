@@ -69,6 +69,7 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 		}
 		if (flag == 0x07 && grid == NULL) {
 			grid = g3dFactory_->NewUniformGrid(originX, originY, originZ, stepX, stepY, stepZ, dimI, dimJ, dimK);
+			grid->SetID(id);
 		}
 		status = xmlTextReaderRead(reader);
 	}
