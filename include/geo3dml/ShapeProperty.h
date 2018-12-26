@@ -57,6 +57,7 @@ namespace geo3dml {
 		/// @param name Name of the field.
 		/// @return Returns the index of the field. In case of none existing field, -1 will be returned.
 		virtual int GetFieldIndex(const std::string& name);
+		virtual const Field& GetField(const std::string& name);
 		//@}
 
 		/// @name Attribute setting / getting methods for target elements by field name.
@@ -89,6 +90,7 @@ namespace geo3dml {
 
 		/// Number of values in a field.
 		virtual int GetValueCount(int fieldIndex) = 0;
+		virtual int GetValueCount(const std::string& fieldName) = 0;
 
 	private:
 		std::string name_;
