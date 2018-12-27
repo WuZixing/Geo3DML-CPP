@@ -48,7 +48,7 @@ namespace g3dvtk {
 		virtual int GetValueCount(const std::string& fieldName);
 
 	private:
-		int GetInnerIndexOfField(int fieldIndex);
+		std::string GetTemporaryNameOfField(int fieldIndex);
 
 	private:
 		vtkSmartPointer<vtkDataSetAttributes> dataSet_;

@@ -7,7 +7,7 @@
 using namespace g3dvtk;
 
 ShapeProperty::ShapeProperty() {
-	dataSet_ = vtkDataSetAttributes::New();
+	dataSet_ = vtkSmartPointer<vtkDataSetAttributes>::New();
 	baseIndexOfFields_ = dataSet_->GetNumberOfArrays();
 }
 
@@ -23,7 +23,6 @@ void ShapeProperty::BindDataSet(vtkDataSetAttributes* ds) {
 	for (int i = 0; i < arrayNum; ++i) {
 		ds->AddArray(dataSet_->GetAbstractArray(i));
 	}
-	dataSet_->Delete();
 	dataSet_ = ds;
 }
 
@@ -41,40 +40,41 @@ bool ShapeProperty::AddField(const geo3dml::Field& f) {
 	if (!geo3dml::ShapeProperty::AddField(f)) {
 		return false;
 	}
-	int fieldIndex = GetFieldIndex(f.Name());
-	vtkAbstractArray* dataArray = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (dataArray == NULL) {
+	// change field's temporary name to real name.
+	std::string fieldName = f.Name();
+	int fieldIndex = GetFieldIndex(fieldName);
+	vtkAbstractArray* dataArray = dataSet_->GetAbstractArray(GetTemporaryNameOfField(fieldIndex).c_str());
+	if (dataArray != NULL) {
+		dataArray->SetName(fieldName.c_str());
+	} else {
 		switch (f.DataType()) {
 		case geo3dml::Field::Boolean: {
 			vtkSmartPointer<vtkUnsignedCharArray> charArray = vtkSmartPointer<vtkUnsignedCharArray>::New();
-			charArray->SetName(f.Name().c_str());
+			charArray->SetName(fieldName.c_str());
 			dataSet_->AddArray(charArray);
 			break;
 		}
 		case geo3dml::Field::Double: {
 			vtkSmartPointer<vtkDoubleArray> doubleArray = vtkSmartPointer<vtkDoubleArray>::New();
-			doubleArray->SetName(f.Name().c_str());
+			doubleArray->SetName(fieldName.c_str());
 			dataSet_->AddArray(doubleArray);
 			break;
 		}
 		case geo3dml::Field::Integer: {
 			vtkSmartPointer<vtkIntArray> intArray = vtkSmartPointer<vtkIntArray>::New();
-			intArray->SetName(f.Name().c_str());
+			intArray->SetName(fieldName.c_str());
 			dataSet_->AddArray(intArray);
 			break;
 		}
 		case geo3dml::Field::Text: {
 			vtkSmartPointer<vtkStringArray> stringArray = vtkSmartPointer<vtkStringArray>::New();
-			stringArray->SetName(f.Name().c_str());
+			stringArray->SetName(fieldName.c_str());
 			dataSet_->AddArray(stringArray);
 			break;
 		}
 		default:
 			break;
 		}
-	} else {
-		// make coherent field names, since methods like DoubleValue, IntValue, TextValue, BooleanValue may add anonymous field at the same position.
-		dataArray->SetName(f.Name().c_str());
 	}
 	return true;
 }
@@ -297,140 +297,101 @@ ShapeProperty& ShapeProperty::BooleanValue(const std::string& field, int targetI
 
 double ShapeProperty::DoubleValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		return 0;
-	}
-	vtkDoubleArray* doubleArray = vtkDoubleArray::SafeDownCast(ary);
-	if (doubleArray != NULL) {
-		return doubleArray->GetValue(targetIndex);
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
 	} else {
-		return 0;
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
+	return DoubleValue(fieldName, targetIndex);
 }
 
 ShapeProperty& ShapeProperty::DoubleValue(int fieldIndex, int targetIndex, double v) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		vtkSmartPointer<vtkDoubleArray> dataArray = vtkSmartPointer<vtkDoubleArray>::New();
-		dataArray->SetNumberOfComponents(1);
-		dataSet_->AddArray(dataArray);
-		ary = dataArray.Get();
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
+	} else {
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
-	vtkDoubleArray* doubleArray = vtkDoubleArray::SafeDownCast(ary);
-	if (doubleArray == NULL) {
-		return *this;
-	}
-	doubleArray->InsertValue(targetIndex, v);
-	doubleArray->Modified();
-	return *this;
+	return DoubleValue(fieldName, targetIndex, v);
 }
 
 std::string ShapeProperty::TextValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		return "";
-	}
-	vtkStringArray* stringArray = vtkStringArray::SafeDownCast(ary);
-	if (stringArray != NULL) {
-		return stringArray->GetValue(targetIndex);
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
 	} else {
-		return "";
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
+	return TextValue(fieldName, targetIndex);
 }
 
 ShapeProperty& ShapeProperty::TextValue(int fieldIndex, int targetIndex, const std::string& v) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		vtkSmartPointer<vtkStringArray> dataArray = vtkSmartPointer<vtkStringArray>::New();
-		dataArray->SetNumberOfComponents(1);
-		dataSet_->AddArray(dataArray);
-		ary = dataArray;
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
+	} else {
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
-	vtkStringArray* stringArray = vtkStringArray::SafeDownCast(ary);
-	if (stringArray == NULL) {
-		return *this;
-	}
-	stringArray->InsertValue(targetIndex, v.c_str());
-	stringArray->Modified();
-	return *this;
+	return TextValue(fieldName, targetIndex, v);
 }
 
 int ShapeProperty::IntValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		return 0;
-	}
-	vtkIntArray* intArray = vtkIntArray::SafeDownCast(ary);
-	if (intArray != NULL) {
-		return intArray->GetValue(targetIndex);
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
 	} else {
-		return 0;
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
+	return IntValue(fieldName, targetIndex);
 }
 
 ShapeProperty& ShapeProperty::IntValue(int fieldIndex, int targetIndex, int v) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		vtkSmartPointer<vtkIntArray> dataArray = vtkSmartPointer<vtkIntArray>::New();
-		dataArray->SetNumberOfComponents(1);
-		dataSet_->AddArray(dataArray);
-		ary = dataArray.Get();
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
+	} else {
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
-	vtkIntArray* intArray = vtkIntArray::SafeDownCast(ary);
-	if (intArray == NULL) {
-		return *this;
-	}
-	intArray->InsertValue(targetIndex, v);
-	intArray->Modified();
-	return *this;
+	return IntValue(fieldName, targetIndex, v);
 }
 
 bool ShapeProperty::BooleanValue(int fieldIndex, int targetIndex) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		return false;
-	}
-	vtkUnsignedCharArray* charArray = vtkUnsignedCharArray::SafeDownCast(ary);
-	if (charArray != NULL) {
-		return charArray->GetValue(targetIndex);
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
 	} else {
-		return false;
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
+	return BooleanValue(fieldName, targetIndex);
 }
 
 ShapeProperty& ShapeProperty::BooleanValue(int fieldIndex, int targetIndex, bool v) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary == NULL) {
-		vtkSmartPointer<vtkUnsignedCharArray> dataArray = vtkSmartPointer<vtkUnsignedCharArray>::New();
-		dataArray->SetNumberOfComponents(1);
-		dataSet_->AddArray(dataArray);
-		ary = dataArray.Get();
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
+	} else {
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
-	vtkUnsignedCharArray* charArray = vtkUnsignedCharArray::SafeDownCast(ary);
-	if (charArray == NULL) {
-		return *this;
-	}
-	charArray->InsertValue(targetIndex, v ? (unsigned char)1 : (unsigned char)0);
-	charArray->Modified();
-	return *this;
+	return BooleanValue(fieldName, targetIndex, v);
 }
 
 int ShapeProperty::GetValueCount(int fieldIndex) {
 	g3d_lock_guard lck(mtx_);
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(GetInnerIndexOfField(fieldIndex));
-	if (ary != NULL) {
-		return ary->GetNumberOfTuples();
+	std::string fieldName;
+	if (fieldIndex < GetFieldCount()) {
+		fieldName = GetFieldAt(fieldIndex).Name();
 	} else {
-		return 0;
+		fieldName = GetTemporaryNameOfField(fieldIndex);
 	}
+	return GetValueCount(fieldName);
 }
 
 int ShapeProperty::GetValueCount(const std::string& fieldName) {
@@ -443,6 +404,8 @@ int ShapeProperty::GetValueCount(const std::string& fieldName) {
 	}
 }
 
-int ShapeProperty::GetInnerIndexOfField(int fieldIndex) {
-	return baseIndexOfFields_ + fieldIndex;
+std::string ShapeProperty::GetTemporaryNameOfField(int fieldIndex) {
+	char name[64] = {'\0'};
+	snprintf(name, 64, "_%d_", fieldIndex);
+	return name;
 }

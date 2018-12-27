@@ -131,7 +131,7 @@ const Field& ShapeProperty::GetFieldAt(int i) {
 	return fields_.at(i);
 }
 
-const Field& ShapeProperty::GetField(const std::string& name) {
+Field ShapeProperty::GetField(const std::string& name) {
 	g3d_lock_guard lck(mtx_);
 	std::vector<Field>::const_iterator citor = fields_.cbegin();
 	while (citor != fields_.cend()) {
@@ -140,7 +140,7 @@ const Field& ShapeProperty::GetField(const std::string& name) {
 		}
 		++citor;
 	}
-	return Field().Name(name);
+	return Field();
 }
 
 int ShapeProperty::GetFieldIndex(const std::string& name) {
