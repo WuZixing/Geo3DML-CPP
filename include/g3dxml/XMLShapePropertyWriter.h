@@ -11,7 +11,7 @@ namespace g3dxml {
 		XMLShapePropertyWriter();
 		virtual ~XMLShapePropertyWriter();
 
-		bool Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output);
+		bool Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output, SchemaVersion v);
 
 	private:
 		void WriteDoubleFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output);

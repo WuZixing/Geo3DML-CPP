@@ -13,12 +13,12 @@ XMLFeatureClassWriter::~XMLFeatureClassWriter() {
 
 }
 
-bool XMLFeatureClassWriter::Write(geo3dml::FeatureClass* fc, std::ostream& output) {
+bool XMLFeatureClassWriter::Write(geo3dml::FeatureClass* fc, std::ostream& output, SchemaVersion v) {
 	output << "<FeatureClass>" << std::endl
 		<< "<GeoFeatureClass gml:id=\"" << fc->GetID() << "\">" << std::endl;
 	output << "<gml:name>" << fc->GetName() << "</gml:name>" << std::endl;
 	WriteSchema(fc, output);
-	WriteFeatures(fc, output);
+	WriteFeatures(fc, output, v);
 	output << "</GeoFeatureClass>" << std::endl
 		<< "</FeatureClass>" << std::endl;
 	return IsOK();
@@ -37,7 +37,7 @@ void XMLFeatureClassWriter::WriteSchema(geo3dml::FeatureClass* fc, std::ostream&
 	output << "</Schema>" << std::endl;
 }
 
-void XMLFeatureClassWriter::WriteFeatures(geo3dml::FeatureClass* fc, std::ostream& output) {
+void XMLFeatureClassWriter::WriteFeatures(geo3dml::FeatureClass* fc, std::ostream& output, SchemaVersion v) {
 	int featureNumber = fc->GetFeatureCount();
 	if (featureNumber < 1) {
 		return;
@@ -45,12 +45,12 @@ void XMLFeatureClassWriter::WriteFeatures(geo3dml::FeatureClass* fc, std::ostrea
 	output << "<Features>" << std::endl;
 	for (int i = 0; i < featureNumber; ++i) {
 		geo3dml::Feature* feature = fc->GetFeatureAt(i);
-		WriteFeature(feature, output);
+		WriteFeature(feature, output, v);
 	}
 	output << "</Features>" << std::endl;
 }
 
-void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream& output) {
+void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream& output, SchemaVersion v) {
 	output << "<Feature>" << std::endl
 		<< "<GeoFeature gml:id=\"" << feature->GetID() << "\">" << std::endl;
 	output << "<gml:name>" << feature->GetName() << "</gml:name>" << std::endl;
@@ -106,15 +106,23 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 	// Geometries
 	int geometryNumber = feature->GetGeometryCount();
 	if (geometryNumber > 0) {
-		output << "<Geometries>" << std::endl;
+		if (v == Schema_1_0) {
+			geometryNumber = 1;
+		} else {
+			output << "<Geometries>" << std::endl;
+		}
 		for (int i = 0; i < geometryNumber; ++i) {
 			geo3dml::Geometry* geometry = feature->GetGeometryAt(i);
-			output << "<Geometry Name=\"" << geometry->GetName() << "\" LOD=\"" << geometry->GetLODLevel() << "\">" << std::endl;
+			if (v == Schema_1_0) {
+				output << "<Geometry>" << std::endl;
+			} else {
+				output << "<Geometry Name=\"" << geometry->GetName() << "\" LOD=\"" << geometry->GetLODLevel() << "\">" << std::endl;
+			}
 			// Shape
 			geo3dml::Shape* shape = geometry->GetShape();
 			if (shape != NULL) {
 				XMLShapeWriter shapeWriter;
-				if (!shapeWriter.Write(shape, output)) {
+				if (!shapeWriter.Write(shape, output, v)) {
 					SetStatus(false, shapeWriter.Error());
 					break;
 				}
@@ -124,7 +132,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 				geo3dml::ShapeProperty* vertexProperty = shape->GetProperty(geo3dml::ShapeProperty::Vertex);
 				if (vertexProperty != NULL) {
 					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(vertexProperty, output)) {
+					if (!propWriter.Write(vertexProperty, output, v)) {
 						SetStatus(false, propWriter.Error());
 						break;
 					}
@@ -132,7 +140,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 				geo3dml::ShapeProperty* edgeProperty = shape->GetProperty(geo3dml::ShapeProperty::Edge);
 				if (edgeProperty != NULL) {
 					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(edgeProperty, output)) {
+					if (!propWriter.Write(edgeProperty, output, v)) {
 						SetStatus(false, propWriter.Error());
 						break;
 					}
@@ -140,7 +148,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 				geo3dml::ShapeProperty* faceProperty = shape->GetProperty(geo3dml::ShapeProperty::Face);
 				if (faceProperty != NULL) {
 					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(faceProperty, output)) {
+					if (!propWriter.Write(faceProperty, output, v)) {
 						SetStatus(false, propWriter.Error());
 						break;
 					}
@@ -148,7 +156,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 				geo3dml::ShapeProperty* voxelProperty = shape->GetProperty(geo3dml::ShapeProperty::Voxel);
 				if (voxelProperty != NULL) {
 					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(voxelProperty, output)) {
+					if (!propWriter.Write(voxelProperty, output, v)) {
 						SetStatus(false, propWriter.Error());
 						break;
 					}
@@ -156,7 +164,9 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 			}
 			output << "</Geometry>" << std::endl;
 		}
-		output << "</Geometries>" << std::endl;
+		if (v != Schema_1_0) {
+			output << "</Geometries>" << std::endl;
+		}
 	}
 	output << "</GeoFeature>" << std::endl
 		<< "</Feature>" << std::endl;

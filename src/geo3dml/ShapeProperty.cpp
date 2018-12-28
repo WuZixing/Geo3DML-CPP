@@ -2,29 +2,29 @@
 
 using namespace geo3dml;
 
-Version::Version() {
+ShapeProperty::Version::Version() {
 
 }
 
-Version::~Version() {
+ShapeProperty::Version::~Version() {
 
 }
 
-Version& Version::VersionNo(const std::string& v) {
+ShapeProperty::Version& ShapeProperty::Version::VersionNo(const std::string& v) {
 	versionNo_ = v;
 	return *this;
 }
 
-std::string Version::VersionNo() const {
+std::string ShapeProperty::Version::VersionNo() const {
 	return versionNo_;
 }
 
-Version& Version::Timestamp(const std::string& t) {
+ShapeProperty::Version& ShapeProperty::Version::Timestamp(const std::string& t) {
 	timestamp_ = t;
 	return *this;
 }
 
-std::string Version::Timestamp() const {
+std::string ShapeProperty::Version::Timestamp() const {
 	return timestamp_;
 }
 
@@ -93,13 +93,13 @@ std::string ShapeProperty::Name() {
 	return name_;
 }
 
-ShapeProperty& ShapeProperty::VersionInfo(const Version& v) {
+ShapeProperty& ShapeProperty::VersionInfo(const ShapeProperty::Version& v) {
 	g3d_lock_guard lck(mtx_);
 	versionInfo_ = v;
 	return *this;
 }
 
-const Version& ShapeProperty::VersionInfo() {
+const ShapeProperty::Version& ShapeProperty::VersionInfo() {
 	g3d_lock_guard lck(mtx_);
 	return versionInfo_;
 }

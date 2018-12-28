@@ -4,8 +4,6 @@
 using namespace g3dxml;
 
 XMLWriter::XMLWriter() :
-	NS_Geo3DML("xmlns:geo3dml=\"http://www.cgs.gov.cn/geo3dml\""),
-	NS_Default("xmlns=\"http://www.cgs.gov.cn/geo3dml\""),
 	NS_xi("xmlns:xi=\"http://www.w3.org/2001/XInclude\""),
 	NS_xsi("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""),
 	xsi_SchemaLocation("xsi:schemaLocation=\"http://www.cgs.gov.cn/geo3dml\""),
@@ -15,16 +13,15 @@ XMLWriter::XMLWriter() :
 	NS_gmd("xmlns:gmd=\"http://www.isotc211.org/2005/gmd\""),
 	NS_xlink("xmlns:xlink=\"http://www.w3.org/1999/xlink\""),
 	NS_gmlcov("xmlns:gmlcov=\"http://www.opengis.net/gmlcov/1.0\"") {
-
 }
 
 XMLWriter::~XMLWriter() {
 
 }
 
-bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output) {
+bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v) {
 	WriteXMLDeclaration(output);
-	output << "<geo3dml:Geo3DModel " << NS_Geo3DML << " " << NS_Default << std::endl
+	output << "<geo3dml:Geo3DModel " << NSGeo3DML(v) << " " << NSDefault(v) << std::endl
 		<< NS_gml << std::endl
 		<< NS_swe << std::endl
 		<< NS_gco << std::endl
@@ -47,7 +44,7 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output) {
 		output << "<FeatureClasses>" << std::endl;
 		for (int i = 0; i < featureClassNumber; ++i) {
 			XMLFeatureClassWriter fcWriter;
-			if (!fcWriter.Write(model->GetFeatureClassAt(i), output)) {
+			if (!fcWriter.Write(model->GetFeatureClassAt(i), output, v)) {
 				SetStatus(false, fcWriter.Error());
 				break;
 			}
@@ -58,9 +55,9 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output) {
 	return IsOK();
 }
 
-bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output) {
+bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVersion v) {
 	WriteXMLDeclaration(output);
-	output << "<geo3dml:Geo3DProject " << NS_Geo3DML << " " << NS_Default << std::endl
+	output << "<geo3dml:Geo3DProject " << NSGeo3DML(v) << " " << NSDefault(v) << std::endl
 		<< NS_xi << std::endl
 		<< NS_xsi << std::endl
 		<< xsi_SchemaLocation << ">" << std::endl;
@@ -78,4 +75,28 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output) {
 
 void XMLWriter::WriteXMLDeclaration(std::ostream& output) {
 	output << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+}
+
+std::string XMLWriter::NSGeo3DML(SchemaVersion v) {
+	std::string nsGeo3DMLBase("xmlns:geo3dml=\"http://www.cgs.gov.cn/geo3dml");
+	switch (v) {
+	case Schema_1_0:
+		return nsGeo3DMLBase + "\"";
+	case Schema_1_x:
+		return nsGeo3DMLBase + "/1.x\"";
+	default:
+		return nsGeo3DMLBase + "\"";
+	}
+}
+
+std::string XMLWriter::NSDefault(SchemaVersion v) {
+	std::string nsDefaultBase("xmlns=\"http://www.cgs.gov.cn/geo3dml");
+	switch (v) {
+	case Schema_1_0:
+		return nsDefaultBase + "\"";
+	case Schema_1_x:
+		return nsDefaultBase + "/1.x\"";
+	default:
+		return nsDefaultBase + "\"";
+	}
 }

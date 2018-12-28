@@ -47,7 +47,7 @@ bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr read
 					SetStatus(false, versionNo);
 					break;
 				}
-				geo3dml::Version vInfo;
+				geo3dml::ShapeProperty::Version vInfo;
 				vInfo.VersionNo(versionNo).Timestamp(timestamp);
 				shapeProperty->VersionInfo(vInfo);
 			} else if (_stricmp(localName, Element_RangeType.c_str()) == 0) {

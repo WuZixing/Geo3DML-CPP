@@ -11,11 +11,11 @@ namespace g3dxml {
 		XMLFeatureClassWriter();
 		virtual ~XMLFeatureClassWriter();
 
-		bool Write(geo3dml::FeatureClass* fc, std::ostream& output);
+		bool Write(geo3dml::FeatureClass* fc, std::ostream& output, SchemaVersion v);
 
 	private:
 		void WriteSchema(geo3dml::FeatureClass* fc, std::ostream& output);
-		void WriteFeatures(geo3dml::FeatureClass* fc, std::ostream& output);
-		void WriteFeature(geo3dml::Feature* feature, std::ostream& output);
+		void WriteFeatures(geo3dml::FeatureClass* fc, std::ostream& output, SchemaVersion v);
+		void WriteFeature(geo3dml::Feature* feature, std::ostream& output, SchemaVersion v);
 	};
 }

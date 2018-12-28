@@ -11,7 +11,7 @@ XMLShapePropertyWriter::~XMLShapePropertyWriter() {
 
 }
 
-bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output) {
+bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output, SchemaVersion v) {
 	output << "<ShapeProperty>" << std::endl
 		<< "<GeoDiscreteCoverage gml:id=\"" << shapeProperty->GetID() << "\">" << std::endl;
 	output << "<gml:name>" << shapeProperty->Name() << "</gml:name>" << std::endl;

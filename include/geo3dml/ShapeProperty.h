@@ -6,23 +6,6 @@
 
 namespace geo3dml {
 
-	class Version {
-	public:
-		Version();
-		virtual ~Version();
-
-	public:
-		Version& VersionNo(const std::string& v);
-		std::string VersionNo() const;
-
-		Version& Timestamp(const std::string& t);
-		std::string Timestamp() const;
-
-	private:
-		std::string versionNo_;
-		std::string timestamp_;
-	};
-
 	class ShapeProperty : public Object {
 	public:
 		enum SamplingTarget {
@@ -34,6 +17,23 @@ namespace geo3dml {
 		};
 		static SamplingTarget NameToSamplingTarget(const std::string& name);
 		static std::string SamplingTargetToName(SamplingTarget t);
+
+		class Version {
+		public:
+			Version();
+			virtual ~Version();
+
+		public:
+			Version & VersionNo(const std::string& v);
+			std::string VersionNo() const;
+
+			Version& Timestamp(const std::string& t);
+			std::string Timestamp() const;
+
+		private:
+			std::string versionNo_;
+			std::string timestamp_;
+		};
 
 	public:
 		ShapeProperty();

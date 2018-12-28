@@ -16,7 +16,7 @@ namespace g3dxml {
 		XMLShapeWriter();
 		virtual ~XMLShapeWriter();
 
-		bool Write(geo3dml::Shape* shape, std::ostream& output);
+		bool Write(geo3dml::Shape* shape, std::ostream& output, SchemaVersion v);
 
 	private:
 		void WriteTIN(geo3dml::TIN* tin, std::ostream& output);

@@ -24,9 +24,6 @@ namespace geo3dml {
 		//@}
 
 	protected:
-
-
-	protected:
 		typedef std::lock_guard<std::recursive_mutex> g3d_lock_guard;
 		/// The mutex object to make thread safe.
 		std::recursive_mutex mtx_;

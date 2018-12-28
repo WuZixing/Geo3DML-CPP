@@ -10,7 +10,7 @@ XMLShapeWriter::~XMLShapeWriter() {
 
 }
 
-bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output) {
+bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output, SchemaVersion v) {
 	output << "<Shape>" << std::endl;
 	geo3dml::TIN* tin = dynamic_cast<geo3dml::TIN*>(shape);
 	if (tin != NULL) {
@@ -32,9 +32,11 @@ bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output) {
 					if (cornerGrid != NULL) {
 						WriteCornerPointGrid(cornerGrid, output);
 					} else {
-						geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(shape);
-						if (rectGrid != NULL) {
-							WriteUniformGrid(rectGrid, output);
+						if (v != Schema_1_0) {
+							geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(shape);
+							if (rectGrid != NULL) {
+								WriteUniformGrid(rectGrid, output);
+							}
 						}
 					}
 				}
