@@ -37,5 +37,6 @@ namespace geo3dml {
 		virtual void GetSteps(double& sx, double& sy, double& sz) = 0;
 		virtual void SetCellValidation(int i, int j, int k, bool beValid = true) = 0;
 		virtual bool IsCellValid(int i, int j, int k) = 0;
+		virtual int CalculateCellIndex(int i, int j, int k) = 0;
 	};
 }

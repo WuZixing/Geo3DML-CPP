@@ -34,6 +34,8 @@ namespace g3dvtk {
 		virtual void SetCellValidation(int i, int j, int k, bool beValid = true);
 		/// @see geo3dml::UniformGrid#IsCellValid .
 		virtual bool IsCellValid(int i, int j, int k);
+		/// @see geo3dml::UniformGrid#CalculateCellIndex .
+		virtual int CalculateCellIndex(int i, int j, int k);
 		//@}
 
 		/// @name Methods inherited from geo3dml::Shape.

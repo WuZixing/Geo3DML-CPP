@@ -97,3 +97,10 @@ bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double
 	maxZ = bounds[5];
 	return true;
 }
+
+int UniformGrid::CalculateCellIndex(int i, int j, int k) {
+	g3d_lock_guard lck(mtx_);
+	int dimI = 0, dimJ = 0, dimK = 0;
+	GetDimensions(dimI, dimJ, dimK);
+	return  k * dimJ * dimI + j * dimI + i;
+}
