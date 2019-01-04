@@ -58,6 +58,7 @@ namespace geo3dml {
 		/// @return Returns the index of the field. In case of none existing field, -1 will be returned.
 		virtual int GetFieldIndex(const std::string& name);
 		virtual Field GetField(const std::string& name);
+		virtual bool CheckOrAddFieldAndFillDefaultValues(const Field& field, int numberOfValues, double defaultDouble = 0, int defaultInt = 0, bool defaultBool = false, const std::string& defaultText = "");
 		//@}
 
 		/// @name Attribute setting / getting methods for target elements by field name.

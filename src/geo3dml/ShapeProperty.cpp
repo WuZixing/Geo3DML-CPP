@@ -156,3 +156,32 @@ int ShapeProperty::GetFieldIndex(const std::string& name) {
 	}
 	return -1;
 }
+
+bool ShapeProperty::CheckOrAddFieldAndFillDefaultValues(const Field& field, int numberOfValues, double defaultDouble, int defaultInt, bool defaultBool, const std::string& defaultText) {
+	g3d_lock_guard lck(mtx_);
+	const geo3dml::Field& existingField = GetField(field.Name());
+	if (existingField.DataType() != geo3dml::Field::Unknown) {
+		if (existingField.DataType() == field.DataType()) {
+			return true;
+		} else {
+			return false;
+		}
+	} else if (!AddField(field)) {
+		return false;
+	}
+	switch (field.DataType()) {
+	case geo3dml::Field::Boolean:
+		FillBooleanValue(field.Name(), numberOfValues, defaultBool);
+		break;
+	case geo3dml::Field::Double:
+		FillDoubleValue(field.Name(), numberOfValues, defaultDouble);
+		break;
+	case geo3dml::Field::Integer:
+		FillIntValue(field.Name(), numberOfValues, defaultInt);
+		break;
+	case geo3dml::Field::Text:
+		FillTextValue(field.Name(), numberOfValues, defaultText);
+		break;
+	}
+	return true;
+}
