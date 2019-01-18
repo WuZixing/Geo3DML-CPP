@@ -103,6 +103,18 @@ FeatureClass* Model::GetFeatureClassAt(int i) {
 	return featureClasses_.at(i);
 }
 
+void Model::RemoveFeatureClass(const std::string& id) {
+	g3d_lock_guard lck(mtx_);
+	std::vector<FeatureClass*>::const_iterator citor = featureClasses_.cbegin();
+	while (citor != featureClasses_.cend()) {
+		if ((*citor)->GetID() == id) {
+			featureClasses_.erase(citor);
+			break;
+		}
+		citor++;
+	}
+}
+
 void Model::SetMinimumBoundingRectangle(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
 	g3d_lock_guard lck(mtx_);
 	box_[0] = minX;
