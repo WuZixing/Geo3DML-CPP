@@ -31,7 +31,7 @@ TextFieldValue& TextFieldValue::Value(const std::string& v) {
 	return *this;
 }
 
-const std::string TextFieldValue::Value() const {
+const std::string& TextFieldValue::Value() const {
 	return value_;
 }
 

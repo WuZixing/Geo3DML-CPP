@@ -234,10 +234,9 @@ void Model::SetToolVersion(const std::string& s) {
 	toolVersion_ = s;
 }
 
-Model* Model::SetParentProject(const std::string& id) {
+void Model::SetParentProject(const std::string& id) {
 	g3d_lock_guard lck(mtx_);
 	parentProjectId_ = id;
-	return this;
 }
 
 std::string Model::GetParentProject() {

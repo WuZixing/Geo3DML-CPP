@@ -2,6 +2,7 @@
 
 #include "Geo3DML.h"
 #include "Model.h"
+#include "Map.h"
 #include "SceneStyle.h"
 
 namespace geo3dml {
@@ -28,6 +29,12 @@ namespace geo3dml {
 		Model* RemoveModelAt(int i);
 		//@}
 
+		//@{
+		void AddMap(Map* map);
+		int GetMapCount();
+		Map* GetMapAt(int i);
+		//@}
+
 		/// Compute the minimum bounding rectangle of all the models.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
@@ -44,6 +51,7 @@ namespace geo3dml {
 		std::string name_;
 		std::string description_;
 		std::vector<Model*> models_;
+		std::vector<Map*> maps_;
 		SceneStyle sceneStyle_;
 	};
 }

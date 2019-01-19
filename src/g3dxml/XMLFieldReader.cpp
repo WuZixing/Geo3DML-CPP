@@ -9,8 +9,6 @@ geo3dml::Field::ValueType XMLFieldReader::NameToValueType(const std::string& n) 
 		return geo3dml::Field::Text;
 	} else if (_stricmp(n.c_str(), "Quantity") == 0) {
 		return geo3dml::Field::Double;
-	} else if (_stricmp(n.c_str(), "Time") == 0) {
-		return geo3dml::Field::DateTime;
 	} else if (_stricmp(n.c_str(), "Count") == 0) {
 		return geo3dml::Field::Integer;
 	} else if (_stricmp(n.c_str(), "Boolean") == 0) {
@@ -28,8 +26,6 @@ std::string XMLFieldReader::ValueTypeToName(geo3dml::Field::ValueType t) {
 		return "Count";
 	case geo3dml::Field::Double:
 		return "Quantity";
-	case geo3dml::Field::DateTime:
-		return "Time";
 	case geo3dml::Field::Boolean:
 		return "Boolean";
 	default:

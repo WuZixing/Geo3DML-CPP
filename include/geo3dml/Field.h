@@ -11,7 +11,6 @@ namespace geo3dml {
 			Text,
 			Integer,
 			Double,
-			DateTime,
 			Boolean
 		};
 

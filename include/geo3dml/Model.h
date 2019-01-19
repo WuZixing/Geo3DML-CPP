@@ -68,7 +68,7 @@ namespace geo3dml {
 		//@}
 
 		//@{
-		Model* SetParentProject(const std::string& id);
+		void SetParentProject(const std::string& id);
 		std::string GetParentProject();
 		//@}
 

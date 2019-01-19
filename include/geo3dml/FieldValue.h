@@ -26,7 +26,7 @@ namespace geo3dml {
 		virtual Field::ValueType ValueType() const;
 
 		TextFieldValue& Value(const std::string& v);
-		const std::string Value() const;
+		const std::string& Value() const;
 
 	private:
 		std::string value_;

@@ -7,10 +7,16 @@ Project::Project() {
 }
 
 Project::~Project() {
+	g3d_lock_guard lck(mtx_);
 	std::vector<Model*>::const_iterator citor = models_.cbegin();
 	while (citor != models_.cend()) {
 		delete *citor;
 		citor++;
+	}
+	std::vector<Map*>::const_iterator mapItor = maps_.cbegin();
+	while (mapItor != maps_.cend()) {
+		delete *mapItor;
+		mapItor++;
 	}
 }
 
@@ -115,4 +121,29 @@ bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& mi
 		}
 	}
 	return true;
+}
+
+void Project::AddMap(Map* map) {
+	g3d_lock_guard lck(mtx_);
+	if (map == NULL)
+		return;
+	std::vector<Map*>::const_iterator citor = maps_.cbegin();
+	while (citor != maps_.cend()) {
+		if (*citor == map)
+			return;
+		citor++;
+	}
+	std::string pId = GetID();
+	map->SetParentProject(pId);
+	maps_.push_back(map);
+}
+
+int Project::GetMapCount() {
+	g3d_lock_guard lck(mtx_);
+	return (int)maps_.size();
+}
+
+Map* Project::GetMapAt(int i) {
+	g3d_lock_guard lck(mtx_);
+	return maps_.at(i);
 }

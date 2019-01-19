@@ -26,6 +26,17 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/LineString.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Point.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiPoint.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Map.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Layer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Material.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Symbolizer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/PointSymbolizer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/LineSymbolizer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/SurfaceSymbolizer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Geo3DStyle.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/FeatureTypeStyle.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/StyleRule.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/StyleRuleEqualTo.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC
