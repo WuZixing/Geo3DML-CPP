@@ -68,3 +68,12 @@ Geo3DStyle* Layer::GetStyleAt(int i) {
 	g3d_lock_guard lck(mtx_);
 	return styles_.at(i);
 }
+
+bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+	g3d_lock_guard lck(mtx_);
+	if (bindingFeatureClass_ != NULL) {
+		return bindingFeatureClass_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
+	} else {
+		return false;
+	}
+}
