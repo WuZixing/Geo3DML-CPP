@@ -147,3 +147,18 @@ Map* Project::GetMapAt(int i) {
 	g3d_lock_guard lck(mtx_);
 	return maps_.at(i);
 }
+
+Map* Project::RemoveMapAt(int i) {
+	g3d_lock_guard lck(mtx_);
+	std::vector<Map*>::const_iterator citor = maps_.cbegin();
+	while (citor != maps_.cend() && i > 0) {
+		++citor;
+		--i;
+	}
+	Map* map = NULL;
+	if (citor != maps_.end()) {
+		map = *citor;
+		maps_.erase(citor);
+	}
+	return map;
+}

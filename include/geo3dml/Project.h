@@ -33,6 +33,7 @@ namespace geo3dml {
 		void AddMap(Map* map);
 		int GetMapCount();
 		Map* GetMapAt(int i);
+		Map* RemoveMapAt(int i);
 		//@}
 
 		/// Compute the minimum bounding rectangle of all the models.

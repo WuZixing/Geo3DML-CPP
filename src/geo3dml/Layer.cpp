@@ -14,6 +14,16 @@ Layer::~Layer() {
 	}
 }
 
+void Layer::SetName(const std::string& name) {
+	g3d_lock_guard lck(mtx_);
+	name_ = name;
+}
+
+std::string Layer::GetName() {
+	g3d_lock_guard lck(mtx_);
+	return name_;
+}
+
 void Layer::BindFeatureClass(FeatureClass* fc) {
 	g3d_lock_guard lck(mtx_);
 	bindingFeatureClass_ = fc;

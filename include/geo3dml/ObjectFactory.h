@@ -11,6 +11,7 @@
 #include "LineString.h"
 #include "Point.h"
 #include "MultiPoint.h"
+#include "Map.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -52,6 +53,12 @@ namespace geo3dml {
 		/// @name shape property.
 		//@{
 		virtual ShapeProperty* NewShapeProperty() = 0;
+		//@}
+
+		/// @name map
+		//@{
+		virtual Map* NewMap();
+		virtual Layer* NewLayer();
 		//@}
 
 	public:

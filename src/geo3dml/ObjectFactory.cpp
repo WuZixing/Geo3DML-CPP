@@ -8,6 +8,14 @@ ObjectFactory::ObjectFactory() {
 ObjectFactory::~ObjectFactory() {
 }
 
+Map* ObjectFactory::NewMap() {
+	return new Map();
+}
+
+Layer* ObjectFactory::NewLayer() {
+	return new Layer();
+}
+
 Geometry* ObjectFactory::NewGeometry() {
 	return new Geometry();
 }
