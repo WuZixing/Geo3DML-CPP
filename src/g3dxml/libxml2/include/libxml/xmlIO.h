@@ -211,6 +211,16 @@ xmlParserInputBufferPtr
         __xmlParserInputBufferCreateFilename(const char *URI,
                                                                                 xmlCharEncoding enc);
 
+#if defined(_WIN32) || defined (__DJGPP__) && !defined (__CYGWIN__)
+/**
+* __xmlIOWin32UTF8ToWChar:
+* @u8String:  uft-8 string
+*
+* Convert a string from utf-8 to wchar (WINDOWS ONLY!)
+*/
+XMLPUBFUN wchar_t* XMLCALL __xmlIOWin32UTF8ToWChar(const char *u8String);
+#endif
+
 #ifdef LIBXML_OUTPUT_ENABLED
 /*
  * Interfaces for output

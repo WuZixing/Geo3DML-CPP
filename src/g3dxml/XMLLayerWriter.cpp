@@ -1,5 +1,6 @@
 #include <g3dxml/XMLLayerWriter.h>
 #include <geo3dml/StyleRuleEqualTo.h>
+#include <geo3dml/FeatureTypeStyle.h>
 
 using namespace g3dxml;
 
@@ -18,7 +19,24 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 	if (bindingFC != NULL) {
 		output << "<FeatureClass xlink:type=\"simple\" xlink:href=\"#" << bindingFC->GetID() << "\" />" << std::endl;
 	}
+	int actorNumber = layer->GetActorCount();
 	int styleNumber = layer->GetStyleCount();
+	if (styleNumber < 1 && actorNumber > 0) {
+		geo3dml::Field fieldDef = geo3dml::StyleRule::GetFieldOfFeatureID();
+		geo3dml::FeatureTypeStyle* featureStyle = new geo3dml::FeatureTypeStyle();
+		featureStyle->SetID(geo3dml::Object::NewID());
+		featureStyle->SetName(layer->GetName());
+		for (int m = 0; m < actorNumber; ++m) {
+			geo3dml::Actor* actor = layer->GetActorAt(m);
+			geo3dml::TextFieldValue* textValue = new geo3dml::TextFieldValue(fieldDef.Name());
+			textValue->Value(actor->GetBindingFeature()->GetID());
+			geo3dml::StyleRuleEqualTo* eqRule = new geo3dml::StyleRuleEqualTo(textValue, fieldDef);
+			eqRule->SetSymbolizer(actor->MakeSymbozier());
+			featureStyle->AddRule(eqRule);
+		}
+		layer->AddStyle(featureStyle);
+		styleNumber = 1;
+	}
 	if (styleNumber > 0) {
 		output << "<Styles>" << std::endl;
 		for (int s = 0; s < styleNumber; ++s) {
@@ -93,7 +111,7 @@ void XMLLayerWriter::WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& outp
 		default:
 			break;
 		}
-		output << "<ogc:Literal>" << std::endl;
+		output << "</ogc:Literal>" << std::endl;
 		output << "</ogc:PropertyIsEqualTo>" << std::endl
 			<< "</ogc:Filter>" << std::endl;
 	}

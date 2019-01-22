@@ -7,6 +7,10 @@ namespace geo3dml {
 
 	class StyleRule {
 	public:
+		/// Make the field definition for the feature ID property.
+		static Field GetFieldOfFeatureID();
+
+	public:
 		StyleRule();
 		virtual ~StyleRule();
 

@@ -243,7 +243,7 @@ static const char *IOerr[] = {
  *
  * Convert a string from utf-8 to wchar (WINDOWS ONLY!)
  */
-static wchar_t *
+wchar_t *
 __xmlIOWin32UTF8ToWChar(const char *u8String)
 {
     wchar_t *wString = NULL;

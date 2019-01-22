@@ -17,24 +17,28 @@ namespace g3dvtk {
 		/// @name methods defined in geo3dml::Actor.
 		//@{
 		virtual void BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3dml::Symbolizer* sym);
-		virtual geo3dml::Feature* GetBindingFeature() const;
-		virtual geo3dml::Geometry* GetBindingGeometry() const;
-		virtual geo3dml::Symbolizer* GetSymbozier();
+		virtual geo3dml::Feature* GetBindingFeature();
+		virtual geo3dml::Geometry* GetBindingGeometry();
+		virtual geo3dml::Symbolizer* MakeSymbozier();
 		//@}
 
-		vtkActor* GetVTKActor() const;
+		vtkActor* GetVTKActor();
 
 	private:
 		void ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym);
 		void ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym);
 		void ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym);
-		void ConfigMaterial(const geo3dml::Material& m, vtkProperty* p);
+		void ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p);
 		void SetRandomRenderOption();
+
+		geo3dml::Material ToMaterial(vtkProperty* p);
+		void ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym);
+		void ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym);
+		void ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym);
 
 	private:
 		geo3dml::Feature* bindingFeature_;
 		geo3dml::Geometry* bindingGeometry_;
-		geo3dml::Symbolizer* symbolizer_;
 		vtkSmartPointer<vtkActor> actor_;
 	};
 }

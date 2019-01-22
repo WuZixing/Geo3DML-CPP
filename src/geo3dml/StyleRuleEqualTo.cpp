@@ -2,12 +2,6 @@
 
 using namespace geo3dml;
 
-const std::string GMLIDName_ = "gml:id";
-
-Field StyleRuleEqualTo::GetFieldOfFeatureID() {
-	return Field().Name(GMLIDName_).DataType(Field::Text);
-}
-
 StyleRuleEqualTo::StyleRuleEqualTo(const FieldValue* baseValue, const Field& onField) {
 	targetField_ = onField;
 	baseValue_ = baseValue;
@@ -28,7 +22,7 @@ const FieldValue* StyleRuleEqualTo::GetBaseValue() const {
 }
 
 bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) {
-	if (targetField_.Name() == GMLIDName_) {
+	if (targetField_.Name() == StyleRule::GetFieldOfFeatureID().Name()) {
 		const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(baseValue_);
 		if (textValue != NULL) {
 			return textValue->Value() == feature->GetID();

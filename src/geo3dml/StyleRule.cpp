@@ -2,6 +2,10 @@
 
 using namespace geo3dml;
 
+Field StyleRule::GetFieldOfFeatureID() {
+	return Field().Name("gml:id").DataType(Field::Text);
+}
+
 StyleRule::StyleRule() {
 	symbolizer_ = NULL;
 }
@@ -16,6 +20,6 @@ void StyleRule::SetSymbolizer(Symbolizer* sym) {
 	symbolizer_ = sym;
 }
 
-Symbolizer*StyleRule::GetSymbolizer() const {
+Symbolizer* StyleRule::GetSymbolizer() const {
 	return symbolizer_;
 }

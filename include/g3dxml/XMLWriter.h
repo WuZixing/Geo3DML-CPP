@@ -1,8 +1,8 @@
 #pragma once
 
 #include <geo3dml/Project.h>
-#include <iostream>
 #include <g3dxml/XMLIO.h>
+#include <fstream>
 
 namespace g3dxml {
 
@@ -11,14 +11,19 @@ namespace g3dxml {
 		XMLWriter();
 		virtual ~XMLWriter();
 
+		bool Write(geo3dml::Project* project, const std::string& xmlFilePath, SchemaVersion v);
+		bool Write(geo3dml::Model* model, const std::string& xmlFilePath, SchemaVersion v);
+		bool Write(geo3dml::Map* map, const std::string& xmlFilePath, SchemaVersion v);
+
+	private:
 		bool Write(geo3dml::Project* project, std::ostream& output, SchemaVersion v);
 		bool Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v);
 		bool Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v);
-
-	private:
 		void WriteXMLDeclaration(std::ostream& output);
 		std::string NSGeo3DML(SchemaVersion v);
 		std::string NSDefault(SchemaVersion v);
+
+		void OpenXMLFileForOutput(const std::string& xmlFilePath, std::ofstream& xmlFile);
 
 	private:
 		const std::string NS_xi;

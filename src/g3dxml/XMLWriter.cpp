@@ -1,7 +1,7 @@
 #include <g3dxml/XMLWriter.h>
 #include <g3dxml/XMLFeatureClassWriter.h>
-#include <fstream>
 #include <g3dxml/XMLLayerWriter.h>
+#include <libxml/xmlreader.h>
 
 using namespace g3dxml;
 
@@ -21,6 +21,24 @@ XMLWriter::XMLWriter() :
 
 XMLWriter::~XMLWriter() {
 
+}
+
+bool XMLWriter::Write(geo3dml::Project* project, const std::string& xmlFilePath, SchemaVersion v) {
+	std::ofstream xmlFile;
+	OpenXMLFileForOutput(xmlFilePath, xmlFile);
+	return Write(project, xmlFile, v);
+}
+
+bool XMLWriter::Write(geo3dml::Model* model, const std::string& xmlFilePath, SchemaVersion v) {
+	std::ofstream xmlFile;
+	OpenXMLFileForOutput(xmlFilePath, xmlFile);
+	return Write(model, xmlFile, v);
+}
+
+bool XMLWriter::Write(geo3dml::Map* map, const std::string& xmlFilePath, SchemaVersion v) {
+	std::ofstream xmlFile;
+	OpenXMLFileForOutput(xmlFilePath, xmlFile);
+	return Write(map, xmlFile, v);
 }
 
 bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v) {
@@ -73,7 +91,8 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 		for (int m = 0; m < modelNumber; ++m) {
 			geo3dml::Model* model = project->GetModelAt(m);
 			std::string modelFileName = model->GetName() + "_model.xml";
-			std::ofstream modelFile(modelFileName);
+			std::ofstream modelFile;
+			OpenXMLFileForOutput(modelFileName, modelFile);
 			Write(model, modelFile, v);
 			output << "<Model>" << "<xi:include href=\"" << modelFileName << "\" />" << "</Model>" << std::endl;
 			if (!IsOK()) {
@@ -89,7 +108,8 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 			for (int m = 0; m < mapNumber; ++m) {
 				geo3dml::Map* map = project->GetMapAt(m);
 				std::string mapFileName = map->GetName() + "_map.xml";
-				std::ofstream mapFile(mapFileName);
+				std::ofstream mapFile;
+				OpenXMLFileForOutput(mapFileName, mapFile);
 				Write(map, mapFile, v);
 				output << "<Map>" << "<xi:include href=\"" << mapFileName << "\" />" << "</Map>" << std::endl;
 				if (!IsOK()) {
@@ -111,6 +131,7 @@ bool XMLWriter::Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v) 
 		<< NS_xlink << std::endl
 		<< NS_ogc << std::endl
 		<< NS_se << std::endl
+		<< NS_xsi << std::endl
 		<< xsi_SchemaLocation << std::endl
 		<< "ID=\"" << map->GetID() << "\">" << std::endl;
 	output << "<Name>" << map->GetName() << "</Name>" << std::endl
@@ -158,4 +179,18 @@ std::string XMLWriter::NSDefault(SchemaVersion v) {
 	default:
 		return nsDefaultBase + "\"";
 	}
+}
+
+void XMLWriter::OpenXMLFileForOutput(const std::string& xmlFilePath, std::ofstream& xmlFile) {
+#if defined(_WIN32)
+	wchar_t* wPath = __xmlIOWin32UTF8ToWChar(xmlFilePath.c_str());
+	if (wPath != NULL) {
+		xmlFile.open(wPath);
+		xmlFree(wPath);
+	} else {
+		xmlFile.open(xmlFilePath);
+	}
+#else
+	xmlFile.open(xmlFilePath);
+#endif
 }

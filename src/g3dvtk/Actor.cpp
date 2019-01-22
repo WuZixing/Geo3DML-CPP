@@ -19,16 +19,14 @@ using namespace g3dvtk;
 Actor::Actor() {
 	bindingFeature_ = NULL;
 	bindingGeometry_ = NULL;
-	symbolizer_ = NULL;
 }
 
 Actor::~Actor() {
-	if (symbolizer_ != NULL) {
-		delete symbolizer_;
-	}
+
 }
 
 void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3dml::Symbolizer* sym) {
+	g3d_lock_guard lck(mtx_);
 	bindingFeature_ = feature;
 	bindingGeometry_ = geo;
 	if (bindingGeometry_ == NULL || bindingGeometry_->GetShape() == NULL) {
@@ -107,37 +105,83 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	}
 }
 
-geo3dml::Feature* Actor::GetBindingFeature() const {
+geo3dml::Feature* Actor::GetBindingFeature() {
+	g3d_lock_guard lck(mtx_);
 	return bindingFeature_;
 }
 
-geo3dml::Geometry* Actor::GetBindingGeometry() const {
+geo3dml::Geometry* Actor::GetBindingGeometry() {
+	g3d_lock_guard lck(mtx_);
 	return bindingGeometry_;
 }
 
-geo3dml::Symbolizer* Actor::GetSymbozier() {
+geo3dml::Symbolizer* Actor::MakeSymbozier() {
+	g3d_lock_guard lck(mtx_);
+	if (bindingGeometry_ == NULL || bindingGeometry_->GetShape() == NULL) {
+		return NULL;
+	}
+	g3dvtk::ObjectFactory g3dFactory;
+	geo3dml::Shape* shape = bindingGeometry_->GetShape();
+	g3dvtk::TIN* tin = dynamic_cast<g3dvtk::TIN*>(shape);
+	if (tin != NULL) {
+		geo3dml::SurfaceSymbolizer* surfaceSym = g3dFactory.NewSurfaceSymbolizer();
+		ToSurfaceSymbolizer(actor_->GetProperty(), surfaceSym);
+		return surfaceSym;
+	} else {
+		g3dvtk::CornerPointGrid* grid = dynamic_cast<g3dvtk::CornerPointGrid*>(shape);
+		if (grid != NULL) {
+			return NULL;
+		} else {
+			g3dvtk::UniformGrid* grid = dynamic_cast<g3dvtk::UniformGrid*>(shape);
+			if (grid != NULL) {
+				return NULL;
+			} else {
+				g3dvtk::LineString* lineString = dynamic_cast<g3dvtk::LineString*>(shape);
+				if (lineString != NULL) {
+					geo3dml::LineSymbolizer* lineSym = g3dFactory.NewLineSymbolizer();
+					ToLineSymbolizer(actor_->GetProperty(), lineSym);
+					return lineSym;
+				} else {
+					g3dvtk::Point* point = dynamic_cast<g3dvtk::Point*>(shape);
+					if (point != NULL) {
+						geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
+						ToPointSymbolizer(actor_->GetProperty(), pointSym);
+						return pointSym;
+					} else {
+						g3dvtk::MultiPoint* mPoint = dynamic_cast<g3dvtk::MultiPoint*>(shape);
+						if (mPoint != NULL) {
+							geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
+							ToPointSymbolizer(actor_->GetProperty(), pointSym);
+							return pointSym;
+						}
+					}
+				}
+			}
+		}
+	}
 	return NULL;
 }
 
-vtkActor* Actor::GetVTKActor() const {
+vtkActor* Actor::GetVTKActor() {
+	g3d_lock_guard lck(mtx_);
 	return actor_;
 }
 
 void Actor::ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym) {
 	vtkProperty* p = actor_->GetProperty();
 	p->SetPointSize(sym->GetSize());
-	ConfigMaterial(sym->GetMaterial(), p);
+	ConfigByMaterial(sym->GetMaterial(), p);
 }
 
 void Actor::ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym) {
 	vtkProperty* p = actor_->GetProperty();
 	p->SetLineWidth(sym->GetWidth());
-	ConfigMaterial(sym->GetMaterial(), p);
+	ConfigByMaterial(sym->GetMaterial(), p);
 }
 
 void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym) {
 	vtkProperty* p = actor_->GetProperty();
-	ConfigMaterial(sym->GetFrontMaterial(), p);
+	ConfigByMaterial(sym->GetFrontMaterial(), p);
 	if (sym->IsVertexRenderEnabled()) {
 		p->SetPointSize(sym->GetVertexSymbolizer().GetSize());
 		p->VertexVisibilityOn();
@@ -152,7 +196,7 @@ void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym) {
 	}
 }
 
-void Actor::ConfigMaterial(const geo3dml::Material& m, vtkProperty* p) {
+void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) {
 	geo3dml::Color diffuseColor = m.GetDiffuseColor();
 	geo3dml::Color specularColor = m.GetSpecularColor();
 	p->SetAmbient(m.GetAmbientIntensity());
@@ -170,4 +214,29 @@ void Actor::SetRandomRenderOption() {
 	p->SetColor(r, g, b);
 	p->SetPointSize(3);
 	p->SetAmbient(0.25);
+}
+
+geo3dml::Material Actor::ToMaterial(vtkProperty* p) {
+	geo3dml::Material m;
+	m.SetAmbientIntensity(p->GetAmbient());
+	double* clr = p->GetDiffuseColor();
+	m.SetDiffuseColor(geo3dml::Color(clr[0], clr[1], clr[2]));
+	clr = p->GetSpecularColor();
+	m.SetSpecularColor(geo3dml::Color(clr[0], clr[1], clr[2]));
+	m.SetTransparency(1 - p->GetOpacity());
+	return m;
+}
+
+void Actor::ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) {
+	sym->SetSize(p->GetPointSize());
+	sym->SetMaterial(ToMaterial(p));
+}
+
+void Actor::ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) {
+	sym->SetWidth(p->GetLineWidth());
+	sym->SetMaterial(ToMaterial(p));
+}
+
+void Actor::ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) {
+	sym->SetFrontMaterial(ToMaterial(actor_->GetProperty()));
 }
