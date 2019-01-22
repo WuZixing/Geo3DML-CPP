@@ -6,6 +6,7 @@
 #include <g3dvtk/ShapeProperty.h>
 #include <g3dvtk/Point.h>
 #include <g3dvtk/MultiPoint.h>
+#include <g3dvtk/Actor.h>
 
 using namespace g3dvtk;
 
@@ -75,4 +76,8 @@ geo3dml::UniformGrid* ObjectFactory::NewUniformGrid(
 
 geo3dml::ShapeProperty* ObjectFactory::NewShapeProperty() {
 	return new ShapeProperty();
+}
+
+geo3dml::Actor* ObjectFactory::NewActor() {
+	return new Actor();
 }

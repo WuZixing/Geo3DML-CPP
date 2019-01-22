@@ -32,6 +32,8 @@ namespace g3dvtk {
 		);
 
 		virtual geo3dml::ShapeProperty* NewShapeProperty();
+
+		virtual geo3dml::Actor* NewActor();
 		//@}
 	};
 }

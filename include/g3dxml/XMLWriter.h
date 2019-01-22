@@ -11,8 +11,9 @@ namespace g3dxml {
 		XMLWriter();
 		virtual ~XMLWriter();
 
-		bool Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v);
 		bool Write(geo3dml::Project* project, std::ostream& output, SchemaVersion v);
+		bool Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v);
+		bool Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v);
 
 	private:
 		void WriteXMLDeclaration(std::ostream& output);
@@ -29,5 +30,7 @@ namespace g3dxml {
 		const std::string NS_gmd;
 		const std::string NS_xlink;
 		const std::string NS_gmlcov;
+		const std::string NS_ogc;
+		const std::string NS_se;
 	};
 }

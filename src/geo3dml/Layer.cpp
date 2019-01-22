@@ -12,6 +12,11 @@ Layer::~Layer() {
 		delete *styleItor;
 		++styleItor;
 	}
+	std::vector<Actor*>::const_iterator actorItor = actors_.cbegin();
+	while (actorItor != actors_.cend()) {
+		delete *actorItor;
+		++actorItor;
+	}
 }
 
 void Layer::SetName(const std::string& name) {
@@ -76,4 +81,29 @@ bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ
 	} else {
 		return false;
 	}
+}
+
+void Layer::AddActor(Actor* actor) {
+	g3d_lock_guard lck(mtx_);
+	if (actor == NULL) {
+		return;
+	}
+	std::vector<Actor*>::const_iterator actorItor = actors_.cbegin();
+	while (actorItor != actors_.cend()) {
+		if (*actorItor == actor) {
+			return;
+		}
+		++actorItor;
+	}
+	actors_.push_back(actor);
+}
+
+int Layer::GetActorCount() {
+	g3d_lock_guard lck(mtx_);
+	return (int)actors_.size();
+}
+
+Actor* Layer::GetActorAt(int i) {
+	g3d_lock_guard lck(mtx_);
+	return actors_.at(i);
 }

@@ -12,6 +12,9 @@
 #include "Point.h"
 #include "MultiPoint.h"
 #include "Map.h"
+#include "PointSymbolizer.h"
+#include "LineSymbolizer.h"
+#include "SurfaceSymbolizer.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -59,6 +62,10 @@ namespace geo3dml {
 		//@{
 		virtual Map* NewMap();
 		virtual Layer* NewLayer();
+		virtual Actor* NewActor() = 0;
+		virtual PointSymbolizer* NewPointSymbolizer();
+		virtual LineSymbolizer* NewLineSymbolizer();
+		virtual SurfaceSymbolizer* NewSurfaceSymbolizer();
 		//@}
 
 	public:

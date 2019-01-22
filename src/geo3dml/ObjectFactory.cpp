@@ -59,3 +59,15 @@ std::string ObjectFactory::TypeNameOfShape(Shape* shape) {
 	}
 	return "";
 }
+
+PointSymbolizer* ObjectFactory::NewPointSymbolizer() {
+	return new PointSymbolizer();
+}
+
+LineSymbolizer* ObjectFactory::NewLineSymbolizer() {
+	return new LineSymbolizer();
+}
+
+SurfaceSymbolizer* ObjectFactory::NewSurfaceSymbolizer() {
+	return new SurfaceSymbolizer();
+}

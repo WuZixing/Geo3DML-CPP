@@ -1,5 +1,7 @@
 #include <g3dxml/XMLWriter.h>
 #include <g3dxml/XMLFeatureClassWriter.h>
+#include <fstream>
+#include <g3dxml/XMLLayerWriter.h>
 
 using namespace g3dxml;
 
@@ -12,7 +14,9 @@ XMLWriter::XMLWriter() :
 	NS_gco("xmlns:gco=\"http://www.isotc211.org/2005/gco\""),
 	NS_gmd("xmlns:gmd=\"http://www.isotc211.org/2005/gmd\""),
 	NS_xlink("xmlns:xlink=\"http://www.w3.org/1999/xlink\""),
-	NS_gmlcov("xmlns:gmlcov=\"http://www.opengis.net/gmlcov/1.0\"") {
+	NS_gmlcov("xmlns:gmlcov=\"http://www.opengis.net/gmlcov/1.0\""),
+	NS_ogc("xmlns:ogc=\"http://www.opengis.net/ogc\""),
+	NS_se("xmlns:se=\"http://www.opengis.net/se\"") {
 }
 
 XMLWriter::~XMLWriter() {
@@ -66,10 +70,65 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 	int modelNumber = project->GetModelCount();
 	if (modelNumber > 0) {
 		output << "<Models>" << std::endl;
-
+		for (int m = 0; m < modelNumber; ++m) {
+			geo3dml::Model* model = project->GetModelAt(m);
+			std::string modelFileName = model->GetName() + "_model.xml";
+			std::ofstream modelFile(modelFileName);
+			Write(model, modelFile, v);
+			output << "<Model>" << "<xi:include href=\"" << modelFileName << "\" />" << "</Model>" << std::endl;
+			if (!IsOK()) {
+				break;
+			}
+		}
 		output << "</Models>" << std::endl;
 	}
+	if (IsOK()) {
+		int mapNumber = project->GetMapCount();
+		if (mapNumber > 0) {
+			output << "<Maps>" << std::endl;
+			for (int m = 0; m < mapNumber; ++m) {
+				geo3dml::Map* map = project->GetMapAt(m);
+				std::string mapFileName = map->GetName() + "_map.xml";
+				std::ofstream mapFile(mapFileName);
+				Write(map, mapFile, v);
+				output << "<Map>" << "<xi:include href=\"" << mapFileName << "\" />" << "</Map>" << std::endl;
+				if (!IsOK()) {
+					break;
+				}
+			}
+			output << "</Maps>" << std::endl;
+		}
+	}
+	
 	output << "</geo3dml:Geo3DProject>" << std::endl;
+	return IsOK();
+}
+
+bool XMLWriter::Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v) {
+	WriteXMLDeclaration(output);
+	output << "<geo3dml:Geo3DMap " << NSGeo3DML(v) << " " << NSDefault(v) << std::endl
+		<< NS_gml << std::endl
+		<< NS_xlink << std::endl
+		<< NS_ogc << std::endl
+		<< NS_se << std::endl
+		<< xsi_SchemaLocation << std::endl
+		<< "ID=\"" << map->GetID() << "\">" << std::endl;
+	output << "<Name>" << map->GetName() << "</Name>" << std::endl
+		<< "<Description>" << map->GetDescription() << "</Description>" << std::endl;
+	int layerNumber = map->GetLayerCount();
+	if (layerNumber > 0) {
+		output << "<Layers>" << std::endl;
+		for (int i = 0; i < layerNumber; ++i) {
+			geo3dml::Layer* layer = map->GetLayerAt(i);
+			XMLLayerWriter layerWriter;
+			if (!layerWriter.Write(layer, output, v)) {
+				SetStatus(false, layerWriter.Error());
+				break;
+			}
+		}
+		output << "</Layers>" << std::endl;
+	}
+	output << "</geo3dml:Geo3DMap>" << std::endl;
 	return IsOK();
 }
 

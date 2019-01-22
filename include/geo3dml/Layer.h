@@ -3,6 +3,7 @@
 #include "Geo3DML.h"
 #include "FeatureClass.h"
 #include "Geo3DStyle.h"
+#include "Actor.h"
 
 namespace geo3dml {
 
@@ -22,6 +23,10 @@ namespace geo3dml {
 		void AddStyle(Geo3DStyle* style);
 		int GetStyleCount();
 		Geo3DStyle* GetStyleAt(int i);
+
+		void AddActor(Actor* actor);
+		int GetActorCount();
+		Actor* GetActorAt(int i);
 
 		//@{
 		void SetParentMap(const std::string& id);
@@ -43,5 +48,6 @@ namespace geo3dml {
 		FeatureClass* bindingFeatureClass_;
 		std::string parentMapId_;
 		std::vector<Geo3DStyle*> styles_;
+		std::vector<Actor*> actors_;
 	};
 }
