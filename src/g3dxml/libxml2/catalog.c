@@ -941,7 +941,7 @@ xmlParseCatalogFile(const char *filename) {
 static xmlChar *
 xmlLoadFileContent(const char *filename)
 {
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     int fd;
 #else
     FILE *fd;
@@ -949,7 +949,7 @@ xmlLoadFileContent(const char *filename)
     int len;
     long size;
 
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     struct stat info;
 #endif
     xmlChar *content;
@@ -957,12 +957,12 @@ xmlLoadFileContent(const char *filename)
     if (filename == NULL)
         return (NULL);
 
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     if (stat(filename, &info) < 0)
         return (NULL);
 #endif
 
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     if ((fd = open(filename, O_RDONLY)) < 0)
 #else
     if ((fd = fopen(filename, "rb")) == NULL)
@@ -970,7 +970,7 @@ xmlLoadFileContent(const char *filename)
     {
         return (NULL);
     }
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     size = info.st_size;
 #else
     if (fseek(fd, 0, SEEK_END) || (size = ftell(fd)) == EOF || fseek(fd, 0, SEEK_SET)) {        /* File operations denied? ok, just close and return failure */
@@ -983,7 +983,7 @@ xmlLoadFileContent(const char *filename)
         xmlCatalogErrMemory("allocating catalog data");
         return (NULL);
     }
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     len = read(fd, content, size);
 #else
     len = fread(content, 1, size, fd);
@@ -992,7 +992,7 @@ xmlLoadFileContent(const char *filename)
         xmlFree(content);
         return (NULL);
     }
-#ifdef HAVE_STAT
+#ifdef HAVE_UNISTD_H
     close(fd);
 #else
     fclose(fd);

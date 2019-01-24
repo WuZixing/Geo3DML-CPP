@@ -1481,6 +1481,7 @@ xhtmlNodeDumpOutput(xmlSaveCtxtPtr ctxt, xmlNodePtr cur) {
  *                                                                      *
  ************************************************************************/
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlSaveToFd:
  * @fd:  a file descriptor number
@@ -1506,6 +1507,7 @@ xmlSaveToFd(int fd, const char *encoding, int options)
     }
     return(ret);
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlSaveToFilename:

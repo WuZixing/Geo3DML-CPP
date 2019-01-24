@@ -158,6 +158,7 @@ docbCreatePushParserCtxt(docbSAXHandlerPtr sax ATTRIBUTE_UNUSED,
     return(xmlCreatePushParserCtxt(sax, user_data, chunk, size, filename));
 }
 
+#ifdef LIBXML_SAX1_ENABLED
 /**
  * docbSAXParseDoc:
  * @cur:  a pointer to an array of xmlChar
@@ -214,7 +215,7 @@ docbParseDoc(xmlChar * cur ATTRIBUTE_UNUSED,
 
     return (xmlParseDoc(cur));
 }
-
+#endif /* LIBXML_SAX1_ENABLED */
 
 /**
  * docbCreateFileParserCtxt:
@@ -242,6 +243,7 @@ docbCreateFileParserCtxt(const char *filename ATTRIBUTE_UNUSED,
     return (xmlCreateFileParserCtxt(filename));
 }
 
+#ifdef LIBXML_SAX1_ENABLED
 /**
  * docbSAXParseFile:
  * @filename:  the filename
@@ -300,6 +302,7 @@ docbParseFile(const char *filename ATTRIBUTE_UNUSED,
 
     return (xmlParseFile(filename));
 }
+#endif /* LIBXML_SAX1_ENABLED */
 #define bottom_DOCBparser
 #include "elfgcchack.h"
 #endif /* LIBXML_DOCB_ENABLED */

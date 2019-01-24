@@ -37,10 +37,12 @@ typedef enum {
 typedef struct _xmlSaveCtxt xmlSaveCtxt;
 typedef xmlSaveCtxt *xmlSaveCtxtPtr;
 
+#ifdef HAVE_UNISTD_H
 XMLPUBFUN xmlSaveCtxtPtr XMLCALL
                 xmlSaveToFd             (int fd,
                                          const char *encoding,
                                          int options);
+#endif /* HAVE_UNISTD_H */
 XMLPUBFUN xmlSaveCtxtPtr XMLCALL
                 xmlSaveToFilename       (const char *filename,
                                          const char *encoding,

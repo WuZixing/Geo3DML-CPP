@@ -13326,6 +13326,7 @@ xmlReadMemory(const char *buffer, int size, const char *URL, const char *encodin
     return (xmlDoRead(ctxt, URL, encoding, options, 0));
 }
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlReadFd:
  * @fd:  an open file descriptor
@@ -13367,6 +13368,7 @@ xmlReadFd(int fd, const char *URL, const char *encoding, int options)
     inputPush(ctxt, stream);
     return (xmlDoRead(ctxt, URL, encoding, options, 0));
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlReadIO:
@@ -13521,6 +13523,7 @@ xmlCtxtReadMemory(xmlParserCtxtPtr ctxt, const char *buffer, int size,
     return (xmlDoRead(ctxt, URL, encoding, options, 1));
 }
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlCtxtReadFd:
  * @ctxt:  an XML parser context
@@ -13563,6 +13566,7 @@ xmlCtxtReadFd(xmlParserCtxtPtr ctxt, int fd,
     inputPush(ctxt, stream);
     return (xmlDoRead(ctxt, URL, encoding, options, 1));
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlCtxtReadIO:

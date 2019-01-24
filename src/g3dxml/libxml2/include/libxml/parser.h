@@ -1120,11 +1120,13 @@ XMLPUBFUN xmlDocPtr XMLCALL
                                          const char *URL,
                                          const char *encoding,
                                          int options);
+#ifdef HAVE_UNISTD_H
 XMLPUBFUN xmlDocPtr XMLCALL
                 xmlReadFd               (int fd,
                                          const char *URL,
                                          const char *encoding,
                                          int options);
+#endif /* HAVE_UNISTD_H */
 XMLPUBFUN xmlDocPtr XMLCALL
                 xmlReadIO               (xmlInputReadCallback ioread,
                                          xmlInputCloseCallback ioclose,
@@ -1150,12 +1152,14 @@ XMLPUBFUN xmlDocPtr XMLCALL
                                          const char *URL,
                                          const char *encoding,
                                          int options);
+#ifdef HAVE_UNISTD_H
 XMLPUBFUN xmlDocPtr XMLCALL
                 xmlCtxtReadFd           (xmlParserCtxtPtr ctxt,
                                          int fd,
                                          const char *URL,
                                          const char *encoding,
                                          int options);
+#endif /* HAVE_UNISTD_H */
 XMLPUBFUN xmlDocPtr XMLCALL
                 xmlCtxtReadIO           (xmlParserCtxtPtr ctxt,
                                          xmlInputReadCallback ioread,

@@ -5187,6 +5187,7 @@ xmlReaderForMemory(const char *buffer, int size, const char *URL,
     return (reader);
 }
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlReaderForFd:
  * @fd:  an open file descriptor
@@ -5223,6 +5224,7 @@ xmlReaderForFd(int fd, const char *URL, const char *encoding, int options)
     xmlTextReaderSetup(reader, NULL, URL, encoding, options);
     return (reader);
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlReaderForIO:
@@ -5404,6 +5406,7 @@ xmlReaderNewMemory(xmlTextReaderPtr reader, const char *buffer, int size,
     return (xmlTextReaderSetup(reader, input, URL, encoding, options));
 }
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlReaderNewFd:
  * @reader:  an XML reader
@@ -5437,6 +5440,7 @@ xmlReaderNewFd(xmlTextReaderPtr reader, int fd,
     input->closecallback = NULL;
     return (xmlTextReaderSetup(reader, input, URL, encoding, options));
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlReaderNewIO:

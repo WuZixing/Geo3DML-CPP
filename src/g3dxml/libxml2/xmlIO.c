@@ -36,6 +36,7 @@
 
 #ifdef WIN32
 #include <windows.h>
+#include <direct.h>
 #endif
 
 /*--------------------------------------------------------------------------*/
@@ -786,6 +787,7 @@ xmlNop(void) {
     return(0);
 }
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlFdRead:
  * @context:  the I/O context
@@ -804,7 +806,9 @@ xmlFdRead (void * context, char * buffer, int len) {
     if (ret < 0) xmlIOErr(0, "read()");
     return(ret);
 }
+#endif /* HAVE_UNISTD_H */
 
+#ifdef HAVE_UNISTD_H
 #ifdef LIBXML_OUTPUT_ENABLED
 /**
  * xmlFdWrite:
@@ -843,6 +847,7 @@ xmlFdClose (void * context) {
     if (ret < 0) xmlIOErr(0, "close()");
     return(ret);
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlFileMatch:
@@ -2711,6 +2716,7 @@ xmlOutputBufferCreateBuffer(xmlBufferPtr buffer,
 
 #endif /* LIBXML_OUTPUT_ENABLED */
 
+#ifdef HAVE_UNISTD_H
 /**
  * xmlParserInputBufferCreateFd:
  * @fd:  a file descriptor number
@@ -2736,6 +2742,7 @@ xmlParserInputBufferCreateFd(int fd, xmlCharEncoding enc) {
 
     return(ret);
 }
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlParserInputBufferCreateMem:
@@ -2816,6 +2823,7 @@ xmlParserInputBufferCreateStatic(const char *mem, int size,
     return(ret);
 }
 
+#ifdef HAVE_UNISTD_H
 #ifdef LIBXML_OUTPUT_ENABLED
 /**
  * xmlOutputBufferCreateFd:
@@ -2843,6 +2851,7 @@ xmlOutputBufferCreateFd(int fd, xmlCharEncodingHandlerPtr encoder) {
     return(ret);
 }
 #endif /* LIBXML_OUTPUT_ENABLED */
+#endif /* HAVE_UNISTD_H */
 
 /**
  * xmlParserInputBufferCreateIO:
@@ -3549,7 +3558,7 @@ xmlParserGetDirectory(const char *filename) {
         else *cur = 0;
         ret = xmlMemStrdup(dir);
     } else {
-        if (getcwd(dir, 1024) != NULL) {
+        if (_getcwd(dir, 1024) != NULL) {
             dir[1023] = 0;
             ret = xmlMemStrdup(dir);
         }
