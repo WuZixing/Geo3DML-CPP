@@ -11,12 +11,12 @@
 
 namespace g3dxml {
 
-	class XMLShapeWriter : public XMLIO {
+	class XMLGeometryWriter : public XMLIO {
 	public:
-		XMLShapeWriter();
-		virtual ~XMLShapeWriter();
+		XMLGeometryWriter();
+		virtual ~XMLGeometryWriter();
 
-		bool Write(geo3dml::Shape* shape, std::ostream& output, SchemaVersion v);
+		bool Write(geo3dml::Geometry* geo, std::ostream& output, SchemaVersion v);
 
 	private:
 		void WriteTIN(geo3dml::TIN* tin, std::ostream& output);

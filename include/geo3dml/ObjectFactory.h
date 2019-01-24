@@ -4,7 +4,6 @@
 #include "Model.h"
 #include "FeatureClass.h"
 #include "Feature.h"
-#include "Geometry.h"
 #include "TIN.h"
 #include "CornerPointGrid.h"
 #include "UniformGrid.h"
@@ -20,7 +19,7 @@ namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
 	class ObjectFactory {
 	public:
-		static std::string TypeNameOfShape(Shape* shape);
+		static std::string TypeNameOfGeometry(Geometry* shape);
 
 	public:
 		ObjectFactory();
@@ -37,7 +36,7 @@ namespace geo3dml {
 		virtual Feature* NewFeature() = 0;
 		//@}
 
-		/// @name shape (goemetry) objects.
+		/// @name goemetry(shape) objects.
 		//@{
 		virtual Point* NewPoint() = 0;
 		virtual MultiPoint* NewMultiPoint() = 0;
@@ -69,7 +68,6 @@ namespace geo3dml {
 		//@}
 
 	public:
-		Geometry* NewGeometry();
-		Shape* NewShape(const std::string& typeName);
+		Geometry* NewGeometry(const std::string& typeName);
 	};
 }

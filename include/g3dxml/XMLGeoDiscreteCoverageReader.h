@@ -16,7 +16,7 @@ namespace g3dxml {
 		XMLGeoDiscreteCoverageReader(geo3dml::ObjectFactory* factory);
 		virtual ~XMLGeoDiscreteCoverageReader();
 
-		bool ReadGeoDiscreteCoverage(xmlTextReaderPtr reader, geo3dml::Shape* toShape);
+		bool ReadGeoDiscreteCoverage(xmlTextReaderPtr reader, geo3dml::Geometry* toShape);
 		bool ReadRangeType(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty);
 		bool ReadRangeSet(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty);
 		bool ReadRangeSetField(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty, int fieldIndex);

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Shape.h"
+#include "Geometry.h"
 
 namespace geo3dml {
 
-	class Point : public Shape {
+	class Point : public Geometry {
 	public:
 		Point();
 		virtual ~Point();

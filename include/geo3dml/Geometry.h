@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Shape.h"
-#include <mutex>
+#include "Geo3DML.h"
+#include "ShapeProperty.h"
 
 namespace geo3dml {
 
 	/// A Geometry object is thread safe.
-	class Geometry {
+	class Geometry : public Object {
 	public:
 		Geometry();
 		virtual ~Geometry();
@@ -21,28 +21,20 @@ namespace geo3dml {
 		int GetLODLevel();
 		//@}
 
-		//@{
-		/// Set or replace the shape object bound by this geometry.
-		/// @param shape the Shape object binding with this geometry. It will be deallocated by this Geometry object unless it was replaced by another shape object.
-		/// @return the replaced shape if there was a bound Shape object. The returned object should be deallocated by the caller.
-		Shape* SetShape(Shape* shape);
-		Shape* GetShape();
-		//@}
-
-		/// Compute the minimum bounding rectangle of the geometry.
+		/// Compute the minimum bounding rectangle of the shape.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
 		/// @param minZ Output the minimum X coordinate.
 		/// @param maxX Output the maximum X coordinate.
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
-		/// @return In case of a geometry without a valid shape, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		/// @return In case of a null shape which means a geometry without any vertex, it will return false.
+		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) = 0;
+		virtual void SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t) = 0;
+		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) = 0;
 
 	private:
 		std::string name_;
 		int lodLevel_;
-		Shape* shape_;
-		std::mutex mtx_;
 	};
 }

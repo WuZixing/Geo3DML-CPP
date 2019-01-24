@@ -1,6 +1,5 @@
 #pragma once
 
-#include <geo3dml/Geo3DML.h>
 #include "Geometry.h"
 #include "FieldValue.h"
 #include <vector>

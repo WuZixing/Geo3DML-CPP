@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Shape.h"
+#include "Geometry.h"
 
 namespace geo3dml {
 
-	class TIN : public Shape {
+	class TIN : public Geometry {
 	public:
 		TIN();
 		virtual ~TIN();

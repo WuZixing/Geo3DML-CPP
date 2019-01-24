@@ -1,39 +1,39 @@
-#include <g3dxml/XMLShapeWriter.h>
+#include <g3dxml/XMLGeometryWriter.h>
 
 using namespace g3dxml;
 
-XMLShapeWriter::XMLShapeWriter() {
+XMLGeometryWriter::XMLGeometryWriter() {
 
 }
 
-XMLShapeWriter::~XMLShapeWriter() {
+XMLGeometryWriter::~XMLGeometryWriter() {
 
 }
 
-bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output, SchemaVersion v) {
+bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, SchemaVersion v) {
 	output << "<Shape>" << std::endl;
-	geo3dml::TIN* tin = dynamic_cast<geo3dml::TIN*>(shape);
+	geo3dml::TIN* tin = dynamic_cast<geo3dml::TIN*>(geo);
 	if (tin != NULL) {
 		WriteTIN(tin, output);
 	} else {
-		geo3dml::LineString* line = dynamic_cast<geo3dml::LineString*>(shape);
+		geo3dml::LineString* line = dynamic_cast<geo3dml::LineString*>(geo);
 		if (line != NULL) {
 			WriteLineString(line, output);
 		} else {
-			geo3dml::Point* point = dynamic_cast<geo3dml::Point*>(shape);
+			geo3dml::Point* point = dynamic_cast<geo3dml::Point*>(geo);
 			if (point != NULL) {
 				WritePoint(point, output);
 			} else {
-				geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(shape);
+				geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
 				if (mPoint != NULL) {
 					WriteMultiPoint(mPoint, output);
 				} else {
-					geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(shape);
+					geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
 					if (cornerGrid != NULL) {
 						WriteCornerPointGrid(cornerGrid, output);
 					} else {
 						if (v != Schema_1_0) {
-							geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(shape);
+							geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
 							if (rectGrid != NULL) {
 								WriteUniformGrid(rectGrid, output);
 							}
@@ -47,7 +47,7 @@ bool XMLShapeWriter::Write(geo3dml::Shape* shape, std::ostream& output, SchemaVe
 	return IsOK();
 }
 
-void XMLShapeWriter::WriteTIN(geo3dml::TIN* tin, std::ostream& output) {
+void XMLGeometryWriter::WriteTIN(geo3dml::TIN* tin, std::ostream& output) {
 	output << "<GeoTin gml:id=\"" << tin->GetID() << "\">" << std::endl;
 	// vertices
 	int vertexNumber = tin->GetVertexCount();
@@ -77,7 +77,7 @@ void XMLShapeWriter::WriteTIN(geo3dml::TIN* tin, std::ostream& output) {
 	output << "</GeoTin>" << std::endl;
 }
 
-void XMLShapeWriter::WriteLineString(geo3dml::LineString* line, std::ostream& output) {
+void XMLGeometryWriter::WriteLineString(geo3dml::LineString* line, std::ostream& output) {
 	output << "<gml:LineString gml:id=\"" << line->GetID() << "\">" << std::endl;
 	double x = 0, y = 0, z = 0;
 	int vertexNumber = line->GetVertexCount();
@@ -90,7 +90,7 @@ void XMLShapeWriter::WriteLineString(geo3dml::LineString* line, std::ostream& ou
 	output << "</gml:LineString>" << std::endl;
 }
 
-void XMLShapeWriter::WritePoint(geo3dml::Point* point, std::ostream& output) {
+void XMLGeometryWriter::WritePoint(geo3dml::Point* point, std::ostream& output) {
 	output << "<gml:Point gml:id=\"" << point->GetID() << "\">" << std::endl;
 	double x = 0, y = 0, z = 0;
 	point->GetPosition(x, y, z);
@@ -98,7 +98,7 @@ void XMLShapeWriter::WritePoint(geo3dml::Point* point, std::ostream& output) {
 	output << "</gml:Point>" << std::endl;
 }
 
-void XMLShapeWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output) {
+void XMLGeometryWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output) {
 	output << "<gml:MultiPoint gml:id=\"" << mPoint->GetID() << "\">" << std::endl
 		<< "<gml:pointMembers>" << std::endl;
 	double x = 0, y = 0, z = 0;
@@ -113,7 +113,7 @@ void XMLShapeWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& 
 		<< "</gml:MultiPoint>" << std::endl;
 }
 
-void XMLShapeWriter::WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output) {
+void XMLGeometryWriter::WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output) {
 	output << "<GeoCornerPointGrid gml:id=\"" << cornerGrid->GetID() << "\">" << std::endl;
 	int dimI = 0, dimJ = 0, dimK = 0;
 	cornerGrid->GetDimensions(dimI, dimJ, dimK);
@@ -147,7 +147,7 @@ void XMLShapeWriter::WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, 
 	output << "</GeoCornerPointGrid>" << std::endl;
 }
 
-void XMLShapeWriter::WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output) {
+void XMLGeometryWriter::WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output) {
 	output << "<GeoUniformGrid gml:id=\"" << uniformGrid->GetID() << "\">" << std::endl;
 	double x = 0, y = 0, z = 0;
 	uniformGrid->GetOrigin(x, y, z);

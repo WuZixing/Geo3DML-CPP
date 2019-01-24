@@ -71,7 +71,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLFieldReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLFeatureClassWriter.h
-	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLShapeWriter.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeometryWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLShapePropertyWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTINReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLCornerPointGridReader.h

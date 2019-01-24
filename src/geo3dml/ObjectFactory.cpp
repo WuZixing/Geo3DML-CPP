@@ -16,11 +16,8 @@ Layer* ObjectFactory::NewLayer() {
 	return new Layer();
 }
 
-Geometry* ObjectFactory::NewGeometry() {
-	return new Geometry();
-}
 
-Shape* ObjectFactory::NewShape(const std::string& typeName) {
+Geometry* ObjectFactory::NewGeometry(const std::string& typeName) {
 	if (_stricmp(typeName.c_str(), "GeoTIN") == 0) {
 		return NewTIN();
 	} else if (_stricmp(typeName.c_str(), "GeoCornerPointGrid") == 0) {
@@ -36,7 +33,7 @@ Shape* ObjectFactory::NewShape(const std::string& typeName) {
 	}
 }
 
-std::string ObjectFactory::TypeNameOfShape(Shape* shape) {
+std::string ObjectFactory::TypeNameOfGeometry(Geometry* shape) {
 	TIN* tin = dynamic_cast<TIN*>(shape);
 	if (tin != NULL) {
 		return "GeoTIN";

@@ -15,7 +15,7 @@ XMLGeoDiscreteCoverageReader::~XMLGeoDiscreteCoverageReader() {
 
 }
 
-bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr reader, geo3dml::Shape* toShape) {
+bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr reader, geo3dml::Geometry* toShape) {
 	geo3dml::ShapeProperty* shapeProperty = g3dFactory_->NewShapeProperty();
 	std::string coverageName;
 	std::string coverageId = XMLReaderHelper::AttributeGMLID(reader);

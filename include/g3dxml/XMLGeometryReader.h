@@ -19,8 +19,8 @@ namespace g3dxml {
 		geo3dml::Geometry* ReadGeometry(xmlTextReaderPtr reader);
 
 	private:
-		geo3dml::Shape* ReadShape(xmlTextReaderPtr reader);
-		bool ReadShapeProperty(xmlTextReaderPtr reader, geo3dml::Shape* toShape);
+		geo3dml::Geometry* ReadShape(xmlTextReaderPtr reader);
+		bool ReadShapeProperty(xmlTextReaderPtr reader, geo3dml::Geometry* toShape);
 
 	private:
 		static std::string Element_Shape;

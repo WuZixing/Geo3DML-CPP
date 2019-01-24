@@ -1,6 +1,6 @@
 #include <g3dxml/XMLFeatureClassWriter.h>
 #include <g3dxml/XMLFieldReader.h>
-#include <g3dxml/XMLShapeWriter.h>
+#include <g3dxml/XMLGeometryWriter.h>
 #include <g3dxml/XMLShapePropertyWriter.h>
 
 using namespace g3dxml;
@@ -119,47 +119,42 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 				output << "<Geometry Name=\"" << geometry->GetName() << "\" LOD=\"" << geometry->GetLODLevel() << "\">" << std::endl;
 			}
 			// Shape
-			geo3dml::Shape* shape = geometry->GetShape();
-			if (shape != NULL) {
-				XMLShapeWriter shapeWriter;
-				if (!shapeWriter.Write(shape, output, v)) {
-					SetStatus(false, shapeWriter.Error());
+			XMLGeometryWriter geoWriter;
+			if (!geoWriter.Write(geometry, output, v)) {
+				SetStatus(false, geoWriter.Error());
+				break;
+			}
+			// Shape property.
+			geo3dml::ShapeProperty* vertexProperty = geometry->GetProperty(geo3dml::ShapeProperty::Vertex);
+			if (vertexProperty != NULL) {
+				XMLShapePropertyWriter propWriter;
+				if (!propWriter.Write(vertexProperty, output, v)) {
+					SetStatus(false, propWriter.Error());
 					break;
 				}
 			}
-			// Shape property.
-			if (shape != NULL) {
-				geo3dml::ShapeProperty* vertexProperty = shape->GetProperty(geo3dml::ShapeProperty::Vertex);
-				if (vertexProperty != NULL) {
-					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(vertexProperty, output, v)) {
-						SetStatus(false, propWriter.Error());
-						break;
-					}
+			geo3dml::ShapeProperty* edgeProperty = geometry->GetProperty(geo3dml::ShapeProperty::Edge);
+			if (edgeProperty != NULL) {
+				XMLShapePropertyWriter propWriter;
+				if (!propWriter.Write(edgeProperty, output, v)) {
+					SetStatus(false, propWriter.Error());
+					break;
 				}
-				geo3dml::ShapeProperty* edgeProperty = shape->GetProperty(geo3dml::ShapeProperty::Edge);
-				if (edgeProperty != NULL) {
-					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(edgeProperty, output, v)) {
-						SetStatus(false, propWriter.Error());
-						break;
-					}
+			}
+			geo3dml::ShapeProperty* faceProperty = geometry->GetProperty(geo3dml::ShapeProperty::Face);
+			if (faceProperty != NULL) {
+				XMLShapePropertyWriter propWriter;
+				if (!propWriter.Write(faceProperty, output, v)) {
+					SetStatus(false, propWriter.Error());
+					break;
 				}
-				geo3dml::ShapeProperty* faceProperty = shape->GetProperty(geo3dml::ShapeProperty::Face);
-				if (faceProperty != NULL) {
-					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(faceProperty, output, v)) {
-						SetStatus(false, propWriter.Error());
-						break;
-					}
-				}
-				geo3dml::ShapeProperty* voxelProperty = shape->GetProperty(geo3dml::ShapeProperty::Voxel);
-				if (voxelProperty != NULL) {
-					XMLShapePropertyWriter propWriter;
-					if (!propWriter.Write(voxelProperty, output, v)) {
-						SetStatus(false, propWriter.Error());
-						break;
-					}
+			}
+			geo3dml::ShapeProperty* voxelProperty = geometry->GetProperty(geo3dml::ShapeProperty::Voxel);
+			if (voxelProperty != NULL) {
+				XMLShapePropertyWriter propWriter;
+				if (!propWriter.Write(voxelProperty, output, v)) {
+					SetStatus(false, propWriter.Error());
+					break;
 				}
 			}
 			output << "</Geometry>" << std::endl;

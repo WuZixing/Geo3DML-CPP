@@ -21,7 +21,7 @@ namespace g3dvtk {
 		virtual void GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3);
 		//@}
 
-		/// @name Methods inherited from geo3dml::Shape.
+		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
 		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);

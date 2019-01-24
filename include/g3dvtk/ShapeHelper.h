@@ -1,6 +1,6 @@
 #pragma once
 
-#include <geo3dml/Shape.h>
+#include <geo3dml/ShapeProperty.h>
 #include <vtkDataSet.h>
 
 namespace g3dvtk {
