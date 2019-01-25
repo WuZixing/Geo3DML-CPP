@@ -28,7 +28,11 @@ XMLModelReader::~XMLModelReader() {
 
 geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 	geo3dml::Model* model = g3dFactory_->NewModel();
-	model->SetID(XMLReaderHelper::Attribute(reader, "ID"));
+	std::string modelId = XMLReaderHelper::Attribute(reader, "ID");
+	if (modelId.empty()) {
+		modelId = geo3dml::Object::NewID();
+	}
+	model->SetID(modelId);
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);

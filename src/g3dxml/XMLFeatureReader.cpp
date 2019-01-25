@@ -19,7 +19,11 @@ XMLFeatureReader::~XMLFeatureReader() {
 
 geo3dml::Feature* XMLFeatureReader::ReadFeature(xmlTextReaderPtr reader) {
 	geo3dml::Feature* feature = g3dFactory_->NewFeature();
-	feature->SetID(XMLReaderHelper::AttributeGMLID(reader));
+	std::string featureId = XMLReaderHelper::AttributeGMLID(reader);
+	if (featureId.empty()) {
+		featureId = geo3dml::Object::NewID();
+	}
+	feature->SetID(featureId);
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
