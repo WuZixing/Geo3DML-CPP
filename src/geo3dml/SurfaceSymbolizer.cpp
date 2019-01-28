@@ -1,15 +1,30 @@
 #include <geo3dml/SurfaceSymbolizer.h>
 
+#ifndef NULL
+#ifdef __cplusplus
+#define NULL 0
+#else
+#define NULL ((void *)0)
+#endif
+#endif
+
 using namespace geo3dml;
 
 SurfaceSymbolizer::SurfaceSymbolizer() {
 	isBackRenderEnabled_ = false;
 	isVertexRenderEnabled_ = false;
 	isFrameRenderEnabled_ = false;
+	vertexSymbolizer_ = NULL;
+	frameSymbolizer_ = NULL;
 }
 
 SurfaceSymbolizer::~SurfaceSymbolizer() {
-
+	if (vertexSymbolizer_ != NULL) {
+		delete vertexSymbolizer_;
+	}
+	if (frameSymbolizer_ != NULL) {
+		delete frameSymbolizer_;
+	}
 }
 
 void SurfaceSymbolizer::SetFrontMaterial(const Material& m) {
@@ -44,11 +59,11 @@ bool SurfaceSymbolizer::IsVertexRenderEnabled() const {
 	return isVertexRenderEnabled_;
 }
 
-void SurfaceSymbolizer::SetVertexSymbolizer(const PointSymbolizer& pointSym) {
+void SurfaceSymbolizer::SetVertexSymbolizer(PointSymbolizer* pointSym) {
 	vertexSymbolizer_ = pointSym;
 }
 
-PointSymbolizer SurfaceSymbolizer::GetVertexSymbolizer() const {
+PointSymbolizer* SurfaceSymbolizer::GetVertexSymbolizer() const {
 	return vertexSymbolizer_;
 }
 
@@ -60,10 +75,10 @@ bool SurfaceSymbolizer::IsFrameRenderEnabled() const {
 	return isFrameRenderEnabled_;
 }
 
-void SurfaceSymbolizer::SetFrameSymbolizer(const LineSymbolizer& lineSym) {
+void SurfaceSymbolizer::SetFrameSymbolizer(LineSymbolizer* lineSym) {
 	frameSymbolizer_ = lineSym;
 }
 
-LineSymbolizer SurfaceSymbolizer::GetFrameSymbolizer() const {
+LineSymbolizer* SurfaceSymbolizer::GetFrameSymbolizer() const {
 	return frameSymbolizer_;
 }

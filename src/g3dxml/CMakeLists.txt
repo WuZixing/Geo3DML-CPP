@@ -81,6 +81,15 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLPointReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiPointReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLayerWriter.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMapReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLayerReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeo3DStyleReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLFeatureTypeStyleReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLStyleRuleReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLPointSymbolizerReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLineSymbolizerReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSurfaceSymbolizerReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMaterialReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

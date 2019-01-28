@@ -170,14 +170,14 @@ void XMLLayerWriter::WriteSurfaceSymbolizer(geo3dml::SurfaceSymbolizer* surfaceS
 	}
 	if (surfaceSym->IsVertexRenderEnabled()) {
 		output << "<VertexSymbolizer>" << std::endl;
-		geo3dml::PointSymbolizer pointSym = surfaceSym->GetVertexSymbolizer();
-		WritePointSymbolizer(&pointSym, output);
+		geo3dml::PointSymbolizer* pointSym = surfaceSym->GetVertexSymbolizer();
+		WritePointSymbolizer(pointSym, output);
 		output << "</VertexSymbolizer>" << std::endl;
 	}
 	if (surfaceSym->IsFrameRenderEnabled()) {
 		output << "<FrameSymbolizer>" << std::endl;
-		geo3dml::LineSymbolizer lineSym = surfaceSym->GetFrameSymbolizer();
-		WriteLineSymbolizer(&lineSym, output);
+		geo3dml::LineSymbolizer* lineSym = surfaceSym->GetFrameSymbolizer();
+		WriteLineSymbolizer(lineSym, output);
 		output << "</FrameSymbolizer>" << std::endl;
 	}
 	output << "</GeoSurfaceSymbolizer>" << std::endl;

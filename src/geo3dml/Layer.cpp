@@ -39,6 +39,16 @@ FeatureClass* Layer::GetBindingFeatureClass() {
 	return bindingFeatureClass_;
 }
 
+void Layer::SetBindingFeatureClassID(const std::string& featureClassID) {
+	g3d_lock_guard lck(mtx_);
+	bindingFeatureClassID_ = featureClassID;
+}
+
+std::string Layer::GetBindingFeatureClassID() {
+	g3d_lock_guard lck(mtx_);
+	return bindingFeatureClassID_;
+}
+
 void Layer::SetParentMap(const std::string& id) {
 	g3d_lock_guard lck(mtx_);
 	parentMapId_ = id;

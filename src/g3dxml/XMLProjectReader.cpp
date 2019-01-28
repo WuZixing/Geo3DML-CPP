@@ -1,5 +1,6 @@
 #include <g3dxml/XMLProjectReader.h>
 #include <g3dxml/XMLModelReader.h>
+#include <g3dxml/XMLMapReader.h>
 
 using namespace g3dxml;
 
@@ -10,6 +11,7 @@ std::string XMLProjectReader::Element_Model = "Model";
 std::string XMLProjectReader::Element_Include = "include";
 std::string XMLProjectReader::Element_Style = "GeoSceneStyle";
 std::string XMLProjectReader::Element_Light = "Light";
+std::string XMLProjectReader::Element_Map = "Map";
 
 XMLProjectReader::XMLProjectReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;
@@ -53,8 +55,14 @@ geo3dml::Project* XMLProjectReader::ReadProject(xmlTextReaderPtr reader) {
 				if (!ReadStyle(reader, project)) {
 					break;
 				}
+			} else if (_stricmp(localName, Element_Map.c_str()) == 0) {
+				geo3dml::Map* map = ReadMap(reader);
+				if (map != NULL) {
+					project->AddMap(map);
+				} else {
+					break;
+				}
 			}
-			/// TODO: parse Map.
 		}
 		status = xmlTextReaderRead(reader);
 	}
@@ -70,7 +78,7 @@ geo3dml::Project* XMLProjectReader::ReadProject(xmlTextReaderPtr reader) {
 }
 
 geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {
-	// a GeoModel element can be embedded in <Model>, or included from another xml file by an xi:include element.
+	// a Geo3DModel element can be embedded in <Model>, or included from another xml file by an xi:include element.
 	geo3dml::Model* model = NULL;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -244,4 +252,48 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 		SetStatus(false, err);
 	}
 	return IsOK();
+}
+
+geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
+	// a Geo3DMap element can be embedded in <Map>, or included from another xml file by an xi:include element.
+	geo3dml::Map* map = NULL;
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Map.c_str()) == 0) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (_stricmp(localName, Element_Include.c_str()) == 0) {
+				// load from XML file.
+				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
+				if (href != NULL) {
+					XMLMapReader mapReader(g3dFactory_);
+					map = mapReader.LoadFromFile((const char*)href);
+					xmlFree(href);
+					if (!mapReader.IsOK()) {
+						SetStatus(false, mapReader.Error());
+					}
+				} else {
+					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of href");
+					SetStatus(false, err);
+				}
+				break;
+			} else if (XMLModelReader::IsModelElementName(localName)) {
+				// read from <Geo3DMap> element.
+				XMLMapReader mapReader(g3dFactory_);
+				map = mapReader.ReadMap(reader);
+				if (!mapReader.IsOK()) {
+					SetStatus(false, mapReader.Error());
+				}
+				break;
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_Map);
+		SetStatus(false, err);
+	}
+	return map;
 }

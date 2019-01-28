@@ -20,6 +20,7 @@ namespace g3dxml {
 
 	private:
 		geo3dml::Model* ReadModel(xmlTextReaderPtr reader);
+		geo3dml::Map* ReadMap(xmlTextReaderPtr reader);
 		bool ReadStyle(xmlTextReaderPtr reader, geo3dml::Project* project);
 		bool ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light);
 
@@ -30,6 +31,7 @@ namespace g3dxml {
 		static std::string Element_Include;
 		static std::string Element_Style;
 		static std::string Element_Light;
+		static std::string Element_Map;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

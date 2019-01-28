@@ -25,21 +25,21 @@ namespace geo3dml {
 		//@{
 		void EnableVertexRender(bool enabled = false);
 		bool IsVertexRenderEnabled() const;
-		void SetVertexSymbolizer(const PointSymbolizer& pointSym);
-		PointSymbolizer GetVertexSymbolizer() const;
+		void SetVertexSymbolizer(PointSymbolizer* pointSym);
+		PointSymbolizer* GetVertexSymbolizer() const;
 		//@}
 
 		//@{
 		void EnableFrameRender(bool enabled = false);
 		bool IsFrameRenderEnabled() const;
-		void SetFrameSymbolizer(const LineSymbolizer& lineSym);
-		LineSymbolizer GetFrameSymbolizer() const;
+		void SetFrameSymbolizer(LineSymbolizer* lineSym);
+		LineSymbolizer* GetFrameSymbolizer() const;
 		//@}
 
 	private:
 		bool isBackRenderEnabled_, isVertexRenderEnabled_, isFrameRenderEnabled_;
 		Material frontMaterial_, backMaterial_;
-		PointSymbolizer vertexSymbolizer_;
-		LineSymbolizer frameSymbolizer_;
+		PointSymbolizer* vertexSymbolizer_;
+		LineSymbolizer* frameSymbolizer_;
 	};
 }

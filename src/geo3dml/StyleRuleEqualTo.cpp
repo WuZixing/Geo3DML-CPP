@@ -2,6 +2,11 @@
 
 using namespace geo3dml;
 
+StyleRuleEqualTo::StyleRuleEqualTo(const std::string& fieldName, const std::string& valueLiteral) {
+	fieldName_ = fieldName;
+	valueLiteral_ = valueLiteral;
+}
+
 StyleRuleEqualTo::StyleRuleEqualTo(const FieldValue* baseValue, const Field& onField) {
 	targetField_ = onField;
 	baseValue_ = baseValue;
@@ -11,6 +16,22 @@ StyleRuleEqualTo::~StyleRuleEqualTo() {
 	if (baseValue_ != NULL) {
 		delete baseValue_;
 	}
+}
+
+void StyleRuleEqualTo::SetFieldName(const std::string& fieldName) {
+	fieldName_ = fieldName;
+}
+
+std::string StyleRuleEqualTo::GetFieldName() const {
+	return fieldName_;
+}
+
+void StyleRuleEqualTo::SetValueLiteral(const std::string& valueLiteral) {
+	valueLiteral_ = valueLiteral;
+}
+
+std::string StyleRuleEqualTo::GetValueLiteral() const {
+	return valueLiteral_;
 }
 
 const Field& StyleRuleEqualTo::GetField() const {

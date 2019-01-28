@@ -181,13 +181,13 @@ void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym) {
 	vtkProperty* p = actor_->GetProperty();
 	ConfigByMaterial(sym->GetFrontMaterial(), p);
 	if (sym->IsVertexRenderEnabled()) {
-		p->SetPointSize(sym->GetVertexSymbolizer().GetSize());
+		p->SetPointSize(sym->GetVertexSymbolizer()->GetSize());
 		p->VertexVisibilityOn();
 	} else {
 		p->VertexVisibilityOff();
 	}
 	if (sym->IsFrameRenderEnabled()) {
-		p->SetLineWidth(sym->GetFrameSymbolizer().GetWidth());
+		p->SetLineWidth(sym->GetFrameSymbolizer()->GetWidth());
 		p->EdgeVisibilityOn();
 	} else {
 		p->EdgeVisibilityOff();

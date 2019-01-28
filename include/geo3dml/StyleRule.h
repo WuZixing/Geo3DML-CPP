@@ -17,7 +17,7 @@ namespace geo3dml {
 		void SetSymbolizer(Symbolizer* sym);
 		Symbolizer* GetSymbolizer() const;
 
-		virtual bool DoesFeatureMatch(Feature* feature) = 0;
+		virtual bool DoesFeatureMatch(Feature* feature);
 
 	private:
 		Symbolizer* symbolizer_;

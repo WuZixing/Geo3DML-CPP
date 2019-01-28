@@ -68,3 +68,7 @@ LineSymbolizer* ObjectFactory::NewLineSymbolizer() {
 SurfaceSymbolizer* ObjectFactory::NewSurfaceSymbolizer() {
 	return new SurfaceSymbolizer();
 }
+
+FeatureTypeStyle* ObjectFactory::NewFeatureTypeStyle() {
+	return new FeatureTypeStyle();
+}

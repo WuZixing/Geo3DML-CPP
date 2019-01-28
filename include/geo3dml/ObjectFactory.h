@@ -14,6 +14,7 @@
 #include "PointSymbolizer.h"
 #include "LineSymbolizer.h"
 #include "SurfaceSymbolizer.h"
+#include "FeatureTypeStyle.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -65,6 +66,7 @@ namespace geo3dml {
 		virtual PointSymbolizer* NewPointSymbolizer();
 		virtual LineSymbolizer* NewLineSymbolizer();
 		virtual SurfaceSymbolizer* NewSurfaceSymbolizer();
+		virtual FeatureTypeStyle* NewFeatureTypeStyle();
 		//@}
 
 	public:

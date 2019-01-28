@@ -17,8 +17,12 @@ namespace geo3dml {
 		std::string GetName();
 		//@}
 
+		//@{
 		void BindFeatureClass(FeatureClass* fc);
 		FeatureClass* GetBindingFeatureClass();
+		void SetBindingFeatureClassID(const std::string& featureClassID);
+		std::string GetBindingFeatureClassID();
+		//@}
 
 		void AddStyle(Geo3DStyle* style);
 		int GetStyleCount();
@@ -46,6 +50,7 @@ namespace geo3dml {
 	private:
 		std::string name_;
 		FeatureClass* bindingFeatureClass_;
+		std::string bindingFeatureClassID_;
 		std::string parentMapId_;
 		std::vector<Geo3DStyle*> styles_;
 		std::vector<Actor*> actors_;

@@ -23,3 +23,8 @@ void StyleRule::SetSymbolizer(Symbolizer* sym) {
 Symbolizer* StyleRule::GetSymbolizer() const {
 	return symbolizer_;
 }
+
+bool StyleRule::DoesFeatureMatch(Feature* feature) {
+	// match any feature.
+	return true;
+}
