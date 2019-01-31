@@ -36,6 +36,7 @@ namespace geo3dml {
 		void AddFeatureClass(FeatureClass* f);
 		int GetFeatureClassCount();
 		FeatureClass* GetFeatureClassAt(int i);
+		FeatureClass* GetFeatureClass(const std::string& id);
 		/// Remove a feature class from the model but not delete it.
 		void RemoveFeatureClass(const std::string& id);
 		//@}

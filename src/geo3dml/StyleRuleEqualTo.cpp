@@ -1,22 +1,44 @@
 #include <geo3dml/StyleRuleEqualTo.h>
+#include <sstream>
 
 using namespace geo3dml;
 
 StyleRuleEqualTo::StyleRuleEqualTo(const std::string& fieldName, const std::string& valueLiteral) {
 	fieldName_ = fieldName;
 	valueLiteral_ = valueLiteral;
-	baseValue_ = NULL;
 }
 
-StyleRuleEqualTo::StyleRuleEqualTo(const FieldValue* baseValue, const Field& onField) {
-	targetField_ = onField;
-	baseValue_ = baseValue;
+StyleRuleEqualTo::StyleRuleEqualTo(const Field& fieldDef, const FieldValue* value) {
+	fieldName_ = fieldDef.Name();
+	if (value != NULL) {
+		std::ostringstream ostr;
+		const IntegerFieldValue* intValue = dynamic_cast<const IntegerFieldValue*>(value);
+		if (intValue != NULL) {
+			ostr << intValue->Value();
+			valueLiteral_ = ostr.str();
+		} else {
+			const DoubleFieldValue* doubleValue = dynamic_cast<const DoubleFieldValue*>(value);
+			if (doubleValue != NULL) {
+				ostr << doubleValue->Value();
+				valueLiteral_ = ostr.str();
+			} else {
+				const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(value);
+				if (textValue != NULL) {
+					valueLiteral_ = textValue->Value();
+				} else {
+					const BooleanFieldValue* boolValue = dynamic_cast<const BooleanFieldValue*>(value);
+					if (boolValue != NULL) {
+						ostr << boolValue->Value();
+						valueLiteral_ = ostr.str();
+					}
+				}
+			}
+		}
+	}
 }
 
 StyleRuleEqualTo::~StyleRuleEqualTo() {
-	if (baseValue_ != NULL) {
-		delete baseValue_;
-	}
+
 }
 
 void StyleRuleEqualTo::SetFieldName(const std::string& fieldName) {
@@ -35,62 +57,53 @@ std::string StyleRuleEqualTo::GetValueLiteral() const {
 	return valueLiteral_;
 }
 
-const Field& StyleRuleEqualTo::GetField() const {
-	return targetField_;
-}
-
-const FieldValue* StyleRuleEqualTo::GetBaseValue() const {
-	return baseValue_;
-}
-
-bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) {
-	if (targetField_.Name() == StyleRule::GetFieldOfFeatureID().Name()) {
-		const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(baseValue_);
-		if (textValue != NULL) {
-			return textValue->Value() == feature->GetID();
+bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) const {
+	if (fieldName_ == StyleRule::GetFieldOfFeatureID().Name()) {
+		return valueLiteral_ == feature->GetID();
+	} else {
+		geo3dml::FieldValue* fieldValue = feature->GetField(fieldName_);
+		if (fieldValue != NULL) {
+			const IntegerFieldValue* intValue = dynamic_cast<const IntegerFieldValue*>(fieldValue);
+			if (intValue != NULL) {
+				int v = (int)strtol(valueLiteral_.c_str(), NULL, 10);
+				return v == intValue->Value();
+			} else {
+				const DoubleFieldValue* doubleValue = dynamic_cast<const DoubleFieldValue*>(fieldValue);
+				if (doubleValue != NULL) {
+					double v = strtod(valueLiteral_.c_str(), NULL);
+					return fabs(doubleValue->Value() - v) < 1e-6;
+				} else {
+					const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(fieldValue);
+					if (textValue != NULL) {
+						return valueLiteral_ == textValue->Value();
+					} else {
+						const BooleanFieldValue* boolValue = dynamic_cast<const BooleanFieldValue*>(fieldValue);
+						if (boolValue != NULL) {
+							return TextToBoolean(valueLiteral_) == boolValue->Value();
+						} else {
+							return false;
+						}
+					}
+				}
+			}
 		} else {
 			return false;
 		}
+	}
+}
+
+bool StyleRuleEqualTo::TextToBoolean(const std::string& s) const {
+	if (_stricmp(s.c_str(), "1") == 0) {
+		return true;
+	} else if (_stricmp(s.c_str(), "true") == 0) {
+		return true;
+	} else if (_stricmp(s.c_str(), "yes") == 0) {
+		return true;
+	} else if (_stricmp(s.c_str(), "t") == 0) {
+		return true;
+	} else if (_stricmp(s.c_str(), "y") == 0) {
+		return true;
 	} else {
-		switch (targetField_.DataType()) {
-		case Field::Integer: {
-			const IntegerFieldValue* intValue = dynamic_cast<const IntegerFieldValue*>(baseValue_);
-			const IntegerFieldValue* intValueOfFeature = dynamic_cast<const IntegerFieldValue*>(feature->GetField(targetField_.Name()));
-			if (intValue != NULL && intValueOfFeature != NULL) {
-				return intValue->Value() == intValueOfFeature->Value();
-			} else {
-				return false;
-			}
-		}
-		case Field::Double: {
-			const DoubleFieldValue* doubleValue = dynamic_cast<const DoubleFieldValue*>(baseValue_);
-			const DoubleFieldValue* doubleValueOfFeature = dynamic_cast<const DoubleFieldValue*>(feature->GetField(targetField_.Name()));
-			if (doubleValue != NULL && doubleValueOfFeature != NULL) {
-				return fabs(doubleValue->Value() - doubleValueOfFeature->Value()) < 1e-6;
-			} else {
-				return false;
-			}
-		}
-		case Field::Text: {
-			const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(baseValue_);
-			const TextFieldValue* textValueOfFeature = dynamic_cast<const TextFieldValue*>(feature->GetField(targetField_.Name()));
-			if (textValue != NULL && textValueOfFeature != NULL) {
-				return textValue->Value() == textValueOfFeature->Value();
-			} else {
-				return false;
-			}
-		}
-		case Field::Boolean: {
-			const BooleanFieldValue* boolValue = dynamic_cast<const BooleanFieldValue*>(baseValue_);
-			const BooleanFieldValue* boolValueOfFeature = dynamic_cast<const BooleanFieldValue*>(feature->GetField(targetField_.Name()));
-			if (boolValue != NULL && boolValueOfFeature != NULL) {
-				return boolValue->Value() == boolValueOfFeature->Value();
-			} else {
-				return false;
-			}
-		}
-		default:
-			return false;
-		}
+		return false;
 	}
 }

@@ -51,3 +51,14 @@ int Geo3DStyle::GetRuleCount() const {
 StyleRule* Geo3DStyle::GetRuleAt(int i) {
 	return rules_.at(i);
 }
+
+StyleRule* Geo3DStyle::MatchWithFeature(Feature* f) const {
+	std::vector<StyleRule*>::const_iterator ruleItor = rules_.cbegin();
+	while (ruleItor != rules_.cend()) {
+		if ((*ruleItor)->DoesFeatureMatch(f)) {
+			return *ruleItor;
+		}
+		++ruleItor;
+	}
+	return NULL;
+}

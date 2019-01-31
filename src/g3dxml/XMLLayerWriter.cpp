@@ -28,9 +28,7 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 		featureStyle->SetName(layer->GetName());
 		for (int m = 0; m < actorNumber; ++m) {
 			geo3dml::Actor* actor = layer->GetActorAt(m);
-			geo3dml::TextFieldValue* textValue = new geo3dml::TextFieldValue(fieldDef.Name());
-			textValue->Value(actor->GetBindingFeature()->GetID());
-			geo3dml::StyleRuleEqualTo* eqRule = new geo3dml::StyleRuleEqualTo(textValue, fieldDef);
+			geo3dml::StyleRuleEqualTo* eqRule = new geo3dml::StyleRuleEqualTo(fieldDef.Name(), actor->GetBindingFeature()->GetID());
 			eqRule->SetSymbolizer(actor->MakeSymbozier());
 			featureStyle->AddRule(eqRule);
 		}
@@ -76,43 +74,10 @@ void XMLLayerWriter::WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& outp
 	geo3dml::StyleRuleEqualTo* eqRule = dynamic_cast<geo3dml::StyleRuleEqualTo*>(rule);
 	if (eqRule != NULL) {
 		output << "<ogc:Filter>" << std::endl
-			<< "<ogc:PropertyIsEqualTo>" << std::endl;
-		output << "<ogc:PropertyName>" << eqRule->GetField().Name() << "</ogc:PropertyName>" << std::endl;
-		output << "<ogc:Literal>";
-		const geo3dml::FieldValue* fv = eqRule->GetBaseValue();
-		switch (fv->ValueType()) {
-		case geo3dml::Field::Text: {
-			const geo3dml::TextFieldValue* textValue = dynamic_cast<const geo3dml::TextFieldValue*>(fv);
-			if (textValue != NULL) {
-				output << textValue->Value();
-			}
-			break;
-		}
-		case geo3dml::Field::Double: {
-			const geo3dml::DoubleFieldValue* doubleValue = dynamic_cast<const geo3dml::DoubleFieldValue*>(fv);
-			if (doubleValue != NULL) {
-				output << doubleValue->Value();
-			}
-			break;
-		}
-		case geo3dml::Field::Integer: {
-			const geo3dml::IntegerFieldValue* intValue = dynamic_cast<const geo3dml::IntegerFieldValue*>(fv);
-			if (intValue != NULL) {
-				output << intValue->Value();
-			}
-			break;
-		}
-		case geo3dml::Field::Boolean: {
-			const geo3dml::BooleanFieldValue* boolValue = dynamic_cast<const geo3dml::BooleanFieldValue*>(fv);
-			if (boolValue != NULL) {
-				output << boolValue->Value();
-			}
-		}
-		default:
-			break;
-		}
-		output << "</ogc:Literal>" << std::endl;
-		output << "</ogc:PropertyIsEqualTo>" << std::endl
+			<< "<ogc:PropertyIsEqualTo>" << std::endl
+			<< "<ogc:PropertyName>" << eqRule->GetFieldName() << "</ogc:PropertyName>" << std::endl
+			<< "<ogc:Literal>" << eqRule->GetValueLiteral() << "</ogc:Literal>" << std::endl
+			<< "</ogc:PropertyIsEqualTo>" << std::endl
 			<< "</ogc:Filter>" << std::endl;
 	}
 	geo3dml::Symbolizer* sym = rule->GetSymbolizer();
@@ -134,6 +99,11 @@ void XMLLayerWriter::WriteSymbolizer(geo3dml::Symbolizer* sym, std::ostream& out
 			geo3dml::PointSymbolizer* pointSym = dynamic_cast<geo3dml::PointSymbolizer*>(sym);
 			if (pointSym != NULL) {
 				WritePointSymbolizer(pointSym, output);
+			} else {
+				geo3dml::GeoDiscreteCoverageSymbolizer* coverageSym = dynamic_cast<geo3dml::GeoDiscreteCoverageSymbolizer*>(sym);
+				if (coverageSym != NULL) {
+					WriteGeoDiscreteCoverageSymbolizer(coverageSym, output);
+				}
 			}
 		}
 	}
@@ -181,6 +151,11 @@ void XMLLayerWriter::WriteSurfaceSymbolizer(geo3dml::SurfaceSymbolizer* surfaceS
 		output << "</FrameSymbolizer>" << std::endl;
 	}
 	output << "</GeoSurfaceSymbolizer>" << std::endl;
+}
+
+void XMLLayerWriter::WriteGeoDiscreteCoverageSymbolizer(geo3dml::GeoDiscreteCoverageSymbolizer* coverageSym, std::ostream& output) {
+	output << "<GeoDiscreteCoverageSymbolizer>" << std::endl
+		<< "</GeoDiscreteCoverageSymbolizer>" << std::endl;
 }
 
 void XMLLayerWriter::WriteMaterial(const geo3dml::Material& m, std::ostream& output) {

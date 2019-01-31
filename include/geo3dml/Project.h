@@ -27,6 +27,7 @@ namespace geo3dml {
 		int GetModelCount();
 		Model* GetModelAt(int i);
 		Model* RemoveModelAt(int i);
+		FeatureClass* FindFeatureClass(const std::string& id);
 		//@}
 
 		//@{
@@ -34,6 +35,7 @@ namespace geo3dml {
 		int GetMapCount();
 		Map* GetMapAt(int i);
 		Map* RemoveMapAt(int i);
+		void BindFeatureClassesToLayers(ObjectFactory* g3dFactory);
 		//@}
 
 		/// Compute the minimum bounding rectangle of all the models.

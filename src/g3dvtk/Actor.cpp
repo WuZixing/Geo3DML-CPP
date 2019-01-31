@@ -198,6 +198,7 @@ void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) {
 	geo3dml::Color diffuseColor = m.GetDiffuseColor();
 	geo3dml::Color specularColor = m.GetSpecularColor();
 	p->SetAmbient(m.GetAmbientIntensity());
+	p->SetAmbientColor(diffuseColor.R(), diffuseColor.G(), diffuseColor.B());
 	p->SetDiffuseColor(diffuseColor.R(), diffuseColor.G(), diffuseColor.B());
 	p->SetSpecularColor(specularColor.R(), specularColor.G(), specularColor.B());
 	p->SetOpacity(1 - m.GetTransparency());

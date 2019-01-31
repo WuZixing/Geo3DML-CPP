@@ -7,6 +7,7 @@
 #include <geo3dml/PointSymbolizer.h>
 #include <geo3dml/LineSymbolizer.h>
 #include <geo3dml/SurfaceSymbolizer.h>
+#include <geo3dml/GeoDiscreteCoverageSymbolizer.h>
 
 namespace g3dxml {
 
@@ -25,6 +26,7 @@ namespace g3dxml {
 		void WritePointSymbolizer(geo3dml::PointSymbolizer* pointSym, std::ostream& output);
 		void WriteLineSymbolizer(geo3dml::LineSymbolizer* lineSym, std::ostream& output);
 		void WriteSurfaceSymbolizer(geo3dml::SurfaceSymbolizer* surfaceSym, std::ostream& output);
+		void WriteGeoDiscreteCoverageSymbolizer(geo3dml::GeoDiscreteCoverageSymbolizer* coverageSym, std::ostream& output);
 		void WriteMaterial(const geo3dml::Material& m, std::ostream& output);
 	};
 }

@@ -24,7 +24,7 @@ Symbolizer* StyleRule::GetSymbolizer() const {
 	return symbolizer_;
 }
 
-bool StyleRule::DoesFeatureMatch(Feature* feature) {
+bool StyleRule::DoesFeatureMatch(Feature* feature) const {
 	// match any feature.
 	return true;
 }

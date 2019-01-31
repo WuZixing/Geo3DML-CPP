@@ -43,7 +43,7 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 				}
 				if (href != NULL) {
 					std::string fcID((const char*)href);
-					fcID = fcID.substr(fcID.find_first_not_of('#'));
+					fcID = fcID.substr(fcID.find_last_of('#') + 1);
 					layer->SetBindingFeatureClassID(fcID);
 					xmlFree(href);
 				} else {

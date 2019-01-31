@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "StyleRule.h"
+#include "Feature.h"
 
 namespace geo3dml {
 
@@ -20,6 +21,7 @@ namespace geo3dml {
 		void AddRule(StyleRule* rule);
 		int GetRuleCount() const;
 		StyleRule* GetRuleAt(int i);
+		StyleRule* MatchWithFeature(Feature* f) const;
 
 	protected:
 		virtual void Reserved() = 0;

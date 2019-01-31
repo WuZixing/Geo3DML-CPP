@@ -1,4 +1,5 @@
 #include <geo3dml/Project.h>
+#include <geo3dml/ObjectFactory.h>
 
 using namespace geo3dml;
 
@@ -63,6 +64,19 @@ int Project::GetModelCount() {
 Model* Project::GetModelAt(int i) {
 	g3d_lock_guard lck(mtx_);
 	return models_.at(i);
+}
+
+FeatureClass* Project::FindFeatureClass(const std::string& id) {
+	g3d_lock_guard lck(mtx_);
+	std::vector<Model*>::const_iterator citor = models_.cbegin();
+	while (citor != models_.cend()) {
+		FeatureClass* featureClass = (*citor)->GetFeatureClass(id);
+		if (featureClass != NULL) {
+			return featureClass;
+		}
+		citor++;
+	}
+	return NULL;
 }
 
 Model* Project::RemoveModelAt(int i) {
@@ -161,4 +175,20 @@ Map* Project::RemoveMapAt(int i) {
 		maps_.erase(citor);
 	}
 	return map;
+}
+
+void Project::BindFeatureClassesToLayers(ObjectFactory* g3dFactory) {
+	std::vector<Map*>::const_iterator mapItor = maps_.cbegin();
+	while (mapItor != maps_.cend()) {
+		int numberOfLayers = (*mapItor)->GetLayerCount();
+		for (int i = 0; i < numberOfLayers; ++i) {
+			geo3dml::Layer* layer = (*mapItor)->GetLayerAt(i);
+			if (layer->GetBindingFeatureClass() == NULL) {
+				FeatureClass* fc = FindFeatureClass(layer->GetBindingFeatureClassID());
+				layer->BindFeatureClass(fc);
+				layer->RebuildActorsFromFeaturesByStyle(0, g3dFactory);
+			}
+		}
+		++mapItor;
+	}
 }

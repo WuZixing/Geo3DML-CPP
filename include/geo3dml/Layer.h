@@ -31,6 +31,7 @@ namespace geo3dml {
 		void AddActor(Actor* actor);
 		int GetActorCount();
 		Actor* GetActorAt(int i);
+		void RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dFactory);
 
 		//@{
 		void SetParentMap(const std::string& id);
@@ -46,6 +47,9 @@ namespace geo3dml {
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty feature class, it will return false.
 		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+
+	private:
+		void DeleteAllActors();
 
 	private:
 		std::string name_;

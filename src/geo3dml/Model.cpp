@@ -103,6 +103,18 @@ FeatureClass* Model::GetFeatureClassAt(int i) {
 	return featureClasses_.at(i);
 }
 
+FeatureClass* Model::GetFeatureClass(const std::string& id) {
+	g3d_lock_guard lck(mtx_);
+	std::vector<FeatureClass*>::const_iterator citor = featureClasses_.cbegin();
+	while (citor != featureClasses_.cend()) {
+		if ((*citor)->GetID() == id) {
+			return *citor;
+		}
+		citor++;
+	}
+	return NULL;
+}
+
 void Model::RemoveFeatureClass(const std::string& id) {
 	g3d_lock_guard lck(mtx_);
 	std::vector<FeatureClass*>::const_iterator citor = featureClasses_.cbegin();
