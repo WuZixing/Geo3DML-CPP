@@ -3,6 +3,7 @@
 #include <g3dxml/XMLPointSymbolizerReader.h>
 #include <g3dxml/XMLLineSymbolizerReader.h>
 #include <g3dxml/XMLSurfaceSymbolizerReader.h>
+#include <g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h>
 
 using namespace g3dxml;
 
@@ -68,6 +69,17 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 					}
 				} else {
 					SetStatus(false, surfaceSymReader.Error());
+					break;
+				}
+			} else if (_stricmp(localName, XMLGeoDiscreteCoverageSymbolizerReader::Element.c_str()) == 0) {
+				XMLGeoDiscreteCoverageSymbolizerReader coverageSymReader(g3dFactory_);
+				symbolizer = coverageSymReader.ReadCoverageSym(reader);
+				if (symbolizer != NULL) {
+					if (rule != NULL) {
+						rule->SetSymbolizer(symbolizer);
+					}
+				} else {
+					SetStatus(false, coverageSymReader.Error());
 					break;
 				}
 			}
@@ -142,7 +154,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadEqualToFilter(xmlTextReaderPtr reade
 				}
 			} else if (_stricmp(localName, "Literal") == 0) {
 				std::string v;
-				if (XMLReaderHelper::TextNode(reader, "PropertyName", v)) {
+				if (XMLReaderHelper::TextNode(reader, "Literal", v)) {
 					eqRule->SetValueLiteral(v);
 				} else {
 					SetStatus(false, v);

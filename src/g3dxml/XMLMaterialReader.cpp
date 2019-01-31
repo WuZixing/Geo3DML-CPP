@@ -64,7 +64,7 @@ bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, geo3dml::Material&
 				toMaterial.SetShininess(strtod(shininess.c_str(), NULL));
 			} else if (_stricmp(localName, Element_SpecularColor.c_str()) == 0) {
 				std::string specularColor;
-				if (!XMLReaderHelper::TextNode(reader, Element_EmissiveColor, specularColor)) {
+				if (!XMLReaderHelper::TextNode(reader, Element_SpecularColor, specularColor)) {
 					SetStatus(false, specularColor);
 					break;
 				}

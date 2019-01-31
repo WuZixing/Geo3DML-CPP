@@ -90,6 +90,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLineSymbolizerReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSurfaceSymbolizerReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMaterialReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

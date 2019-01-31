@@ -101,7 +101,6 @@ geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {
 					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of href");
 					SetStatus(false, err);
 				}
-				break;
 			} else if (XMLModelReader::IsModelElementName(localName)) {
 				// read from <GeoModel> element.
 				XMLModelReader modelReader(g3dFactory_);
@@ -109,7 +108,6 @@ geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {
 				if (!modelReader.IsOK()) {
 					SetStatus(false, modelReader.Error());
 				}
-				break;
 			}
 		}
 		status = xmlTextReaderRead(reader);
@@ -278,15 +276,13 @@ geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
 					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of href");
 					SetStatus(false, err);
 				}
-				break;
-			} else if (XMLModelReader::IsModelElementName(localName)) {
+			} else if (_stricmp(localName, XMLMapReader::Element.c_str()) == 0) {
 				// read from <Geo3DMap> element.
 				XMLMapReader mapReader(g3dFactory_);
 				map = mapReader.ReadMap(reader);
 				if (!mapReader.IsOK()) {
 					SetStatus(false, mapReader.Error());
 				}
-				break;
 			}
 		}
 		status = xmlTextReaderRead(reader);

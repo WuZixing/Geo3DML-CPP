@@ -5,6 +5,7 @@ using namespace geo3dml;
 StyleRuleEqualTo::StyleRuleEqualTo(const std::string& fieldName, const std::string& valueLiteral) {
 	fieldName_ = fieldName;
 	valueLiteral_ = valueLiteral;
+	baseValue_ = NULL;
 }
 
 StyleRuleEqualTo::StyleRuleEqualTo(const FieldValue* baseValue, const Field& onField) {

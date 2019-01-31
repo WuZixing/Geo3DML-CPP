@@ -14,6 +14,7 @@
 #include "PointSymbolizer.h"
 #include "LineSymbolizer.h"
 #include "SurfaceSymbolizer.h"
+#include "GeoDiscreteCoverageSymbolizer.h"
 #include "FeatureTypeStyle.h"
 
 namespace geo3dml {
@@ -66,6 +67,7 @@ namespace geo3dml {
 		virtual PointSymbolizer* NewPointSymbolizer();
 		virtual LineSymbolizer* NewLineSymbolizer();
 		virtual SurfaceSymbolizer* NewSurfaceSymbolizer();
+		virtual GeoDiscreteCoverageSymbolizer* NewGeoDiscreteCoverageSymbolizer();
 		virtual FeatureTypeStyle* NewFeatureTypeStyle();
 		//@}
 

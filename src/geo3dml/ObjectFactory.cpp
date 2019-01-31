@@ -72,3 +72,7 @@ SurfaceSymbolizer* ObjectFactory::NewSurfaceSymbolizer() {
 FeatureTypeStyle* ObjectFactory::NewFeatureTypeStyle() {
 	return new FeatureTypeStyle();
 }
+
+GeoDiscreteCoverageSymbolizer* ObjectFactory::NewGeoDiscreteCoverageSymbolizer() {
+	return new GeoDiscreteCoverageSymbolizer();
+}
