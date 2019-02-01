@@ -136,7 +136,7 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 			geo3dml::Geometry* geo = feature->GetGeometryAt(g);
 			geo3dml::Actor* actor = g3dFactory->NewActor();
 			ostr.str("");
-			ostr << feature->GetName() << "_[LOD-" << geo->GetLODLevel() << "]";
+			ostr << feature->GetName() << "_" << geo->GetName() << "_[LOD-" << geo->GetLODLevel() << "]";
 			actor->SetName(ostr.str());	
 			actor->BindGeometry(feature, geo, rule->GetSymbolizer());
 			AddActor(actor);
