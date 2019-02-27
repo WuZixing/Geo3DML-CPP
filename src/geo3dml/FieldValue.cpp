@@ -2,20 +2,24 @@
 
 using namespace geo3dml;
 
-FieldValue::FieldValue(const std::string& name) {
-	fieldName_ = name;
+FieldValue::FieldValue(const std::string& fieldName) {
+	fieldName_ = fieldName;
 }
 
 FieldValue::~FieldValue() {
 
 }
 
-const std::string& FieldValue::Name() const {
+const std::string& FieldValue::FieldName() const {
 	return fieldName_;
 }
 
-TextFieldValue::TextFieldValue(const std::string& name) : FieldValue(name) {
+TextFieldValue::TextFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
 
+}
+
+TextFieldValue::TextFieldValue(const TextFieldValue& v) : FieldValue(v.FieldName()) {
+	value_ = v.value_;
 }
 
 TextFieldValue::~TextFieldValue() {
@@ -35,8 +39,12 @@ const std::string& TextFieldValue::Value() const {
 	return value_;
 }
 
-DoubleFieldValue::DoubleFieldValue(const std::string& name) : FieldValue(name) {
+DoubleFieldValue::DoubleFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
 
+}
+
+DoubleFieldValue::DoubleFieldValue(const DoubleFieldValue& v) : FieldValue(v.FieldName()) {
+	value_ = v.value_;
 }
 
 DoubleFieldValue::~DoubleFieldValue() {
@@ -56,8 +64,12 @@ double DoubleFieldValue::Value() const {
 	return value_;
 }
 
-IntegerFieldValue::IntegerFieldValue(const std::string& name) : FieldValue(name) {
+IntegerFieldValue::IntegerFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
 
+}
+
+IntegerFieldValue::IntegerFieldValue(const IntegerFieldValue& v) : FieldValue(v.FieldName()) {
+	value_ = v.value_;
 }
 
 IntegerFieldValue::~IntegerFieldValue() {
@@ -77,8 +89,12 @@ int IntegerFieldValue::Value() const {
 	return value_;
 }
 
-BooleanFieldValue::BooleanFieldValue(const std::string& name) : FieldValue(name) {
+BooleanFieldValue::BooleanFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
 
+}
+
+BooleanFieldValue::BooleanFieldValue(const BooleanFieldValue& v) : FieldValue(v.FieldName()) {
+	value_ = v.value_;
 }
 
 BooleanFieldValue::~BooleanFieldValue() {

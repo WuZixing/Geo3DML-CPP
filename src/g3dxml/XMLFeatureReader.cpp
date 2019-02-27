@@ -185,7 +185,7 @@ bool XMLFeatureReader::ReadFieldValue(xmlTextReaderPtr reader, const std::string
 							if (boolValue != NULL) {
 								boolValue->Value(XMLReaderHelper::IsTrue(v));
 							} else {
-								std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "unknown value type: " + XMLFieldReader::ValueTypeToName(value->ValueType()) + " with field name of " + value->Name());
+								std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "unknown value type: " + XMLFieldReader::ValueTypeToName(value->ValueType()) + " with field name of " + value->FieldName());
 								SetStatus(false, err);
 								break;
 							}

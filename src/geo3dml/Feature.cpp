@@ -72,7 +72,7 @@ Feature& Feature::SetField(FieldValue* fv) {
 		return *this;
 	}
 	g3d_lock_guard lck(mtx_);
-	fieldValues_[fv->Name()] = fv;
+	fieldValues_[fv->FieldName()] = fv;
 	return *this;
 }
 

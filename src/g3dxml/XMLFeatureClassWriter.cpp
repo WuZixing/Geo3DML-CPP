@@ -64,7 +64,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 			if (fv == NULL) {
 				continue;
 			}
-			output << "<Field Name=\"" << fv->Name() << "\">" << std::endl;
+			output << "<Field Name=\"" << fv->FieldName() << "\">" << std::endl;
 			std::string elementName = XMLFieldReader::ValueTypeToName(fv->ValueType());
 			output << "<swe:" << elementName << ">" << std::endl;
 			switch (fv->ValueType()) {

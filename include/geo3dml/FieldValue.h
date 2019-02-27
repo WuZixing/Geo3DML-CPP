@@ -7,10 +7,10 @@ namespace geo3dml {
 
 	class FieldValue {
 	public:
-		FieldValue(const std::string& name);
+		FieldValue(const std::string& fieldName);
 		virtual ~FieldValue();
 
-		const std::string& Name() const;
+		const std::string& FieldName() const;
 
 		virtual Field::ValueType ValueType() const = 0;
 
@@ -20,7 +20,8 @@ namespace geo3dml {
 
 	class TextFieldValue : public FieldValue {
 	public:
-		TextFieldValue(const std::string& name);
+		TextFieldValue(const std::string& fieldName);
+		TextFieldValue(const TextFieldValue& v);
 		virtual ~TextFieldValue();
 
 		virtual Field::ValueType ValueType() const;
@@ -34,7 +35,8 @@ namespace geo3dml {
 
 	class DoubleFieldValue : public FieldValue {
 	public:
-		DoubleFieldValue(const std::string& name);
+		DoubleFieldValue(const std::string& fieldName);
+		DoubleFieldValue(const DoubleFieldValue& v);
 		virtual ~DoubleFieldValue();
 
 		virtual Field::ValueType ValueType() const;
@@ -48,7 +50,8 @@ namespace geo3dml {
 
 	class IntegerFieldValue : public FieldValue {
 	public:
-		IntegerFieldValue(const std::string& name);
+		IntegerFieldValue(const std::string& fieldName);
+		IntegerFieldValue(const IntegerFieldValue& v);
 		virtual ~IntegerFieldValue();
 
 		virtual Field::ValueType ValueType() const;
@@ -62,7 +65,8 @@ namespace geo3dml {
 
 	class BooleanFieldValue : public FieldValue {
 	public:
-		BooleanFieldValue(const std::string& name);
+		BooleanFieldValue(const std::string& fieldName);
+		BooleanFieldValue(const BooleanFieldValue& v);
 		virtual ~BooleanFieldValue();
 
 		virtual Field::ValueType ValueType() const;
