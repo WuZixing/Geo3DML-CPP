@@ -37,5 +37,8 @@ namespace g3dxml {
 		const std::string NS_gmlcov;
 		const std::string NS_ogc;
 		const std::string NS_se;
+
+	private:
+		std::string projectDirectory_;
 	};
 }

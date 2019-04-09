@@ -35,7 +35,17 @@ geo3dml::Object* XMLReader::LoadXMLFile(const std::string& file) {
 				continue;
 			}
 			if (_stricmp(localName, XMLProjectReader::Element.c_str()) == 0) {
-				XMLProjectReader projectReader(g3dFactory_);
+#if defined(_WIN32)
+				char pathSeperator = '\\';
+#else
+				char pathSeperator = '/';
+#endif
+				std::string projectDirectory;
+				size_t pos = file.find_last_of(pathSeperator);
+				if (pos != std::string::npos) {
+					projectDirectory = file.substr(0, pos + 1);
+				}
+				XMLProjectReader projectReader(g3dFactory_, projectDirectory);
 				g3dObject = projectReader.ReadProject(reader);
 				if (!projectReader.IsOK()) {
 					SetStatus(false, projectReader.Error());

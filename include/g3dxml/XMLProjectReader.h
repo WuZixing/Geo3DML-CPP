@@ -13,7 +13,7 @@ namespace g3dxml {
 	public:
 		/// Constructor.
 		/// @param factory the factory of Geo3DML objects. The factory object should be deallocated by the caller.
-		XMLProjectReader(geo3dml::ObjectFactory* factory);
+		XMLProjectReader(geo3dml::ObjectFactory* factory, const std::string& projectDirectory);
 		virtual ~XMLProjectReader();
 
 		geo3dml::Project* ReadProject(xmlTextReaderPtr reader);
@@ -23,6 +23,7 @@ namespace g3dxml {
 		geo3dml::Map* ReadMap(xmlTextReaderPtr reader);
 		bool ReadStyle(xmlTextReaderPtr reader, geo3dml::Project* project);
 		bool ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light);
+		bool IsRelativePath(const std::string& path);
 
 	private:
 		static std::string Element_Name;
@@ -35,5 +36,6 @@ namespace g3dxml {
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;
+		std::string projectDirectory_;
 	};
 }

@@ -24,6 +24,17 @@ XMLWriter::~XMLWriter() {
 }
 
 bool XMLWriter::Write(geo3dml::Project* project, const std::string& xmlFilePath, SchemaVersion v) {
+#if defined(_WIN32)
+	char pathSeperator = '\\';
+#else
+	char pathSeperator = '/';
+#endif
+	size_t pos = xmlFilePath.find_last_of(pathSeperator);
+	if (pos != std::string::npos) {
+		projectDirectory_ = xmlFilePath.substr(0, pos + 1);
+	} else {
+		projectDirectory_ = "";
+	}
 	std::ofstream xmlFile;
 	OpenXMLFileForOutput(xmlFilePath, xmlFile);
 	return Write(project, xmlFile, v);
@@ -92,7 +103,7 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 			geo3dml::Model* model = project->GetModelAt(m);
 			std::string modelFileName = model->GetName() + "_model.xml";
 			std::ofstream modelFile;
-			OpenXMLFileForOutput(modelFileName, modelFile);
+			OpenXMLFileForOutput(projectDirectory_ + modelFileName, modelFile);
 			Write(model, modelFile, v);
 			output << "<Model>" << "<xi:include href=\"" << modelFileName << "\" />" << "</Model>" << std::endl;
 			if (!IsOK()) {
@@ -109,7 +120,7 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 				geo3dml::Map* map = project->GetMapAt(m);
 				std::string mapFileName = map->GetName() + "_map.xml";
 				std::ofstream mapFile;
-				OpenXMLFileForOutput(mapFileName, mapFile);
+				OpenXMLFileForOutput(projectDirectory_ + mapFileName, mapFile);
 				Write(map, mapFile, v);
 				output << "<Map>" << "<xi:include href=\"" << mapFileName << "\" />" << "</Map>" << std::endl;
 				if (!IsOK()) {
