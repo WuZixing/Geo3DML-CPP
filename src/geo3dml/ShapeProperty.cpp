@@ -53,7 +53,7 @@ std::string ShapeProperty::SamplingTargetToName(ShapeProperty::SamplingTarget t)
 	case Face:
 		return "FACE";
 	default:
-		return "";
+		return "UNKNOWN";
 	}
 }
 
