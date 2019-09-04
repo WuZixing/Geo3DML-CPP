@@ -36,18 +36,24 @@ bool XMLWriter::Write(geo3dml::Project* project, const std::string& xmlFilePath,
 		projectDirectory_ = "";
 	}
 	std::ofstream xmlFile;
+	xmlFile.setf(std::ios_base::fixed);
+	xmlFile.precision(6);
 	OpenXMLFileForOutput(xmlFilePath, xmlFile);
 	return Write(project, xmlFile, v);
 }
 
 bool XMLWriter::Write(geo3dml::Model* model, const std::string& xmlFilePath, SchemaVersion v) {
 	std::ofstream xmlFile;
+	xmlFile.setf(std::ios_base::fixed);
+	xmlFile.precision(6);
 	OpenXMLFileForOutput(xmlFilePath, xmlFile);
 	return Write(model, xmlFile, v);
 }
 
 bool XMLWriter::Write(geo3dml::Map* map, const std::string& xmlFilePath, SchemaVersion v) {
 	std::ofstream xmlFile;
+	xmlFile.setf(std::ios_base::fixed);
+	xmlFile.precision(6);
 	OpenXMLFileForOutput(xmlFilePath, xmlFile);
 	return Write(map, xmlFile, v);
 }
