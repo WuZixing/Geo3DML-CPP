@@ -17,6 +17,9 @@ namespace geo3dml {
 		virtual Feature* GetBindingFeature() = 0;
 		virtual Geometry* GetBindingGeometry() = 0;
 
+		virtual bool IsVisible() = 0;
+		virtual void SetVisible(bool show) = 0;
+
 		/// Make a Symbolizer object which represents render parameters of the actor.
 		/// @return The returned Symbolizer object should be deallocated by the caller.
 		virtual Symbolizer* MakeSymbozier() = 0;

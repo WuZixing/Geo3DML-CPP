@@ -7,6 +7,7 @@
 #include <g3dvtk/Point.h>
 #include <g3dvtk/MultiPoint.h>
 #include <g3dvtk/Actor.h>
+#include <g3dvtk/Annotation.h>
 
 using namespace g3dvtk;
 
@@ -72,6 +73,10 @@ geo3dml::UniformGrid* ObjectFactory::NewUniformGrid(
 	int dimI, int dimJ, int dimK
 ) {
 	return new UniformGrid(originX, originY, originZ, stepX, stepY, stepZ, dimI, dimJ, dimK);
+}
+
+geo3dml::Annotation* ObjectFactory::NewAnnotation() {
+	return new Annotation();
 }
 
 geo3dml::ShapeProperty* ObjectFactory::NewShapeProperty() {

@@ -30,6 +30,7 @@ namespace g3dvtk {
 			double stepX, double stepY, double stepZ,
 			int dimI, int dimJ, int dimK
 		);
+		virtual geo3dml::Annotation* NewAnnotation();
 
 		virtual geo3dml::ShapeProperty* NewShapeProperty();
 

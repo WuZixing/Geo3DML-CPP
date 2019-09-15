@@ -38,6 +38,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/StyleRuleEqualTo.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Actor.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/GeoDiscreteCoverageSymbolizer.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Annotation.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC

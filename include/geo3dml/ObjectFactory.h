@@ -16,6 +16,7 @@
 #include "SurfaceSymbolizer.h"
 #include "GeoDiscreteCoverageSymbolizer.h"
 #include "FeatureTypeStyle.h"
+#include "Annotation.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -52,6 +53,7 @@ namespace geo3dml {
 			double stepX, double stepY, double stepZ,
 			int dimI, int dimJ, int dimK
 		) = 0;
+		virtual Annotation* NewAnnotation() = 0;
 		//@}
 
 		/// @name shape property.
