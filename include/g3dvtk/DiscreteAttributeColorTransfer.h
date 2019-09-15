@@ -25,6 +25,8 @@ namespace g3dvtk {
 		bool PickUpColor(int value, unsigned char& r, unsigned char& g, unsigned char& b);
 		bool PickUpColor(const std::string& value, double& r, double& g, double& b);
 		bool PickUpColor(int value, double& r, double& g, double& b);
+		void RandomColor(unsigned char& r, unsigned char& g, unsigned char& b);
+		void RandomColor(double& r, double& g, double& b);
 		//@}
 
 	private:

@@ -87,3 +87,11 @@ bool DiscreteAttributeColorTransfer::PickUpColor(int value, double& r, double& g
 	colorMap_->ColorAt(citor->second, r, g, b);
 	return true;
 }
+
+void DiscreteAttributeColorTransfer::RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) {
+	colorMap_->RandomColor(r, g, b);
+}
+
+void DiscreteAttributeColorTransfer::RandomColor(double& r, double& g, double& b) {
+	colorMap_->RandomColor(r, g, b);
+}
