@@ -62,6 +62,18 @@ Feature* FeatureClass::GetFeatureAt(int i) {
 	return features_.at(i);
 }
 
+Feature* FeatureClass::GetFeature(const std::string& id) {
+	g3d_lock_guard lck(mtx_);
+	std::vector<Feature*>::const_iterator citor = features_.cbegin();
+	while (citor != features_.cend()) {
+		if ((*citor)->GetID() == id) {
+			return *citor;
+		}
+		citor++;
+	}
+	return NULL;
+}
+
 FeatureClass& FeatureClass::SetParentModel(const std::string& id) {
 	g3d_lock_guard lck(mtx_);
 	parentModelId_ = id;

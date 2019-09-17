@@ -26,6 +26,7 @@ namespace geo3dml {
 		FeatureClass& AddFeature(Feature* f);
 		int GetFeatureCount();
 		Feature* GetFeatureAt(int i);
+		Feature* GetFeature(const std::string& id);
 		//@}
 
 		//@{
