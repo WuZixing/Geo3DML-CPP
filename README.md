@@ -48,10 +48,11 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 
 基于*g3dvtk*读取文件。
 
->```
+>```C++
 > #include <g3dvtk/ObjectFactory.h>
 > #include <g3dxml/XMLReader.h>
-> ......
+> 
+> //......
 > std::string xmlFilePath = "d:\\data.xml";
 > // 构造Geo3DML对象工厂。
 > g3dvtk::ObjectFactory g3dFactory;
