@@ -43,3 +43,32 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 > ...
 > target_link_libraries(${xxx} ${G3DVTK_LIBRARIES})
 > ```
+
+4. **示例**
+
+基于*g3dvtk*读取文件。
+
+>```
+> #include <g3dvtk/ObjectFactory.h>
+> #include <g3dxml/XMLReader.h>
+> ......
+> std::string xmlFilePath = "d:\\data.xml";
+> // 构造Geo3DML对象工厂。
+> g3dvtk::ObjectFactory g3dFactory;
+> // 读取文件。
+> g3dxml::XMLReader xmlReader(&g3dFactory);
+> geo3dml::Object* g3dObject = xmlReader.LoadXMLFile(xmlFilePath);  // 该方法可读取工程或者模型。
+> // 检查返回的对象类型。
+> geo3dml::Model* model = dynamic_cast<geo3dml::Model*>(g3dObject);
+> if (model != NULL) {
+>   // 按模型处理。
+>   // ......
+> } else {
+>   geo3dml::Project* project = dynamic_cast<geo3dml::Project*>(g3dObject);
+>   if (project != NULL) {
+>     project->BindFeatureClassesToLayers(&g3dFactory); // 将要素类与图层绑定起来。
+>     // 按工程中的*geo3dml::Map*和*geo3dml::Model*来处理。
+>     // ......
+>   }
+> }
+>```
