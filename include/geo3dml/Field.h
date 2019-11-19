@@ -11,7 +11,8 @@ namespace geo3dml {
 			Text,
 			Integer,
 			Double,
-			Boolean
+			Boolean,
+			Object
 		};
 
 	public:
