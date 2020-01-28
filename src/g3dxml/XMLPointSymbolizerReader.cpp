@@ -1,5 +1,6 @@
 #include <g3dxml/XMLPointSymbolizerReader.h>
 #include <g3dxml/XMLMaterialReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -19,14 +20,14 @@ geo3dml::PointSymbolizer* XMLPointSymbolizerReader::ReadPointSym(xmlTextReaderPt
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Graphic.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Graphic)) {
 				if (!ReadGraphic(reader, pointSym)) {
 					break;
 				}
-			} else if (_stricmp(localName, XMLMaterialReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				XMLMaterialReader materialReader(g3dFactory_);
 				geo3dml::Material material;
 				if (materialReader.ReadMaterial(reader, material)) {
@@ -55,10 +56,10 @@ bool XMLPointSymbolizerReader::ReadGraphic(xmlTextReaderPtr reader, geo3dml::Poi
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Graphic.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Graphic)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "Size") == 0) {
+			if (geo3dml::IsiEqual(localName, "Size")) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, "Size", v)) {
 					SetStatus(false, v);

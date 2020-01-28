@@ -1,5 +1,6 @@
 #include <g3dxml/XMLModelReader.h>
 #include <g3dxml/XMLFeatureClassReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -9,9 +10,9 @@ std::string XMLModelReader::Element_Name = "Name";
 std::string XMLModelReader::Element_Type = "Type";
 
 bool XMLModelReader::IsModelElementName(const std::string& name) {
-	if (_stricmp(name.c_str(), Element.c_str()) == 0) {
+	if (geo3dml::IsiEqual(name, Element)) {
 		return true;
-	} else if (_stricmp(name.c_str(), OldElement.c_str()) == 0) {
+	} else if (geo3dml::IsiEqual(name, OldElement)) {
 		return true;
 	} else {
 		return false;
@@ -41,21 +42,21 @@ geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && IsModelElementName(localName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Name.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Name)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Name, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				model->SetName(v);
-			} else if (_stricmp(localName, Element_Type.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Type)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Type, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				model->SetType(geo3dml::Model::NameToModelType(v));
-			} else if (_stricmp(localName, XMLFeatureClassReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLFeatureClassReader::Element)) {
 				XMLFeatureClassReader fcReader(g3dFactory_);
 				geo3dml::FeatureClass* featureClass = fcReader.ReadFeatureClass(reader);
 				if (featureClass != NULL) {

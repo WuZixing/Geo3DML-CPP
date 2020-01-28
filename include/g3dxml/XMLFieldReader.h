@@ -3,6 +3,7 @@
 #include <geo3dml/Field.h>
 #include <g3dxml/XMLReaderHelper.h>
 #include <g3dxml/XMLIO.h>
+#include <ostream>
 
 namespace g3dxml {
 

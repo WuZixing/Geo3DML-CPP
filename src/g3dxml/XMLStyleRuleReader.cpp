@@ -4,6 +4,7 @@
 #include <g3dxml/XMLLineSymbolizerReader.h>
 #include <g3dxml/XMLSurfaceSymbolizerReader.h>
 #include <g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -26,10 +27,10 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Filter.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Filter)) {
 				rule = ReadFilter(reader);
 				if (rule != NULL) {
 					if (symbolizer != NULL) {
@@ -38,7 +39,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 				} else {
 					break;
 				}
-			} else if (_stricmp(localName, XMLPointSymbolizerReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLPointSymbolizerReader::Element)) {
 				XMLPointSymbolizerReader pointSymReader(g3dFactory_);
 				symbolizer = pointSymReader.ReadPointSym(reader);
 				if (symbolizer != NULL) {
@@ -49,7 +50,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 					SetStatus(false, pointSymReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLLineSymbolizerReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLLineSymbolizerReader::Element)) {
 				XMLLineSymbolizerReader lineSymReader(g3dFactory_);
 				symbolizer = lineSymReader.ReadLineSym(reader);
 				if (symbolizer != NULL) {
@@ -60,7 +61,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 					SetStatus(false, lineSymReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLSurfaceSymbolizerReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLSurfaceSymbolizerReader::Element)) {
 				XMLSurfaceSymbolizerReader surfaceSymReader(g3dFactory_);
 				symbolizer = surfaceSymReader.ReadSurfaceSym(reader);
 				if (symbolizer != NULL) {
@@ -71,7 +72,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadStyleRule(xmlTextReaderPtr reader) {
 					SetStatus(false, surfaceSymReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLGeoDiscreteCoverageSymbolizerReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLGeoDiscreteCoverageSymbolizerReader::Element)) {
 				XMLGeoDiscreteCoverageSymbolizerReader coverageSymReader(g3dFactory_);
 				symbolizer = coverageSymReader.ReadCoverageSym(reader);
 				if (symbolizer != NULL) {
@@ -115,10 +116,10 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadFilter(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Filter.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Filter)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Filter_IsEqualTo.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Filter_IsEqualTo)) {
 				rule = ReadEqualToFilter(reader);
 				if (rule == NULL) {
 					break;
@@ -141,10 +142,10 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadEqualToFilter(xmlTextReaderPtr reade
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Filter_IsEqualTo.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Filter_IsEqualTo)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "PropertyName") == 0) {
+			if (geo3dml::IsiEqual(localName, "PropertyName")) {
 				std::string v;
 				if (XMLReaderHelper::TextNode(reader, "PropertyName", v)) {
 					eqRule->SetFieldName(v);
@@ -152,7 +153,7 @@ geo3dml::StyleRule* XMLStyleRuleReader::ReadEqualToFilter(xmlTextReaderPtr reade
 					SetStatus(false, v);
 					break;
 				}
-			} else if (_stricmp(localName, "Literal") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Literal")) {
 				std::string v;
 				if (XMLReaderHelper::TextNode(reader, "Literal", v)) {
 					eqRule->SetValueLiteral(v);

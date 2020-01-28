@@ -1,5 +1,7 @@
 #include <geo3dml/StyleRuleEqualTo.h>
 #include <sstream>
+#include <cmath>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
@@ -71,7 +73,7 @@ bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) const {
 				const DoubleFieldValue* doubleValue = dynamic_cast<const DoubleFieldValue*>(fieldValue);
 				if (doubleValue != NULL) {
 					double v = strtod(valueLiteral_.c_str(), NULL);
-					return fabs(doubleValue->Value() - v) < 1e-6;
+					return std::fabs(doubleValue->Value() - v) < 1e-6;
 				} else {
 					const TextFieldValue* textValue = dynamic_cast<const TextFieldValue*>(fieldValue);
 					if (textValue != NULL) {
@@ -79,7 +81,7 @@ bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) const {
 					} else {
 						const BooleanFieldValue* boolValue = dynamic_cast<const BooleanFieldValue*>(fieldValue);
 						if (boolValue != NULL) {
-							return TextToBoolean(valueLiteral_) == boolValue->Value();
+							return IsTrue(valueLiteral_) == boolValue->Value();
 						} else {
 							return false;
 						}
@@ -89,21 +91,5 @@ bool StyleRuleEqualTo::DoesFeatureMatch(Feature* feature) const {
 		} else {
 			return false;
 		}
-	}
-}
-
-bool StyleRuleEqualTo::TextToBoolean(const std::string& s) const {
-	if (_stricmp(s.c_str(), "1") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "true") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "yes") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "t") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "y") == 0) {
-		return true;
-	} else {
-		return false;
 	}
 }

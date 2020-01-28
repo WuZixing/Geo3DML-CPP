@@ -1,4 +1,5 @@
 #include <g3dxml/XMLIO.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -14,9 +15,9 @@ std::string g3dxml::SchemaVersionToString(SchemaVersion v) {
 }
 
 SchemaVersion g3dxml::StringToSchemaVersion(const std::string& s) {
-	if (_stricmp(s.c_str(), "1.0") == 0) {
+	if (geo3dml::IsiEqual(s, "1.0")) {
 		return Schema_1_0;
-	} else if (_stricmp(s.c_str(), "1.x") == 0) {
+	} else if (geo3dml::IsiEqual(s, "1.x")) {
 		return Schema_1_x;
 	} else {
 		return Schema_Unknown;

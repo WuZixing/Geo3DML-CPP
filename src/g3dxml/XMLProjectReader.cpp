@@ -2,6 +2,7 @@
 #include <g3dxml/XMLModelReader.h>
 #include <g3dxml/XMLMapReader.h>
 #include <regex>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -29,35 +30,35 @@ geo3dml::Project* XMLProjectReader::ReadProject(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Name.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Name)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Name, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				project->SetName(v);
-			} else if (_stricmp(localName, Element_Description.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Description)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Description, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				project->SetDescription(v);
-			} else if (_stricmp(localName, Element_Model.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Model)) {
 				geo3dml::Model* model = ReadModel(reader);
 				if (model != NULL) {
 					project->AddModel(model);
 				} else {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Style.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Style)) {
 				if (!ReadStyle(reader, project)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Map.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Map)) {
 				geo3dml::Map* map = ReadMap(reader);
 				if (map != NULL) {
 					project->AddMap(map);
@@ -86,10 +87,10 @@ geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Model.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Model)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Include.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Include)) {
 				// load from XML file.
 				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 				if (href != NULL) {
@@ -130,10 +131,10 @@ bool XMLProjectReader::ReadStyle(xmlTextReaderPtr reader, geo3dml::Project* proj
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Style.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Style)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "Background") == 0) {
+			if (geo3dml::IsiEqual(localName, "Background")) {
 				std::string strColor;
 				if (!XMLReaderHelper::TextNode(reader, "Background", strColor)) {
 					SetStatus(false, strColor);
@@ -144,7 +145,7 @@ bool XMLProjectReader::ReadStyle(xmlTextReaderPtr reader, geo3dml::Project* proj
 				double g = strtod(end, &end);
 				double b = strtod(end, NULL);
 				project->GetSceneStyle().SetBackgroundColor(geo3dml::Color(r, g, b));
-			} else if (_stricmp(localName, Element_Light.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Light)) {
 				geo3dml::Light light;
 				if (ReadLight(reader, light)) {
 					project->GetSceneStyle().AddLight(light);
@@ -167,24 +168,24 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Light.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Light)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "On") == 0) {
+			if (geo3dml::IsiEqual(localName, "On")) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, "On", v)) {
 					SetStatus(false, v);
 					break;
 				}
-				light.Switch(XMLReaderHelper::IsTrue(v));
-			} else if (_stricmp(localName, "Type") == 0) {
+				light.Switch(geo3dml::IsTrue(v));
+			} else if (geo3dml::IsiEqual(localName, "Type")) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, "Type", v)) {
 					SetStatus(false, v);
 					break;
 				}
 				light.SetType(geo3dml::Light::NameToLightType(v));
-			} else if (_stricmp(localName, "Position") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Position")) {
 				std::string pos;
 				if (!XMLReaderHelper::TextNode(reader, "Position", pos)) {
 					SetStatus(false, pos);
@@ -195,7 +196,7 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 				double y = strtod(end, &end);
 				double z = strtod(end, NULL);
 				light.SetPosition(x, y, z);
-			} else if (_stricmp(localName, "FocalPosition") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "FocalPosition")) {
 				std::string pos;
 				if (!XMLReaderHelper::TextNode(reader, "FocalPosition", pos)) {
 					SetStatus(false, pos);
@@ -206,7 +207,7 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 				double y = strtod(end, &end);
 				double z = strtod(end, NULL);
 				light.SetFocalPosition(x, y, z);
-			} else if (_stricmp(localName, "Intensity") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Intensity")) {
 				std::string str;
 				if (!XMLReaderHelper::TextNode(reader, "Intensity", str)) {
 					SetStatus(false, str);
@@ -214,7 +215,7 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 				}
 				double intensity = strtod(str.c_str(), NULL);
 				light.SetIntensity(intensity);
-			} else if (_stricmp(localName, "AmbientColor") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "AmbientColor")) {
 				std::string str;
 				if (!XMLReaderHelper::TextNode(reader, "AmbientColor", str)) {
 					SetStatus(false, str);
@@ -225,7 +226,7 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 				double g = strtod(end, &end);
 				double b = strtod(end, NULL);
 				light.SetAmbientColor(geo3dml::Color(r, g, b));
-			} else if (_stricmp(localName, "DiffuseColor") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "DiffuseColor")) {
 				std::string str;
 				if (!XMLReaderHelper::TextNode(reader, "DiffuseColor", str)) {
 					SetStatus(false, str);
@@ -236,7 +237,7 @@ bool XMLProjectReader::ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light)
 				double g = strtod(end, &end);
 				double b = strtod(end, NULL);
 				light.SetDiffuseColor(geo3dml::Color(r, g, b));
-			} else if (_stricmp(localName, "SpecularColor") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "SpecularColor")) {
 				std::string str;
 				if (!XMLReaderHelper::TextNode(reader, "SpecularColor", str)) {
 					SetStatus(false, str);
@@ -265,10 +266,10 @@ geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Map.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Map)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Include.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Include)) {
 				// load from XML file.
 				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 				if (href != NULL) {
@@ -286,7 +287,7 @@ geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
 					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of href");
 					SetStatus(false, err);
 				}
-			} else if (_stricmp(localName, XMLMapReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLMapReader::Element)) {
 				// read from <Geo3DMap> element.
 				XMLMapReader mapReader(g3dFactory_);
 				map = mapReader.ReadMap(reader);

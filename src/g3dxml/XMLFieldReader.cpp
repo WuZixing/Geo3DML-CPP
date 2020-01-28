@@ -1,17 +1,18 @@
 #include <g3dxml/XMLFieldReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
 std::string XMLFieldReader::Element = "field";
 
 geo3dml::Field::ValueType XMLFieldReader::NameToValueType(const std::string& n) {
-	if (_stricmp(n.c_str(), "Text") == 0) {
+	if (geo3dml::IsiEqual(n, "Text")) {
 		return geo3dml::Field::Text;
-	} else if (_stricmp(n.c_str(), "Quantity") == 0) {
+	} else if (geo3dml::IsiEqual(n, "Quantity")) {
 		return geo3dml::Field::Double;
-	} else if (_stricmp(n.c_str(), "Count") == 0) {
+	} else if (geo3dml::IsiEqual(n, "Count")) {
 		return geo3dml::Field::Integer;
-	} else if (_stricmp(n.c_str(), "Boolean") == 0) {
+	} else if (geo3dml::IsiEqual(n, "Boolean")) {
 		return geo3dml::Field::Boolean;
 	} else {
 		return geo3dml::Field::Unknown;
@@ -40,7 +41,7 @@ bool XMLFieldReader::ReadField(xmlTextReaderPtr reader, geo3dml::Field* field) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			geo3dml::Field::ValueType vType = NameToValueType(localName);
@@ -73,10 +74,10 @@ bool XMLFieldReader::ReadFieldDefinition(xmlTextReaderPtr reader, const std::str
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, fieldElementName.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, fieldElementName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "label") == 0) {
+			if (geo3dml::IsiEqual(localName, "label")) {
 				std::string label;
 				if (XMLReaderHelper::TextNode(reader, "label", label)) {
 					field->Label(label);
@@ -84,7 +85,7 @@ bool XMLFieldReader::ReadFieldDefinition(xmlTextReaderPtr reader, const std::str
 					SetStatus(false, label);
 					break;
 				}
-			} else if (_stricmp(localName, "description") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "description")) {
 				std::string description;
 				if (XMLReaderHelper::TextNode(reader, "description", description)) {
 					field->Description(description);
@@ -92,7 +93,7 @@ bool XMLFieldReader::ReadFieldDefinition(xmlTextReaderPtr reader, const std::str
 					SetStatus(false, description);
 					break;
 				}
-			} else if (_stricmp(localName, "uom") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "uom")) {
 				std::string uom = XMLReaderHelper::Attribute(reader, "code");
 				field->Uom(uom);
 			}

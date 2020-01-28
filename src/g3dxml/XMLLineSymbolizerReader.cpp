@@ -1,5 +1,6 @@
 #include <g3dxml/XMLLineSymbolizerReader.h>
 #include <g3dxml/XMLMaterialReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -19,14 +20,14 @@ geo3dml::LineSymbolizer* XMLLineSymbolizerReader::ReadLineSym(xmlTextReaderPtr r
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Stroke.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Stroke)) {
 				if (!ReadStroke(reader, lineSym)) {
 					break;
 				}
-			} else if (_stricmp(localName, XMLMaterialReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				XMLMaterialReader materialReader(g3dFactory_);
 				geo3dml::Material material;
 				if (!materialReader.ReadMaterial(reader, material)) {
@@ -54,12 +55,12 @@ bool XMLLineSymbolizerReader::ReadStroke(xmlTextReaderPtr reader, geo3dml::LineS
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Stroke.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Stroke)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "SvgParameter") == 0) {
+			if (geo3dml::IsiEqual(localName, "SvgParameter")) {
 				std::string svgAttribute = XMLReaderHelper::Attribute(reader, "name");
-				if (_stricmp(svgAttribute.c_str(), "stroke-width") == 0) {
+				if (geo3dml::IsiEqual(svgAttribute, "stroke-width")) {
 					std::string strokeWidth;
 					if (!XMLReaderHelper::TextNode(reader, "SvgParameter", strokeWidth)) {
 						SetStatus(false, strokeWidth);

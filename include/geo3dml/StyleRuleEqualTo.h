@@ -22,9 +22,6 @@ namespace geo3dml {
 		virtual bool DoesFeatureMatch(Feature* feature) const;
 
 	private:
-		bool TextToBoolean(const std::string& s) const;
-
-	private:
 		std::string fieldName_, valueLiteral_;
 	};
 }

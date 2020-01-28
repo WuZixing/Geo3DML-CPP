@@ -1,6 +1,7 @@
 #include <g3dxml/XMLReader.h>
 #include <g3dxml/XMLProjectReader.h>
 #include <g3dxml/XMLModelReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -34,7 +35,7 @@ geo3dml::Object* XMLReader::LoadXMLFile(const std::string& file) {
 				status = xmlTextReaderRead(reader);
 				continue;
 			}
-			if (_stricmp(localName, XMLProjectReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLProjectReader::Element)) {
 #if defined(_WIN32)
 				char pathSeperator = '\\';
 #else

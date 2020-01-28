@@ -1,4 +1,5 @@
 #include <geo3dml/ObjectFactory.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
@@ -18,15 +19,15 @@ Layer* ObjectFactory::NewLayer() {
 
 
 Geometry* ObjectFactory::NewGeometry(const std::string& typeName) {
-	if (_stricmp(typeName.c_str(), "GeoTIN") == 0) {
+	if (IsiEqual(typeName, "GeoTIN")) {
 		return NewTIN();
-	} else if (_stricmp(typeName.c_str(), "GeoCornerPointGrid") == 0) {
+	} else if (IsiEqual(typeName, "GeoCornerPointGrid")) {
 		return NewCornerPointGrid();
-	} else if (_stricmp(typeName.c_str(), "GeoUniformGrid") == 0) {
+	} else if (IsiEqual(typeName, "GeoUniformGrid")) {
 		return NewUniformGrid();
-	} else if (_stricmp(typeName.c_str(), "LineString") == 0) {
+	} else if (IsiEqual(typeName, "LineString")) {
 		return NewLineString();
-	} else if (_stricmp(typeName.c_str(), "Point") == 0) {
+	} else if (IsiEqual(typeName, "Point")) {
 		return NewPoint();
 	} else {
 		return NULL;

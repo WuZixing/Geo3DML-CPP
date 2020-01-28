@@ -1,5 +1,6 @@
 #include <g3dxml/XMLMapReader.h>
 #include <g3dxml/XMLLayerReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -27,24 +28,24 @@ geo3dml::Map* XMLMapReader::ReadMap(xmlTextReaderPtr reader) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
 		/// TODO: parse metadata, feature relationship.
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Name.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Name)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Name, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				map->SetName(v);
-			} else if (_stricmp(localName, Element_Description.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Description)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Description, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				map->SetDescription(v);
-			} else if (_stricmp(localName, XMLLayerReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLLayerReader::Element)) {
 				XMLLayerReader layerReader(g3dFactory_);
 				geo3dml::Layer* layer = layerReader.ReadLayer(reader);
 				if (layer != NULL) {
@@ -85,7 +86,7 @@ geo3dml::Map* XMLMapReader::LoadFromFile(const std::string& file) {
 				status = xmlTextReaderRead(reader);
 				continue;
 			}
-			if (_stricmp(localName, Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element)) {
 				map = ReadMap(reader);
 				break;
 			}

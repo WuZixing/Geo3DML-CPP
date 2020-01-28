@@ -1,4 +1,5 @@
 #include <g3dxml/XMLUniformGridReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -24,11 +25,11 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			metEndElement = true;
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Origin.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Origin)) {
 				std::string origin;
 				if (!XMLReaderHelper::TextNode(reader, Element_Origin, origin)) {
 					SetStatus(false, origin);
@@ -39,7 +40,7 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 				originY = strtod(end, &end);
 				originZ = strtod(end, NULL);
 				flag |= 0x01;
-			} else if (_stricmp(localName, Element_Steps.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Steps)) {
 				std::string steps;
 				if (!XMLReaderHelper::TextNode(reader, Element_Steps, steps)) {
 					SetStatus(false, steps);
@@ -50,7 +51,7 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 				stepY = strtod(end, &end);
 				stepZ = strtod(end, &end);
 				flag |= 0x02;
-			} else if (_stricmp(localName, Element_Dimension.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Dimension)) {
 				std::string dims;
 				if (!XMLReaderHelper::TextNode(reader, Element_Dimension, dims)) {
 					SetStatus(false, dims);
@@ -61,7 +62,7 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 				dimJ = strtol(end, &end, 10);
 				dimK = strtol(end, NULL, 10);
 				flag |= 0x04;
-			} else if (_stricmp(localName, Element_Cells.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Cells)) {
 				if (!ReadCells(reader, grid)) {
 					break;
 				}
@@ -94,10 +95,10 @@ bool XMLUniformGridReader::ReadCells(xmlTextReaderPtr reader, geo3dml::UniformGr
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Cells.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Cells)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Cell.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Cell)) {
 				if (!ReadCell(reader, grid)) {
 					break;
 				}
@@ -122,7 +123,7 @@ bool XMLUniformGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::UniformGri
 	attr = XMLReaderHelper::Attribute(reader, "Valid");
 	bool beValid = true;
 	if (!attr.empty()) {
-		if (_stricmp(attr.c_str(), "false") == 0 || attr == "0") {
+		if (geo3dml::IsiEqual(attr, "false") || attr == "0") {
 			beValid = false;
 		}
 	}

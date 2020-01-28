@@ -1,5 +1,6 @@
 #include <g3dxml/XMLLayerReader.h>
 #include <g3dxml/XMLGeo3DStyleReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -26,17 +27,17 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Name.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Name)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_Name, v)) {
 					SetStatus(false, v);
 					break;
 				}
 				layer->SetName(v);
-			} else if (_stricmp(localName, Element_FeatureClass.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_FeatureClass)) {
 				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 				if (href == NULL) {
 					href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"xlink:href");
@@ -51,7 +52,7 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 					SetStatus(false, err);
 					break;
 				}
-			} else if (_stricmp(localName, XMLGeo3DStyleReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLGeo3DStyleReader::Element)) {
 				XMLGeo3DStyleReader styleReader(g3dFactory_);
 				geo3dml::Geo3DStyle* style = styleReader.ReadStyle(reader);
 				if (style != NULL) {

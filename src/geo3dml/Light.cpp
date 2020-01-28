@@ -1,11 +1,12 @@
 #include <geo3dml/Light.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
 Light::Type Light::NameToLightType(const std::string& name) {
-	if (_stricmp(name.c_str(), "Head") == 0) {
+	if (IsiEqual(name, "Head")) {
 		return Light_Head;
-	} else if (_stricmp(name.c_str(), "Camera") == 0) {
+	} else if (IsiEqual(name, "Camera")) {
 		return Light_Camera;
 	} else {
 		return Light_Scene;

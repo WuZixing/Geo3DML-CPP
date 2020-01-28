@@ -1,5 +1,6 @@
 #include <g3dxml/XMLGeoDiscreteCoverageReader.h>
 #include <g3dxml/XMLFieldReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -24,23 +25,23 @@ bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr read
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "SamplingTarget") == 0) {
+			if (geo3dml::IsiEqual(localName, "SamplingTarget")) {
 				std::string targetName;
 				if (!XMLReaderHelper::TextNode(reader, "SamplingTarget", targetName)) {
 					SetStatus(false, targetName);
 					break;
 				}
 				toShape->SetProperty(shapeProperty, geo3dml::ShapeProperty::NameToSamplingTarget(targetName));
-			} else if (_stricmp(localName, "name") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "name")) {
 				if (!XMLReaderHelper::TextNode(reader, "name", coverageName)) {
 					SetStatus(false, coverageName);
 					break;
 				}
 				shapeProperty->Name(coverageName);
-			} else if (_stricmp(localName, "Version") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Version")) {
 				std::string timestamp = XMLReaderHelper::Attribute(reader, "Timestamp");
 				std::string versionNo;
 				if (!XMLReaderHelper::TextNode(reader, "Version", versionNo)) {
@@ -50,11 +51,11 @@ bool XMLGeoDiscreteCoverageReader::ReadGeoDiscreteCoverage(xmlTextReaderPtr read
 				geo3dml::ShapeProperty::Version vInfo;
 				vInfo.VersionNo(versionNo).Timestamp(timestamp);
 				shapeProperty->VersionInfo(vInfo);
-			} else if (_stricmp(localName, Element_RangeType.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_RangeType)) {
 				if (!ReadRangeType(reader, shapeProperty)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_RangeSet.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_RangeSet)) {
 				if (!ReadRangeSet(reader, shapeProperty)) {
 					break;
 				}
@@ -74,10 +75,10 @@ bool XMLGeoDiscreteCoverageReader::ReadRangeType(xmlTextReaderPtr reader, geo3dm
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_RangeType.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_RangeType)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLFieldReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLFieldReader::Element)) {
 				geo3dml::Field field;
 				XMLFieldReader fieldReader;
 				if (!fieldReader.ReadField(reader, &field)) {
@@ -102,10 +103,10 @@ bool XMLGeoDiscreteCoverageReader::ReadRangeSet(xmlTextReaderPtr reader, geo3dml
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_RangeSet.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_RangeSet)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "ValueArray") == 0) {
+			if (geo3dml::IsiEqual(localName, "ValueArray")) {
 				if (!ReadRangeSetField(reader, shapeProperty, fieldIndex)) {
 					break;
 				}
@@ -127,10 +128,10 @@ bool XMLGeoDiscreteCoverageReader::ReadRangeSetField(xmlTextReaderPtr reader, ge
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, elementName.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, elementName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "valueComponents") == 0) {
+			if (geo3dml::IsiEqual(localName, "valueComponents")) {
 				if (!ReadFieldValues(reader, shapeProperty, fieldIndex)) {
 					break;
 				}
@@ -152,10 +153,10 @@ bool XMLGeoDiscreteCoverageReader::ReadFieldValues(xmlTextReaderPtr reader, geo3
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, elementName.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, elementName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "Quantity") == 0) {
+			if (geo3dml::IsiEqual(localName, "Quantity")) {
 				// double value
 				std::string str;
 				if (XMLReaderHelper::TextNode(reader, "Quantity", str)) {
@@ -165,7 +166,7 @@ bool XMLGeoDiscreteCoverageReader::ReadFieldValues(xmlTextReaderPtr reader, geo3
 					SetStatus(false, str);
 					break;
 				}
-			} else if (_stricmp(localName, "Count") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Count")) {
 				// int value
 				std::string str;
 				if (XMLReaderHelper::TextNode(reader, "Count", str)) {
@@ -175,7 +176,7 @@ bool XMLGeoDiscreteCoverageReader::ReadFieldValues(xmlTextReaderPtr reader, geo3
 					SetStatus(false, str);
 					break;
 				}
-			} else if (_stricmp(localName, "Text") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "Text")) {
 				// string value
 				std::string str;
 				if (XMLReaderHelper::TextNode(reader, "Text", str)) {
@@ -184,7 +185,7 @@ bool XMLGeoDiscreteCoverageReader::ReadFieldValues(xmlTextReaderPtr reader, geo3
 					SetStatus(false, str);
 					break;
 				}
-			} else if (_stricmp(localName, "ValueArray") == 0) {
+			} else if (geo3dml::IsiEqual(localName, "ValueArray")) {
 				// array value
 				if (!ReadElementValueAsArray(reader, shapeProperty, fieldIndex)) {
 					break;
@@ -207,14 +208,14 @@ bool XMLGeoDiscreteCoverageReader::ReadElementValueAsArray(xmlTextReaderPtr read
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, elementName.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, elementName)) {
 			if (iteratorLevel > 0) {
 				--iteratorLevel;
 			} else {
 				break;
 			}
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, elementName.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, elementName)) {
 				++iteratorLevel;
 			}
 		}

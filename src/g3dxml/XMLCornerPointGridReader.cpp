@@ -1,4 +1,6 @@
 #include <g3dxml/XMLCornerPointGridReader.h>
+#include <geo3dml/Utils.h>
+#include <cmath>
 
 using namespace g3dxml;
 
@@ -24,10 +26,10 @@ geo3dml::CornerPointGrid* XMLCornerPointGridReader::ReadCornerPointGrid(xmlTextR
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Dimension.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Dimension)) {
 				std::string dims;
 				if (XMLReaderHelper::TextNode(reader, Element_Dimension, dims)) {
 					if (grid == NULL) {
@@ -42,11 +44,11 @@ geo3dml::CornerPointGrid* XMLCornerPointGridReader::ReadCornerPointGrid(xmlTextR
 					SetStatus(false, dims);
 					break;
 				}
-			} else if (_stricmp(localName, Element_Pillar.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Pillar)) {
 				if (!ReadPillar(reader, grid)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Cells.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Cells)) {
 				if (!ReadCells(reader, grid)) {
 					break;
 				}
@@ -77,10 +79,10 @@ bool XMLCornerPointGridReader::ReadPillar(xmlTextReaderPtr reader, geo3dml::Corn
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Pillar.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Pillar)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Pillar_HeadPos.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Pillar_HeadPos)) {
 				std::string coordinates;
 				if (XMLReaderHelper::TextNode(reader, Element_Pillar_HeadPos, coordinates)) {
 					char* end = NULL;
@@ -92,7 +94,7 @@ bool XMLCornerPointGridReader::ReadPillar(xmlTextReaderPtr reader, geo3dml::Corn
 					SetStatus(false, coordinates);
 					break;
 				}
-			} else if (_stricmp(localName, Element_Pillar_TailPos.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Pillar_TailPos)) {
 				std::string coordinates;
 				if (XMLReaderHelper::TextNode(reader, Element_Pillar_TailPos, coordinates)) {
 					char* end = NULL;
@@ -134,10 +136,10 @@ bool XMLCornerPointGridReader::ReadCells(xmlTextReaderPtr reader, geo3dml::Corne
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Cells.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Cells)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Cell.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Cell)) {
 				// read the cell: (i, j, k).
 				if (!ReadCell(reader, grid, i, j, k, attrZValue)) {
 					break;
@@ -199,7 +201,7 @@ bool XMLCornerPointGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::Corner
 	// compute coordinates.
 	double bottomFrontLeftPos[3], bottomFrontRightPos[3], bottomBackLeftPos[3], bottomBackRightPos[3];
 	double topFrontLeftPos[3], topFrontRightPos[3], topBackLeftPos[3], topBackRightPos[3];
-	if (_stricmp(zValueTag.c_str(), "elevation") == 0) {
+	if (geo3dml::IsiEqual(zValueTag, "elevation")) {
 		ComputeZByElevation(headOfBottomLeftPillar, tailOfBottomLeftPillar, bottomFrontLeftZ, bottomFrontLeftPos);
 		ComputeZByElevation(headOfBottomLeftPillar, tailOfBottomLeftPillar, topFrontLeftZ, topFrontLeftPos);
 		ComputeZByElevation(headOfBottomRightPillar, tailOfBottomRightPillar, bottomFrontRightZ, bottomFrontRightPos);
@@ -208,7 +210,7 @@ bool XMLCornerPointGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::Corner
 		ComputeZByElevation(headOfTopLeftPillar, tailOfTopLeftPillar, topBackLeftZ, topBackLeftPos);
 		ComputeZByElevation(headOfTopRightPillar, tailOfTopRightPillar, bottomBackRightZ, bottomBackRightPos);
 		ComputeZByElevation(headOfTopRightPillar, tailOfTopRightPillar, topBackRightZ, topBackRightPos);
-	} else if (_stricmp(zValueTag.c_str(), "length") == 0) {
+	} else if (geo3dml::IsiEqual(zValueTag, "length")) {
 		ComputeZByLength(headOfBottomLeftPillar, tailOfBottomLeftPillar, bottomFrontLeftZ, bottomFrontLeftPos);
 		ComputeZByLength(headOfBottomLeftPillar, tailOfBottomLeftPillar, topFrontLeftZ, topFrontLeftPos);
 		ComputeZByLength(headOfBottomRightPillar, tailOfBottomRightPillar, bottomFrontRightZ, bottomFrontRightPos);
@@ -230,7 +232,7 @@ void XMLCornerPointGridReader::ComputeZByElevation(const double headPosOfPillar[
 	pos[2] = z;
 	double t = 0;
 	double deltaZ = tailPosOfPillar[2] - headPosOfPillar[2];
-	if (!XMLReaderHelper::IsZero(deltaZ)) {
+	if (!geo3dml::IsZero(deltaZ)) {
 		t = (pos[2] - headPosOfPillar[2]) / deltaZ;
 	}	
 	pos[0] = headPosOfPillar[0] + t * (tailPosOfPillar[0] - headPosOfPillar[0]);
@@ -245,7 +247,7 @@ void XMLCornerPointGridReader::ComputeZByLength(const double headPosOfPillar[3],
 	double t = 0;
 	double length = pow(tailPosOfPillar[0] - headPosOfPillar[0], 2) + pow(tailPosOfPillar[1] - headPosOfPillar[1], 2) + pow(tailPosOfPillar[2] - headPosOfPillar[2], 2);
 	length = pow(length, 0.5);
-	if (!XMLReaderHelper::IsZero(length)) {
+	if (!geo3dml::IsZero(length)) {
 		t = len / length;
 	}
 	pos[0] = headPosOfPillar[0] + t * (tailPosOfPillar[0] - headPosOfPillar[0]);

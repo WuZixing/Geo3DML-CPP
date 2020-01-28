@@ -22,8 +22,5 @@ namespace g3dxml {
 		static std::string Attribute(xmlTextReaderPtr reader, const std::string& attribute);
 
 		static std::string FormatErrorMessageWithPosition(xmlTextReaderPtr reader, const std::string& message);
-
-		static bool IsZero(double v);
-		static bool IsTrue(const std::string& s);
 	};
 }

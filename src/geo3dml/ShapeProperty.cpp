@@ -1,4 +1,5 @@
 #include <geo3dml/ShapeProperty.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
@@ -29,13 +30,13 @@ std::string ShapeProperty::Version::Timestamp() const {
 }
 
 ShapeProperty::SamplingTarget ShapeProperty::NameToSamplingTarget(const std::string& name) {
-	if (_stricmp(name.c_str(), "VOXEL") == 0) {
+	if (IsiEqual(name, "VOXEL")) {
 		return Voxel;
-	} else if (_stricmp(name.c_str(), "VERTEX") == 0) {
+	} else if (IsiEqual(name, "VERTEX")) {
 		return Vertex;
-	} else if (_stricmp(name.c_str(), "EDGE") == 0) {
+	} else if (IsiEqual(name, "EDGE")) {
 		return Edge;
-	} else if (_stricmp(name.c_str(), "FACE") == 0) {
+	} else if (IsiEqual(name, "FACE")) {
 		return Face;
 	} else {
 		return Unknown;

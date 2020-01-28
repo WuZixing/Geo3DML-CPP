@@ -6,6 +6,7 @@
 #include <g3dxml/XMLLineStringReader.h>
 #include <g3dxml/XMLPointReader.h>
 #include <g3dxml/XMLMultiPointReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -30,11 +31,11 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			metEndElement = true;
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Shape.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Shape)) {
 				geometry = ReadShape(reader);
 				if (geometry != NULL) {
 					geometry->SetName(geoName);
@@ -42,7 +43,7 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 				} else {
 					break;
 				}
-			} else if (_stricmp(localName, Element_ShapeProperty.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_ShapeProperty)) {
 				if (geometry == NULL) {
 					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "Shape object must be available before reading shape property.");
 					SetStatus(false, err);
@@ -72,45 +73,45 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Shape.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Shape)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLTINReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLTINReader::Element)) {
 				XMLTINReader tinReader(g3dFactory_);
 				geo = tinReader.ReadTIN(reader);
 				if (geo == NULL) {
 					SetStatus(false, tinReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLCornerPointGridReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLCornerPointGridReader::Element)) {
 				XMLCornerPointGridReader gridReader(g3dFactory_);
 				geo = gridReader.ReadCornerPointGrid(reader);
 				if (geo == NULL) {
 					SetStatus(false, gridReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLUniformGridReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLUniformGridReader::Element)) {
 				XMLUniformGridReader gridReader(g3dFactory_);
 				geo = gridReader.ReadUniformGrid(reader);
 				if (geo == NULL) {
 					SetStatus(false, gridReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLLineStringReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLLineStringReader::Element)) {
 				XMLLineStringReader lineStringReader(g3dFactory_);
 				geo = lineStringReader.ReadLineString(reader);
 				if (geo == NULL) {
 					SetStatus(false, lineStringReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLPointReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLPointReader::Element)) {
 				XMLPointReader pointReader(g3dFactory_);
 				geo = pointReader.ReadPoint(reader);
 				if (geo == NULL) {
 					SetStatus(false, pointReader.Error());
 					break;
 				}
-			} else if (_stricmp(localName, XMLMultiPointReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLMultiPointReader::Element)) {
 				XMLMultiPointReader mPointReader(g3dFactory_);
 				geo = mPointReader.ReadMultiPoint(reader);
 				if (geo == NULL) {
@@ -137,10 +138,10 @@ bool XMLGeometryReader::ReadShapeProperty(xmlTextReaderPtr reader, geo3dml::Geom
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_ShapeProperty.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_ShapeProperty)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLGeoDiscreteCoverageReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLGeoDiscreteCoverageReader::Element)) {
 				XMLGeoDiscreteCoverageReader coverageReader(g3dFactory_);
 				if (!coverageReader.ReadGeoDiscreteCoverage(reader, toShape)) {
 					SetStatus(false, coverageReader.Error());

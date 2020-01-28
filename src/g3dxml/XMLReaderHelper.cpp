@@ -1,6 +1,8 @@
 #include <g3dxml/XMLReaderHelper.h>
 #include <fstream>
 #include <sstream>
+#include <cmath>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -71,10 +73,10 @@ std::string XMLReaderHelper::DectectFileEncoding(const std::string& file) {
 }
 
 bool XMLReaderHelper::IsUTF8(const std::string& encodingName) {
-	if (_stricmp(encodingName.c_str(), "utf-8") == 0) {
+	if (geo3dml::IsiEqual(encodingName, "utf-8")) {
 		return true;
 	}
-	if (_stricmp(encodingName.c_str(), "utf8") == 0) {
+	if (geo3dml::IsiEqual(encodingName, "utf8")) {
 		return true;
 	}
 	return false;
@@ -100,7 +102,7 @@ bool XMLReaderHelper::TextNode(xmlTextReaderPtr reader, const std::string& eleme
 		}
 		case XML_READER_TYPE_END_ELEMENT: {
 			const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
-			if (localName != NULL && _stricmp(localName, element.c_str()) == 0) {
+			if (localName != NULL && geo3dml::IsiEqual(localName, element)) {
 				metEndElement = true;
 				break;
 			}
@@ -135,28 +137,8 @@ std::string XMLReaderHelper::Attribute(xmlTextReaderPtr reader, const std::strin
 	return attri;
 }
 
-bool XMLReaderHelper::IsZero(double v) {
-	return fabs(v) <= 10e-6;
-}
-
 std::string XMLReaderHelper::FormatErrorMessageWithPosition(xmlTextReaderPtr reader, const std::string& message) {
 	std::ostringstream ostr;
 	ostr << "line " << xmlTextReaderGetParserLineNumber(reader) << ", column " << xmlTextReaderGetParserColumnNumber(reader) << ": " << message;
 	return ostr.str();
-}
-
-bool XMLReaderHelper::IsTrue(const std::string& s) {
-	if (_stricmp(s.c_str(), "1") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "true") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "yes") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "t") == 0) {
-		return true;
-	} else if (_stricmp(s.c_str(), "y") == 0) {
-		return true;
-	} else {
-		return false;
-	}
 }

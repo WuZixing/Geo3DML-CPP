@@ -1,5 +1,5 @@
 #include <g3dxml/XMLTINReader.h>
-
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -24,14 +24,14 @@ geo3dml::TIN* XMLTINReader::ReadTIN(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Vertex.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Vertex)) {
 				if (!ReadVertex(reader, tin)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Triangle.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Triangle)) {
 				if (!ReadTriangle(reader, tin)) {
 					break;
 				}
@@ -74,10 +74,10 @@ bool XMLTINReader::ReadTriangle(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Triangle.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Triangle)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_VertexList.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_VertexList)) {
 				std::string ids;
 				if (XMLReaderHelper::TextNode(reader, Element_VertexList, ids)) {
 					char* end = NULL;

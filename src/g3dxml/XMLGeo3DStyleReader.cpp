@@ -1,5 +1,6 @@
 #include <g3dxml/XMLGeo3DStyleReader.h>
 #include <g3dxml/XMLFeatureTypeStyleReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -25,10 +26,10 @@ geo3dml::Geo3DStyle* XMLGeo3DStyleReader::ReadStyle(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Name.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Name)) {
 				if (!XMLReaderHelper::TextNode(reader, Element_Name, styleName)) {
 					SetStatus(false, styleName);
 					break;
@@ -36,7 +37,7 @@ geo3dml::Geo3DStyle* XMLGeo3DStyleReader::ReadStyle(xmlTextReaderPtr reader) {
 				if (style != NULL) {
 					style->SetName(styleName);
 				}
-			} else if (_stricmp(localName, XMLFeatureTypeStyleReader::Element.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, XMLFeatureTypeStyleReader::Element)) {
 				XMLFeatureTypeStyleReader ftStyleReader(g3dFactory_);
 				style = ftStyleReader.ReadFeatureTypeStyle(reader);
 				if (style != NULL) {

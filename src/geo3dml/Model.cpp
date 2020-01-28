@@ -1,15 +1,16 @@
 #include <geo3dml/Model.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
 Model::ModelType Model::NameToModelType(const std::string& n) {
-	if (_stricmp("Drill", n.c_str()) == 0) {
+	if (geo3dml::IsiEqual("Drill", n)) {
 		return Drill;
-	} else if (_stricmp("Section", n.c_str()) == 0) {
+	} else if (geo3dml::IsiEqual("Section", n)) {
 		return Section;
-	} else if (_stricmp("3DModel", n.c_str()) == 0 || _stricmp("Map3D", n.c_str()) == 0) {
+	} else if (geo3dml::IsiEqual("3DModel", n) || geo3dml::IsiEqual("Map3D", n)) {
 		return Model3D;
-	} else if (_stricmp("Isogram", n.c_str()) == 0) {
+	} else if (geo3dml::IsiEqual("Isogram", n)) {
 		return Isogram;
 	} else {
 		return Other;

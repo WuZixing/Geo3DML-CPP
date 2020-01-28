@@ -2,6 +2,7 @@
 #include <g3dxml/XMLMaterialReader.h>
 #include <g3dxml/XMLPointSymbolizerReader.h>
 #include <g3dxml/XMLLineSymbolizerReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -28,22 +29,22 @@ geo3dml::SurfaceSymbolizer* XMLSurfaceSymbolizerReader::ReadSurfaceSym(xmlTextRe
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, Element_Front.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, Element_Front)) {
 				if (!ReadFront(reader, surfaceSym)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Back.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Back)) {
 				if (!ReadBack(reader, surfaceSym)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Vertex.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Vertex)) {
 				if (!ReadVertex(reader, surfaceSym)) {
 					break;
 				}
-			} else if (_stricmp(localName, Element_Frame.c_str()) == 0) {
+			} else if (geo3dml::IsiEqual(localName, Element_Frame)) {
 				if (!ReadFrame(reader, surfaceSym)) {
 					break;
 				}
@@ -67,10 +68,10 @@ bool XMLSurfaceSymbolizerReader::ReadFront(xmlTextReaderPtr reader, geo3dml::Sur
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Front.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Front)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLMaterialReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				geo3dml::Material material;
 				XMLMaterialReader materialReader(g3dFactory_);
 				if (materialReader.ReadMaterial(reader, material)) {
@@ -95,10 +96,10 @@ bool XMLSurfaceSymbolizerReader::ReadBack(xmlTextReaderPtr reader, geo3dml::Surf
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Back.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Back)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLMaterialReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				geo3dml::Material material;
 				XMLMaterialReader materialReader(g3dFactory_);
 				if (materialReader.ReadMaterial(reader, material)) {
@@ -123,10 +124,10 @@ bool XMLSurfaceSymbolizerReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::Su
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Vertex.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Vertex)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLPointSymbolizerReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLPointSymbolizerReader::Element)) {
 				XMLPointSymbolizerReader pointSymReader(g3dFactory_);
 				geo3dml::PointSymbolizer* pointSym = pointSymReader.ReadPointSym(reader);
 				if (pointSym != NULL) {
@@ -152,10 +153,10 @@ bool XMLSurfaceSymbolizerReader::ReadFrame(xmlTextReaderPtr reader, geo3dml::Sur
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element_Frame.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Frame)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, XMLLineSymbolizerReader::Element.c_str()) == 0) {
+			if (geo3dml::IsiEqual(localName, XMLLineSymbolizerReader::Element)) {
 				XMLLineSymbolizerReader lineSymReader(g3dFactory_);
 				geo3dml::LineSymbolizer* lineSym = lineSymReader.ReadLineSym(reader);
 				if (lineSym != NULL) {

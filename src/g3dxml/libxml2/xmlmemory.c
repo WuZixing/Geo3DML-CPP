@@ -61,7 +61,7 @@ void xmlMallocBreakpoint(void);
  *              Macros, variables and associated types                  *
  *                                                                      *
  ************************************************************************/
-
+/*
 #if !defined(LIBXML_THREAD_ENABLED) && !defined(LIBXML_THREAD_ALLOC_ENABLED)
 #ifdef xmlMalloc
 #undef xmlMalloc
@@ -73,6 +73,7 @@ void xmlMallocBreakpoint(void);
 #undef xmlMemStrdup
 #endif
 #endif
+*/
 
 /*
  * Each of the blocks allocated begin with a header containing informations

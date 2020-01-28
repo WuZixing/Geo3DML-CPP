@@ -15,6 +15,15 @@
 #include <libxml/threads.h>
 #include <libxml/globals.h>
 
+#ifndef LIBXML_THREAD_ENABLED
+#ifdef HAVE_PTHREAD_H
+#undef HAVE_PTHREAD_H
+#endif
+#ifdef HAVE_WIN32_THREADS
+#undef HAVE_WIN32_THREADS
+#endif
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif

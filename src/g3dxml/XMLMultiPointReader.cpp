@@ -1,4 +1,5 @@
 #include <g3dxml/XMLMultiPointReader.h>
+#include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
@@ -19,10 +20,10 @@ geo3dml::MultiPoint* XMLMultiPointReader::ReadMultiPoint(xmlTextReaderPtr reader
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && _stricmp(localName, Element.c_str()) == 0) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (_stricmp(localName, "pos") == 0) {
+			if (geo3dml::IsiEqual(localName, "pos")) {
 				std::string strSrsDimension = XMLReaderHelper::Attribute(reader, "srsDimension");
 				int srsDimension = atoi(strSrsDimension.c_str());
 				std::string posList;
