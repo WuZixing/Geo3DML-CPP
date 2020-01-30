@@ -1,5 +1,6 @@
 #include <g3dvtk/ContinuousAttributeColorTransfer.h>
 #include <g3dvtk/ColorMap.h>
+#include <cmath>
 
 using namespace g3dvtk;
 
@@ -26,7 +27,7 @@ void ContinuousAttributeColorTransfer::PickUpColor(double value, unsigned char& 
 		index = colorMap_->Size() - 1;
 	} else {
 		double t = (value - minValue_) / (maxValue_ - minValue_);
-		index = int(floor(t * (colorMap_->Size() - 1)));
+		index = int(std::floor(t * (colorMap_->Size() - 1)));
 	}
 	colorMap_->ColorAt(index, r, g, b);
 }

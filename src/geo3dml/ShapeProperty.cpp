@@ -183,6 +183,8 @@ bool ShapeProperty::CheckOrAddFieldAndFillDefaultValues(const Field& field, int 
 	case geo3dml::Field::Text:
 		FillTextValue(field.Name(), numberOfValues, defaultText);
 		break;
+	default:
+	        break;
 	}
 	return true;
 }

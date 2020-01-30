@@ -1,5 +1,6 @@
 #include <g3dvtk/DiscreteAttributeColorTransfer.h>
 #include <g3dvtk/ColorMap.h>
+#include <cmath>
 
 using namespace g3dvtk;
 
@@ -30,7 +31,7 @@ void DiscreteAttributeColorTransfer::Compile() {
 			int i = 1;
 			++itor;
 			while (itor != strAttributes_.end()) {
-				itor->second = int(floor(i++ * step));
+				itor->second = int(std::floor(i++ * step));
 				++itor;
 			}
 		}
@@ -45,7 +46,7 @@ void DiscreteAttributeColorTransfer::Compile() {
 			int i = 1;
 			++itor;
 			while (itor != intAttributes_.end()) {
-				itor->second = int(floor(i++ * step));
+				itor->second = int(std::floor(i++ * step));
 				++itor;
 			}
 		}
