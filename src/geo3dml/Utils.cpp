@@ -1,5 +1,6 @@
 #include <geo3dml/Utils.h>
 #include <cmath>
+#include <cctype>
 
 bool geo3dml::IsZero(double v) {
     return std::fabs(v) <= 10e-6;

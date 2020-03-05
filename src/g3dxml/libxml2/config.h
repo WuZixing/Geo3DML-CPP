@@ -1,14 +1,14 @@
 /* Define if getaddrinfo is there */
-#define HAVE_GETADDRINFO
+/* #undef HAVE_GETADDRINFO */
 
 /* Define to 1 if you have the <ansidecl.h> header file. */
 /* #undef HAVE_ANSIDECL_H */
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
-#define HAVE_ARPA_INET_H 1
+/* #undef HAVE_ARPA_INET_H */
 
 /* Define to 1 if you have the <arpa/nameser.h> header file. */
-#define HAVE_ARPA_NAMESER_H 1
+/* #undef HAVE_ARPA_NAMESER_H */
 
 /* Whether struct sockaddr::__ss_family exists */
 /* #undef HAVE_BROKEN_SS_FAMILY */
@@ -20,10 +20,10 @@
 #define HAVE_CTYPE_H 1
 
 /* Define to 1 if you have the <dirent.h> header file. */
-#define HAVE_DIRENT_H 1
+/* #undef HAVE_DIRENT_H */
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 1
+/* #undef HAVE_DLFCN_H */
 
 /* Have dlopen based dso */
 /* #undef HAVE_DLOPEN */
@@ -38,7 +38,7 @@
 #define HAVE_FCNTL_H 1
 
 /* Define to 1 if you have the `finite' function. */
-#define HAVE_FINITE 1
+/* #undef HAVE_FINITE */
 
 /* Define to 1 if you have the <float.h> header file. */
 #define HAVE_FLOAT_H 1
@@ -59,7 +59,7 @@
 #define HAVE_FTIME 1
 
 /* Define to 1 if you have the `gettimeofday' function. */
-#define HAVE_GETTIMEOFDAY 1
+/* #undef HAVE_GETTIMEOFDAY */
 
 /* Define to 1 if you have the <ieeefp.h> header file. */
 /* #undef HAVE_IEEEFP_H */
@@ -83,7 +83,7 @@
 #define HAVE_LOCALTIME 1
 
 /* Define to 1 if you have the <malloc.h> header file. */
-/* #undef HAVE_MALLOC_H */
+#define HAVE_MALLOC_H 1
 
 /* Define to 1 if you have the <math.h> header file. */
 #define HAVE_MATH_H 1
@@ -98,19 +98,19 @@
 /* #undef HAVE_NDIR_H */
 
 /* Define to 1 if you have the <netdb.h> header file. */
-#define HAVE_NETDB_H 1
+/* #undef HAVE_NETDB_H */
 
 /* Define to 1 if you have the <netinet/in.h> header file. */
-#define HAVE_NETINET_IN_H 1
+/* #undef HAVE_NETINET_IN_H */
 
 /* Define to 1 if you have the `printf' function. */
 #define HAVE_PRINTF 1
 
 /* Define if <pthread.h> is there */
-#define HAVE_PTHREAD_H
+/* #undef HAVE_PTHREAD_H */
 
 /* Define to 1 if you have the <resolv.h> header file. */
-#define HAVE_RESOLV_H 1
+/* #undef HAVE_RESOLV_H */
 
 /* Have shl_load based dso */
 /* #undef HAVE_SHLLOAD */
@@ -134,7 +134,7 @@
 #define HAVE_STAT 1
 
 /* Define to 1 if you have the `stat64' function. */
-#define HAVE_STAT64 1
+/* #undef HAVE_STAT64 */
 
 /* Define to 1 if you have the <stdarg.h> header file. */
 #define HAVE_STDARG_H 1
@@ -155,30 +155,30 @@
 #define HAVE_STRFTIME 1
 
 /* Define to 1 if you have the <strings.h> header file. */
-#define HAVE_STRINGS_H 1
+/* #undef HAVE_STRINGS_H */
 
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H 1
 
 /* Define to 1 if you have the `strndup' function. */
-#define HAVE_STRNDUP 1
+/* #undef HAVE_STRNDUP */
 
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
-#define HAVE_SYS_DIR_H 1
+/* #undef HAVE_SYS_DIR_H */
 
 /* Define to 1 if you have the <sys/mman.h> header file. */
-#define HAVE_SYS_MMAN_H 1
+/* #undef HAVE_SYS_MMAN_H */
 
 /* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
    */
 /* #undef HAVE_SYS_NDIR_H */
 
 /* Define to 1 if you have the <sys/select.h> header file. */
-#define HAVE_SYS_SELECT_H 1
+/* #undef HAVE_SYS_SELECT_H */
 
 /* Define to 1 if you have the <sys/socket.h> header file. */
-#define HAVE_SYS_SOCKET_H 1
+/* #undef HAVE_SYS_SOCKET_H */
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -187,7 +187,7 @@
 #define HAVE_SYS_TIMEB_H 1
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-#define HAVE_SYS_TIME_H 1
+/* #undef HAVE_SYS_TIME_H */
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
@@ -196,7 +196,7 @@
 #define HAVE_TIME_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#define HAVE_UNISTD_H 1
+/* #undef HAVE_UNISTD_H */
 
 /* Whether va_copy() is available */
 #define HAVE_VA_COPY 1
@@ -217,13 +217,13 @@
 /* #undef HAVE_ZLIB_H */
 
 /* Define to 1 if you have the `_stat' function. */
-/* #undef HAVE__STAT */
+#define HAVE__STAT 1
 
 /* Define to 1 if you have the `_stat64' function. */
-/* #undef HAVE__STAT64 */
+#define HAVE__STAT64 1
 
 /* Whether __va_copy() is available */
-#define HAVE___VA_COPY 1
+/* #undef HAVE___VA_COPY */
 
 /* Name of package */
 #define PACKAGE "g3dlibxml2"
@@ -244,7 +244,7 @@
 #define PACKAGE_VERSION ""
 
 /* Support for IPv6 */
-#define SUPPORT_IP6
+/* #undef SUPPORT_IP6 */
 
 /* Version number of package */
 #define VERSION "2.6.27"
