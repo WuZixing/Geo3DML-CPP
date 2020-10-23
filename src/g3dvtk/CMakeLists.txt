@@ -5,8 +5,18 @@ if(NOT GEO3DML_HEADER)
 endif()
 
 # VTK
-find_package(VTK 8.1 REQUIRED)
-include(${VTK_USE_FILE})
+#find_package(VTK 9.0 REQUIRED)
+find_package(VTK REQUIRED)
+if(NOT VTK_FOUND)
+  message(FATAL_ERROR "${VTK_NOT_FOUND_MESSAGE}")
+endif()
+message(STATUS "VTK_VERSION: ${VTK_VERSION}")
+if(VTK_VERSION VERSION_LESS "8.90.0")
+  # old system
+  include(${VTK_USE_FILE})
+else()
+  include_directories("${VTK_PREFIX_PATH}/include/vtk-${VTK_MAJOR_VERSION}.${VTK_MINOR_VERSION}")
+endif()
 
 # output variables
 set(G3DVTK_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include CACHE PATH "")

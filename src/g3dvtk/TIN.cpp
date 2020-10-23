@@ -62,7 +62,7 @@ int TIN::GetTriangleCount() {
 
 void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) {
 	g3d_lock_guard lck(mtx_);
-	vtkIdType n = 0, *pts = NULL;
+	const vtkIdType* pts = NULL;
 	polyData_->GetCell(i, pts);
 	vertex1 = pts[1];	// pts[0] is the count of points.
 	vertex2 = pts[2];
