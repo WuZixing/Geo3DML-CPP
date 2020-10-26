@@ -116,29 +116,39 @@ Actor* Layer::GetActorAt(int i) {
 	return actors_.at(i);
 }
 
+void Layer::BuildActorsFromFeatures(ObjectFactory* g3dFactory) {
+	RebuildActorsFromFeaturesByStyle(-1, g3dFactory);
+}
+
 void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dFactory) {
 	g3d_lock_guard lck(mtx_);
-	if (styleIndex < 0 || styleIndex >= styles_.size() || bindingFeatureClass_ == NULL) {
+	if (bindingFeatureClass_ == NULL) {
 		return;
+	}
+	Geo3DStyle* style = NULL;
+	if (styleIndex >= 0 && styleIndex < styles_.size()) {
+		style = styles_[styleIndex];
 	}
 	DeleteAllActors();
 	std::ostringstream ostr;
-	Geo3DStyle* style = styles_[styleIndex];
 	int numberOfFeatures = bindingFeatureClass_->GetFeatureCount();
 	for (int f = 0; f < numberOfFeatures; ++f) {
 		geo3dml::Feature* feature = bindingFeatureClass_->GetFeatureAt(f);
-		StyleRule* rule = style->MatchWithFeature(feature);
-		if (rule == NULL) {
-			continue;
+		geo3dml::Symbolizer* sym = NULL;
+		if (style != NULL) {
+			StyleRule* rule = style->MatchWithFeature(feature);
+			if (rule != NULL) {
+				sym = rule->GetSymbolizer();
+			}
 		}
 		int numberOfGeometries = feature->GetGeometryCount();
 		for (int g = 0; g < numberOfGeometries; ++g) {
 			geo3dml::Geometry* geo = feature->GetGeometryAt(g);
 			geo3dml::Actor* actor = g3dFactory->NewActor();
 			ostr.str("");
-			ostr << feature->GetName() << "_" << geo->GetName() << "_[LOD-" << geo->GetLODLevel() << "]";
+			ostr << feature->GetName() << "_" << geo->GetName() << "[LOD-" << geo->GetLODLevel() << "]";
 			actor->SetName(ostr.str());	
-			actor->BindGeometry(feature, geo, rule->GetSymbolizer());
+			actor->BindGeometry(feature, geo, sym);
 			AddActor(actor);
 		}
 	}

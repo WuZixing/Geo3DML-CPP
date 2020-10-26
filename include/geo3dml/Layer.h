@@ -31,6 +31,7 @@ namespace geo3dml {
 		void AddActor(Actor* actor);
 		int GetActorCount();
 		Actor* GetActorAt(int i);
+		void BuildActorsFromFeatures(ObjectFactory* g3dFactory);
 		void RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dFactory);
 
 		//@{
