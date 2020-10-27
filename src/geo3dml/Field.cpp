@@ -2,6 +2,23 @@
 
 using namespace geo3dml;
 
+std::string Field::ValueTypeToName(ValueType t) {
+	switch (t) {
+	case geo3dml::Field::ValueType::Text:
+		return "Text";
+	case geo3dml::Field::ValueType::Integer:
+		return "Integer";
+	case geo3dml::Field::ValueType::Double:
+		return "Double";
+	case geo3dml::Field::ValueType::Boolean:
+		return "Boolean";
+	case geo3dml::Field::ValueType::Object:
+		return "Object";
+	default:
+		return "Unknown";
+	}
+}
+
 Field::Field() {
 	valueType_ = Unknown;
 }
