@@ -1,4 +1,5 @@
 #include <geo3dml/Field.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
@@ -16,6 +17,22 @@ std::string Field::ValueTypeToName(ValueType t) {
 		return "Object";
 	default:
 		return "Unknown";
+	}
+}
+
+Field::ValueType Field::NameToValueType(const std::string& name) {
+	if (geo3dml::IsiEqual(name, "Text")) {
+		return geo3dml::Field::Text;
+	} else if (geo3dml::IsiEqual(name, "Double")) {
+		return geo3dml::Field::Double;
+	} else if (geo3dml::IsiEqual(name, "Integer")) {
+		return geo3dml::Field::Integer;
+	} else if (geo3dml::IsiEqual(name, "Boolean")) {
+		return geo3dml::Field::Boolean;
+	} else if (geo3dml::IsiEqual(name, "Object")) {
+		return geo3dml::Field::Object;
+	} else {
+		return geo3dml::Field::Unknown;
 	}
 }
 

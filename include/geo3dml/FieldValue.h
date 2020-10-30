@@ -65,6 +65,8 @@ namespace geo3dml {
 
 	class BooleanFieldValue : public FieldValue {
 	public:
+		static bool IsTrue(const std::string& str);
+	public:
 		BooleanFieldValue(const std::string& fieldName);
 		BooleanFieldValue(const BooleanFieldValue& v);
 		virtual ~BooleanFieldValue();

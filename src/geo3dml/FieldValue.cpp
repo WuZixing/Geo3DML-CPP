@@ -1,4 +1,5 @@
 #include <geo3dml/FieldValue.h>
+#include <geo3dml/Utils.h>
 
 using namespace geo3dml;
 
@@ -87,6 +88,10 @@ IntegerFieldValue& IntegerFieldValue::Value(int v) {
 
 int IntegerFieldValue::Value() const {
 	return value_;
+}
+
+bool BooleanFieldValue::IsTrue(const std::string& str) {
+	return geo3dml::IsTrue(str);
 }
 
 BooleanFieldValue::BooleanFieldValue(const std::string& fieldName) : FieldValue(fieldName) {

@@ -16,6 +16,7 @@ namespace geo3dml {
 		};
 
 		static std::string ValueTypeToName(ValueType t);
+		static ValueType NameToValueType(const std::string& name);
 
 	public:
 		Field();
