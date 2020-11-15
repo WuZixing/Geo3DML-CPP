@@ -27,9 +27,9 @@ namespace g3dvtk {
 		/// @see geo3dml::UniformGrid#GetDimensions .
 		virtual void GetDimensions(int& i, int& j, int& k);
 		/// @see geo3dml::UniformGrid#GetOrigin .
-		void GetOrigin(double& x, double& y, double& z);
+		virtual void GetOrigin(double& x, double& y, double& z);
 		/// @see geo3dml::UniformGrid#GetSteps .
-		void GetSteps(double& sx, double& sy, double& sz);
+		virtual void GetSteps(double& sx, double& sy, double& sz);
 		/// @see geo3dml::UniformGrid#SetCellValidation .
 		virtual void SetCellValidation(int i, int j, int k, bool beValid = true);
 		/// @see geo3dml::UniformGrid#IsCellValid .
