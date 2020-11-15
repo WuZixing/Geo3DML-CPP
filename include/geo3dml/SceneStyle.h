@@ -14,14 +14,14 @@ namespace geo3dml {
 
 		//@{
 		SceneStyle& SetBackgroundColor(const Color& c);
-		Color GetBackgroundColor();
+		Color GetBackgroundColor() const;
 		//@}
 
 		/// @name Lights, 8 at most.
 		//@{
 		SceneStyle& AddLight(const Light& lit);
-		int GetLightCount();
-		Light GetLightAt(int i);
+		int GetLightCount() const;
+		Light GetLightAt(int i) const;
 		//@}
 
 	private:

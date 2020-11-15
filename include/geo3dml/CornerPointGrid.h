@@ -21,7 +21,7 @@ namespace geo3dml {
 		/// @param[out] i Number of cells along the X axis.
 		/// @param[out] j Number of cells along the Y axis.
 		/// @param[out] z Number of cells along the Z axis.
-		virtual void GetDimensions(int& i, int& j, int& k) = 0;
+		virtual void GetDimensions(int& i, int& j, int& k) const = 0;
 
 		/// Add a pillar in the row-major order.
 		/// @details Pillars must be added in the row-major order which is the I-major order..
@@ -54,12 +54,12 @@ namespace geo3dml {
 
 		virtual void SetCellValidation(int i, int j, int k, bool beValid = true) = 0;
 
-		virtual void GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) = 0;
+		virtual void GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) const = 0;
 		virtual void GetCellAt(int i, int j, int k,
 			double bottomFrontLeft[3], double bottomFrontRight[3],
 			double bottomBackLeft[3], double bottomBackRight[3],
 			double topFrontLeft[3], double topFrontRight[3],
 			double topBackLeft[3], double topBackRight[3],
-			bool& isValid) = 0;
+			bool& isValid) const = 0;
 	};
 }

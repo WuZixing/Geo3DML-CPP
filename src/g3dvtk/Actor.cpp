@@ -28,7 +28,6 @@ Actor::~Actor() {
 }
 
 void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3dml::Symbolizer* sym) {
-	g3d_lock_guard lck(mtx_);
 	bindingFeature_ = feature;
 	bindingGeometry_ = geo;
 	if (bindingGeometry_ == NULL) {
@@ -126,27 +125,22 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	}
 }
 
-geo3dml::Feature* Actor::GetBindingFeature() {
-	g3d_lock_guard lck(mtx_);
+geo3dml::Feature* Actor::GetBindingFeature() const {
 	return bindingFeature_;
 }
 
-geo3dml::Geometry* Actor::GetBindingGeometry() {
-	g3d_lock_guard lck(mtx_);
+geo3dml::Geometry* Actor::GetBindingGeometry() const {
 	return bindingGeometry_;
 }
 
-bool Actor::IsVisible() {
-	g3d_lock_guard lck(mtx_);
+bool Actor::IsVisible() const {
 	return vtkProp_->GetVisibility() != 0;
 }
 void Actor::SetVisible(bool show) {
-	g3d_lock_guard lck(mtx_);
 	vtkProp_->SetVisibility(show ? 1 : 0);
 }
 
-geo3dml::Symbolizer* Actor::MakeSymbozier() {
-	g3d_lock_guard lck(mtx_);
+geo3dml::Symbolizer* Actor::MakeSymbozier() const {
 	if (bindingGeometry_ == NULL) {
 		return NULL;
 	}
@@ -195,8 +189,7 @@ geo3dml::Symbolizer* Actor::MakeSymbozier() {
 	return NULL;
 }
 
-vtkProp* Actor::GetVTKProp() {
-	g3d_lock_guard lck(mtx_);
+vtkProp* Actor::GetVTKProp() const {
 	return vtkProp_;
 }
 
@@ -211,17 +204,17 @@ void Actor::SetUserTransform(vtkTransform* t) {
 	}
 }
 
-void Actor::ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym, vtkProperty* p) {
+void Actor::ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym, vtkProperty* p) const {
 	p->SetPointSize(sym->GetSize());
 	ConfigByMaterial(sym->GetMaterial(), p);
 }
 
-void Actor::ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym, vtkProperty* p) {
+void Actor::ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym, vtkProperty* p) const {
 	p->SetLineWidth(sym->GetWidth());
 	ConfigByMaterial(sym->GetMaterial(), p);
 }
 
-void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtkProperty* p) {
+void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtkProperty* p) const {
 	ConfigByMaterial(sym->GetFrontMaterial(), p);
 	if (sym->IsVertexRenderEnabled()) {
 		p->SetPointSize(sym->GetVertexSymbolizer()->GetSize());
@@ -237,7 +230,7 @@ void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtk
 	}
 }
 
-void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) {
+void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) const {
 	geo3dml::Color diffuseColor = m.GetDiffuseColor();
 	geo3dml::Color specularColor = m.GetSpecularColor();
 	p->SetAmbient(m.GetAmbientIntensity());
@@ -247,7 +240,7 @@ void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) {
 	p->SetOpacity(1 - m.GetTransparency());
 }
 
-void Actor::SetRandomRenderOption(vtkProperty* p) {
+void Actor::SetRandomRenderOption(vtkProperty* p) const {
 	double r = 0, g = 0, b = 0;
 	ColorMap* colorMap = ColorMap::NewDefaultMap();
 	colorMap->RandomColor(r, g, b);
@@ -257,7 +250,7 @@ void Actor::SetRandomRenderOption(vtkProperty* p) {
 	p->SetAmbient(0.25);
 }
 
-geo3dml::Material Actor::ToMaterial(vtkProperty* p) {
+geo3dml::Material Actor::ToMaterial(vtkProperty* p) const {
 	geo3dml::Material m;
 	m.SetAmbientIntensity(p->GetAmbient());
 	double* clr = p->GetDiffuseColor();
@@ -268,16 +261,16 @@ geo3dml::Material Actor::ToMaterial(vtkProperty* p) {
 	return m;
 }
 
-void Actor::ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) {
+void Actor::ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) const {
 	sym->SetSize(p->GetPointSize());
 	sym->SetMaterial(ToMaterial(p));
 }
 
-void Actor::ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) {
+void Actor::ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) const {
 	sym->SetWidth(p->GetLineWidth());
 	sym->SetMaterial(ToMaterial(p));
 }
 
-void Actor::ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) {
+void Actor::ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) const {
 	sym->SetFrontMaterial(ToMaterial(p));
 }

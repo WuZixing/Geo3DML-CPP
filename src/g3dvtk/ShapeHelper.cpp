@@ -79,7 +79,7 @@ void ShapeHelper::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProper
 	}
 }
 
-geo3dml::ShapeProperty* ShapeHelper::GetProperty(geo3dml::ShapeProperty::SamplingTarget t, const std::string& shapeId, vtkDataSet* dataSet) {
+geo3dml::ShapeProperty* ShapeHelper::GetProperty(geo3dml::ShapeProperty::SamplingTarget t, const std::string& shapeId, vtkDataSet* dataSet) const {
 	switch (t) {
 	case geo3dml::ShapeProperty::Vertex:
 		return vertexProperty_;

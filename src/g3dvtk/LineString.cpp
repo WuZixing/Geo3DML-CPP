@@ -15,7 +15,6 @@ LineString::~LineString() {
 }
 
 void LineString::AddVertex(double x, double y, double z) {
-	g3d_lock_guard lck(mtx_);
 	vtkPoints* pts = polyData_->GetPoints();
 	vtkIdType lastPt = pts->InsertNextPoint(x, y, z);
 	if (pts->GetNumberOfPoints() > 1) {
@@ -28,13 +27,11 @@ void LineString::AddVertex(double x, double y, double z) {
 	}
 }
 
-int LineString::GetVertexCount() {
-	g3d_lock_guard lck(mtx_);
+int LineString::GetVertexCount() const {
 	return polyData_->GetNumberOfPoints();
 }
 
-void LineString::GetVertexAt(int i, double& x, double& y, double& z) {
-	g3d_lock_guard lck(mtx_);
+void LineString::GetVertexAt(int i, double& x, double& y, double& z) const {
 	vtkPoints* pts = polyData_->GetPoints();
 	double coords[3] = {0.0};
 	pts->GetPoint(i, coords);
@@ -43,23 +40,19 @@ void LineString::GetVertexAt(int i, double& x, double& y, double& z) {
 	z = coords[2];
 }
 
-vtkPolyData* LineString::GetPolyData() {
-	g3d_lock_guard lck(mtx_);
+vtkPolyData* LineString::GetPolyData() const {
 	return polyData_;
 }
 
 void LineString::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), polyData_);
 }
 
-geo3dml::ShapeProperty* LineString::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* LineString::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-bool LineString::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool LineString::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
 		return false;
 	}

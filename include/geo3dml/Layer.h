@@ -7,6 +7,8 @@
 
 namespace geo3dml {
 
+	class ObjectFactory;
+
 	class Layer : public Object {
 	public:
 		Layer();
@@ -14,29 +16,29 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		void BindFeatureClass(FeatureClass* fc);
-		FeatureClass* GetBindingFeatureClass();
+		FeatureClass* GetBindingFeatureClass() const;
 		void SetBindingFeatureClassID(const std::string& featureClassID);
-		std::string GetBindingFeatureClassID();
+		std::string GetBindingFeatureClassID() const;
 		//@}
 
 		void AddStyle(Geo3DStyle* style);
-		int GetStyleCount();
-		Geo3DStyle* GetStyleAt(int i);
+		int GetStyleCount() const;
+		Geo3DStyle* GetStyleAt(int i) const;
 
 		void AddActor(Actor* actor);
-		int GetActorCount();
-		Actor* GetActorAt(int i);
+		int GetActorCount() const;
+		Actor* GetActorAt(int i) const;
 		void BuildActorsFromFeatures(ObjectFactory* g3dFactory);
 		void RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dFactory);
 
 		//@{
 		void SetParentMap(const std::string& id);
-		std::string GetParentMap();
+		std::string GetParentMap() const;
 		//@}
 
 		/// Compute the minimum bounding rectangle of the feature class.
@@ -47,7 +49,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty feature class, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 
 	private:
 		void DeleteAllActors();

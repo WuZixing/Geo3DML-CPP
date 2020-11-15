@@ -17,7 +17,7 @@ namespace g3dvtk {
 		/// @name Overriding methods inherited from geo3dml::CornerPointGrid.
 		//@{
 		virtual bool Init(int dimI, int dimJ, int dimK);
-		virtual void GetDimensions(int& i, int& j, int& k);
+		virtual void GetDimensions(int& i, int& j, int& k) const;
 		virtual void AddNextPillar(double headPos[3], double tailPos[3]);
 		virtual void AddNextCell(
 			int i, int j, int k,
@@ -28,29 +28,29 @@ namespace g3dvtk {
 			bool beValid = true
 		);
 		virtual void SetCellValidation(int i, int j, int k, bool isValid = true);
-		virtual void GetPillarAt(int i, int j, double headPos[3], double tailPos[3]);
+		virtual void GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) const;
 		virtual void GetCellAt(int i, int j, int k,
 			double bottomFrontLeft[3], double bottomFrontRight[3],
 			double bottomBackLeft[3], double bottomBackRight[3],
 			double topFrontLeft[3], double topFrontRight[3],
 			double topBackLeft[3], double topBackRight[3],
-			bool& isValid);
+			bool& isValid) const;
 		//@}
 
 		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
-		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
-		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t);
+		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
 		//@}
 
 	public:
-		vtkPolyData* GetPillars();
-		vtkStructuredGrid* GetStructuredGrid();
+		vtkPolyData* GetPillars() const;
+		vtkStructuredGrid* GetStructuredGrid() const;
 
 	private:
 		/// Prviate non-lock implementation of GetDimensions.
-		void InnerGetDimensions(int& i, int& j, int& k);
+		void InnerGetDimensions(int& i, int& j, int& k) const;
 		/// Private non-lock implementation of SetCellValidation.
 		void InnerSetCellValidation(int i, int j, int k, bool isValid = true);
 

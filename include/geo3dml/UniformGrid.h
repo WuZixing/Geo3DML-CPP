@@ -32,11 +32,11 @@ namespace geo3dml {
 		/// @param[out] i Number of cells along the X axis.
 		/// @param[out] j Number of cells along the Y axis.
 		/// @param[out] z Number of cells along the Z axis.
-		virtual void GetDimensions(int& i, int& j, int& k) = 0;
-		virtual void GetOrigin(double& x, double& y, double& z) = 0;
-		virtual void GetSteps(double& sx, double& sy, double& sz) = 0;
+		virtual void GetDimensions(int& i, int& j, int& k) const = 0;
+		virtual void GetOrigin(double& x, double& y, double& z) const = 0;
+		virtual void GetSteps(double& sx, double& sy, double& sz) const = 0;
 		virtual void SetCellValidation(int i, int j, int k, bool beValid = true) = 0;
-		virtual bool IsCellValid(int i, int j, int k) = 0;
-		virtual int CalculateCellIndex(int i, int j, int k) = 0;
+		virtual bool IsCellValid(int i, int j, int k) const = 0;
+		virtual int CalculateCellIndex(int i, int j, int k) const = 0;
 	};
 }

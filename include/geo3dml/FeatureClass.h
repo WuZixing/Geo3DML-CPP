@@ -13,25 +13,25 @@ namespace geo3dml {
 
 		//@{
 		FeatureClass& SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		FeatureClass& AddField(const Field& f);
-		int GetFieldCount();
-		const Field& GetFieldAt(int i);
+		int GetFieldCount() const;
+		const Field& GetFieldAt(int i) const;
 		//@}
 
 		//@{
 		FeatureClass& AddFeature(Feature* f);
-		int GetFeatureCount();
-		Feature* GetFeatureAt(int i);
-		Feature* GetFeature(const std::string& id);
+		int GetFeatureCount() const;
+		Feature* GetFeatureAt(int i) const;
+		Feature* GetFeature(const std::string& id) const;
 		//@}
 
 		//@{
 		FeatureClass& SetParentModel(const std::string& id);
-		std::string GetParentModel();
+		std::string GetParentModel() const;
 		//@}
 
 		/// Compute the minimum bounding rectangle of the feature class.
@@ -42,7 +42,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty feature class, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 
 	private:
 		std::string name_;

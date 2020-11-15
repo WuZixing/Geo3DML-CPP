@@ -13,24 +13,24 @@ namespace geo3dml {
 
 		//@{
 		Feature& SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		Feature& AddGeometry(Geometry* g);
-		int GetGeometryCount();
-		Geometry* GetGeometryAt(int i);
+		int GetGeometryCount() const;
+		Geometry* GetGeometryAt(int i) const;
 		//@}
 
 		//@{
 		Feature& SetParentFeatureClass(const std::string& id);
-		std::string GetParentFeatureClass();
+		std::string GetParentFeatureClass() const;
 		//@}
 
 		//{@
 		Feature& SetField(FieldValue* fv);
-		FieldValue* GetField(const std::string& name);
-		std::vector<std::string> GetFieldNames();
+		FieldValue* GetField(const std::string& name) const;
+		std::vector<std::string> GetFieldNames() const;
 		//@}
 
 		/// Compute the minimum bounding rectangle of the feature.
@@ -41,7 +41,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of a feature without any valid shape, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 
 	private:
 		std::string name_;

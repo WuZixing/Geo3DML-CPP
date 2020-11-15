@@ -12,7 +12,7 @@ namespace g3dvtk {
 
 	public:
 		void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t, const std::string& shapeId, vtkDataSet* dataSet);
-		geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t, const std::string& shapeId, vtkDataSet* dataSet);
+		geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t, const std::string& shapeId, vtkDataSet* dataSet) const;
 
 	private:
 		geo3dml::ShapeProperty* vertexProperty_;

@@ -15,7 +15,6 @@ Point::~Point() {
 }
 
 void Point::SetPosition(double x, double y, double z) {
-	g3d_lock_guard lck(mtx_);
 	vtkPoints* pts = polyData_->GetPoints();
 	if (pts->GetNumberOfPoints() > 0) {
 		pts->SetPoint(0, x, y, z);
@@ -26,8 +25,7 @@ void Point::SetPosition(double x, double y, double z) {
 	polyData_->Modified();
 }
 
-void Point::GetPosition(double& x, double& y, double& z) {
-	g3d_lock_guard lck(mtx_);
+void Point::GetPosition(double& x, double& y, double& z) const {
 	vtkPoints* pts = polyData_->GetPoints();
 	if (pts->GetNumberOfPoints() > 0) {
 		double coords[3] = {0.0};
@@ -41,22 +39,18 @@ void Point::GetPosition(double& x, double& y, double& z) {
 }
 
 void Point::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), polyData_);
 }
 
-geo3dml::ShapeProperty* Point::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* Point::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-vtkPolyData* Point::GetPolyData() {
-	g3d_lock_guard lck(mtx_);
+vtkPolyData* Point::GetPolyData() const {
 	return polyData_;
 }
 
-bool Point::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool Point::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
 		return false;
 	}

@@ -19,27 +19,27 @@ namespace g3dvtk {
 		/// @name methods defined in geo3dml::Actor.
 		//@{
 		virtual void BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3dml::Symbolizer* sym);
-		virtual geo3dml::Feature* GetBindingFeature();
-		virtual geo3dml::Geometry* GetBindingGeometry();
-		virtual bool IsVisible();
+		virtual geo3dml::Feature* GetBindingFeature() const;
+		virtual geo3dml::Geometry* GetBindingGeometry() const;
+		virtual bool IsVisible() const;
 		virtual void SetVisible(bool show);
-		virtual geo3dml::Symbolizer* MakeSymbozier();
+		virtual geo3dml::Symbolizer* MakeSymbozier() const;
 		//@}
 
-		vtkProp* GetVTKProp();
+		vtkProp* GetVTKProp() const;
 		void SetUserTransform(vtkTransform* t);
 
 	private:
-		void ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym, vtkProperty* p);
-		void ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym, vtkProperty* p);
-		void ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtkProperty* p);
-		void ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p);
-		void SetRandomRenderOption(vtkProperty* p);
+		void ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym, vtkProperty* p) const;
+		void ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym, vtkProperty* p) const;
+		void ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtkProperty* p) const;
+		void ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) const;
+		void SetRandomRenderOption(vtkProperty* p) const;
 
-		geo3dml::Material ToMaterial(vtkProperty* p);
-		void ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym);
-		void ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym);
-		void ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym);
+		geo3dml::Material ToMaterial(vtkProperty* p) const;
+		void ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) const;
+		void ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) const;
+		void ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) const;
 
 	private:
 		geo3dml::Feature* bindingFeature_;

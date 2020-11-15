@@ -11,7 +11,7 @@ namespace geo3dml {
 
 	public:
 		virtual void AddPoint(double x, double y, double z) = 0;
-		virtual int GetPointCount() = 0;
-		virtual void GetPointAt(int i, double& x, double& y, double& z) = 0;
+		virtual int GetPointCount() const = 0;
+		virtual void GetPointAt(int i, double& x, double& y, double& z) const = 0;
 	};
 }

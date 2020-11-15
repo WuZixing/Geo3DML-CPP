@@ -16,18 +16,15 @@ TIN::~TIN() {
 }
 
 void TIN::AddVertex(int index, double x, double y, double z) {
-	g3d_lock_guard lck(mtx_);
 	vtkPoints* pts = polyData_->GetPoints();
 	pts->InsertPoint(index, x, y, z);
 }
 
-int TIN::GetVertexCount() {
-	g3d_lock_guard lck(mtx_);
+int TIN::GetVertexCount() const {
 	return polyData_->GetNumberOfPoints();
 }
 
-void TIN::GetVertexAt(int i, double& x, double& y, double& z) {
-	g3d_lock_guard lck(mtx_);
+void TIN::GetVertexAt(int i, double& x, double& y, double& z) const {
 	vtkPoints* pts = polyData_->GetPoints();
 	double coords[3];
 	pts->GetPoint(i, coords);
@@ -37,7 +34,6 @@ void TIN::GetVertexAt(int i, double& x, double& y, double& z) {
 }
 
 void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
-	g3d_lock_guard lck(mtx_);
 	if (vertex1 < 0 || vertex2 < 0 || vertex3 < 0) {
 		// invalid vertex index.
 		return;
@@ -55,13 +51,11 @@ void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
 	polyData_->InsertNextCell(VTK_TRIANGLE, 3, vertices);
 }
 
-int TIN::GetTriangleCount() {
-	g3d_lock_guard lck(mtx_);
+int TIN::GetTriangleCount() const {
 	return polyData_->GetNumberOfPolys();
 }
 
-void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) {
-	g3d_lock_guard lck(mtx_);
+void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) const {
 	const vtkIdType* pts = NULL;
 	polyData_->GetCell(i, pts);
 	vertex1 = pts[1];	// pts[0] is the count of points.
@@ -69,23 +63,19 @@ void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) {
 	vertex3 = pts[3];
 }
 
-vtkPolyData* TIN::GetPolyData() {
-	g3d_lock_guard lck(mtx_);
+vtkPolyData* TIN::GetPolyData() const {
 	return polyData_;
 }
 
 void TIN::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), polyData_);
 }
 
-geo3dml::ShapeProperty* TIN::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* TIN::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-bool TIN::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool TIN::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
 		return false;
 	}

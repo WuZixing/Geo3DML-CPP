@@ -53,7 +53,7 @@ void DiscreteAttributeColorTransfer::Compile() {
 	}
 }
 
-bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, unsigned char& r, unsigned char& g, unsigned char& b) {
+bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, unsigned char& r, unsigned char& g, unsigned char& b) const {
 	std::map<std::string, int>::const_iterator citor = strAttributes_.find(value);
 	if (citor == strAttributes_.cend()) {
 		return false;
@@ -62,7 +62,7 @@ bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, unsig
 	return true;
 }
 
-bool DiscreteAttributeColorTransfer::PickUpColor(int value, unsigned char& r, unsigned char& g, unsigned char& b) {
+bool DiscreteAttributeColorTransfer::PickUpColor(int value, unsigned char& r, unsigned char& g, unsigned char& b) const {
 	std::map<int, int>::const_iterator citor = intAttributes_.find(value);
 	if (citor == intAttributes_.cend()) {
 		return false;
@@ -71,7 +71,7 @@ bool DiscreteAttributeColorTransfer::PickUpColor(int value, unsigned char& r, un
 	return true;
 }
 
-bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, double& r, double& g, double& b) {
+bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, double& r, double& g, double& b) const {
 	std::map<std::string, int>::const_iterator citor = strAttributes_.find(value);
 	if (citor == strAttributes_.cend()) {
 		return false;
@@ -80,7 +80,7 @@ bool DiscreteAttributeColorTransfer::PickUpColor(const std::string& value, doubl
 	return true;
 }
 
-bool DiscreteAttributeColorTransfer::PickUpColor(int value, double& r, double& g, double& b) {
+bool DiscreteAttributeColorTransfer::PickUpColor(int value, double& r, double& g, double& b) const {
 	std::map<int, int>::const_iterator citor = intAttributes_.find(value);
 	if (citor == intAttributes_.cend()) {
 		return false;
@@ -89,10 +89,10 @@ bool DiscreteAttributeColorTransfer::PickUpColor(int value, double& r, double& g
 	return true;
 }
 
-void DiscreteAttributeColorTransfer::RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) {
+void DiscreteAttributeColorTransfer::RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) const {
 	colorMap_->RandomColor(r, g, b);
 }
 
-void DiscreteAttributeColorTransfer::RandomColor(double& r, double& g, double& b) {
+void DiscreteAttributeColorTransfer::RandomColor(double& r, double& g, double& b) const {
 	colorMap_->RandomColor(r, g, b);
 }

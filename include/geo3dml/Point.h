@@ -11,6 +11,6 @@ namespace geo3dml {
 
 	public:
 		virtual void SetPosition(double x, double y, double z) = 0;
-		virtual void GetPosition(double& x, double& y, double& z) = 0;
+		virtual void GetPosition(double& x, double& y, double& z) const = 0;
 	};
 }

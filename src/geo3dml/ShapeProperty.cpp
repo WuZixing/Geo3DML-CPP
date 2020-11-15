@@ -67,46 +67,38 @@ ShapeProperty::~ShapeProperty() {
 }
 
 ShapeProperty& ShapeProperty::Target(const std::string& shapeId, SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	targetShapeId_ = shapeId;
 	samplingTarget_ = t;
 	return *this;
 }
 
-std::string ShapeProperty::TargetShape() {
-	g3d_lock_guard lck(mtx_);
+std::string ShapeProperty::TargetShape() const {
 	return targetShapeId_;
 }
 
-ShapeProperty::SamplingTarget ShapeProperty::TargetComponent() {
-	g3d_lock_guard lck(mtx_);
+ShapeProperty::SamplingTarget ShapeProperty::TargetComponent() const {
 	return samplingTarget_;
 }
 
 ShapeProperty& ShapeProperty::Name(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
 	name_ = name;
 	return *this;
 }
 
-std::string ShapeProperty::Name() {
-	g3d_lock_guard lck(mtx_);
+std::string ShapeProperty::Name() const {
 	return name_;
 }
 
 ShapeProperty& ShapeProperty::VersionInfo(const ShapeProperty::Version& v) {
-	g3d_lock_guard lck(mtx_);
 	versionInfo_ = v;
 	return *this;
 }
 
-const ShapeProperty::Version& ShapeProperty::VersionInfo() {
-	g3d_lock_guard lck(mtx_);
+const ShapeProperty::Version& ShapeProperty::VersionInfo() const {
 	return versionInfo_;
 }
 
 bool ShapeProperty::AddField(const Field& f) {
-	g3d_lock_guard lck(mtx_);
 	std::vector<Field>::const_iterator citor = fields_.cbegin();
 	while (citor != fields_.cend()) {
 		if (citor->Name() == f.Name()) {
@@ -122,18 +114,15 @@ bool ShapeProperty::AddField(const Field& f) {
 	}
 }
 
-int ShapeProperty::GetFieldCount() {
-	g3d_lock_guard lck(mtx_);
+int ShapeProperty::GetFieldCount() const {
 	return (int)fields_.size();
 }
 
-const Field& ShapeProperty::GetFieldAt(int i) {
-	g3d_lock_guard lck(mtx_);
+const Field& ShapeProperty::GetFieldAt(int i) const {
 	return fields_.at(i);
 }
 
-Field ShapeProperty::GetField(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
+Field ShapeProperty::GetField(const std::string& name) const {
 	std::vector<Field>::const_iterator citor = fields_.cbegin();
 	while (citor != fields_.cend()) {
 		if (citor->Name() == name) {
@@ -144,8 +133,7 @@ Field ShapeProperty::GetField(const std::string& name) {
 	return Field();
 }
 
-int ShapeProperty::GetFieldIndex(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
+int ShapeProperty::GetFieldIndex(const std::string& name) const {
 	std::vector<Field>::const_iterator citor = fields_.cbegin();
 	int index = 0;
 	while (citor != fields_.cend()) {
@@ -159,7 +147,6 @@ int ShapeProperty::GetFieldIndex(const std::string& name) {
 }
 
 bool ShapeProperty::CheckOrAddFieldAndFillDefaultValues(const Field& field, int numberOfValues, double defaultDouble, int defaultInt, bool defaultBool, const std::string& defaultText) {
-	g3d_lock_guard lck(mtx_);
 	const geo3dml::Field& existingField = GetField(field.Name());
 	if (existingField.DataType() != geo3dml::Field::Unknown) {
 		if (existingField.DataType() == field.DataType()) {

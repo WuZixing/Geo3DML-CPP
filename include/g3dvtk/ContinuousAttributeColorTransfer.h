@@ -10,8 +10,8 @@ namespace g3dvtk {
 		virtual ~ContinuousAttributeColorTransfer();
 
 		void SetAttributeRange(double min, double max);
-		void PickUpColor(double value, unsigned char& r, unsigned char& g, unsigned char& b);
-		void PickUpColor(double value, double& r, double& g, double& b);
+		void PickUpColor(double value, unsigned char& r, unsigned char& g, unsigned char& b) const;
+		void PickUpColor(double value, double& r, double& g, double& b) const;
 
 	private:
 		double minValue_, maxValue_;

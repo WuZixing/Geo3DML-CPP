@@ -19,36 +19,36 @@ namespace g3dvtk {
 		/// @name Attribute setting / getting methods for target elements by field name.
 		//@{
 		virtual void FillDoubleValue(const std::string field, int numberOfValues, double v);
-		virtual double DoubleValue(const std::string& field, int targetIndex);
+		virtual double DoubleValue(const std::string& field, int targetIndex) const;
 		virtual ShapeProperty& DoubleValue(const std::string& field, int targetIndex, double v);
 		virtual void FillTextValue(const std::string& field, int numberOfValues, const std::string& v);
-		virtual std::string TextValue(const std::string& field, int targetIndex);
+		virtual std::string TextValue(const std::string& field, int targetIndex) const;
 		virtual ShapeProperty& TextValue(const std::string& field, int targetIndex, const std::string& v);
 		virtual void FillIntValue(const std::string& field, int numberOfValues, int v);
-		virtual int IntValue(const std::string& field, int targetIndex);
+		virtual int IntValue(const std::string& field, int targetIndex) const;
 		virtual ShapeProperty& IntValue(const std::string& field, int targetIndex, int v);
 		virtual void FillBooleanValue(const std::string& field, int numberOfValues, bool v);
-		virtual bool BooleanValue(const std::string& field, int targetIndex);
+		virtual bool BooleanValue(const std::string& field, int targetIndex) const;
 		virtual ShapeProperty& BooleanValue(const std::string& field, int targetIndex, bool v);
 		//@}
 
 		/// @name Attribute setting / getting methods for target elements by field index.
 		//@{
-		virtual double DoubleValue(int fieldIndex, int targetIndex);
+		virtual double DoubleValue(int fieldIndex, int targetIndex) const;
 		virtual ShapeProperty& DoubleValue(int fieldIndex, int targetIndex, double v);
-		virtual std::string TextValue(int fieldIndex, int targetIndex);
+		virtual std::string TextValue(int fieldIndex, int targetIndex) const;
 		virtual ShapeProperty& TextValue(int fieldIndex, int targetIndex, const std::string& v);
-		virtual int IntValue(int fieldIndex, int targetIndex);
+		virtual int IntValue(int fieldIndex, int targetIndex) const;
 		virtual ShapeProperty& IntValue(int fieldIndex, int targetIndex, int v);
-		virtual bool BooleanValue(int fieldIndex, int targetIndex);
+		virtual bool BooleanValue(int fieldIndex, int targetIndex) const;
 		virtual ShapeProperty& BooleanValue(int fieldIndex, int targetIndex, bool v);
 		//@}
 
-		virtual int GetValueCount(int fieldIndex);
-		virtual int GetValueCount(const std::string& fieldName);
+		virtual int GetValueCount(int fieldIndex) const;
+		virtual int GetValueCount(const std::string& fieldName) const;
 
 	private:
-		std::string GetTemporaryNameOfField(int fieldIndex);
+		std::string GetTemporaryNameOfField(int fieldIndex) const;
 
 	private:
 		vtkSmartPointer<vtkDataSetAttributes> dataSet_;

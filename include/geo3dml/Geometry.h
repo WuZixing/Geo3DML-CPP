@@ -13,12 +13,12 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		void SetLODLevel(int l);
-		int GetLODLevel();
+		int GetLODLevel() const;
 		//@}
 
 		/// Compute the minimum bounding rectangle of the shape.
@@ -29,9 +29,9 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of a null shape which means a geometry without any vertex, it will return false.
-		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) = 0;
+		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const = 0;
 		virtual void SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t) = 0;
-		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) = 0;
+		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) const = 0;
 
 	private:
 		std::string name_;

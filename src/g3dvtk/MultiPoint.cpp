@@ -15,19 +15,16 @@ MultiPoint::~MultiPoint() {
 }
 
 void MultiPoint::AddPoint(double x, double y, double z) {
-	g3d_lock_guard lck(mtx_);
 	vtkIdType ptIndex = polyData_->GetPoints()->InsertNextPoint(x, y, z);
 	polyData_->InsertNextCell(VTK_VERTEX, 1, &ptIndex);
 	polyData_->Modified();
 }
 
-int MultiPoint::GetPointCount() {
-	g3d_lock_guard lck(mtx_);
+int MultiPoint::GetPointCount() const {
 	return polyData_->GetNumberOfPoints();
 }
 
-void MultiPoint::GetPointAt(int i, double& x, double& y, double& z) {
-	g3d_lock_guard lck(mtx_);
+void MultiPoint::GetPointAt(int i, double& x, double& y, double& z) const {
 	double coords[3] = {0.0};
 	polyData_->GetPoints()->GetPoint(i, coords);
 	x = coords[0];
@@ -35,8 +32,7 @@ void MultiPoint::GetPointAt(int i, double& x, double& y, double& z) {
 	z = coords[2];
 }
 
-bool MultiPoint::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool MultiPoint::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
 		return false;
 	}
@@ -52,16 +48,13 @@ bool MultiPoint::GetMinimumBoundingRectangle(double& minX, double& minY, double&
 }
 
 void MultiPoint::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), polyData_);
 }
 
-geo3dml::ShapeProperty* MultiPoint::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* MultiPoint::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
 vtkPolyData* MultiPoint::GetPolyData() {
-	g3d_lock_guard lck(mtx_);
 	return polyData_;
 }

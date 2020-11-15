@@ -18,47 +18,38 @@ Layer::~Layer() {
 }
 
 void Layer::SetName(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
 	name_ = name;
 }
 
-std::string Layer::GetName() {
-	g3d_lock_guard lck(mtx_);
+std::string Layer::GetName() const {
 	return name_;
 }
 
 void Layer::BindFeatureClass(FeatureClass* fc) {
-	g3d_lock_guard lck(mtx_);
 	bindingFeatureClass_ = fc;
 }
 
-FeatureClass* Layer::GetBindingFeatureClass() {
-	g3d_lock_guard lck(mtx_);
+FeatureClass* Layer::GetBindingFeatureClass() const {
 	return bindingFeatureClass_;
 }
 
 void Layer::SetBindingFeatureClassID(const std::string& featureClassID) {
-	g3d_lock_guard lck(mtx_);
 	bindingFeatureClassID_ = featureClassID;
 }
 
-std::string Layer::GetBindingFeatureClassID() {
-	g3d_lock_guard lck(mtx_);
+std::string Layer::GetBindingFeatureClassID() const {
 	return bindingFeatureClassID_;
 }
 
 void Layer::SetParentMap(const std::string& id) {
-	g3d_lock_guard lck(mtx_);
 	parentMapId_ = id;
 }
 
-std::string Layer::GetParentMap() {
-	g3d_lock_guard lck(mtx_);
+std::string Layer::GetParentMap() const {
 	return parentMapId_;
 }
 
 void Layer::AddStyle(Geo3DStyle* style) {
-	g3d_lock_guard lck(mtx_);
 	if (style == NULL) {
 		return;
 	}
@@ -72,18 +63,15 @@ void Layer::AddStyle(Geo3DStyle* style) {
 	styles_.push_back(style);
 }
 
-int Layer::GetStyleCount() {
-	g3d_lock_guard lck(mtx_);
+int Layer::GetStyleCount() const {
 	return (int)styles_.size();
 }
 
-Geo3DStyle* Layer::GetStyleAt(int i) {
-	g3d_lock_guard lck(mtx_);
+Geo3DStyle* Layer::GetStyleAt(int i) const {
 	return styles_.at(i);
 }
 
-bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (bindingFeatureClass_ != NULL) {
 		return bindingFeatureClass_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
 	} else {
@@ -92,7 +80,6 @@ bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ
 }
 
 void Layer::AddActor(Actor* actor) {
-	g3d_lock_guard lck(mtx_);
 	if (actor == NULL) {
 		return;
 	}
@@ -106,13 +93,11 @@ void Layer::AddActor(Actor* actor) {
 	actors_.push_back(actor);
 }
 
-int Layer::GetActorCount() {
-	g3d_lock_guard lck(mtx_);
+int Layer::GetActorCount() const {
 	return (int)actors_.size();
 }
 
-Actor* Layer::GetActorAt(int i) {
-	g3d_lock_guard lck(mtx_);
+Actor* Layer::GetActorAt(int i) const {
 	return actors_.at(i);
 }
 
@@ -121,7 +106,6 @@ void Layer::BuildActorsFromFeatures(ObjectFactory* g3dFactory) {
 }
 
 void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dFactory) {
-	g3d_lock_guard lck(mtx_);
 	if (bindingFeatureClass_ == NULL) {
 		return;
 	}

@@ -15,18 +15,15 @@ FeatureClass::~FeatureClass() {
 }
 
 FeatureClass& FeatureClass::SetName(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
 	name_ = name;
 	return *this;
 }
 
-std::string FeatureClass::GetName() {
-	g3d_lock_guard lck(mtx_);
+std::string FeatureClass::GetName() const {
 	return name_;
 }
 
 FeatureClass& FeatureClass::AddFeature(Feature* f) {
-	g3d_lock_guard lck(mtx_);
 	if (f == NULL)
 		return *this;
 	std::vector<Feature*>::const_iterator citor = features_.cbegin();
@@ -40,30 +37,15 @@ FeatureClass& FeatureClass::AddFeature(Feature* f) {
 	return *this;
 }
 
-int FeatureClass::GetFeatureCount() {
-	g3d_lock_guard lck(mtx_);
-	if (features_.empty()) {
-		Context* ctx = GetContext();
-		if (ctx != NULL && !ctx->IsDone()) {
-			ctx->LoadMoreData();
-		}
-	}
+int FeatureClass::GetFeatureCount() const {
 	return (int)features_.size();
 }
 
-Feature* FeatureClass::GetFeatureAt(int i) {
-	g3d_lock_guard lck(mtx_);
-	if (features_.empty()) {
-		Context* ctx = GetContext();
-		if (ctx != NULL && !ctx->IsDone()) {
-			ctx->LoadMoreData();
-		}
-	}
+Feature* FeatureClass::GetFeatureAt(int i) const {
 	return features_.at(i);
 }
 
-Feature* FeatureClass::GetFeature(const std::string& id) {
-	g3d_lock_guard lck(mtx_);
+Feature* FeatureClass::GetFeature(const std::string& id) const {
 	std::vector<Feature*>::const_iterator citor = features_.cbegin();
 	while (citor != features_.cend()) {
 		if ((*citor)->GetID() == id) {
@@ -75,52 +57,28 @@ Feature* FeatureClass::GetFeature(const std::string& id) {
 }
 
 FeatureClass& FeatureClass::SetParentModel(const std::string& id) {
-	g3d_lock_guard lck(mtx_);
 	parentModelId_ = id;
 	return *this;
 }
 
-std::string FeatureClass::GetParentModel() {
-	g3d_lock_guard lck(mtx_);
+std::string FeatureClass::GetParentModel() const {
 	return parentModelId_;
 }
 
 FeatureClass& FeatureClass::AddField(const Field& f) {
-	g3d_lock_guard lck(mtx_);
 	fields_.push_back(f);
 	return *this;
 }
 
-int FeatureClass::GetFieldCount() {
-	g3d_lock_guard lck(mtx_);
-	if (fields_.empty()) {
-		Context* ctx = GetContext();
-		if (ctx != NULL && !ctx->IsDone()) {
-			ctx->LoadMoreData();
-		}
-	}
+int FeatureClass::GetFieldCount() const {
 	return (int)fields_.size();
 }
 
-const Field& FeatureClass::GetFieldAt(int i) {
-	g3d_lock_guard lck(mtx_);
-	if (fields_.empty()) {
-		Context* ctx = GetContext();
-		if (ctx != NULL && !ctx->IsDone()) {
-			ctx->LoadMoreData();
-		}
-	}
+const Field& FeatureClass::GetFieldAt(int i) const {
 	return fields_.at(i);
 }
 
-bool FeatureClass::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
-	if (features_.empty()) {
-		Context* ctx = GetContext();
-		if (ctx != NULL && !ctx->IsDone()) {
-			ctx->LoadMoreData();
-		}
-	}
+bool FeatureClass::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	size_t i = 0, numberOfFeature = features_.size();
 	for (; i < numberOfFeature; ++i) {
 		if (features_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {

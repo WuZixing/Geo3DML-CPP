@@ -14,26 +14,26 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		void SetDescription(const std::string& desc);
-		std::string GetDescription();
+		std::string GetDescription() const;
 		//@}
 
 		//@{
 		void AddModel(Model* model);
-		int GetModelCount();
-		Model* GetModelAt(int i);
+		int GetModelCount() const;
+		Model* GetModelAt(int i) const;
 		Model* RemoveModelAt(int i);
-		FeatureClass* FindFeatureClass(const std::string& id);
+		FeatureClass* FindFeatureClass(const std::string& id) const;
 		//@}
 
 		//@{
 		void AddMap(Map* map);
-		int GetMapCount();
-		Map* GetMapAt(int i);
+		int GetMapCount() const;
+		Map* GetMapAt(int i) const;
 		Map* RemoveMapAt(int i);
 		void BindFeatureClassesToLayers(ObjectFactory* g3dFactory);
 		//@}
@@ -46,7 +46,7 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty project, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 
 		SceneStyle& GetSceneStyle();
 

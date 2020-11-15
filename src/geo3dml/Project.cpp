@@ -8,7 +8,6 @@ Project::Project() {
 }
 
 Project::~Project() {
-	g3d_lock_guard lck(mtx_);
 	std::vector<Model*>::const_iterator citor = models_.cbegin();
 	while (citor != models_.cend()) {
 		delete *citor;
@@ -22,27 +21,22 @@ Project::~Project() {
 }
 
 void Project::SetName(const std::string& name) {
-	g3d_lock_guard lck(mtx_);
 	name_ = name;
 }
 
-std::string Project::GetName() {
-	g3d_lock_guard lck(mtx_);
+std::string Project::GetName() const {
 	return name_;
 }
 
 void Project::SetDescription(const std::string& desc) {
-	g3d_lock_guard lck(mtx_);
 	description_ = desc;
 }
 
-std::string Project::GetDescription() {
-	g3d_lock_guard lck(mtx_);
+std::string Project::GetDescription() const {
 	return description_;
 }
 
 void Project::AddModel(Model* model) {
-	g3d_lock_guard lck(mtx_);
 	if (model == NULL)
 		return;
 	std::vector<Model*>::const_iterator citor = models_.cbegin();
@@ -56,18 +50,15 @@ void Project::AddModel(Model* model) {
 	models_.push_back(model);
 }
 
-int Project::GetModelCount() {
-	g3d_lock_guard lck(mtx_);
+int Project::GetModelCount() const {
 	return (int)models_.size();
 }
 
-Model* Project::GetModelAt(int i) {
-	g3d_lock_guard lck(mtx_);
+Model* Project::GetModelAt(int i) const {
 	return models_.at(i);
 }
 
-FeatureClass* Project::FindFeatureClass(const std::string& id) {
-	g3d_lock_guard lck(mtx_);
+FeatureClass* Project::FindFeatureClass(const std::string& id) const {
 	std::vector<Model*>::const_iterator citor = models_.cbegin();
 	while (citor != models_.cend()) {
 		FeatureClass* featureClass = (*citor)->GetFeatureClass(id);
@@ -80,7 +71,6 @@ FeatureClass* Project::FindFeatureClass(const std::string& id) {
 }
 
 Model* Project::RemoveModelAt(int i) {
-	g3d_lock_guard lck(mtx_);
 	std::vector<Model*>::const_iterator citor = models_.cbegin();
 	while (citor != models_.cend() && i > 0) {
 		++citor;
@@ -95,12 +85,10 @@ Model* Project::RemoveModelAt(int i) {
 }
 
 SceneStyle& Project::GetSceneStyle() {
-	g3d_lock_guard lck(mtx_);
 	return sceneStyle_;
 }
 
-bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	size_t i = 0, numberOfModels = models_.size();
 	for (; i < numberOfModels; ++i) {
 		if (models_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
@@ -138,7 +126,6 @@ bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& mi
 }
 
 void Project::AddMap(Map* map) {
-	g3d_lock_guard lck(mtx_);
 	if (map == NULL)
 		return;
 	std::vector<Map*>::const_iterator citor = maps_.cbegin();
@@ -152,18 +139,15 @@ void Project::AddMap(Map* map) {
 	maps_.push_back(map);
 }
 
-int Project::GetMapCount() {
-	g3d_lock_guard lck(mtx_);
+int Project::GetMapCount() const {
 	return (int)maps_.size();
 }
 
-Map* Project::GetMapAt(int i) {
-	g3d_lock_guard lck(mtx_);
+Map* Project::GetMapAt(int i) const {
 	return maps_.at(i);
 }
 
 Map* Project::RemoveMapAt(int i) {
-	g3d_lock_guard lck(mtx_);
 	std::vector<Map*>::const_iterator citor = maps_.cbegin();
 	while (citor != maps_.cend() && i > 0) {
 		++citor;

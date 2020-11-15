@@ -27,8 +27,7 @@ bool UniformGrid::Init(double originX, double originY, double originZ,
 	return true;
 }
 
-void UniformGrid::GetDimensions(int& i, int& j, int& k) {
-	g3d_lock_guard lck(mtx_);
+void UniformGrid::GetDimensions(int& i, int& j, int& k) const {
 	int dims[3] = {0};
 	uniformGrid_->GetDimensions(dims);
 	i = dims[0] - 1;
@@ -37,7 +36,6 @@ void UniformGrid::GetDimensions(int& i, int& j, int& k) {
 }
 
 void UniformGrid::SetCellValidation(int i, int j, int k, bool beValid) {
-	g3d_lock_guard lck(mtx_);
 	int dimI = 0, dimJ = 0, dimK = 0;
 	GetDimensions(dimI, dimJ, dimK);
 	int cellId = k * dimJ * dimI + j * dimI + i;
@@ -49,41 +47,34 @@ void UniformGrid::SetCellValidation(int i, int j, int k, bool beValid) {
 	uniformGrid_->Modified();
 }
 
-bool UniformGrid::IsCellValid(int i, int j, int k) {
-	g3d_lock_guard lck(mtx_);
+bool UniformGrid::IsCellValid(int i, int j, int k) const {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	GetDimensions(dimI, dimJ, dimK);
 	int cellId = k * dimJ * dimI + j * dimI + i;
 	return uniformGrid_->IsCellVisible(cellId);
 }
 
-void UniformGrid::GetOrigin(double& x, double& y, double& z) {
-	g3d_lock_guard lck(mtx_);
+void UniformGrid::GetOrigin(double& x, double& y, double& z) const {
 	uniformGrid_->GetOrigin(x, y, z);
 }
 
-void UniformGrid::GetSteps(double& sx, double& sy, double& sz) {
-	g3d_lock_guard lck(mtx_);
+void UniformGrid::GetSteps(double& sx, double& sy, double& sz) const {
 	uniformGrid_->GetSpacing(sx, sy, sz);
 }
 
-vtkUniformGrid* UniformGrid::GetUniformGrid() {
-	g3d_lock_guard lck(mtx_);
+vtkUniformGrid* UniformGrid::GetUniformGrid() const {
 	return uniformGrid_;
 }
 
 void UniformGrid::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), uniformGrid_);
 }
 
-geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), uniformGrid_);
 }
 
-bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (uniformGrid_ == NULL || uniformGrid_->GetNumberOfPoints() < 1) {
 		return false;
 	}
@@ -98,8 +89,7 @@ bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double
 	return true;
 }
 
-int UniformGrid::CalculateCellIndex(int i, int j, int k) {
-	g3d_lock_guard lck(mtx_);
+int UniformGrid::CalculateCellIndex(int i, int j, int k) const {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	GetDimensions(dimI, dimJ, dimK);
 	return  k * dimJ * dimI + j * dimI + i;

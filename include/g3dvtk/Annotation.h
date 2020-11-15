@@ -16,25 +16,25 @@ namespace g3dvtk {
 		/// @name Methods inherited from geo3dml::Annotation.
 		//@{
 		virtual void SetLabelOfPointAt(int i, const std::string& s);
-		virtual std::string GetLabelOfPointAt(int i);
+		virtual std::string GetLabelOfPointAt(int i) const;
 		//@}
 
 		/// @name Methods inherited from geo3dml::MultiPoint.
 		//@{
 		virtual void AddPoint(double x, double y, double z);
-		virtual int GetPointCount();
-		virtual void GetPointAt(int i, double& x, double& y, double& z);
+		virtual int GetPointCount() const;
+		virtual void GetPointAt(int i, double& x, double& y, double& z) const;
 		//@}
 
 		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
-		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
-		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t);
+		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
 		//@}
 
-		vtkPolyData* GetPolyData();
-		void ConfigLabelMapper(vtkLabeledDataMapper* mapper);
+		vtkPolyData* GetPolyData() const;
+		void ConfigLabelMapper(vtkLabeledDataMapper* mapper) const;
 
 	private:
 		g3dvtk::MultiPoint* geo_;

@@ -24,39 +24,38 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		//@}
 
 		//@{
 		void SetType(ModelType t);
-		ModelType GetType();
+		ModelType GetType() const;
 		//@}
 
 		//@{
 		void AddFeatureClass(FeatureClass* f);
-		int GetFeatureClassCount();
-		FeatureClass* GetFeatureClassAt(int i);
-		FeatureClass* GetFeatureClass(const std::string& id);
+		int GetFeatureClassCount() const;
+		FeatureClass* GetFeatureClassAt(int i) const;
+		FeatureClass* GetFeatureClass(const std::string& id) const;
 		/// Remove a feature class from the model but not delete it.
 		void RemoveFeatureClass(const std::string& id);
 		//@}
 
 		/// @name Metadata.
 		//@{
-		std::string GetDateStamp();
+		std::string GetDateStamp() const;
 		void SetDateStamp(const std::string& s);
-		std::string GetDescription();
+		std::string GetDescription() const;
 		void SetDescription(const std::string& s);
-		std::string GetVersion();
+		std::string GetVersion() const;
 		void SetVersion(const std::string& s);
-		std::string GetToolName();
+		std::string GetToolName() const;
 		void SetToolName(const std::string& s);
-		std::string GetToolVersion();
+		std::string GetToolVersion() const;
 		void SetToolVersion(const std::string& s);
 		//@]
 
 		//@{
-		void SetMinimumBoundingRectangle(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 		/// Compute the minimum bounding rectangle of the model.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
@@ -65,19 +64,18 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty model or a model without a valid bounding box, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 		//@}
 
 		//@{
 		void SetParentProject(const std::string& id);
-		std::string GetParentProject();
+		std::string GetParentProject() const;
 		//@}
 
 	private:
 		std::string name_;
 		ModelType type_;
 		std::vector<FeatureClass*> featureClasses_;
-		double box_[6];	///< [minX, minY, minZ, maxX, maxY, maxZ]
 		// metadata
 		std::string dateStamp_;
 		std::string description_;

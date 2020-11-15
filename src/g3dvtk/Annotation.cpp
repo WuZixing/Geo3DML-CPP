@@ -19,7 +19,7 @@ void Annotation::SetLabelOfPointAt(int i, const std::string& s) {
 	labels_->InsertValue(i, s.c_str());
 }
 
-std::string Annotation::GetLabelOfPointAt(int i) {
+std::string Annotation::GetLabelOfPointAt(int i) const {
 	return labels_->GetValue(i);
 }
 
@@ -27,15 +27,15 @@ void Annotation::AddPoint(double x, double y, double z) {
 	geo_->AddPoint(x, y, z);
 }
 
-int Annotation::GetPointCount() {
+int Annotation::GetPointCount() const {
 	return geo_->GetPointCount();
 }
 
-void Annotation::GetPointAt(int i, double& x, double& y, double& z) {
+void Annotation::GetPointAt(int i, double& x, double& y, double& z) const {
 	geo_->GetPointAt(i, x, y, z);
 }
 
-bool Annotation::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
+bool Annotation::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	return geo_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
 }
 
@@ -43,15 +43,15 @@ void Annotation::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapePropert
 	geo_->SetProperty(prop, t);
 }
 
-geo3dml::ShapeProperty* Annotation::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
+geo3dml::ShapeProperty* Annotation::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return geo_->GetProperty(t);
 }
 
-vtkPolyData* Annotation::GetPolyData() {
+vtkPolyData* Annotation::GetPolyData() const {
 	return geo_->GetPolyData();
 }
 
-void Annotation::ConfigLabelMapper(vtkLabeledDataMapper* mapper) {
+void Annotation::ConfigLabelMapper(vtkLabeledDataMapper* mapper) const {
 	mapper->SetInputData(GetPolyData());
 	mapper->SetLabelModeToLabelFieldData();
 	mapper->SetFieldDataName(labels_->GetName());

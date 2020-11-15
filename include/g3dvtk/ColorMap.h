@@ -18,7 +18,7 @@ namespace g3dvtk {
 		/// Fetch colors.
 		virtual void ColorAt(int i, unsigned char& r, unsigned char& g, unsigned char& b) const = 0;
 		virtual void ColorAt(int i, double& r, double& g, double& b) const = 0;
-		virtual void RandomColor(unsigned char& r, unsigned char& g, unsigned char& b);
-		virtual void RandomColor(double& r, double& g, double& b);
+		virtual void RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) const;
+		virtual void RandomColor(double& r, double& g, double& b) const;
 	};
 }

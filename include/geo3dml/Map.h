@@ -13,19 +13,18 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName();
+		std::string GetName() const;
 		void SetDescription(const std::string& s);
-		std::string GetDescription();
+		std::string GetDescription() const;
 		//@}
 
 		//@{
 		void AddLayer(Layer* layer);
-		int GetLayerCount();
-		Layer* GetLayerAt(int i);
+		int GetLayerCount() const;
+		Layer* GetLayerAt(int i) const;
 		//@}
 
 		//@{
-		void SetMinimumBoundingRectangle(double minX, double minY, double minZ, double maxX, double maxY, double maxZ);
 		/// Compute the minimum bounding rectangle of the model.
 		/// @param minX Output the minimum X coordinate.
 		/// @param minY Output the minimum Y coordinate.
@@ -34,12 +33,12 @@ namespace geo3dml {
 		/// @param maxY Output the maximum Y coordinate.
 		/// @param maxZ Output the maximum Z coordinate.
 		/// @return In case of an empty model or a model without a valid bounding box, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ);
+		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
 		//@}
 
 		//@{
 		void SetParentProject(const std::string& id);
-		std::string GetParentProject();
+		std::string GetParentProject() const;
 		//@}
 
 	private:
@@ -47,6 +46,5 @@ namespace geo3dml {
 		std::string description_;
 		std::string parentProjectId_;
 		std::vector<Layer*> layers_;
-		double box_[6];	///< [minX, minY, minZ, maxX, maxY, maxZ]
 	};
 }

@@ -12,39 +12,17 @@ std::string Object::NewID() {
 }
 
 Object::Object() {
-	context_ = NULL;
+
 }
 
 Object::~Object() {
-	if (context_ != NULL) {
-		delete context_;
-		context_ = NULL;
-	}
+
 }
 
-std::string Object::GetID() {
-	g3d_lock_guard lck(mtx_);
+std::string Object::GetID() const {
 	return id_;
 }
 
 void Object::SetID(const std::string& id) {
-	g3d_lock_guard lck(mtx_);
 	id_ = id;
-}
-
-void Object::SetContext(Context* ctx) {
-	g3d_lock_guard lck(mtx_);
-	if (context_ != NULL) {
-		delete context_;
-		context_ = NULL;
-	}
-	context_ = ctx;
-	if (context_ != NULL) {
-		context_->BindGeo3DMLObject(this);
-	}
-}
-
-Context* Object::GetContext() {
-	g3d_lock_guard lck(mtx_);
-	return context_;
 }

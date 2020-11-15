@@ -17,12 +17,12 @@ ColorMap::~ColorMap() {
 
 }
 
-void ColorMap::RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) {
+void ColorMap::RandomColor(unsigned char& r, unsigned char& g, unsigned char& b) const {
 	const int round = Size();
 	ColorAt(rand() % round, r, g, b);
 }
 
-void ColorMap::RandomColor(double& r, double& g, double& b) {
+void ColorMap::RandomColor(double& r, double& g, double& b) const {
 	const int round = Size();
 	ColorAt(rand() % round, r, g, b);
 }

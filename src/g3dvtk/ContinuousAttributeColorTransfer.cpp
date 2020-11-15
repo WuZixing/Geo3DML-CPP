@@ -19,7 +19,7 @@ void ContinuousAttributeColorTransfer::SetAttributeRange(double min, double max)
 	maxValue_ = max;
 }
 
-void ContinuousAttributeColorTransfer::PickUpColor(double value, unsigned char& r, unsigned char& g, unsigned char& b) {
+void ContinuousAttributeColorTransfer::PickUpColor(double value, unsigned char& r, unsigned char& g, unsigned char& b) const {
 	int index = 0;
 	if (value <= minValue_) {
 		index = 0;
@@ -32,7 +32,7 @@ void ContinuousAttributeColorTransfer::PickUpColor(double value, unsigned char& 
 	colorMap_->ColorAt(index, r, g, b);
 }
 
-void ContinuousAttributeColorTransfer::PickUpColor(double value, double& r, double& g, double& b) {
+void ContinuousAttributeColorTransfer::PickUpColor(double value, double& r, double& g, double& b) const {
 	unsigned char bR = 0, bG = 0, bB = 0;
 	PickUpColor(value, bR, bG, bB);
 	r = bR / 255.0f;

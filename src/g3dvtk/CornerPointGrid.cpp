@@ -36,12 +36,11 @@ bool CornerPointGrid::Init(int dimI, int dimJ, int dimK) {
 	return true;
 }
 
-void CornerPointGrid::GetDimensions(int& i, int& j, int& k) {
-	g3d_lock_guard lck(mtx_);
+void CornerPointGrid::GetDimensions(int& i, int& j, int& k) const {
 	InnerGetDimensions(i, j, k);
 }
 
-void CornerPointGrid::InnerGetDimensions(int& i, int& j, int& k) {
+void CornerPointGrid::InnerGetDimensions(int& i, int& j, int& k) const {
 	int dims[3] = { 0 };
 	cells_->GetCellDims(dims);
 	i = dims[0];
@@ -50,7 +49,6 @@ void CornerPointGrid::InnerGetDimensions(int& i, int& j, int& k) {
 }
 
 void CornerPointGrid::AddNextPillar(double headPos[3], double tailPos[3]) {
-	g3d_lock_guard lck(mtx_);
 	vtkPoints* pts = pillars_->GetPoints();
 	vtkIdType headId = pts->InsertNextPoint(headPos);
 	vtkIdType tailId = pts->InsertNextPoint(tailPos);
@@ -68,7 +66,6 @@ void CornerPointGrid::AddNextCell(
 	double topBackLeft[3], double topBackRight[3],
 	bool beValid
 ) {
-	g3d_lock_guard lck(mtx_);
 	int dimI = 0, dimJ = 0, dimK = 0;
 	InnerGetDimensions(dimI, dimJ, dimK);
 	int numberOfPointsInLayer = (dimJ + 1) * (dimI + 1);
@@ -136,7 +133,6 @@ void CornerPointGrid::AddNextCell(
 }
 
 void CornerPointGrid::SetCellValidation(int i, int j, int k, bool isValid) {
-	g3d_lock_guard lck(mtx_);
 	InnerSetCellValidation(i, j, k, isValid);
 	cells_->Modified();
 }
@@ -156,8 +152,7 @@ void CornerPointGrid::GetCellAt(int i, int j, int k,
 	double bottomBackLeft[3], double bottomBackRight[3],
 	double topFrontLeft[3], double topFrontRight[3],
 	double topBackLeft[3], double topBackRight[3],
-	bool& isValid) {
-	g3d_lock_guard lck(mtx_);
+	bool& isValid) const {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	InnerGetDimensions(dimI, dimJ, dimK);
 	int numberOfPointsInLayer = (dimJ + 1) * (dimI + 1);
@@ -185,8 +180,7 @@ void CornerPointGrid::GetCellAt(int i, int j, int k,
 	isValid = cells_->IsCellVisible(k * dimJ * dimI + j * dimI + i);
 }
 
-void CornerPointGrid::GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) {
-	g3d_lock_guard lck(mtx_);
+void CornerPointGrid::GetPillarAt(int i, int j, double headPos[3], double tailPos[3]) const {
 	int dimI = 0, dimJ = 0, dimK = 0;
 	InnerGetDimensions(dimI, dimJ, dimK);
 	int index = j * (dimI + 1) + i;
@@ -197,28 +191,23 @@ void CornerPointGrid::GetPillarAt(int i, int j, double headPos[3], double tailPo
 	pillars_->GetPoint(pt1, tailPos);
 }
 
-vtkPolyData* CornerPointGrid::GetPillars() {
-	g3d_lock_guard lck(mtx_);
+vtkPolyData* CornerPointGrid::GetPillars() const {
 	return pillars_;
 }
 
-vtkStructuredGrid* CornerPointGrid::GetStructuredGrid() {
-	g3d_lock_guard lck(mtx_);
+vtkStructuredGrid* CornerPointGrid::GetStructuredGrid() const {
 	return cells_;
 }
 
 void CornerPointGrid::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
 	shapeHelper_.SetProperty(prop, t, GetID(), cells_);
 }
 
-geo3dml::ShapeProperty* CornerPointGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) {
-	g3d_lock_guard lck(mtx_);
+geo3dml::ShapeProperty* CornerPointGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
 	return shapeHelper_.GetProperty(t, GetID(), cells_);
 }
 
-bool CornerPointGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) {
-	g3d_lock_guard lck(mtx_);
+bool CornerPointGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
 	if (cells_ == NULL || cells_->GetNumberOfPoints() < 1) {
 		return false;
 	}
