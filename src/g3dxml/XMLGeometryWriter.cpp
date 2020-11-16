@@ -104,7 +104,7 @@ void XMLGeometryWriter::WritePoint(geo3dml::Point* point, std::ostream& output) 
 }
 
 void XMLGeometryWriter::WriteAnnotation(geo3dml::Annotation* annotation, std::ostream& output) {
-	output << "<Annotation gml:id=\"" << annotation->GetID() << "\">" << std::endl
+	output << "<GeoAnnotation gml:id=\"" << annotation->GetID() << "\">" << std::endl
 		<< "<gml:pointMembers>" << std::endl;
 	double x = 0, y = 0, z = 0;
 	int ptNum = annotation->GetPointCount();
@@ -121,7 +121,7 @@ void XMLGeometryWriter::WriteAnnotation(geo3dml::Annotation* annotation, std::os
 		output << "<Label IndexNo=\"" << i << "\">" << label << "</Label>" << std::endl;
 	}
 	output << "</Labels>" << std::endl
-		<< "</Annotation>" << std::endl;
+		<< "</GeoAnnotation>" << std::endl;
 }
 
 void XMLGeometryWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output) {
