@@ -6,6 +6,7 @@
 #include <g3dxml/XMLLineStringReader.h>
 #include <g3dxml/XMLPointReader.h>
 #include <g3dxml/XMLMultiPointReader.h>
+#include <g3dxml/XMLAnnotationReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -116,6 +117,13 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				geo = mPointReader.ReadMultiPoint(reader);
 				if (geo == NULL) {
 					SetStatus(false, mPointReader.Error());
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, XMLAnnotationReader::Element)) {
+				XMLAnnotationReader annotationReader(g3dFactory_);
+				geo = annotationReader.ReadAnnotation(reader);
+				if (geo == NULL) {
+					SetStatus(false, annotationReader.Error());
 					break;
 				}
 			}

@@ -192,6 +192,9 @@ void CornerPointGrid::GetPillarAt(int i, int j, double headPos[3], double tailPo
 }
 
 vtkPolyData* CornerPointGrid::GetPillars() const {
+	if (pillars_.Get() != NULL && pillars_->NeedToBuildCells()) {
+		pillars_->BuildCells();
+	}
 	return pillars_;
 }
 

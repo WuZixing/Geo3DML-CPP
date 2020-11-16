@@ -55,6 +55,9 @@ geo3dml::ShapeProperty* MultiPoint::GetProperty(geo3dml::ShapeProperty::Sampling
 	return shapeHelper_.GetProperty(t, GetID(), polyData_);
 }
 
-vtkPolyData* MultiPoint::GetPolyData() {
+vtkPolyData* MultiPoint::GetPolyData() const {
+	if (polyData_ != NULL && polyData_->NeedToBuildCells()) {
+		polyData_->BuildCells();
+	}
 	return polyData_;
 }

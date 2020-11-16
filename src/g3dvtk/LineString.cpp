@@ -41,6 +41,9 @@ void LineString::GetVertexAt(int i, double& x, double& y, double& z) const {
 }
 
 vtkPolyData* LineString::GetPolyData() const {
+	if (polyData_ != NULL && polyData_->NeedToBuildCells()) {
+		polyData_->BuildCells();
+	}
 	return polyData_;
 }
 

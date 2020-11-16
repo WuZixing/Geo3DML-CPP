@@ -56,14 +56,18 @@ int TIN::GetTriangleCount() const {
 }
 
 void TIN::GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) const {
+	vtkIdType npts = 0;
 	const vtkIdType* pts = NULL;
-	polyData_->GetCell(i, pts);
-	vertex1 = pts[1];	// pts[0] is the count of points.
-	vertex2 = pts[2];
-	vertex3 = pts[3];
+	polyData_->GetCellPoints(i, npts, pts);
+	vertex1 = pts[0];
+	vertex2 = pts[1];
+	vertex3 = pts[2];
 }
 
 vtkPolyData* TIN::GetPolyData() const {
+	if (polyData_ != NULL && polyData_->NeedToBuildCells()) {
+		polyData_->BuildCells();
+	}
 	return polyData_;
 }
 

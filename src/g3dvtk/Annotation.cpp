@@ -48,11 +48,18 @@ geo3dml::ShapeProperty* Annotation::GetProperty(geo3dml::ShapeProperty::Sampling
 }
 
 vtkPolyData* Annotation::GetPolyData() const {
-	return geo_->GetPolyData();
+	vtkPolyData* polyData = geo_->GetPolyData();
+	if (polyData != NULL && polyData->NeedToBuildCells()) {
+		polyData->BuildCells();
+	}
+	return polyData;
 }
 
 void Annotation::ConfigLabelMapper(vtkLabeledDataMapper* mapper) const {
 	mapper->SetInputData(GetPolyData());
-	mapper->SetLabelModeToLabelFieldData();
-	mapper->SetFieldDataName(labels_->GetName());
+
+	if (labels_->GetNumberOfValues() > 0) {
+		mapper->SetLabelModeToLabelFieldData();
+		mapper->SetFieldDataName(labels_->GetName());
+	}
 }

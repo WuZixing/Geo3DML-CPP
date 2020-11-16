@@ -47,6 +47,9 @@ geo3dml::ShapeProperty* Point::GetProperty(geo3dml::ShapeProperty::SamplingTarge
 }
 
 vtkPolyData* Point::GetPolyData() const {
+	if (polyData_ != NULL && polyData_->NeedToBuildCells()) {
+		polyData_->BuildCells();
+	}
 	return polyData_;
 }
 

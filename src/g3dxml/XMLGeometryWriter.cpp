@@ -24,18 +24,23 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 			if (point != NULL) {
 				WritePoint(point, output);
 			} else {
-				geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
-				if (mPoint != NULL) {
-					WriteMultiPoint(mPoint, output);
+				geo3dml::Annotation* annotation = dynamic_cast<geo3dml::Annotation*>(geo);
+				if (annotation != NULL) {
+					WriteAnnotation(annotation, output);
 				} else {
-					geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
-					if (cornerGrid != NULL) {
-						WriteCornerPointGrid(cornerGrid, output);
+					geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
+					if (mPoint != NULL) {
+						WriteMultiPoint(mPoint, output);
 					} else {
-						if (v != Schema_1_0) {
-							geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
-							if (rectGrid != NULL) {
-								WriteUniformGrid(rectGrid, output);
+						geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
+						if (cornerGrid != NULL) {
+							WriteCornerPointGrid(cornerGrid, output);
+						} else {
+							if (v != Schema_1_0) {
+								geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
+								if (rectGrid != NULL) {
+									WriteUniformGrid(rectGrid, output);
+								}
 							}
 						}
 					}
@@ -96,6 +101,27 @@ void XMLGeometryWriter::WritePoint(geo3dml::Point* point, std::ostream& output) 
 	point->GetPosition(x, y, z);
 	output << "<gml:pos srsDimension=\"3\">" << x << " " << y << " " << z << "</gml:pos>" << std::endl;
 	output << "</gml:Point>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteAnnotation(geo3dml::Annotation* annotation, std::ostream& output) {
+	output << "<Annotation gml:id=\"" << annotation->GetID() << "\">" << std::endl
+		<< "<gml:pointMembers>" << std::endl;
+	double x = 0, y = 0, z = 0;
+	int ptNum = annotation->GetPointCount();
+	for (int i = 0; i < ptNum; ++i) {
+		annotation->GetPointAt(i, x, y, z);
+		output << "<gml:Point gml:id=\"" << i << "\">" << std::endl
+			<< "<gml:pos srsDimension=\"3\">" << x << " " << y << " " << z << "</gml:pos>" << std::endl
+			<< "</gml:Point>" << std::endl;
+	}
+	output << "</gml:pointMembers>" << std::endl
+		<< "<Labels>" << std::endl;
+	for (int i = 0; i < ptNum; ++i) {
+		std::string label = annotation->GetLabelOfPointAt(i);
+		output << "<Label IndexNo=\"" << i << "\">" << label << "</Label>" << std::endl;
+	}
+	output << "</Labels>" << std::endl
+		<< "</Annotation>" << std::endl;
 }
 
 void XMLGeometryWriter::WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output) {

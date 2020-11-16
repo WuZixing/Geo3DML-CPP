@@ -26,7 +26,7 @@ namespace g3dvtk {
 		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
 		//@}
 
-		vtkPolyData* GetPolyData();
+		vtkPolyData* GetPolyData() const;
 
 	private:
 		vtkSmartPointer<vtkPolyData> polyData_;
