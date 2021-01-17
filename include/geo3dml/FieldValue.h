@@ -1,6 +1,5 @@
 #pragma once
 
-#include <string>
 #include "Field.h"
 
 namespace geo3dml {
@@ -13,6 +12,7 @@ namespace geo3dml {
 		const std::string& FieldName() const;
 
 		virtual Field::ValueType ValueType() const = 0;
+		virtual FieldValue* Clone() const = 0;
 
 	private:
 		std::string fieldName_;
@@ -25,6 +25,7 @@ namespace geo3dml {
 		virtual ~TextFieldValue();
 
 		virtual Field::ValueType ValueType() const;
+		virtual FieldValue* Clone() const;
 
 		TextFieldValue& Value(const std::string& v);
 		const std::string& Value() const;
@@ -40,6 +41,7 @@ namespace geo3dml {
 		virtual ~DoubleFieldValue();
 
 		virtual Field::ValueType ValueType() const;
+		virtual FieldValue* Clone() const;
 
 		DoubleFieldValue& Value(double v);
 		double Value() const;
@@ -55,6 +57,7 @@ namespace geo3dml {
 		virtual ~IntegerFieldValue();
 
 		virtual Field::ValueType ValueType() const;
+		virtual FieldValue* Clone() const;
 
 		IntegerFieldValue& Value(int v);
 		int Value() const;
@@ -72,6 +75,7 @@ namespace geo3dml {
 		virtual ~BooleanFieldValue();
 
 		virtual Field::ValueType ValueType() const;
+		virtual FieldValue* Clone() const;
 
 		BooleanFieldValue& Value(bool v);
 		bool Value() const;

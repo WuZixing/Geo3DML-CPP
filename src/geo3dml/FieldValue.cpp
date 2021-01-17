@@ -31,6 +31,10 @@ Field::ValueType TextFieldValue::ValueType() const {
 	return Field::Text;
 }
 
+FieldValue* TextFieldValue::Clone() const {
+	return new TextFieldValue(*this);
+}
+
 TextFieldValue& TextFieldValue::Value(const std::string& v) {
 	value_ = v;
 	return *this;
@@ -56,6 +60,10 @@ Field::ValueType DoubleFieldValue::ValueType() const {
 	return Field::Double;
 }
 
+FieldValue* DoubleFieldValue::Clone() const {
+	return new DoubleFieldValue(*this);
+}
+
 DoubleFieldValue& DoubleFieldValue::Value(double v) {
 	value_ = v;
 	return *this;
@@ -79,6 +87,10 @@ IntegerFieldValue::~IntegerFieldValue() {
 
 Field::ValueType IntegerFieldValue::ValueType() const {
 	return Field::Integer;
+}
+
+FieldValue* IntegerFieldValue::Clone() const {
+	return new IntegerFieldValue(*this);
 }
 
 IntegerFieldValue& IntegerFieldValue::Value(int v) {
@@ -108,6 +120,10 @@ BooleanFieldValue::~BooleanFieldValue() {
 
 Field::ValueType BooleanFieldValue::ValueType() const {
 	return Field::Boolean;
+}
+
+FieldValue* BooleanFieldValue::Clone() const {
+	return new BooleanFieldValue(*this);
 }
 
 BooleanFieldValue& BooleanFieldValue::Value(bool v) {
