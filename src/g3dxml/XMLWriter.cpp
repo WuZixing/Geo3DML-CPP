@@ -25,11 +25,16 @@ XMLWriter::~XMLWriter() {
 
 bool XMLWriter::Write(geo3dml::Project* project, const std::string& xmlFilePath, SchemaVersion v) {
 #if defined(_WIN32)
-	char pathSeperator = '\\';
+	char primaryPathSeperator = '\\';
+	char secondaryPathSeperator = '/';	// Qt uses '/' as path seperator on windows.
 #else
-	char pathSeperator = '/';
+	char primaryPathSeperator = '/';
+	char secondaryPathSeperator = '\\';
 #endif
-	size_t pos = xmlFilePath.find_last_of(pathSeperator);
+	size_t pos = xmlFilePath.find_last_of(primaryPathSeperator);
+	if (pos == std::string::npos) {
+		pos = xmlFilePath.find_last_of(secondaryPathSeperator);
+	}
 	if (pos != std::string::npos) {
 		projectDirectory_ = xmlFilePath.substr(0, pos + 1);
 	} else {
