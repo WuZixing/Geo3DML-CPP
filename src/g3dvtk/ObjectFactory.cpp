@@ -8,6 +8,7 @@
 #include <g3dvtk/MultiPoint.h>
 #include <g3dvtk/Actor.h>
 #include <g3dvtk/Annotation.h>
+#include <g3dvtk/MultiLineString.h>
 
 using namespace g3dvtk;
 
@@ -49,6 +50,10 @@ geo3dml::MultiPoint* ObjectFactory::NewMultiPoint() {
 
 geo3dml::LineString* ObjectFactory::NewLineString() {
 	return new LineString();
+}
+
+geo3dml::MultiLineString* ObjectFactory::NewMultiLineString() {
+	return new MultiLineString();
 }
 
 geo3dml::TIN* ObjectFactory::NewTIN() {

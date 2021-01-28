@@ -21,6 +21,7 @@ namespace g3dvtk {
 		virtual geo3dml::Point* NewPoint();
 		virtual geo3dml::MultiPoint* NewMultiPoint();
 		virtual geo3dml::LineString* NewLineString();
+		virtual geo3dml::MultiLineString* NewMultiLineString();
 		virtual geo3dml::TIN* NewTIN();
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid();
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid(int dimI, int dimJ, int dimK);
