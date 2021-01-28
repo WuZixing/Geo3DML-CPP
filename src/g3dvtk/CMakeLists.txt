@@ -41,6 +41,8 @@ list(APPEND G3DVTK_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ContinuousAttributeColorTransfer.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/DiscreteAttributeColorTransfer.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/Annotation.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiLineString.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiTIN.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

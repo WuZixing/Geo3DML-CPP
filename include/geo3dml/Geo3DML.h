@@ -3,7 +3,6 @@
 #include <string>
 
 namespace geo3dml {
-	/// All Geo3DML objects must be thread safe.
 	class Object {
 	public:
 		static std::string NewID();
