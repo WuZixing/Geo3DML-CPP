@@ -126,13 +126,21 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 			}
 		}
 		int numberOfGeometries = feature->GetGeometryCount();
-		for (int g = 0; g < numberOfGeometries; ++g) {
-			geo3dml::Geometry* geo = feature->GetGeometryAt(g);
+		if (numberOfGeometries > 0) {
+			for (int g = 0; g < numberOfGeometries; ++g) {
+				geo3dml::Geometry* geo = feature->GetGeometryAt(g);
+				geo3dml::Actor* actor = g3dFactory->NewActor();
+				ostr.str("");
+				ostr << feature->GetName() << "_" << geo->GetName() << "[LOD-" << geo->GetLODLevel() << "]";
+				actor->SetName(ostr.str());
+				actor->BindGeometry(feature, geo, sym);
+				AddActor(actor);
+			}
+		} else {
 			geo3dml::Actor* actor = g3dFactory->NewActor();
 			ostr.str("");
-			ostr << feature->GetName() << "_" << geo->GetName() << "[LOD-" << geo->GetLODLevel() << "]";
-			actor->SetName(ostr.str());	
-			actor->BindGeometry(feature, geo, sym);
+			actor->SetName(feature->GetName());
+			actor->BindGeometry(feature, nullptr, nullptr);
 			AddActor(actor);
 		}
 	}
