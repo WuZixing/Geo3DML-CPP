@@ -10,8 +10,13 @@ namespace geo3dml {
 		virtual ~MultiLineString();
 
 	public:
-		virtual void AddLineString(LineString* line) = 0;
+		/// Append a new LineString into the set.
+		/// @return The index of the new LineString.
+		virtual int AddLineString() = 0;
 		virtual int GetLineStringCount() const = 0;
-		virtual LineString* GetLineStringAt(int i) const = 0;
+
+		virtual void AddVertexToLineString(int lineIndex, double x, double y, double z) = 0;
+		virtual int GetVertexCountOfLineString(int lineIndex) const = 0;
+		virtual void GetVertexOfLineString(int lineIndex, int vertexIndex, double& x, double& y, double& z) const = 0;
 	};
 }

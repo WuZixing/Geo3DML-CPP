@@ -134,17 +134,19 @@ geo3dml::Geometry* Actor::GetBindingGeometry() const {
 }
 
 bool Actor::IsVisible() const {
-	return vtkProp_->GetVisibility() != 0;
+	return vtkProp_ != nullptr && vtkProp_->GetVisibility() != 0;
 }
 void Actor::SetVisible(bool show) {
-	vtkProp_->SetVisibility(show ? 1 : 0);
+	if (vtkProp_ != nullptr) {
+		vtkProp_->SetVisibility(show ? 1 : 0);
+	}
 }
 
 geo3dml::Symbolizer* Actor::MakeSymbozier() const {
 	if (bindingGeometry_ == NULL) {
 		return NULL;
 	}
-	if (!vtkProp_->IsA("vtkActor")) {
+	if (vtkProp_ == NULL || !vtkProp_->IsA("vtkActor")) {
 		return NULL;
 	}
 	vtkActor* actor = vtkActor::SafeDownCast(vtkProp_);
@@ -194,6 +196,9 @@ vtkProp* Actor::GetVTKProp() const {
 }
 
 void Actor::SetUserTransform(vtkTransform* t) {
+	if (vtkProp_ == nullptr) {
+		return;
+	}
 	if (vtkProp_->IsA("vtkActor")) {
 		((vtkActor*)vtkProp_.Get())->SetUserTransform(t);
 	} else if (vtkProp_->IsA("vtkActor2D")) {

@@ -17,6 +17,7 @@
 #include "GeoDiscreteCoverageSymbolizer.h"
 #include "FeatureTypeStyle.h"
 #include "Annotation.h"
+#include "MultiLineString.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -44,6 +45,7 @@ namespace geo3dml {
 		virtual Point* NewPoint() = 0;
 		virtual MultiPoint* NewMultiPoint() = 0;
 		virtual LineString* NewLineString() = 0;
+		virtual MultiLineString* NewMultiLineString() = 0;
 		virtual TIN* NewTIN() = 0;
 		virtual CornerPointGrid* NewCornerPointGrid() = 0;
 		virtual CornerPointGrid* NewCornerPointGrid(int dimI, int dimJ, int dimK) = 0;
