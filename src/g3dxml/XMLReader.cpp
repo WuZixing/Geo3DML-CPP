@@ -37,12 +37,17 @@ geo3dml::Object* XMLReader::LoadXMLFile(const std::string& file) {
 			}
 			if (geo3dml::IsiEqual(localName, XMLProjectReader::Element)) {
 #if defined(_WIN32)
-				char pathSeperator = '\\';
+				char primaryPathSeperator = '\\';
+				char secondaryPathSeperator = '/';	// Qt uses '/' as path seperator on windows.
 #else
-				char pathSeperator = '/';
+				char primaryPathSeperator = '/';
+				char secondaryPathSeperator = '\\';
 #endif
 				std::string projectDirectory;
-				size_t pos = file.find_last_of(pathSeperator);
+				size_t pos = file.find_last_of(primaryPathSeperator);
+				if (pos == std::string::npos) {
+					pos = file.find_last_of(secondaryPathSeperator);
+				}
 				if (pos != std::string::npos) {
 					projectDirectory = file.substr(0, pos + 1);
 				}
