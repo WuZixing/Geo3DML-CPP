@@ -99,49 +99,10 @@ bool XMLFeatureReader::ReadField(xmlTextReaderPtr reader, geo3dml::Feature* feat
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, "Field")) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			geo3dml::FieldValue fieldValue(fieldName);
 			geo3dml::Field::ValueType vType = XMLFieldReader::NameToValueType(localName);
-			switch (vType) {
-			case geo3dml::Field::Text: {
-				geo3dml::TextFieldValue* textValue = new geo3dml::TextFieldValue(fieldName);
-				if (ReadFieldValue(reader, localName, textValue)) {
-					feature->SetField(textValue);
-				} else {
-					delete textValue;
-				}
-				break;
-			}
-			case geo3dml::Field::Integer: {
-				geo3dml::IntegerFieldValue* intValue = new geo3dml::IntegerFieldValue(fieldName);
-				if (ReadFieldValue(reader, localName, intValue)) {
-					feature->SetField(intValue);
-				} else {
-					delete intValue;
-				}
-				break;
-			}
-			case geo3dml::Field::Double: {
-				geo3dml::DoubleFieldValue* doubleValue = new geo3dml::DoubleFieldValue(fieldName);
-				if (ReadFieldValue(reader, localName, doubleValue)) {
-					feature->SetField(doubleValue);
-				} else {
-					delete doubleValue;
-				}
-				break;
-			}
-			case geo3dml::Field::Boolean: {
-				geo3dml::BooleanFieldValue* boolValue = new geo3dml::BooleanFieldValue(fieldName);
-				if (ReadFieldValue(reader, localName, boolValue)) {
-					feature->SetField(boolValue);
-				} else {
-					delete boolValue;
-				}
-				break;
-			}
-			default: {
-				std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, std::string("unknown field: ") + std::string(localName));
-				SetStatus(false, err);
-				break;
-			}
+			if (ReadFieldValue(reader, localName, vType, &fieldValue)) {
+				feature->SetField(fieldValue);
 			}
 			if (!IsOK()) {
 				break;
@@ -156,7 +117,7 @@ bool XMLFeatureReader::ReadField(xmlTextReaderPtr reader, geo3dml::Feature* feat
 	return IsOK();
 }
 
-bool XMLFeatureReader::ReadFieldValue(xmlTextReaderPtr reader, const std::string& elementName, geo3dml::FieldValue* value) {
+bool XMLFeatureReader::ReadFieldValue(xmlTextReaderPtr reader, const std::string& elementName, geo3dml::Field::ValueType valueType, geo3dml::FieldValue* value) {
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -170,28 +131,31 @@ bool XMLFeatureReader::ReadFieldValue(xmlTextReaderPtr reader, const std::string
 					SetStatus(false, v);
 					break;
 				}
-				geo3dml::TextFieldValue* textValue = dynamic_cast<geo3dml::TextFieldValue*>(value);
-				if (textValue != NULL) {
-					textValue->Value(v);
-				} else {
-					geo3dml::DoubleFieldValue* doubleValue = dynamic_cast<geo3dml::DoubleFieldValue*>(value);
-					if (doubleValue != NULL) {
-						doubleValue->Value(atof(v.c_str()));
-					} else {
-						geo3dml::IntegerFieldValue* intValue = dynamic_cast<geo3dml::IntegerFieldValue*>(value);
-						if (intValue != NULL) {
-							intValue->Value(atoi(v.c_str()));
-						} else {
-							geo3dml::BooleanFieldValue* boolValue = dynamic_cast<geo3dml::BooleanFieldValue*>(value);
-							if (boolValue != NULL) {
-								boolValue->Value(geo3dml::IsTrue(v));
-							} else {
-								std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "unknown value type: " + XMLFieldReader::ValueTypeToName(value->ValueType()) + " with field name of " + value->FieldName());
-								SetStatus(false, err);
-								break;
-							}
-						}
-					}
+				switch (valueType) {
+				case geo3dml::Field::ValueType::Boolean: {
+					value->SetBool(geo3dml::IsTrue(v));
+					break;
+				}
+				case geo3dml::Field::ValueType::Integer: {
+					value->SetInt(atoi(v.c_str()));
+					break;
+				}
+				case geo3dml::Field::ValueType::Double: {
+					value->SetDouble(atof(v.c_str()));
+					break;
+				}
+				case geo3dml::Field::ValueType::Text: {
+					value->SetString(v);
+					break;
+				}
+				default: {
+					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "unknown value type: " + XMLFieldReader::ValueTypeToName(value->ValueType()) + " with field name of " + value->FieldName());
+					SetStatus(false, err);
+					break;
+				}
+				}
+				if (!IsOK()) {
+					break;
 				}
 			}
 		}

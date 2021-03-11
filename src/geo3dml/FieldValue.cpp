@@ -3,134 +3,130 @@
 
 using namespace geo3dml;
 
-FieldValue::FieldValue(const std::string& fieldName) {
-	fieldName_ = fieldName;
+bool FieldValue::IsTrue(const std::string& str) {
+	return geo3dml::IsTrue(str);
+}
+
+FieldValue::FieldValue() {
+
+}
+
+FieldValue::FieldValue(const std::string& fieldName) : fieldName_(fieldName) {
+
+}
+
+FieldValue::FieldValue(const std::string& fieldName, bool value) : fieldName_(fieldName), value_(value) {
+
+}
+
+FieldValue::FieldValue(const std::string& fieldName, int value) : fieldName_(fieldName), value_(value) {
+
+}
+
+FieldValue::FieldValue(const std::string& fieldName, double value) : fieldName_(fieldName), value_(value) {
+
+}
+
+FieldValue::FieldValue(const std::string& fieldName, const std::string& value) : fieldName_(fieldName), value_(value) {
+
 }
 
 FieldValue::~FieldValue() {
 
 }
 
+FieldValue& FieldValue::SetFieldName(const std::string& name) {
+	fieldName_ = name;
+	return *this;
+}
+
 const std::string& FieldValue::FieldName() const {
 	return fieldName_;
 }
 
-TextFieldValue::TextFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
-
+Field::ValueType FieldValue::ValueType() const {
+	switch (value_.index()) {
+	case 1:
+		return Field::ValueType::Boolean;
+	case 2:
+		return Field::ValueType::Integer;
+	case 3:
+		return Field::ValueType::Double;
+	case 4:
+		return Field::ValueType::Text;
+	default:
+		return Field::ValueType::Unknown;
+	}
 }
 
-TextFieldValue::TextFieldValue(const TextFieldValue& v) : FieldValue(v.FieldName()) {
-	value_ = v.value_;
+FieldValue* FieldValue::Clone() const {
+	return nullptr;
 }
 
-TextFieldValue::~TextFieldValue() {
-
-}
-
-Field::ValueType TextFieldValue::ValueType() const {
-	return Field::Text;
-}
-
-FieldValue* TextFieldValue::Clone() const {
-	return new TextFieldValue(*this);
-}
-
-TextFieldValue& TextFieldValue::Value(const std::string& v) {
+FieldValue& FieldValue::SetBool(bool v) {
 	value_ = v;
 	return *this;
 }
 
-const std::string& TextFieldValue::Value() const {
-	return value_;
-}
-
-DoubleFieldValue::DoubleFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
-
-}
-
-DoubleFieldValue::DoubleFieldValue(const DoubleFieldValue& v) : FieldValue(v.FieldName()) {
-	value_ = v.value_;
-}
-
-DoubleFieldValue::~DoubleFieldValue() {
-
-}
-
-Field::ValueType DoubleFieldValue::ValueType() const {
-	return Field::Double;
-}
-
-FieldValue* DoubleFieldValue::Clone() const {
-	return new DoubleFieldValue(*this);
-}
-
-DoubleFieldValue& DoubleFieldValue::Value(double v) {
+FieldValue& FieldValue::SetInt(int v) {
 	value_ = v;
 	return *this;
 }
 
-double DoubleFieldValue::Value() const {
-	return value_;
-}
-
-IntegerFieldValue::IntegerFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
-
-}
-
-IntegerFieldValue::IntegerFieldValue(const IntegerFieldValue& v) : FieldValue(v.FieldName()) {
-	value_ = v.value_;
-}
-
-IntegerFieldValue::~IntegerFieldValue() {
-
-}
-
-Field::ValueType IntegerFieldValue::ValueType() const {
-	return Field::Integer;
-}
-
-FieldValue* IntegerFieldValue::Clone() const {
-	return new IntegerFieldValue(*this);
-}
-
-IntegerFieldValue& IntegerFieldValue::Value(int v) {
+FieldValue& FieldValue::SetDouble(double v) {
 	value_ = v;
 	return *this;
 }
 
-int IntegerFieldValue::Value() const {
-	return value_;
-}
-
-bool BooleanFieldValue::IsTrue(const std::string& str) {
-	return geo3dml::IsTrue(str);
-}
-
-BooleanFieldValue::BooleanFieldValue(const std::string& fieldName) : FieldValue(fieldName) {
-
-}
-
-BooleanFieldValue::BooleanFieldValue(const BooleanFieldValue& v) : FieldValue(v.FieldName()) {
-	value_ = v.value_;
-}
-
-BooleanFieldValue::~BooleanFieldValue() {
-
-}
-
-Field::ValueType BooleanFieldValue::ValueType() const {
-	return Field::Boolean;
-}
-
-FieldValue* BooleanFieldValue::Clone() const {
-	return new BooleanFieldValue(*this);
-}
-
-BooleanFieldValue& BooleanFieldValue::Value(bool v) {
+FieldValue& FieldValue::SetString(const std::string& v) {
 	value_ = v;
 	return *this;
 }
 
-bool BooleanFieldValue::Value() const {
-	return value_;
+bool FieldValue::IsBool() const {
+	return value_.index() == 1;
+}
+
+bool FieldValue::IsInt() const {
+	return value_.index() == 2;
+}
+
+bool FieldValue::IsDouble() const {
+	return value_.index() == 3;
+}
+
+bool FieldValue::IsString() const {
+	return value_.index() == 4;
+}
+
+bool FieldValue::GetBool() const {
+	try {
+		return std::get<bool>(value_);
+	} catch (...) {
+		return false;
+	}
+}
+
+int FieldValue::GetInt() const {
+	try {
+		return std::get<int>(value_);
+	} catch (...) {
+		return 0;
+	}
+}
+
+double FieldValue::GetDouble() const {
+	try {
+		return std::get<double>(value_);
+	} catch (...) {
+		return 0.0;
+	}
+}
+
+std::string FieldValue::GetString() const {
+	try {
+		return std::get<std::string>(value_);
+	} catch (...) {
+		return std::string();
+	}
 }

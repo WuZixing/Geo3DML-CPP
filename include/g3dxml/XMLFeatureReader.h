@@ -22,7 +22,7 @@ namespace g3dxml {
 	private:
 		bool ReadFields(xmlTextReaderPtr reader, geo3dml::Feature* feature);
 		bool ReadField(xmlTextReaderPtr reader, geo3dml::Feature* feature);
-		bool ReadFieldValue(xmlTextReaderPtr reader, const std::string& elementName, geo3dml::FieldValue* value);
+		bool ReadFieldValue(xmlTextReaderPtr reader, const std::string& elementName, geo3dml::Field::ValueType valueType, geo3dml::FieldValue* value);
 
 	private:
 		static std::string Element_Name;

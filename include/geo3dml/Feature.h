@@ -28,8 +28,8 @@ namespace geo3dml {
 		//@}
 
 		//{@
-		Feature& SetField(FieldValue* fv);
-		FieldValue* GetField(const std::string& name) const;
+		Feature& SetField(const FieldValue& fv);
+		const FieldValue* GetField(const std::string& name) const;
 		std::vector<std::string> GetFieldNames() const;
 		//@}
 
@@ -47,6 +47,6 @@ namespace geo3dml {
 		std::string name_;
 		std::string parentFeatureClassId_;
 		std::vector<Geometry*> geometries_;
-		std::map<std::string, geo3dml::FieldValue*> fieldValues_;
+		std::map<std::string, geo3dml::FieldValue> fieldValues_;
 	};
 }

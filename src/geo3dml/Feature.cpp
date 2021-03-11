@@ -12,12 +12,6 @@ Feature::~Feature() {
 		delete *citor;
 		citor++;
 	}
-	std::map<std::string, geo3dml::FieldValue*>::iterator itor = fieldValues_.begin();
-	while (itor != fieldValues_.end()) {
-		delete itor->second;
-		itor->second = NULL;
-		++itor;
-	}
 }
 
 Feature& Feature::SetName(const std::string& name) {
@@ -60,25 +54,22 @@ std::string Feature::GetParentFeatureClass() const {
 	return parentFeatureClassId_;
 }
 
-Feature& Feature::SetField(FieldValue* fv) {
-	if (fv == NULL) {
-		return *this;
-	}
-	fieldValues_[fv->FieldName()] = fv;
+Feature& Feature::SetField(const FieldValue& fv) {
+	fieldValues_[fv.FieldName()] = fv;
 	return *this;
 }
 
-FieldValue* Feature::GetField(const std::string& name) const {
+const FieldValue* Feature::GetField(const std::string& name) const {
 	if (fieldValues_.find(name) != fieldValues_.cend()) {
-		return fieldValues_.find(name)->second;
+		return &(fieldValues_.find(name)->second);
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 
 std::vector<std::string> Feature::GetFieldNames() const {
 	std::vector<std::string> names;
-	std::map<std::string, geo3dml::FieldValue*>::const_iterator citor = fieldValues_.cbegin();
+	std::map<std::string, geo3dml::FieldValue>::const_iterator citor = fieldValues_.cbegin();
 	while (citor != fieldValues_.cend()) {
 		names.push_back(citor->first);
 		++citor;

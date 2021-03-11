@@ -60,8 +60,8 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 	if (fieldNumber > 0) {
 		output << "<Fields>" << std::endl;
 		for (size_t f = 0; f < fieldNumber; ++f) {
-			geo3dml::FieldValue* fv = feature->GetField(fieldNames[f]);
-			if (fv == NULL) {
+			const geo3dml::FieldValue* fv = feature->GetField(fieldNames[f]);
+			if (fv == nullptr) {
 				continue;
 			}
 			output << "<Field Name=\"" << fv->FieldName() << "\">" << std::endl;
@@ -69,31 +69,20 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 			output << "<swe:" << elementName << ">" << std::endl;
 			switch (fv->ValueType()) {
 			case geo3dml::Field::Text: {
-				geo3dml::TextFieldValue* textValue = dynamic_cast<geo3dml::TextFieldValue*>(fv);
-				if (textValue != NULL) {
-					output << "<swe:value>" << textValue->Value() << "</swe:value>" << std::endl;
-				}
+				output << "<swe:value>" << fv->GetString() << "</swe:value>" << std::endl;
 				break;
 			}
 			case geo3dml::Field::Double: {
-				geo3dml::DoubleFieldValue* doubleValue = dynamic_cast<geo3dml::DoubleFieldValue*>(fv);
-				if (doubleValue != NULL) {
-					output << "<swe:value>" << doubleValue->Value() << "</swe:value>" << std::endl;
-				}
+				output << "<swe:value>" << fv->GetDouble() << "</swe:value>" << std::endl;
 				break;
 			}
 			case geo3dml::Field::Integer: {
-				geo3dml::IntegerFieldValue* intValue = dynamic_cast<geo3dml::IntegerFieldValue*>(fv);
-				if (intValue != NULL) {
-					output << "<swe:value>" << intValue->Value() << "</swe:value>" << std::endl;
-				}
+				output << "<swe:value>" << fv->GetInt() << "</swe:value>" << std::endl;
 				break;
 			}
 			case geo3dml::Field::Boolean: {
-				geo3dml::BooleanFieldValue* boolValue = dynamic_cast<geo3dml::BooleanFieldValue*>(fv);
-				if (boolValue != NULL) {
-					output << "<swe:value>" << boolValue->Value() << "</swe:value>" << std::endl;
-				}
+				output << "<swe:value>" << fv->GetBool() << "</swe:value>" << std::endl;
+				break;
 			}
 			default:
 				break;

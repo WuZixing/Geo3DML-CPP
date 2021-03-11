@@ -1,86 +1,45 @@
 #pragma once
 
+#include <variant>
 #include "Field.h"
 
 namespace geo3dml {
 
 	class FieldValue {
 	public:
+		static bool IsTrue(const std::string& str);
+	public:
+		FieldValue();
 		FieldValue(const std::string& fieldName);
+		FieldValue(const std::string& fieldName, bool value);
+		FieldValue(const std::string& fieldName, int value);
+		FieldValue(const std::string& fieldName, double value);
+		FieldValue(const std::string& fieldName, const std::string& value);
 		virtual ~FieldValue();
 
+		FieldValue& SetFieldName(const std::string& name);
 		const std::string& FieldName() const;
 
-		virtual Field::ValueType ValueType() const = 0;
-		virtual FieldValue* Clone() const = 0;
+		virtual Field::ValueType ValueType() const;
+	protected:
+		virtual FieldValue* Clone() const;
+
+	public:
+		FieldValue& SetBool(bool v);
+		FieldValue& SetInt(int v);
+		FieldValue& SetDouble(double v);
+		FieldValue& SetString(const std::string& v);
+		bool IsBool() const;
+		bool IsInt() const;
+		bool IsDouble() const;
+		bool IsString() const;
+		bool GetBool() const;
+		int GetInt() const;
+		double GetDouble() const;
+		std::string GetString() const;
 
 	private:
 		std::string fieldName_;
-	};
-
-	class TextFieldValue : public FieldValue {
-	public:
-		TextFieldValue(const std::string& fieldName);
-		TextFieldValue(const TextFieldValue& v);
-		virtual ~TextFieldValue();
-
-		virtual Field::ValueType ValueType() const;
-		virtual FieldValue* Clone() const;
-
-		TextFieldValue& Value(const std::string& v);
-		const std::string& Value() const;
-
-	private:
-		std::string value_;
-	};
-
-	class DoubleFieldValue : public FieldValue {
-	public:
-		DoubleFieldValue(const std::string& fieldName);
-		DoubleFieldValue(const DoubleFieldValue& v);
-		virtual ~DoubleFieldValue();
-
-		virtual Field::ValueType ValueType() const;
-		virtual FieldValue* Clone() const;
-
-		DoubleFieldValue& Value(double v);
-		double Value() const;
-
-	private:
-		double value_;
-	};
-
-	class IntegerFieldValue : public FieldValue {
-	public:
-		IntegerFieldValue(const std::string& fieldName);
-		IntegerFieldValue(const IntegerFieldValue& v);
-		virtual ~IntegerFieldValue();
-
-		virtual Field::ValueType ValueType() const;
-		virtual FieldValue* Clone() const;
-
-		IntegerFieldValue& Value(int v);
-		int Value() const;
-
-	private:
-		int value_;
-	};
-
-	class BooleanFieldValue : public FieldValue {
-	public:
-		static bool IsTrue(const std::string& str);
-	public:
-		BooleanFieldValue(const std::string& fieldName);
-		BooleanFieldValue(const BooleanFieldValue& v);
-		virtual ~BooleanFieldValue();
-
-		virtual Field::ValueType ValueType() const;
-		virtual FieldValue* Clone() const;
-
-		BooleanFieldValue& Value(bool v);
-		bool Value() const;
-
-	private:
-		bool value_;
+		std::variant<std::monostate, bool, int, double, std::string> value_;
 	};
 }
