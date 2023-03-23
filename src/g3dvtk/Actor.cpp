@@ -8,6 +8,7 @@
 #include <g3dvtk/Annotation.h>
 #include <g3dvtk/ObjectFactory.h>
 #include <g3dvtk/ColorMap.h>
+#include <g3dvtk/DiscreteAttributeColorTransfer.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkDataSetMapper.h>
 #include <vtkProperty.h>
@@ -15,6 +16,22 @@
 #include <vtkPolyData.h>
 #include <vtkImageToStructuredGrid.h>
 #include <vtkActor2D.h>
+#include <vtkDiscretizableColorTransferFunction.h>
+#include <vtkPiecewiseFunction.h>
+#include <vtkDiscreteMarchingCubes.h>
+#include <vtkCellData.h>
+#include <vtkPointData.h>
+#include <vtkWindowedSincPolyDataFilter.h>
+#include <vtkThreshold.h>
+#include <vtkImageDataToPointSet.h>
+#include <set>
+#include <vtkDiscreteFlyingEdges3D.h>
+#include <vtkContourFilter.h>
+// #include <vtkSurfaceNets3D.h>
+#include <vtkConstrainedSmoothingFilter.h>
+#include <vtkPointSmoothingFilter.h>
+#include <vtkSmoothPolyDataFilter.h>
+#include <vtkExtractUnstructuredGrid.h>
 
 using namespace g3dvtk;
 
@@ -58,14 +75,123 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		} else {
 			g3dvtk::UniformGrid* grid = dynamic_cast<g3dvtk::UniformGrid*>(bindingGeometry_);
 			if (grid != NULL) {
-				vtkSmartPointer<vtkImageToStructuredGrid> algo = vtkSmartPointer<vtkImageToStructuredGrid>::New();
-				algo->SetInputData(grid->GetUniformGrid());
+				vtkUniformGrid* uniGrid = grid->GetUniformGrid();
+				geo3dml::ShapeProperty* shapeProp = grid->GetProperty(geo3dml::ShapeProperty::Vertex);
+				if (shapeProp != nullptr) {
+					const geo3dml::Field& field = shapeProp->GetFieldAt(0);
+					vtkPointData* ptData = uniGrid->GetPointData();
+					vtkDataArray* da = ptData->GetArray(field.Name().c_str());
+					ptData->SetScalars(da);
+				} else {
+					shapeProp = grid->GetProperty(geo3dml::ShapeProperty::Voxel);
+					if (shapeProp != nullptr) {
+						const geo3dml::Field& field = shapeProp->GetFieldAt(0);
+						vtkCellData* cellData = uniGrid->GetCellData();
+						vtkDataArray* da = cellData->GetArray(field.Name().c_str());
+						cellData->SetScalars(da);
+					}
+				}
+				// vtkSmartPointer<vtkImageToStructuredGrid> algo = vtkSmartPointer<vtkImageToStructuredGrid>::New();
+				// vtkSmartPointer<vtkDiscreteFlyingEdges3D> algo = vtkSmartPointer<vtkDiscreteFlyingEdges3D>::New();
+				vtkSmartPointer<vtkDiscreteMarchingCubes> algo = vtkSmartPointer<vtkDiscreteMarchingCubes>::New();
+				// vtkSmartPointer<vtkContourFilter> algo = vtkSmartPointer<vtkContourFilter>::New();
+				// vtkSmartPointer<vtkSurfaceNets3D> algo = vtkSmartPointer<vtkSurfaceNets3D>::New();
+				algo->SetInputData(uniGrid);
+				algo->GenerateValues(1, 3, 3);
+
+				//*
+				vtkSmartPointer<vtkWindowedSincPolyDataFilter> smoother = vtkSmartPointer<vtkWindowedSincPolyDataFilter>::New();
+				smoother->SetInputConnection(algo->GetOutputPort());
+				smoother->SetNumberOfIterations(8);
+				smoother->BoundarySmoothingOff();
+				smoother->FeatureEdgeSmoothingOff();
+				smoother->SetFeatureAngle(120);
+				smoother->SetEdgeAngle(120);
+				smoother->SetPassBand(0.001);
+				smoother->NonManifoldSmoothingOn();
+				smoother->NormalizeCoordinatesOn();
+				//*/
+				/*/
+				vtkSmartPointer<vtkSmoothPolyDataFilter> smoother = vtkSmartPointer<vtkSmoothPolyDataFilter>::New();
+				smoother->SetInputConnection(algo->GetOutputPort());
+				smoother->SetNumberOfIterations(8);
+				smoother->BoundarySmoothingOn();
+				smoother->FeatureEdgeSmoothingOn();
+				smoother->SetFeatureAngle(120);
+				*/
+
+				vtkSmartPointer<vtkThreshold> selector = vtkSmartPointer<vtkThreshold>::New();
+				selector->SetInputConnection(smoother->GetOutputPort());
+				selector->SetThresholdFunction(vtkThreshold::THRESHOLD_BETWEEN);
+				selector->SetLowerThreshold(0);
+				selector->SetUpperThreshold(5);
+				selector->SetInputArrayToProcess(
+					0, 0, 0, vtkDataObject::FIELD_ASSOCIATION_CELLS, vtkDataSetAttributes::SCALARS);
+				//*/
+
 				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-				mapper->SetInputConnection(algo->GetOutputPort());
+				mapper->SetInputConnection(selector->GetOutputPort());
 				vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 				actor->SetMapper(mapper);
 				SetRandomRenderOption(actor->GetProperty());
 				vtkProp_ = actor;
+				//*//////////////////////////////////////////
+				if (shapeProp != nullptr) {
+					const geo3dml::Field& field = shapeProp->GetFieldAt(0);
+					int dimI = 0, dimJ = 0, dimK = 0;
+					grid->GetDimensions(dimI, dimJ, dimK);
+					const int cellNumber = dimK * dimJ * dimI;
+					if (field.DataType() == geo3dml::Field::Integer) {
+						std::set<int> attriValues;
+						int minValue = 1, maxValue = -1;
+						for (int i = 0; i < cellNumber; ++i) {
+							int value = shapeProp->IntValue(0, i);
+							if (value == -99) {
+								continue;
+							}
+							attriValues.insert(value);
+							if (minValue > maxValue) {
+								minValue = value;
+								maxValue = value;
+							} else {
+								if (minValue > value) {
+									minValue = value;
+								}
+								if (maxValue < value) {
+									maxValue = value;
+								}
+							}
+						}
+						g3dvtk::DiscreteAttributeColorTransfer colorMap;
+						for (std::set<int>::const_iterator citor = attriValues.cbegin(); citor != attriValues.cend(); ++citor) {
+							colorMap.InsertAttribute(*citor);
+						}
+						colorMap.Compile();
+						vtkSmartPointer<vtkDiscretizableColorTransferFunction> colorFunc = vtkSmartPointer<vtkDiscretizableColorTransferFunction>::New();
+						colorFunc->DiscretizeOn();
+						colorFunc->SetNumberOfValues(attriValues.size());
+						double r = 0, g = 0, b = 0;
+						for (std::set<int>::const_iterator citor = attriValues.cbegin(); citor != attriValues.cend(); ++citor) {
+							colorMap.PickUpColor(*citor, r, g, b);
+							colorFunc->AddRGBPoint(*citor, r, g, b);
+							colorFunc->SetAnnotation(vtkVariant(*citor), std::to_string(*citor).c_str());
+						}
+						vtkSmartPointer<vtkPiecewiseFunction> alphaFunc = vtkSmartPointer<vtkPiecewiseFunction>::New();
+						alphaFunc->AddSegment(minValue - 1e-6, 1, maxValue + 1e-6, 1);
+						alphaFunc->ClampingOff();
+						colorFunc->SetScalarOpacityFunction(alphaFunc);
+						colorFunc->EnableOpacityMappingOff();
+						colorFunc->ClampingOff();
+						colorFunc->Build();
+						// mapper->SetScalarModeToUseCellFieldData();
+						// mapper->SetScalarModeToUsePointFieldData();
+						mapper->SetLookupTable(colorFunc);
+						// mapper->SelectColorArray(field.Name().c_str());
+						// mapper->ScalarVisibilityOn();
+						// mapper->ScalarVisibilityOff();
+					}
+				}
+				///////////////////////////////////////////*/
 			} else {
 				g3dvtk::LineString* lineString = dynamic_cast<g3dvtk::LineString*>(bindingGeometry_);
 				if (lineString != NULL) {
