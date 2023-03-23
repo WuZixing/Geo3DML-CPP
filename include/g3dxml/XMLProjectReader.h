@@ -13,6 +13,7 @@ namespace g3dxml {
 	public:
 		/// Constructor.
 		/// @param factory the factory of Geo3DML objects. The factory object should be deallocated by the caller.
+		/// @param projectDirectory The base directory used to build absolute path for included XML files, which are usually included by relative paths.
 		XMLProjectReader(geo3dml::ObjectFactory* factory, const std::string& projectDirectory);
 		virtual ~XMLProjectReader();
 
