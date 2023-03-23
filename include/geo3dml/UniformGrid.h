@@ -16,7 +16,7 @@ namespace geo3dml {
 		/// @param stepZ Interpoint space along the Z axis.
 		/// @param dimI Number of cells along the X axis.
 		/// @param dimJ Number of cells along the Y axis.
-		/// @param dimZ Number of cells along the Z axis.
+		/// @param dimK Number of cells along the Z axis.
 		UniformGrid(
 			double originX, double originY, double originZ,
 			double stepX, double stepY, double stepZ,
@@ -31,7 +31,7 @@ namespace geo3dml {
 		/// Get cell dimensions along X, Y and Z axes respectively.
 		/// @param[out] i Number of cells along the X axis.
 		/// @param[out] j Number of cells along the Y axis.
-		/// @param[out] z Number of cells along the Z axis.
+		/// @param[out] k Number of cells along the Z axis.
 		virtual void GetDimensions(int& i, int& j, int& k) const = 0;
 		virtual void GetOrigin(double& x, double& y, double& z) const = 0;
 		virtual void GetSteps(double& sx, double& sy, double& sz) const = 0;

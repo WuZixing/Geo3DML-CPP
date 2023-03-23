@@ -2,9 +2,11 @@
 !.gitignore
 !.gitmodules
 !bin/
+!doc/
 !include/
 !lib/
 !src/
 !LICENSE
 !README.md
+!Doxyfile
 !CMakeLists.txt
