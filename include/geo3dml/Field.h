@@ -47,6 +47,9 @@ namespace geo3dml {
 		Field& Description(const std::string& s);
 		std::string Description() const;
 
+		Field& NoDataValue(const std::string& v);
+		const std::string& NoDataValue() const;
+
 	private:
 		std::string name_;
 		std::string label_;
@@ -54,5 +57,6 @@ namespace geo3dml {
 		std::string uom_;
 		std::string definition_;
 		std::string description_;
+		std::string noDataValue_;
 	};
 }
