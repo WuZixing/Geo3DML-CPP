@@ -15,7 +15,7 @@ namespace geo3dml {
 	class Context {
 	public:
 		/// Constructor.
-		/// @param factory the factory of Geo3DML objects. The factory object should be deallocated by the caller.
+		/// @param g3dFactory the factory of Geo3DML objects. The factory object should be deallocated by the caller.
 		Context(ObjectFactory* g3dFactory);
 		virtual ~Context();
 

@@ -106,3 +106,12 @@ Field& Field::Description(const std::string& s) {
 std::string Field::Description() const {
 	return description_;
 }
+
+Field& Field::NoDataValue(const std::string& v) {
+	noDataValue_ = v;
+	return *this;
+}
+
+const std::string& Field::NoDataValue() const {
+	return noDataValue_;
+}

@@ -4,7 +4,7 @@
 
 namespace g3dvtk {
 
-	/// Color map of Smooth Cool Warm from <a href="http://www.kennethmoreland.com/color-advice/">Color Map Advice for Scientific Visualization</a>.
+	/// Color map of Smooth Cool Warm from <a href="https://www.kennethmoreland.com/color-advice/">Color Map Advice for Scientific Visualization</a>.
 	class ColorMapCoolToWarm : public ColorMap {
 	public:
 		ColorMapCoolToWarm();
