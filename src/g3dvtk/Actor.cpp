@@ -18,20 +18,7 @@
 #include <vtkActor2D.h>
 #include <vtkDiscretizableColorTransferFunction.h>
 #include <vtkPiecewiseFunction.h>
-#include <vtkDiscreteMarchingCubes.h>
-#include <vtkCellData.h>
-#include <vtkPointData.h>
-#include <vtkWindowedSincPolyDataFilter.h>
-#include <vtkThreshold.h>
-#include <vtkImageDataToPointSet.h>
 #include <set>
-#include <vtkDiscreteFlyingEdges3D.h>
-#include <vtkContourFilter.h>
-// #include <vtkSurfaceNets3D.h>
-#include <vtkConstrainedSmoothingFilter.h>
-#include <vtkPointSmoothingFilter.h>
-#include <vtkSmoothPolyDataFilter.h>
-#include <vtkExtractUnstructuredGrid.h>
 
 using namespace g3dvtk;
 
@@ -54,6 +41,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	if (tin != NULL) {
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		mapper->SetInputData(tin->GetPolyData());
+		mapper->ScalarVisibilityOff();
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 		actor->SetMapper(mapper);
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
@@ -76,66 +64,19 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 			g3dvtk::UniformGrid* grid = dynamic_cast<g3dvtk::UniformGrid*>(bindingGeometry_);
 			if (grid != NULL) {
 				vtkUniformGrid* uniGrid = grid->GetUniformGrid();
+				vtkSmartPointer<vtkImageToStructuredGrid> algo = vtkSmartPointer<vtkImageToStructuredGrid>::New();
+				algo->SetInputData(uniGrid);
+				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+				mapper->SetInputConnection(algo->GetOutputPort());
 				geo3dml::ShapeProperty* shapeProp = grid->GetProperty(geo3dml::ShapeProperty::Vertex);
 				if (shapeProp != nullptr) {
-					const geo3dml::Field& field = shapeProp->GetFieldAt(0);
-					vtkPointData* ptData = uniGrid->GetPointData();
-					vtkDataArray* da = ptData->GetArray(field.Name().c_str());
-					ptData->SetScalars(da);
+					mapper->SetScalarModeToUsePointFieldData();
 				} else {
 					shapeProp = grid->GetProperty(geo3dml::ShapeProperty::Voxel);
 					if (shapeProp != nullptr) {
-						const geo3dml::Field& field = shapeProp->GetFieldAt(0);
-						vtkCellData* cellData = uniGrid->GetCellData();
-						vtkDataArray* da = cellData->GetArray(field.Name().c_str());
-						cellData->SetScalars(da);
+						mapper->SetScalarModeToUseCellFieldData();
 					}
 				}
-				// vtkSmartPointer<vtkImageToStructuredGrid> algo = vtkSmartPointer<vtkImageToStructuredGrid>::New();
-				// vtkSmartPointer<vtkDiscreteFlyingEdges3D> algo = vtkSmartPointer<vtkDiscreteFlyingEdges3D>::New();
-				vtkSmartPointer<vtkDiscreteMarchingCubes> algo = vtkSmartPointer<vtkDiscreteMarchingCubes>::New();
-				// vtkSmartPointer<vtkContourFilter> algo = vtkSmartPointer<vtkContourFilter>::New();
-				// vtkSmartPointer<vtkSurfaceNets3D> algo = vtkSmartPointer<vtkSurfaceNets3D>::New();
-				algo->SetInputData(uniGrid);
-				algo->GenerateValues(1, 3, 3);
-
-				//*
-				vtkSmartPointer<vtkWindowedSincPolyDataFilter> smoother = vtkSmartPointer<vtkWindowedSincPolyDataFilter>::New();
-				smoother->SetInputConnection(algo->GetOutputPort());
-				smoother->SetNumberOfIterations(8);
-				smoother->BoundarySmoothingOff();
-				smoother->FeatureEdgeSmoothingOff();
-				smoother->SetFeatureAngle(120);
-				smoother->SetEdgeAngle(120);
-				smoother->SetPassBand(0.001);
-				smoother->NonManifoldSmoothingOn();
-				smoother->NormalizeCoordinatesOn();
-				//*/
-				/*/
-				vtkSmartPointer<vtkSmoothPolyDataFilter> smoother = vtkSmartPointer<vtkSmoothPolyDataFilter>::New();
-				smoother->SetInputConnection(algo->GetOutputPort());
-				smoother->SetNumberOfIterations(8);
-				smoother->BoundarySmoothingOn();
-				smoother->FeatureEdgeSmoothingOn();
-				smoother->SetFeatureAngle(120);
-				*/
-
-				vtkSmartPointer<vtkThreshold> selector = vtkSmartPointer<vtkThreshold>::New();
-				selector->SetInputConnection(smoother->GetOutputPort());
-				selector->SetThresholdFunction(vtkThreshold::THRESHOLD_BETWEEN);
-				selector->SetLowerThreshold(0);
-				selector->SetUpperThreshold(5);
-				selector->SetInputArrayToProcess(
-					0, 0, 0, vtkDataObject::FIELD_ASSOCIATION_CELLS, vtkDataSetAttributes::SCALARS);
-				//*/
-
-				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-				mapper->SetInputConnection(selector->GetOutputPort());
-				vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
-				actor->SetMapper(mapper);
-				SetRandomRenderOption(actor->GetProperty());
-				vtkProp_ = actor;
-				//*//////////////////////////////////////////
 				if (shapeProp != nullptr) {
 					const geo3dml::Field& field = shapeProp->GetFieldAt(0);
 					int dimI = 0, dimJ = 0, dimK = 0;
@@ -183,15 +124,14 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 						colorFunc->EnableOpacityMappingOff();
 						colorFunc->ClampingOff();
 						colorFunc->Build();
-						// mapper->SetScalarModeToUseCellFieldData();
-						// mapper->SetScalarModeToUsePointFieldData();
 						mapper->SetLookupTable(colorFunc);
-						// mapper->SelectColorArray(field.Name().c_str());
-						// mapper->ScalarVisibilityOn();
-						// mapper->ScalarVisibilityOff();
+						mapper->SelectColorArray(field.Name().c_str());
 					}
 				}
-				///////////////////////////////////////////*/
+				vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
+				actor->SetMapper(mapper);
+				SetRandomRenderOption(actor->GetProperty());
+				vtkProp_ = actor;
 			} else {
 				g3dvtk::LineString* lineString = dynamic_cast<g3dvtk::LineString*>(bindingGeometry_);
 				if (lineString != NULL) {
