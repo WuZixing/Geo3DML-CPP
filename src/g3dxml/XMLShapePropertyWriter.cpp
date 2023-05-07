@@ -85,7 +85,7 @@ void XMLShapePropertyWriter::WriteTextFieldValues(geo3dml::ShapeProperty* shapeP
 		<< "<gml:valueComponents>" << std::endl;
 	int valueNumber = shapeProperty->GetValueCount(fieldIndex);
 	for (int i = 0; i < valueNumber; ++i) {
-		// gml ±¾ÉíÃ»ÓÐÒ»°ãµÄ Text Êý¾ÝÀàÐÍ£¬ËùÒÔÊ¹ÓÃ swe:Text ¶ÔÏó¡£
+		// gml æœ¬èº«æ²¡æœ‰ä¸€èˆ¬çš„ Text æ•°æ®ç±»åž‹ï¼Œæ‰€ä»¥ä½¿ç”¨ swe:Text å¯¹è±¡ã€‚
 		output << "<swe:Text>" << shapeProperty->TextValue(fieldIndex, i) << "</swe:Text>" << std::endl;
 	}
 	output << "</gml:valueComponents>" << std::endl

@@ -1,3 +1,5 @@
+add_compile_options(/utf-8)
+
 # Geo3DML SDK
 find_file(GEO3DML_HEADER "geo3dml/ObjectFactory.h" PATHS ${GEO3DML_INCLUDE_DIRS})
 if(NOT GEO3DML_HEADER)
@@ -42,6 +44,7 @@ list(APPEND G3DVTK_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/DiscreteAttributeColorTransfer.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/Annotation.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiLineString.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/GTPVolume.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})
