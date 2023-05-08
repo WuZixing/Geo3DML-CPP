@@ -8,7 +8,7 @@
 namespace g3dvtk {
 
     /// @brief 基于VTK结构的广义三棱柱数据结构实现。
-    class GTPVolume : geo3dml::GTPVolume {
+    class GTPVolume : public geo3dml::GTPVolume {
     public:
         GTPVolume();
         virtual ~GTPVolume();
