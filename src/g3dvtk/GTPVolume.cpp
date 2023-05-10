@@ -72,7 +72,7 @@ int GTPVolume::GetPrismCount() const {
 	return gridData_->GetNumberOfCells();
 }
 
-bool GTPVolume::GetPrismAt(int i, int& topVertex1, int& topVertex2, int topVertex3, int bottomVertex1, int& bottomVertex2, int& bottomVertex3) const {
+bool GTPVolume::GetPrismAt(int i, int& topVertex1, int& topVertex2, int& topVertex3, int& bottomVertex1, int& bottomVertex2, int& bottomVertex3) const {
 	vtkIdType npts = 0;
 	const vtkIdType* pts = nullptr;
 	gridData_->GetCellPoints(i, npts, pts);

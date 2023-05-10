@@ -22,7 +22,7 @@ namespace geo3dml {
         //@{
         virtual int AppendPrism(int topVertex1, int topVertex2, int topVertex3, int bottomVertex1, int bottomVertex2, int bottomVertex3) = 0;
         virtual int GetPrismCount() const = 0;
-        virtual bool GetPrismAt(int i, int& topVertex1, int& topVertex2, int topVertex3, int bottomVertex1, int& bottomVertex2, int& bottomVertex3) const = 0;
+        virtual bool GetPrismAt(int i, int& topVertex1, int& topVertex2, int& topVertex3, int& bottomVertex1, int& bottomVertex2, int& bottomVertex3) const = 0;
         //@}
     };
 }

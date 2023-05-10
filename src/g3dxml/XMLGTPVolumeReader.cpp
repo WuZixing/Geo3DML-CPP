@@ -54,8 +54,8 @@ geo3dml::GTPVolume* XMLGTPVolumeReader::ReadVolume(xmlTextReaderPtr reader) {
 }
 
 bool XMLGTPVolumeReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::GTPVolume* gtp) {
-	std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
-	long idx = strtol(index.c_str(), nullptr, 10);
+	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
+	// long idx = strtol(index.c_str(), nullptr, 10);
 	std::string coordinates;
 	if (XMLReaderHelper::TextNode(reader, Element_Vertex, coordinates)) {
 		char* end = nullptr;
@@ -71,8 +71,8 @@ bool XMLGTPVolumeReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::GTPVolume*
 }
 
 bool XMLGTPVolumeReader::ReadPrism(xmlTextReaderPtr reader, geo3dml::GTPVolume* gtp) {
-	std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
-	long prismIndex = strtol(index.c_str(), nullptr, 10);
+	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
+	// long prismIndex = strtol(index.c_str(), nullptr, 10);
 	int status = xmlTextReaderRead(reader);
 	int topVertex1 = -1, topVertex2 = -1, topVertex3 = -1;
 	int bottomVertex1 = -1, bottomVertex2 = -1, bottomVertex3 = -1;
