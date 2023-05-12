@@ -9,6 +9,7 @@
 #include <g3dvtk/Actor.h>
 #include <g3dvtk/Annotation.h>
 #include <g3dvtk/MultiLineString.h>
+#include <g3dvtk/GTPVolume.h>
 
 using namespace g3dvtk;
 
@@ -82,6 +83,10 @@ geo3dml::UniformGrid* ObjectFactory::NewUniformGrid(
 
 geo3dml::Annotation* ObjectFactory::NewAnnotation() {
 	return new Annotation();
+}
+
+geo3dml::GTPVolume* ObjectFactory::NewGTPVolume() {
+	return new GTPVolume();
 }
 
 geo3dml::ShapeProperty* ObjectFactory::NewShapeProperty() {

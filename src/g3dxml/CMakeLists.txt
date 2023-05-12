@@ -1,3 +1,5 @@
+add_compile_options(/utf-8)
+
 # Geo3DML SDK
 find_file(GEO3DML_HEADER "geo3dml/ObjectFactory.h" PATHS ${GEO3DML_INCLUDE_DIRS})
 if(NOT GEO3DML_HEADER)
@@ -79,7 +81,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLineStringReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLPointReader.h
-  ${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
+    ${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiPointReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLayerWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMapReader.h
@@ -92,6 +94,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSurfaceSymbolizerReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMaterialReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGTPVolumeReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

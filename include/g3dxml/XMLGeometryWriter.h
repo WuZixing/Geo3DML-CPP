@@ -7,6 +7,7 @@
 #include <geo3dml/MultiPoint.h>
 #include <geo3dml/CornerPointGrid.h>
 #include <geo3dml/UniformGrid.h>
+#include <geo3dml/GTPVolume.h>
 #include <iostream>
 #include <g3dxml/XMLIO.h>
 
@@ -27,5 +28,6 @@ namespace g3dxml {
 		void WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output);
 		void WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output);
 		void WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output);
+		void WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream& output);
 	};
 }

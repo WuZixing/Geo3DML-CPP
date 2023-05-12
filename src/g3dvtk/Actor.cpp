@@ -6,6 +6,7 @@
 #include <g3dvtk/Point.h>
 #include <g3dvtk/MultiPoint.h>
 #include <g3dvtk/Annotation.h>
+#include <g3dvtk/GTPVolume.h>
 #include <g3dvtk/ObjectFactory.h>
 #include <g3dvtk/ColorMap.h>
 #include <vtkPolyDataMapper.h>
@@ -30,17 +31,17 @@ Actor::~Actor() {
 void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3dml::Symbolizer* sym) {
 	bindingFeature_ = feature;
 	bindingGeometry_ = geo;
-	if (bindingGeometry_ == NULL) {
+	if (bindingGeometry_ == nullptr) {
 		return;
 	}
 	g3dvtk::TIN* tin = dynamic_cast<g3dvtk::TIN*>(bindingGeometry_);
-	if (tin != NULL) {
+	if (tin != nullptr) {
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		mapper->SetInputData(tin->GetPolyData());
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 		actor->SetMapper(mapper);
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
-		if (surfaceSymbolizer != NULL) {
+		if (surfaceSymbolizer != nullptr) {
 			ConfigBySurfaceSymbolizer(surfaceSymbolizer, actor->GetProperty());
 		} else {
 			SetRandomRenderOption(actor->GetProperty());
@@ -48,7 +49,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		vtkProp_ = actor;
 	} else {
 		g3dvtk::CornerPointGrid* grid = dynamic_cast<g3dvtk::CornerPointGrid*>(bindingGeometry_);
-		if (grid != NULL) {
+		if (grid != nullptr) {
 			vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 			mapper->SetInputData(grid->GetStructuredGrid());
 			vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
@@ -57,7 +58,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 			vtkProp_ = actor;
 		} else {
 			g3dvtk::UniformGrid* grid = dynamic_cast<g3dvtk::UniformGrid*>(bindingGeometry_);
-			if (grid != NULL) {
+			if (grid != nullptr) {
 				vtkSmartPointer<vtkImageToStructuredGrid> algo = vtkSmartPointer<vtkImageToStructuredGrid>::New();
 				algo->SetInputData(grid->GetUniformGrid());
 				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
@@ -68,13 +69,13 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 				vtkProp_ = actor;
 			} else {
 				g3dvtk::LineString* lineString = dynamic_cast<g3dvtk::LineString*>(bindingGeometry_);
-				if (lineString != NULL) {
+				if (lineString != nullptr) {
 					vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 					mapper->SetInputData(lineString->GetPolyData());
 					vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 					actor->SetMapper(mapper);
 					geo3dml::LineSymbolizer* lineSymbolizer = dynamic_cast<geo3dml::LineSymbolizer*>(sym);
-					if (lineSymbolizer != NULL) {
+					if (lineSymbolizer != nullptr) {
 						ConfigByLineSymbolizer(lineSymbolizer, actor->GetProperty());
 					} else {
 						SetRandomRenderOption(actor->GetProperty());
@@ -82,13 +83,13 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 					vtkProp_ = actor;
 				} else {
 					g3dvtk::Point* point = dynamic_cast<g3dvtk::Point*>(bindingGeometry_);
-					if (point != NULL) {
+					if (point != nullptr) {
 						vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 						mapper->SetInputData(point->GetPolyData());
 						vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 						actor->SetMapper(mapper);
 						geo3dml::PointSymbolizer* pointSymbolizer = dynamic_cast<geo3dml::PointSymbolizer*>(sym);
-						if (pointSymbolizer != NULL) {
+						if (pointSymbolizer != nullptr) {
 							ConfigByPointSymbolizer(pointSymbolizer, actor->GetProperty());
 						} else {
 							SetRandomRenderOption(actor->GetProperty());
@@ -96,7 +97,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 						vtkProp_ = actor;
 					} else {
 						g3dvtk::Annotation* annotation = dynamic_cast<g3dvtk::Annotation*>(bindingGeometry_);
-						if (annotation != NULL) {
+						if (annotation != nullptr) {
 							vtkSmartPointer<vtkLabeledDataMapper> labelMapper = vtkSmartPointer<vtkLabeledDataMapper>::New();
 							annotation->ConfigLabelMapper(labelMapper);
 							vtkSmartPointer<vtkActor2D> actor2D = vtkSmartPointer<vtkActor2D>::New();
@@ -104,18 +105,28 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 							vtkProp_ = actor2D;
 						} else {
 							g3dvtk::MultiPoint* mPoint = dynamic_cast<g3dvtk::MultiPoint*>(bindingGeometry_);
-							if (mPoint != NULL) {
+							if (mPoint != nullptr) {
 								vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 								mapper->SetInputData(mPoint->GetPolyData());
 								vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 								actor->SetMapper(mapper);
 								geo3dml::PointSymbolizer* pointSymbolizer = dynamic_cast<geo3dml::PointSymbolizer*>(sym);
-								if (pointSymbolizer != NULL) {
+								if (pointSymbolizer != nullptr) {
 									ConfigByPointSymbolizer(pointSymbolizer, actor->GetProperty());
 								} else {
 									SetRandomRenderOption(actor->GetProperty());
 								}
 								vtkProp_ = actor;
+							} else {
+								g3dvtk::GTPVolume* gtp = dynamic_cast<g3dvtk::GTPVolume*>(bindingGeometry_);
+								if (gtp != nullptr) {
+									vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
+									mapper->SetInputData(gtp->GetVolumeData());
+									vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
+									actor->SetMapper(mapper);
+									SetRandomRenderOption(actor->GetProperty());
+									vtkProp_ = actor;
+								}
 							}
 						}
 					}
@@ -143,42 +154,42 @@ void Actor::SetVisible(bool show) {
 }
 
 geo3dml::Symbolizer* Actor::MakeSymbozier() const {
-	if (bindingGeometry_ == NULL) {
-		return NULL;
+	if (bindingGeometry_ == nullptr) {
+		return nullptr;
 	}
-	if (vtkProp_ == NULL || !vtkProp_->IsA("vtkActor")) {
-		return NULL;
+	if (vtkProp_ == nullptr || !vtkProp_->IsA("vtkActor")) {
+		return nullptr;
 	}
 	vtkActor* actor = vtkActor::SafeDownCast(vtkProp_);
 	g3dvtk::ObjectFactory g3dFactory;
 	g3dvtk::TIN* tin = dynamic_cast<g3dvtk::TIN*>(bindingGeometry_);
-	if (tin != NULL) {
+	if (tin != nullptr) {
 		geo3dml::SurfaceSymbolizer* surfaceSym = g3dFactory.NewSurfaceSymbolizer();
 		ToSurfaceSymbolizer(actor->GetProperty(), surfaceSym);
 		return surfaceSym;
 	} else {
 		g3dvtk::CornerPointGrid* grid = dynamic_cast<g3dvtk::CornerPointGrid*>(bindingGeometry_);
-		if (grid != NULL) {
-			return NULL;
+		if (grid != nullptr) {
+			return nullptr;
 		} else {
 			g3dvtk::UniformGrid* grid = dynamic_cast<g3dvtk::UniformGrid*>(bindingGeometry_);
-			if (grid != NULL) {
-				return NULL;
+			if (grid != nullptr) {
+				return nullptr;
 			} else {
 				g3dvtk::LineString* lineString = dynamic_cast<g3dvtk::LineString*>(bindingGeometry_);
-				if (lineString != NULL) {
+				if (lineString != nullptr) {
 					geo3dml::LineSymbolizer* lineSym = g3dFactory.NewLineSymbolizer();
 					ToLineSymbolizer(actor->GetProperty(), lineSym);
 					return lineSym;
 				} else {
 					g3dvtk::Point* point = dynamic_cast<g3dvtk::Point*>(bindingGeometry_);
-					if (point != NULL) {
+					if (point != nullptr) {
 						geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
 						ToPointSymbolizer(actor->GetProperty(), pointSym);
 						return pointSym;
 					} else {
 						g3dvtk::MultiPoint* mPoint = dynamic_cast<g3dvtk::MultiPoint*>(bindingGeometry_);
-						if (mPoint != NULL) {
+						if (mPoint != nullptr) {
 							geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
 							ToPointSymbolizer(actor->GetProperty(), pointSym);
 							return pointSym;
@@ -188,7 +199,7 @@ geo3dml::Symbolizer* Actor::MakeSymbozier() const {
 			}
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 vtkProp* Actor::GetVTKProp() const {

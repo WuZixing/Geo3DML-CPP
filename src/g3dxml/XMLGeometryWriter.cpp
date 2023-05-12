@@ -40,6 +40,11 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 								geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
 								if (rectGrid != NULL) {
 									WriteUniformGrid(rectGrid, output);
+								} else {
+									geo3dml::GTPVolume* gtpGrid = dynamic_cast<geo3dml::GTPVolume*>(geo);
+									if (gtpGrid != nullptr) {
+										WriteGTPVolume(gtpGrid, output);
+									}
 								}
 							}
 						}
@@ -196,4 +201,35 @@ void XMLGeometryWriter::WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std:
 	}
 	output << "</Cells>" << std::endl;
 	output << "</GeoUniformGrid>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream& output) {
+	output << "<GTPVolume gml:id=\"" << gtpGrid->GetID() << "\">" << std::endl;
+	// vertices
+	int vertexNumber = gtpGrid->GetVertexCount();
+	if (vertexNumber > 0) {
+		output << "<Vertices>" << std::endl;
+		double x, y, z;
+		for (int i = 0; i < vertexNumber; ++i) {
+			gtpGrid->GetVertexAt(i, x, y, z);
+			output << "<Vertex gml:srsDimension=\"3\">" << x << " " << y << " " << z << "</Vertex>" << std::endl;
+		}
+		output << "</Vertices>" << std::endl;
+	}
+	// prisms
+	int prismNumber = gtpGrid->GetPrismCount();
+	if (prismNumber > 0) {
+		output << "<Prisms>" << std::endl;
+		int tv1, tv2, tv3, bv1, bv2, bv3;
+		for (int i = 0; i < prismNumber; ++i) {
+			gtpGrid->GetPrismAt(i, tv1, tv2, tv3, bv1, bv2, bv3);
+			output << "<Prism>" << std::endl
+				<< "<TopTriangle>" << tv1 << " " << tv2 << " " << tv3 << "</TopTriangle>" << std::endl
+				<< "<BottomTriangle>" << bv1 << " " << bv2 << " " << bv3 << "</BottomTriangle>" << std::endl;
+			// << "<NeighborList>-1 -1 -1</NeighborList>" << std::endl;
+			output << "</Prism>" << std::endl;
+		}
+		output << "</Prisms>" << std::endl;
+	}
+	output << "</GTPVolume>" << std::endl;
 }

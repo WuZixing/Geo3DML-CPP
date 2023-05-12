@@ -7,6 +7,7 @@
 #include <g3dxml/XMLPointReader.h>
 #include <g3dxml/XMLMultiPointReader.h>
 #include <g3dxml/XMLAnnotationReader.h>
+#include <g3dxml/XMLGTPVolumeReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -20,11 +21,11 @@ XMLGeometryReader::XMLGeometryReader(geo3dml::ObjectFactory* factory) {
 }
 
 XMLGeometryReader::~XMLGeometryReader() {
-	g3dFactory_ = NULL;
+	g3dFactory_ = nullptr;
 }
 
 geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
-	geo3dml::Geometry* geometry = NULL;
+	geo3dml::Geometry* geometry = nullptr;
 	std::string geoName = XMLReaderHelper::Attribute(reader, "Name");
 	std::string geoLOD = XMLReaderHelper::Attribute(reader, "LOD");
 	bool metEndElement = false;
@@ -38,20 +39,14 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_Shape)) {
 				geometry = ReadShape(reader);
-				if (geometry != NULL) {
+				if (geometry != nullptr) {
 					geometry->SetName(geoName);
-					geometry->SetLODLevel(strtol(geoLOD.c_str(), NULL, 10));
-				} else {
-					break;
+					geometry->SetLODLevel(strtol(geoLOD.c_str(), nullptr, 10));
 				}
 			} else if (geo3dml::IsiEqual(localName, Element_ShapeProperty)) {
-				if (geometry == NULL) {
-					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "Shape object must be available before reading shape property.");
-					SetStatus(false, err);
-				} else {
-					if (!ReadShapeProperty(reader, geometry)) {
-						break;
-					}
+				if (geometry != nullptr) {
+					// Shape object must be available before reading shape property.
+					ReadShapeProperty(reader, geometry);
 				}
 			}
 		}
@@ -63,13 +58,13 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 	}
 	if (!IsOK()) {
 		delete geometry;
-		geometry = NULL;
+		geometry = nullptr;
 	}
 	return geometry;
 }
 
 geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
-	geo3dml::Geometry* geo = NULL;
+	geo3dml::Geometry* geo = nullptr;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -80,51 +75,50 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 			if (geo3dml::IsiEqual(localName, XMLTINReader::Element)) {
 				XMLTINReader tinReader(g3dFactory_);
 				geo = tinReader.ReadTIN(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, tinReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLCornerPointGridReader::Element)) {
 				XMLCornerPointGridReader gridReader(g3dFactory_);
 				geo = gridReader.ReadCornerPointGrid(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, gridReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLUniformGridReader::Element)) {
 				XMLUniformGridReader gridReader(g3dFactory_);
 				geo = gridReader.ReadUniformGrid(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, gridReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLLineStringReader::Element)) {
 				XMLLineStringReader lineStringReader(g3dFactory_);
 				geo = lineStringReader.ReadLineString(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, lineStringReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLPointReader::Element)) {
 				XMLPointReader pointReader(g3dFactory_);
 				geo = pointReader.ReadPoint(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, pointReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLMultiPointReader::Element)) {
 				XMLMultiPointReader mPointReader(g3dFactory_);
 				geo = mPointReader.ReadMultiPoint(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, mPointReader.Error());
-					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLAnnotationReader::Element)) {
 				XMLAnnotationReader annotationReader(g3dFactory_);
 				geo = annotationReader.ReadAnnotation(reader);
-				if (geo == NULL) {
+				if (geo == nullptr) {
 					SetStatus(false, annotationReader.Error());
-					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, XMLGTPVolumeReader::Element)) {
+				XMLGTPVolumeReader gtpReader(g3dFactory_);
+				geo = gtpReader.ReadVolume(reader);
+				if (geo == nullptr) {
+					SetStatus(false, gtpReader.Error());
 				}
 			}
 		}
@@ -134,9 +128,9 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_Shape);
 		SetStatus(false, err);
 	}
-	if (!IsOK() && geo != NULL) {
+	if (!IsOK() && geo != nullptr) {
 		delete geo;
-		geo = NULL;
+		geo = nullptr;
 	}
 	return geo;
 }
@@ -153,7 +147,6 @@ bool XMLGeometryReader::ReadShapeProperty(xmlTextReaderPtr reader, geo3dml::Geom
 				XMLGeoDiscreteCoverageReader coverageReader(g3dFactory_);
 				if (!coverageReader.ReadGeoDiscreteCoverage(reader, toShape)) {
 					SetStatus(false, coverageReader.Error());
-					break;
 				}
 			}
 		}

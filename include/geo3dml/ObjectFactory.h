@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Project.h"
@@ -18,6 +19,7 @@
 #include "FeatureTypeStyle.h"
 #include "Annotation.h"
 #include "MultiLineString.h"
+#include "GTPVolume.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -56,6 +58,7 @@ namespace geo3dml {
 			int dimI, int dimJ, int dimK
 		) = 0;
 		virtual Annotation* NewAnnotation() = 0;
+		virtual GTPVolume* NewGTPVolume() = 0;
 		//@}
 
 		/// @name shape property.

@@ -1,3 +1,4 @@
+add_compile_options(/utf-8)
 
 # output variables
 set(GEO3DML_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include CACHE PATH "")
@@ -43,6 +44,8 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Box3D.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Point3D.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiLineString.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/GeoVolume.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/GTPVolume.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC
