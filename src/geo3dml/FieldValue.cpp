@@ -8,27 +8,33 @@ bool FieldValue::IsTrue(const std::string& str) {
 }
 
 FieldValue::FieldValue() {
-
+	value_.vDouble = 0;
+	valueType_ = Field::ValueType::Unknown;
 }
 
 FieldValue::FieldValue(const std::string& fieldName) : fieldName_(fieldName) {
-
+	value_.vDouble = 0;
+	valueType_ = Field::ValueType::Unknown;
 }
 
-FieldValue::FieldValue(const std::string& fieldName, bool value) : fieldName_(fieldName), value_(value) {
-
+FieldValue::FieldValue(const std::string& fieldName, bool value) : fieldName_(fieldName) {
+	value_.vBool = value;
+	valueType_ = Field::ValueType::Boolean;
 }
 
-FieldValue::FieldValue(const std::string& fieldName, int value) : fieldName_(fieldName), value_(value) {
-
+FieldValue::FieldValue(const std::string& fieldName, int value) : fieldName_(fieldName) {
+	value_.vInt = value;
+	valueType_ = Field::ValueType::Integer;
 }
 
-FieldValue::FieldValue(const std::string& fieldName, double value) : fieldName_(fieldName), value_(value) {
-
+FieldValue::FieldValue(const std::string& fieldName, double value) : fieldName_(fieldName) {
+	value_.vDouble = value;
+	valueType_ = Field::ValueType::Double;
 }
 
-FieldValue::FieldValue(const std::string& fieldName, const std::string& value) : fieldName_(fieldName), value_(value) {
-
+FieldValue::FieldValue(const std::string& fieldName, const std::string& value) : fieldName_(fieldName) {
+	strValue_ = value;
+	valueType_ = Field::ValueType::Text;
 }
 
 FieldValue::~FieldValue() {
@@ -45,88 +51,61 @@ const std::string& FieldValue::FieldName() const {
 }
 
 Field::ValueType FieldValue::ValueType() const {
-	switch (value_.index()) {
-	case 1:
-		return Field::ValueType::Boolean;
-	case 2:
-		return Field::ValueType::Integer;
-	case 3:
-		return Field::ValueType::Double;
-	case 4:
-		return Field::ValueType::Text;
-	default:
-		return Field::ValueType::Unknown;
-	}
-}
-
-FieldValue* FieldValue::Clone() const {
-	return nullptr;
+	return valueType_;
 }
 
 FieldValue& FieldValue::SetBool(bool v) {
-	value_ = v;
+	value_.vBool = v;
+	valueType_ = Field::ValueType::Boolean;
 	return *this;
 }
 
 FieldValue& FieldValue::SetInt(int v) {
-	value_ = v;
+	value_.vInt = v;
+	valueType_ = Field::ValueType::Integer;
 	return *this;
 }
 
 FieldValue& FieldValue::SetDouble(double v) {
-	value_ = v;
+	value_.vDouble = v;
+	valueType_ = Field::ValueType::Double;
 	return *this;
 }
 
 FieldValue& FieldValue::SetString(const std::string& v) {
-	value_ = v;
+	strValue_ = v;
+	valueType_ = Field::ValueType::Text;
 	return *this;
 }
 
 bool FieldValue::IsBool() const {
-	return value_.index() == 1;
+	return valueType_ == Field::ValueType::Boolean;
 }
 
 bool FieldValue::IsInt() const {
-	return value_.index() == 2;
+	return valueType_ == Field::ValueType::Integer;
 }
 
 bool FieldValue::IsDouble() const {
-	return value_.index() == 3;
+	return valueType_ == Field::ValueType::Double;
 }
 
 bool FieldValue::IsString() const {
-	return value_.index() == 4;
+	return valueType_ == Field::ValueType::Text;
 }
 
 bool FieldValue::GetBool() const {
-	try {
-		return std::get<bool>(value_);
-	} catch (...) {
-		return false;
-	}
+	return value_.vBool;
 }
 
 int FieldValue::GetInt() const {
-	try {
-		return std::get<int>(value_);
-	} catch (...) {
-		return 0;
-	}
+	return value_.vInt;
 }
 
 double FieldValue::GetDouble() const {
-	try {
-		return std::get<double>(value_);
-	} catch (...) {
-		return 0.0;
-	}
+	return value_.vDouble;
 }
 
 std::string FieldValue::GetString() const {
-	try {
-		return std::get<std::string>(value_);
-	} catch (...) {
-		return std::string();
-	}
+	return strValue_;
 }

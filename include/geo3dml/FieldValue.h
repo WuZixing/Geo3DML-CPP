@@ -1,6 +1,5 @@
 #pragma once
 
-#include <variant>
 #include "Field.h"
 
 namespace geo3dml {
@@ -20,9 +19,7 @@ namespace geo3dml {
 		FieldValue& SetFieldName(const std::string& name);
 		const std::string& FieldName() const;
 
-		virtual Field::ValueType ValueType() const;
-	protected:
-		virtual FieldValue* Clone() const;
+		Field::ValueType ValueType() const;
 
 	public:
 		FieldValue& SetBool(bool v);
@@ -40,6 +37,13 @@ namespace geo3dml {
 
 	private:
 		std::string fieldName_;
-		std::variant<std::monostate, bool, int, double, std::string> value_;
+		union Value {
+			bool vBool;
+			int vInt;
+			double vDouble;
+		};
+		Value value_;
+		std::string strValue_;
+		Field::ValueType valueType_;
 	};
 }
