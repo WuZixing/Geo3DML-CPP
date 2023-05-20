@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <geo3dml/TIN.h>
 #include <geo3dml/Annotation.h>
 #include <geo3dml/LineString.h>
@@ -8,7 +9,7 @@
 #include <geo3dml/CornerPointGrid.h>
 #include <geo3dml/UniformGrid.h>
 #include <geo3dml/GTPVolume.h>
-#include <iostream>
+#include <geo3dml/RectifiedGrid.h>
 #include <g3dxml/XMLIO.h>
 
 namespace g3dxml {
@@ -29,5 +30,6 @@ namespace g3dxml {
 		void WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output);
 		void WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output);
 		void WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream& output);
+		void WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output);
 	};
 }

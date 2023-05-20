@@ -1,8 +1,9 @@
 #pragma once
 
 #include <geo3dml/Actor.h>
-#include <geo3dml/PointSymbolizer.h>
 #include <geo3dml/LineSymbolizer.h>
+#include <geo3dml/Math.h>
+#include <geo3dml/PointSymbolizer.h>
 #include <geo3dml/SurfaceSymbolizer.h>
 #include <vtkSmartPointer.h>
 #include <vtkProp.h>
@@ -40,6 +41,8 @@ namespace g3dvtk {
 		void ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) const;
 		void ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) const;
 		void ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) const;
+
+		void G3DMatrixToVTKMatrix(const geo3dml::Matrix4x4& g3dMatrix, vtkMatrix4x4* vtkMatrix) const;
 
 	private:
 		geo3dml::Feature* bindingFeature_;

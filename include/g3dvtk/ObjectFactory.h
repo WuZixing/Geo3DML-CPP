@@ -35,6 +35,11 @@ namespace g3dvtk {
 
 		virtual geo3dml::GTPVolume* NewGTPVolume() override;
 
+		virtual geo3dml::RectifiedGrid* NewRectifiedGrid(
+			const geo3dml::Point3D& origin,
+			const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK,
+			int dimI, int dimJ, int dimK) override;
+
 		virtual geo3dml::ShapeProperty* NewShapeProperty() override;
 
 		virtual geo3dml::Actor* NewActor() override;

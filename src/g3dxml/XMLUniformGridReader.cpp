@@ -20,13 +20,11 @@ geo3dml::UniformGrid* XMLUniformGridReader::ReadUniformGrid(xmlTextReaderPtr rea
 	double originX = 0, originY = 0, originZ = 0;
 	double stepX = 0, stepY = 0, stepZ = 0;
 	int dimI = 1, dimJ = 1, dimK = 1;
-	bool metEndElement = false;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
-			metEndElement = true;
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_Origin)) {

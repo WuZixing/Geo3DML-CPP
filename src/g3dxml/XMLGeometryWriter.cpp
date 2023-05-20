@@ -44,6 +44,11 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 									geo3dml::GTPVolume* gtpGrid = dynamic_cast<geo3dml::GTPVolume*>(geo);
 									if (gtpGrid != nullptr) {
 										WriteGTPVolume(gtpGrid, output);
+									} else {
+										geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
+										if (rectGrid != nullptr) {
+											WriteRectifiedGrid(rectGrid, output);
+										}
 									}
 								}
 							}
@@ -232,4 +237,33 @@ void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream
 		output << "</Prisms>" << std::endl;
 	}
 	output << "</GTPVolume>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output) {
+	output << "<gml:RectifiedGrid gml:id=\"" << grid->GetID() << "\" gml:dimension=\"3\">" << std::endl;
+	// limits
+	int dimI = 0, dimJ = 0, dimK = 0;
+	grid->GetDimensions(dimI, dimJ, dimK);
+	output << "<gml:limits>" << std::endl
+		<< "<gml:GridEnvelope>" << std::endl
+		<< "<gml:low>0 0 0</gml:low>" << std::endl
+		<< "<gml:high>" << dimI - 1 << " " << dimJ - 1 << " " << dimK - 1 << "</gml:high>" << std::endl
+		<< "</gml:GridEnvelope>" << std::endl
+		<< "</gml:limits>" << std::endl;
+	// axis label
+	output << "<gml:axisLabels>I J K</gml:axisLabels>" << std::endl;
+	// origin
+	const geo3dml::Point3D& origin = grid->Origin();
+	output << "<gml:origin>" << std::endl
+		<< "<gml:Point>" << origin.x << " " << origin.y << " " << origin.z << "</gml:Point>" << std::endl
+		<< "</gml:origin>" << std::endl;
+	// offset vectors
+	geo3dml::Vector3D vectors[3];
+	vectors[0] = grid->AxisI();
+	vectors[1] = grid->AxisJ();
+	vectors[2] = grid->AxisK();
+	for (int i = 0; i < 3; ++i) {
+		output << "<gml:offsetVector>" << vectors[i].X() << " " << vectors[i].Y() << " " << vectors[i].Z() << "</gml:offsetVector>" << std::endl;
+	}
+	output << "</gml:RectifiedGrid>" << std::endl;
 }

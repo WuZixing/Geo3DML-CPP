@@ -104,15 +104,15 @@ bool XMLReaderHelper::TextNode(xmlTextReaderPtr reader, const std::string& eleme
 			const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 			if (localName != NULL && geo3dml::IsiEqual(localName, element)) {
 				metEndElement = true;
-				break;
 			}
-		}
-		default: {
 			break;
 		}
-		}
-		if (metEndElement)
+		default:
 			break;
+		}
+		if (metEndElement) {
+			break;
+		}
 		status = xmlTextReaderRead(reader);
 	}
 	if (metEndElement) {

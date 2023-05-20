@@ -8,6 +8,7 @@
 #include <g3dxml/XMLMultiPointReader.h>
 #include <g3dxml/XMLAnnotationReader.h>
 #include <g3dxml/XMLGTPVolumeReader.h>
+#include <g3dxml/XMLRectifiedGridReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -28,13 +29,11 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 	geo3dml::Geometry* geometry = nullptr;
 	std::string geoName = XMLReaderHelper::Attribute(reader, "Name");
 	std::string geoLOD = XMLReaderHelper::Attribute(reader, "LOD");
-	bool metEndElement = false;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
-			metEndElement = true;
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_Shape)) {
@@ -119,6 +118,12 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				geo = gtpReader.ReadVolume(reader);
 				if (geo == nullptr) {
 					SetStatus(false, gtpReader.Error());
+				}
+			} else if (geo3dml::IsiEqual(localName, XMLRectifiedGridReader::Element)) {
+				XMLRectifiedGridReader gridReader(g3dFactory_);
+				geo = gridReader.ReadGrid(reader);
+				if (geo == nullptr) {
+					SetStatus(false, gridReader.Error());
 				}
 			}
 		}

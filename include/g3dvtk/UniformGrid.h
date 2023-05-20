@@ -18,7 +18,7 @@ namespace g3dvtk {
 		);
 		virtual ~UniformGrid();
 
-		/// @name Overrided methods inhertied from geo3dml::UniformGrid.
+		/// @name Overrided methods inhertied from geo3dml::UniformGrid .
 		//@{
 		/// @see geo3dml::UniformGrid#Init .
 		virtual bool Init(double originX, double originY, double originZ,

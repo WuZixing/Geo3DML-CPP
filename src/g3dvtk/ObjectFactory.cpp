@@ -10,6 +10,7 @@
 #include <g3dvtk/Annotation.h>
 #include <g3dvtk/MultiLineString.h>
 #include <g3dvtk/GTPVolume.h>
+#include <g3dvtk/RectifiedGrid.h>
 
 using namespace g3dvtk;
 
@@ -95,4 +96,11 @@ geo3dml::ShapeProperty* ObjectFactory::NewShapeProperty() {
 
 geo3dml::Actor* ObjectFactory::NewActor() {
 	return new Actor();
+}
+
+geo3dml::RectifiedGrid* ObjectFactory::NewRectifiedGrid(
+	const geo3dml::Point3D& origin,
+	const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK,
+	int dimI, int dimJ, int dimK) {
+	return new RectifiedGrid(origin, vecI, vecJ, vecK, dimI, dimJ, dimK);
 }

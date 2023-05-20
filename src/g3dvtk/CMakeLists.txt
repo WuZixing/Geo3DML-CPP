@@ -45,6 +45,7 @@ list(APPEND G3DVTK_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/Annotation.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiLineString.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/GTPVolume.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/RectifiedGrid.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

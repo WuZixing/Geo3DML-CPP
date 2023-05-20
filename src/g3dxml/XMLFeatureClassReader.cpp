@@ -24,13 +24,11 @@ geo3dml::FeatureClass* XMLFeatureClassReader::ReadFeatureClass(xmlTextReaderPtr 
 		fcId = geo3dml::Object::NewID();
 	}
 	featureClass->SetID(fcId);
-	bool metEndElement = false;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
-			metEndElement = true;
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_Name)) {
