@@ -100,7 +100,14 @@ geo3dml::Actor* ObjectFactory::NewActor() {
 
 geo3dml::RectifiedGrid* ObjectFactory::NewRectifiedGrid(
 	const geo3dml::Point3D& origin,
-	const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK,
-	int dimI, int dimJ, int dimK) {
-	return new RectifiedGrid(origin, vecI, vecJ, vecK, dimI, dimJ, dimK);
+	int dimI, int dimJ, int dimK,
+	const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK) {
+	return new RectifiedGrid(origin, dimI, dimJ, dimK, vecI, vecJ, vecK);
+}
+
+geo3dml::RectifiedGrid* ObjectFactory::NewRectifiedGrid(
+	const geo3dml::Point3D& origin,
+	int dimI, int dimJ, int dimK,
+	double stepI, double stepJ, double stepK) {
+	return new RectifiedGrid(origin, dimI, dimJ, dimK, stepI, stepJ, stepK);
 }

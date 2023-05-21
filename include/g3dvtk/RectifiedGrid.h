@@ -10,7 +10,12 @@ namespace g3dvtk {
 
     class RectifiedGrid : public geo3dml::RectifiedGrid {
     public:
-        RectifiedGrid(const geo3dml::Point3D& origin, const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK, int dimI, int dimJ, int dimK);
+        /// @see geo3dml::RectifiedGrid::RectifiedGrid
+        RectifiedGrid(const geo3dml::Point3D& origin,
+            int dimI, int dimJ, int dimK,
+            const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK);
+        /// @see geo3dml::RectifiedGrid::RectifiedGrid
+        RectifiedGrid(const geo3dml::Point3D& origin, int dimI, int dimJ, int dimK, double stepI, double stepJ, double stepK);
         virtual ~RectifiedGrid();
 
         /// @name 实现基类 geo3dml::Geometry 定义的接口。

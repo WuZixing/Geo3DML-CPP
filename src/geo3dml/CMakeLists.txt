@@ -47,7 +47,9 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/GeoVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/GTPVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/RectifiedGrid.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/Math.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Vector3D.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Matrix3x3.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Matrix4x4.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC

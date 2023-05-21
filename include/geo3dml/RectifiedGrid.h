@@ -2,7 +2,7 @@
 #pragma once
 
 #include "GeoVolume.h"
-#include "Math.h"
+#include "Matrix4x4.h"
 #include "Point3D.h"
 
 namespace geo3dml {
@@ -10,15 +10,24 @@ namespace geo3dml {
     /// @brief 三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。
     class RectifiedGrid : public GeoVolume {
     public:
-        /// @brief 构造函数
+        /// @brief 构造函数。
         /// @param origin   网格划分的起始点在全局坐标系中的坐标。
-        /// @param vecI     网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
-        /// @param vecJ     网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
-        /// @param vecK     网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
         /// @param dimI     沿网格I坐标轴划分的网格的总数。
         /// @param dimJ     沿网格J坐标轴划分的网格的总数。
         /// @param dimK     沿网格K坐标轴划分的网格的总数。
-        RectifiedGrid(const Point3D& origin, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK, int dimI, int dimJ, int dimK);
+        /// @param vecI     网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
+        /// @param vecJ     网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
+        /// @param vecK     网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
+        RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK);
+        /// @brief 在网格局部坐标系与全局坐标系重合的条件下，构造一个网格对象。
+        /// @param origin   网格划分的起始点在全局坐标系中的坐标。
+        /// @param dimI     沿网格I坐标轴划分的网格的总数。
+        /// @param dimJ     沿网格J坐标轴划分的网格的总数。
+        /// @param dimK     沿网格K坐标轴划分的网格的总数。
+        /// @param stepI    网格单元沿I轴的棱的长度。
+        /// @param stepJ    网格单元沿J轴的棱的长度。
+        /// @param stepK    网格单元沿K轴的棱的长度。
+        RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, double stepI, double stepJ, double stepK);
         virtual ~RectifiedGrid();
 
         /// @brief 取网格划分的起始点坐标。

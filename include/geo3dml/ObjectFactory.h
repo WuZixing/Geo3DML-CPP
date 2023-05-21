@@ -62,17 +62,29 @@ namespace geo3dml {
 		virtual GTPVolume* NewGTPVolume() = 0;
 		/// @brief 构造一个 RectifiedGrid 对象。
 		/// @param origin	网格划分的起始点在全局坐标系中的坐标。
-		/// @param vecI		网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
-		/// @param vecJ		网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
-		/// @param vecK		网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
 		/// @param dimI		沿网格I坐标轴划分的网格的总数。
 		/// @param dimJ		沿网格J坐标轴划分的网格的总数。
 		/// @param dimK		沿网格K坐标轴划分的网格的总数。
+		/// @param vecI		网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
+		/// @param vecJ		网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
+		/// @param vecK		网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
 		/// @return			构造的 RectifiedGrid 对象。该指针所指向的对象由调用者负责管理。
 		virtual RectifiedGrid* NewRectifiedGrid(
 			const Point3D& origin,
-			const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK,
-			int dimI, int dimJ, int dimK) = 0;
+			int dimI, int dimJ, int dimK,
+			const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK) = 0;
+		/// @brief 在网格局部坐标系与全局坐标系重合的条件下，构造一个 RectifiedGrid 对象。
+		/// @param origin   网格划分的起始点在全局坐标系中的坐标。
+		/// @param dimI     沿网格I坐标轴划分的网格的总数。
+		/// @param dimJ     沿网格J坐标轴划分的网格的总数。
+		/// @param dimK     沿网格K坐标轴划分的网格的总数。
+		/// @param stepI    网格单元沿I轴的棱的长度。
+		/// @param stepJ    网格单元沿J轴的棱的长度。
+		/// @param stepK    网格单元沿K轴的棱的长度。
+		virtual RectifiedGrid* NewRectifiedGrid(
+			const Point3D& origin,
+			int dimI, int dimJ, int dimK,
+			double stepI, double stepJ, double stepK) = 0;
 		//@}
 
 		/// @name shape property.

@@ -2,7 +2,7 @@
 
 #include <geo3dml/Actor.h>
 #include <geo3dml/LineSymbolizer.h>
-#include <geo3dml/Math.h>
+#include <geo3dml/Matrix4x4.h>
 #include <geo3dml/PointSymbolizer.h>
 #include <geo3dml/SurfaceSymbolizer.h>
 #include <vtkSmartPointer.h>
