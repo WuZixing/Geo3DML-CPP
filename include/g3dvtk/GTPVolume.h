@@ -26,7 +26,7 @@ namespace g3dvtk {
 
         /// @name 实现geo3dml::Geometry定义的虚函数。
         //@{
-        virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const override;
+        virtual geo3dml::Box3D GetMinimumBoundingRectangle() const override;
         virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) override;
         virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const override;
         //@}

@@ -25,14 +25,8 @@ namespace geo3dml {
 		virtual Symbolizer* MakeSymbozier() const = 0;
 
 		/// Compute the minimum bounding rectangle of the feature class.
-		/// @param minX Output the minimum X coordinate.
-		/// @param minY Output the minimum Y coordinate.
-		/// @param minZ Output the minimum X coordinate.
-		/// @param maxX Output the maximum X coordinate.
-		/// @param maxY Output the maximum Y coordinate.
-		/// @param maxZ Output the maximum Z coordinate.
-		/// @return In case of an empty feature class, it will return false.
-		bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
+		/// @return In case of an empty feature class, it will return an invalid Box3D.
+		Box3D GetMinimumBoundingRectangle() const;
 
 	private:
 		std::string name_;

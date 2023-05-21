@@ -71,12 +71,12 @@ Geo3DStyle* Layer::GetStyleAt(int i) const {
 	return styles_.at(i);
 }
 
-bool Layer::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	if (bindingFeatureClass_ != NULL) {
-		return bindingFeatureClass_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
-	} else {
-		return false;
+Box3D Layer::GetMinimumBoundingRectangle() const {
+	Box3D box;
+	if (bindingFeatureClass_ != nullptr) {
+		box = bindingFeatureClass_->GetMinimumBoundingRectangle();
 	}
+	return box;
 }
 
 void Layer::AddActor(Actor* actor) {

@@ -1,4 +1,5 @@
 #include <g3dvtk/UniformGrid.h>
+#include "Utils.h"
 
 using namespace g3dvtk;
 
@@ -74,19 +75,12 @@ geo3dml::ShapeProperty* UniformGrid::GetProperty(geo3dml::ShapeProperty::Samplin
 	return shapeHelper_.GetProperty(t, GetID(), uniformGrid_);
 }
 
-bool UniformGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	if (uniformGrid_ == NULL || uniformGrid_->GetNumberOfPoints() < 1) {
-		return false;
+geo3dml::Box3D UniformGrid::GetMinimumBoundingRectangle() const {
+	geo3dml::Box3D box;
+	if (uniformGrid_ != nullptr && uniformGrid_->GetNumberOfPoints() > 0) {
+		SetBox3DFromVTKBound(uniformGrid_->GetBounds(), box);
 	}
-	double bounds[6] = { 0 };
-	uniformGrid_->GetBounds(bounds);
-	minX = bounds[0];
-	maxX = bounds[1];
-	minY = bounds[2];
-	maxY = bounds[3];
-	minZ = bounds[4];
-	maxZ = bounds[5];
-	return true;
+	return box;
 }
 
 int UniformGrid::CalculateCellIndex(int i, int j, int k) const {

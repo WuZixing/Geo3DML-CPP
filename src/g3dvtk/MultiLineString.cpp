@@ -1,5 +1,6 @@
 #include <g3dvtk/MultiLineString.h>
 #include <vtkPolyLine.h>
+#include "Utils.h"
 
 using namespace g3dvtk;
 
@@ -67,19 +68,12 @@ void MultiLineString::GetVertexOfLineString(int lineIndex, int vertexIndex, doub
 	}
 }
 
-bool MultiLineString::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	if (polyData_ == NULL || polyData_->GetNumberOfPoints() < 1) {
-		return false;
+geo3dml::Box3D MultiLineString::GetMinimumBoundingRectangle() const {
+	geo3dml::Box3D box;
+	if (polyData_ != nullptr && polyData_->GetNumberOfPoints() > 0) {
+		SetBox3DFromVTKBound(polyData_->GetBounds(), box);
 	}
-	double bounds[6] = { 0 };
-	polyData_->GetBounds(bounds);
-	minX = bounds[0];
-	maxX = bounds[1];
-	minY = bounds[2];
-	maxY = bounds[3];
-	minZ = bounds[4];
-	maxZ = bounds[5];
-	return true;
+	return box;
 }
 
 void MultiLineString::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {

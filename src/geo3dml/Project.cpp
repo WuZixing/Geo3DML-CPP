@@ -88,41 +88,12 @@ SceneStyle& Project::GetSceneStyle() {
 	return sceneStyle_;
 }
 
-bool Project::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	size_t i = 0, numberOfModels = models_.size();
-	for (; i < numberOfModels; ++i) {
-		if (models_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
-			break;
-		}
+Box3D Project::GetMinimumBoundingRectangle() const {
+	Box3D box;
+	for (size_t i = 0; i < models_.size(); ++i) {
+		box.UnionWith(models_[i]->GetMinimumBoundingRectangle());
 	}
-	if (i >= numberOfModels) {
-		return false;
-	}
-	double x[2], y[2], z[2];
-	for (++i; i < numberOfModels; ++i) {
-		if (!models_[i]->GetMinimumBoundingRectangle(x[0], y[0], z[0], x[1], y[1], z[1])) {
-			continue;
-		}
-		if (x[0] < minX) {
-			minX = x[0];
-		}
-		if (x[1] > maxX) {
-			maxX = x[1];
-		}
-		if (y[0] < minY) {
-			minY = y[0];
-		}
-		if (y[1] > maxY) {
-			maxY = y[1];
-		}
-		if (z[0] < minZ) {
-			minZ = z[0];
-		}
-		if (z[1] > maxZ) {
-			maxZ = z[1];
-		}
-	}
-	return true;
+	return box;
 }
 
 void Project::AddMap(Map* map) {

@@ -297,6 +297,40 @@ Matrix4x4 RectifiedGrid::ComputeTransformMatrix() const {
     return t;
 }
 
-bool RectifiedGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-    return false;
+Box3D RectifiedGrid::GetMinimumBoundingRectangle() const {
+    Matrix4x4 t = ComputeTransformMatrix();
+    Point3D pt0[8] = {
+        Point3D(lowI_, lowJ_, lowK_), Point3D(highI_ + 1, lowJ_, lowK_), Point3D(highI_ + 1, highJ_ + 1, lowK_), Point3D(lowI_, highJ_ + 1, lowK_),
+        Point3D(lowI_, lowJ_, highK_ + 1), Point3D(highI_ + 1, lowJ_, highK_ + 1), Point3D(highI_ + 1, highJ_ + 1, highK_ + 1), Point3D(lowI_, highJ_ + 1, highK_ + 1)
+    };
+    Point3D pt1[8];
+    for (int i = 0; i < 8; ++i) {
+        pt1[i].x = t.Element(1, 1) * pt0[i].x + t.Element(1, 2) * pt0[i].y + t.Element(1, 3) * pt0[i].z + t.Element(1, 4);
+        pt1[i].y = t.Element(2, 1) * pt0[i].x + t.Element(2, 2) * pt0[i].y + t.Element(2, 3) * pt0[i].z + t.Element(2, 4);
+        pt1[i].z = t.Element(3, 1) * pt0[i].x + t.Element(3, 2) * pt0[i].y + t.Element(3, 3) * pt0[i].z + t.Element(3, 4);
+    }
+    Box3D box;
+    box.min = pt1[0];
+    box.max = pt1[0];
+    for (int i = 1; i < 8; ++i) {
+        if (box.min.x > pt1[i].x) {
+            box.min.x = pt1[i].x;
+        }
+        if (box.min.y > pt1[i].y) {
+            box.min.y = pt1[i].y;
+        }
+        if (box.min.z > pt1[i].z) {
+            box.min.z = pt1[i].z;
+        }
+        if (box.max.x < pt1[i].x) {
+            box.max.x = pt1[i].x;
+        }
+        if (box.max.y < pt1[i].y) {
+            box.max.y = pt1[i].y;
+        }
+        if (box.max.z < pt1[i].z) {
+            box.max.z = pt1[i].z;
+        }
+    }
+    return box;
 }

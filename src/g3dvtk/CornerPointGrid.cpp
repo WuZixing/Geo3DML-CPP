@@ -1,5 +1,6 @@
 #include <g3dvtk/CornerPointGrid.h>
 #include <vtkPointData.h>
+#include "Utils.h"
 
 using namespace g3dvtk;
 
@@ -210,17 +211,10 @@ geo3dml::ShapeProperty* CornerPointGrid::GetProperty(geo3dml::ShapeProperty::Sam
 	return shapeHelper_.GetProperty(t, GetID(), cells_);
 }
 
-bool CornerPointGrid::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	if (cells_ == NULL || cells_->GetNumberOfPoints() < 1) {
-		return false;
+geo3dml::Box3D CornerPointGrid::GetMinimumBoundingRectangle() const {
+	geo3dml::Box3D box;
+	if (cells_ != nullptr && cells_->GetNumberOfPoints() > 0) {
+		SetBox3DFromVTKBound(cells_->GetBounds(), box);
 	}
-	double bounds[6] = {0};
-	cells_->GetBounds(bounds);
-	minX = bounds[0];
-	maxX = bounds[1];
-	minY = bounds[2];
-	maxY = bounds[3];
-	minZ = bounds[4];
-	maxZ = bounds[5];
-	return true;
+	return box;
 }

@@ -14,6 +14,40 @@ namespace geo3dml {
 		bool IsEmpty() const {
 			return min.x > max.x;
 		};
+		
+		bool isValid() const {
+			return !IsEmpty();
+		}
+
+		Box3D& UnionWith(const Box3D& box) {
+			if (box.IsEmpty()) {
+				return *this;
+			}
+			if (IsEmpty()) {
+				min = box.min;
+				max = box.max;
+				return *this;
+			}
+			if (min.x > box.min.x) {
+				min.x = box.min.x;
+			}
+			if (min.y > box.min.y) {
+				min.y = box.min.y;
+			}
+			if (min.z > box.min.z) {
+				min.z = box.min.z;
+			}
+			if (max.x < box.max.x) {
+				max.x = box.max.x;
+			}
+			if (max.y < box.max.y) {
+				max.y = box.max.y;
+			}
+			if (max.z < box.max.z) {
+				max.z = box.max.z;
+			}
+			return *this;
+		}
 
 		/// Extent in X, Y, and Z axies.
 		Point3D Extent() const {

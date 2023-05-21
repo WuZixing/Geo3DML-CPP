@@ -26,6 +26,7 @@ set(G3DVTK_LIBRARIES libG3DVTK CACHE STRING "")
 
 aux_source_directory(. G3DVTK_SOURCES)
 list(APPEND G3DVTK_HEADERS
+	Utils.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ObjectFactory.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/TIN.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/CornerPointGrid.h

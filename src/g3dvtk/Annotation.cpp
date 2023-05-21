@@ -35,8 +35,8 @@ void Annotation::GetPointAt(int i, double& x, double& y, double& z) const {
 	geo_->GetPointAt(i, x, y, z);
 }
 
-bool Annotation::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	return geo_->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ);
+geo3dml::Box3D Annotation::GetMinimumBoundingRectangle() const {
+	return geo_->GetMinimumBoundingRectangle();
 }
 
 void Annotation::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {

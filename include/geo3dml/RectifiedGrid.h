@@ -65,7 +65,7 @@ namespace geo3dml {
 
         /// @name 实现父类 geo3dml::Geometry 定义的接口。
         /// @see geo3dml::Geometry#GetMinimumBoundingRectangle
-        virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const override;
+        virtual Box3D GetMinimumBoundingRectangle() const override;
 
     private:
         Point3D origin_;

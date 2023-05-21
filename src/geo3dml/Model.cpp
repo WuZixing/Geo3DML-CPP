@@ -103,41 +103,12 @@ void Model::RemoveFeatureClass(const std::string& id) {
 	}
 }
 
-bool Model::GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const {
-	size_t i = 0, numberOfFeatureClasses = featureClasses_.size();
-	for (; i < numberOfFeatureClasses; ++i) {
-		if (featureClasses_[i]->GetMinimumBoundingRectangle(minX, minY, minZ, maxX, maxY, maxZ)) {
-			break;
-		}
+Box3D Model::GetMinimumBoundingRectangle() const {
+	Box3D box;
+	for (size_t i = 0; i < featureClasses_.size(); ++i) {
+		box.UnionWith(featureClasses_[i]->GetMinimumBoundingRectangle());
 	}
-	if (i >= numberOfFeatureClasses) {
-		return false;
-	}
-	double x[2], y[2], z[2];
-	for (++i; i < numberOfFeatureClasses; ++i) {
-		if (!featureClasses_[i]->GetMinimumBoundingRectangle(x[0], y[0], z[0], x[1], y[1], z[1])) {
-			continue;
-		}
-		if (x[0] < minX) {
-			minX = x[0];
-		}
-		if (x[1] > maxX) {
-			maxX = x[1];
-		}
-		if (y[0] < minY) {
-			minY = y[0];
-		}
-		if (y[1] > maxY) {
-			maxY = y[1];
-		}
-		if (z[0] < minZ) {
-			minZ = z[0];
-		}
-		if (z[1] > maxZ) {
-			maxZ = z[1];
-		}
-	}
-	return true;
+	return box;
 }
 
 std::string Model::GetDateStamp() const {

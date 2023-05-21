@@ -40,7 +40,7 @@ namespace g3dvtk {
 
 		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
-		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const;
+		virtual geo3dml::Box3D GetMinimumBoundingRectangle() const override;
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
 		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
 		//@}

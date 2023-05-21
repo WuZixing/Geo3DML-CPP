@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Box3D.h"
 #include "Geo3DML.h"
 #include "ShapeProperty.h"
 
@@ -22,14 +23,8 @@ namespace geo3dml {
 		//@}
 
 		/// Compute the minimum bounding rectangle of the shape.
-		/// @param minX Output the minimum X coordinate.
-		/// @param minY Output the minimum Y coordinate.
-		/// @param minZ Output the minimum X coordinate.
-		/// @param maxX Output the maximum X coordinate.
-		/// @param maxY Output the maximum Y coordinate.
-		/// @param maxZ Output the maximum Z coordinate.
-		/// @return In case of a null shape which means a geometry without any vertex, it will return false.
-		virtual bool GetMinimumBoundingRectangle(double& minX, double& minY, double& minZ, double& maxX, double& maxY, double& maxZ) const = 0;
+		/// @return In case of a null shape which means a geometry without any vertex, it will return an invalid Box3D.
+		virtual Box3D GetMinimumBoundingRectangle() const = 0;
 		virtual void SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t) = 0;
 		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) const = 0;
 
