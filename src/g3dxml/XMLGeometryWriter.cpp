@@ -242,12 +242,12 @@ void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream
 void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output) {
 	output << "<gml:RectifiedGrid gml:id=\"" << grid->GetID() << "\" gml:dimension=\"3\">" << std::endl;
 	// limits
-	int dimI = 0, dimJ = 0, dimK = 0;
-	grid->GetDimensions(dimI, dimJ, dimK);
+	int lowI = 0, lowJ = 0, lowK = 0, highI = 0, highJ = 0, highK = 0;
+	grid->GetCellRange(lowI, lowJ, lowK, highI, highJ, highK);
 	output << "<gml:limits>" << std::endl
 		<< "<gml:GridEnvelope>" << std::endl
-		<< "<gml:low>0 0 0</gml:low>" << std::endl
-		<< "<gml:high>" << dimI - 1 << " " << dimJ - 1 << " " << dimK - 1 << "</gml:high>" << std::endl
+		<< "<gml:low>" << lowI << " " << lowJ << " " << lowK << "</gml:low>" << std::endl
+		<< "<gml:high>" << highI << " " << highJ << " " << highK << "</gml:high>" << std::endl
 		<< "</gml:GridEnvelope>" << std::endl
 		<< "</gml:limits>" << std::endl;
 	// axis label

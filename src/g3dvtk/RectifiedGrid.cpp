@@ -4,9 +4,9 @@
 using namespace g3dvtk;
 
 RectifiedGrid::RectifiedGrid(const geo3dml::Point3D& origin,
-    int dimI, int dimJ, int dimK,
-    const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK)
-    : geo3dml::RectifiedGrid(origin, dimI, dimJ, dimK, vecI, vecJ, vecK) {
+    const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK,
+    int highI, int highJ, int highK, int lowI, int lowJ, int lowK)
+    : geo3dml::RectifiedGrid(origin, vecI, vecJ, vecK, highI, highJ, highK, lowI, lowJ, lowK) {
     // vtkImageData的局部坐标系定义：
     // 原点：(0, 0, 0)
     // X轴：(1, 0, 0)
@@ -14,15 +14,17 @@ RectifiedGrid::RectifiedGrid(const geo3dml::Point3D& origin,
     // Z轴：(0, 0, 1)
     // 局部坐标系下网格单元是边长为单位长度的立方体。
     uniformGrid_ = vtkSmartPointer<vtkUniformGrid>::New();
-    uniformGrid_->SetDimensions(dimI + 1, dimJ + 1, dimK + 1);	// vtkImageData needs to know dimensions in points.
+    uniformGrid_->SetDimensions(highI - lowI + 2, highJ - lowJ + 2, highK - lowK + 2);	// vtkImageData needs to know dimension in points which is number of cells plus 1.
     uniformGrid_->SetOrigin(0, 0, 0);
     uniformGrid_->SetSpacing(1, 1, 1);
 }
 
-RectifiedGrid::RectifiedGrid(const geo3dml::Point3D& origin, int dimI, int dimJ, int dimK, double stepI, double stepJ, double stepK)
-    : geo3dml::RectifiedGrid(origin, dimI, dimJ, dimK, stepI, stepJ, stepK) {
+RectifiedGrid::RectifiedGrid(const geo3dml::Point3D& origin,
+    double stepI, double stepJ, double stepK,
+    int highI, int highJ, int highK, int lowI, int lowJ, int lowK)
+    : geo3dml::RectifiedGrid(origin, stepI, stepJ, stepK, highI, highJ, highK, lowI, lowJ, lowK) {
     uniformGrid_ = vtkSmartPointer<vtkUniformGrid>::New();
-    uniformGrid_->SetDimensions(dimI + 1, dimJ + 1, dimK + 1);	// vtkImageData needs to know dimensions in points.
+    uniformGrid_->SetDimensions(highI - lowI + 2, highJ - lowJ + 2, highK - lowK + 2);
     uniformGrid_->SetOrigin(0, 0, 0);
     uniformGrid_->SetSpacing(1, 1, 1);
 }

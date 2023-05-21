@@ -12,22 +12,28 @@ namespace geo3dml {
     public:
         /// @brief 构造函数。
         /// @param origin   网格划分的起始点在全局坐标系中的坐标。
-        /// @param dimI     沿网格I坐标轴划分的网格的总数。
-        /// @param dimJ     沿网格J坐标轴划分的网格的总数。
-        /// @param dimK     沿网格K坐标轴划分的网格的总数。
         /// @param vecI     网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
         /// @param vecJ     网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
         /// @param vecK     网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
-        RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK);
+        /// @param highI    在局部坐标系下，网格的最大I坐标。
+        /// @param highJ    在局部坐标系下，网格的最大J坐标。
+        /// @param highK    在局部坐标系下，网格的最大K坐标。
+        /// @param lowI     在局部坐标系下，网格的最小I坐标。缺省值为0。
+        /// @param lowJ     在局部坐标系下，网格的最小J坐标。缺省值为0。
+        /// @param lowK     在局部坐标系下，网格的最小K坐标。缺省值为0。
+        RectifiedGrid(const Point3D& origin, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK, int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0);
         /// @brief 在网格局部坐标系与全局坐标系重合的条件下，构造一个网格对象。
         /// @param origin   网格划分的起始点在全局坐标系中的坐标。
-        /// @param dimI     沿网格I坐标轴划分的网格的总数。
-        /// @param dimJ     沿网格J坐标轴划分的网格的总数。
-        /// @param dimK     沿网格K坐标轴划分的网格的总数。
         /// @param stepI    网格单元沿I轴的棱的长度。
         /// @param stepJ    网格单元沿J轴的棱的长度。
         /// @param stepK    网格单元沿K轴的棱的长度。
-        RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, double stepI, double stepJ, double stepK);
+        /// @param highI    在局部坐标系下，网格的最大I坐标。
+        /// @param highJ    在局部坐标系下，网格的最大J坐标。
+        /// @param highK    在局部坐标系下，网格的最大K坐标。
+        /// @param lowI     在局部坐标系下，网格的最小I坐标。缺省值为0。
+        /// @param lowJ     在局部坐标系下，网格的最小J坐标。缺省值为0。
+        /// @param lowK     在局部坐标系下，网格的最小K坐标。缺省值为0。
+        RectifiedGrid(const Point3D& origin, double stepI, double stepJ, double stepK, int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0);
         virtual ~RectifiedGrid();
 
         /// @brief 取网格划分的起始点坐标。
@@ -44,11 +50,14 @@ namespace geo3dml {
         /// @return K坐标轴对应于全局坐标系的单位向量。
         const Vector3D& AxisK() const;
 
-        /// @brief 取网格划分的数目
-        /// @param i 输出I轴方向划分的网格的总数。
-        /// @param j 输出J轴方向划分的网格的总数。
-        /// @param k 输出K轴方向划分的网格的总数。
-        void GetDimensions(int& i, int& j, int& k) const;
+        /// @brief 取网格单元范围。
+        /// @param lowI 输出网格单元的最小I坐标。
+        /// @param lowJ 输出网格单元的最小J坐标。
+        /// @param lowK 输出网格单元的最小K坐标。
+        /// @param highI 输出网格单元的最大I坐标。
+        /// @param highJ 输出网格单元的最大J坐标。
+        /// @param highK 输出网格单元的最大K坐标。
+        void GetCellRange(int& lowI, int& lowJ, int& lowK, int& highI, int& highJ, int& highK) const;
 
         /// @brief 计算将该网格从其局部正交坐标系转换至全局坐标系的变换矩阵。
         /// @return 坐标变换矩阵。
@@ -61,6 +70,6 @@ namespace geo3dml {
     private:
         Point3D origin_;
         Vector3D axisI_, axisJ_, axisK_;
-        int dimI_, dimJ_, dimK_;
+        int lowI_, lowJ_, lowK_, highI_, highJ_, highK_;
     };
 }

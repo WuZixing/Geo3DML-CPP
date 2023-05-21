@@ -5,24 +5,30 @@
 
 using namespace geo3dml;
 
-RectifiedGrid::RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK) {
+RectifiedGrid::RectifiedGrid(const Point3D& origin, const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK, int highI, int highJ, int highK, int lowI, int lowJ, int lowK) {
     origin_ = origin;
-    dimI_ = dimI;
-    dimJ_ = dimJ;
-    dimK_ = dimK;
     axisI_ = vecI;
     axisJ_ = vecJ;
     axisK_ = vecK;
+    highI_ = highI;
+    highJ_ = highJ;
+    highK_ = highK;
+    lowI_ = lowI;
+    lowJ_ = lowJ;
+    lowK_ = lowK;
 }
 
-RectifiedGrid::RectifiedGrid(const Point3D& origin, int dimI, int dimJ, int dimK, double stepI, double stepJ, double stepK) {
+RectifiedGrid::RectifiedGrid(const Point3D& origin, double stepI, double stepJ, double stepK, int highI, int highJ, int highK, int lowI, int lowJ, int lowK) {
     origin_ = origin;
-    dimI_ = dimI;
-    dimJ_ = dimJ;
-    dimK_ = dimK;
     axisI_ = Vector3D(stepI, 0, 0);
     axisJ_ = Vector3D(0, stepJ, 0);
     axisK_ = Vector3D(0, 0, stepK);
+    highI_ = highI;
+    highJ_ = highJ;
+    highK_ = highK;
+    lowI_ = lowI;
+    lowJ_ = lowJ;
+    lowK_ = lowK;
 }
 
 RectifiedGrid::~RectifiedGrid() {
@@ -44,24 +50,22 @@ const Vector3D& RectifiedGrid::AxisK() const {
     return axisK_;
 }
 
-void RectifiedGrid::GetDimensions(int& i, int& j, int& k) const {
-    i = dimI_;
-    j = dimJ_;
-    k = dimK_;
+void RectifiedGrid::GetCellRange(int& lowI, int& lowJ, int& lowK, int& highI, int& highJ, int& highK) const {
+    lowI = lowI_;
+    lowJ = lowJ_;
+    lowK = lowK_;
+    highI = highI_;
+    highJ = highJ_;
+    highK = highK_;
 }
 
 Matrix4x4 RectifiedGrid::ComputeTransformMatrix() const {
-    /*
-    Matrix4x4 tt;
-    tt.Element(1, 1, 0.866);
-    tt.Element(1, 2, -0.5);
-    tt.Element(2, 1, 0.5);
-    tt.Element(2, 2, 0.866);
-    return tt;
-    */
-    // 计算方法见：Beginner's guide to mapping simplexes affinely (https://www.researchgate.net/publication/332410209_Beginner%27s_guide_to_mapping_simplexes_affinely).
+    // 计算方法说明：Beginner's guide to mapping simplexes affinely (https://www.researchgate.net/publication/332410209_Beginner%27s_guide_to_mapping_simplexes_affinely).
     // 坐标变换的对应关系：p0 => pp0, p1 => pp1, p2 => pp2, p3 => pp3
-    geo3dml::Point3D p0(0, 0, 0), p1(1, 0, 0), p2(0, 1, 0), p3(0, 0, 1);
+    geo3dml::Point3D p0(-lowI_, -lowJ_, -lowK_);
+    geo3dml::Point3D p1 = p0 + Vector3D(1, 0, 0);
+    geo3dml::Point3D p2 = p0 + Vector3D(0, 1, 0);
+    geo3dml::Point3D p3 = p0 + Vector3D(0, 0, 1);
     geo3dml::Point3D pp0 = origin_;
     geo3dml::Point3D pp1 = origin_ + axisI_;
     geo3dml::Point3D pp2 = origin_ + axisJ_;

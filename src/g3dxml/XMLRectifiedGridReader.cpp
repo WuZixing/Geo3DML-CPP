@@ -90,7 +90,7 @@ geo3dml::RectifiedGrid* XMLRectifiedGridReader::ReadGrid(xmlTextReaderPtr reader
         SetStatus(false, err);
     }
     if (IsOK()) {
-        grid = g3dFactory_->NewRectifiedGrid(origin, highI - lowI + 1, highJ - lowJ + 1, highK - lowK + 1, vectors[0], vectors[1], vectors[2]);
+        grid = g3dFactory_->NewRectifiedGrid(origin, vectors[0], vectors[1], vectors[2], highI, highJ, highK, lowI, lowJ, lowK);
         if (grid != nullptr) {
             grid->SetID(id);
         }

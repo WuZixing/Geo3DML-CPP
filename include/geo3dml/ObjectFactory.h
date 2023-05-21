@@ -61,30 +61,36 @@ namespace geo3dml {
 		virtual Annotation* NewAnnotation() = 0;
 		virtual GTPVolume* NewGTPVolume() = 0;
 		/// @brief 构造一个 RectifiedGrid 对象。
-		/// @param origin	网格划分的起始点在全局坐标系中的坐标。
-		/// @param dimI		沿网格I坐标轴划分的网格的总数。
-		/// @param dimJ		沿网格J坐标轴划分的网格的总数。
-		/// @param dimK		沿网格K坐标轴划分的网格的总数。
-		/// @param vecI		网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
-		/// @param vecJ		网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
-		/// @param vecK		网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
+		/// @param origin   网格划分的起始点在全局坐标系中的坐标。
+		/// @param vecI     网格I坐标轴对应于全局坐标系的单位向量，表达网格单元沿I轴的棱的方向与长度。
+		/// @param vecJ     网格J坐标轴对应于全局坐标系的单位向量，表达网格单元沿J轴的棱的方向与长度。
+		/// @param vecK     网格K坐标轴对应于全局坐标系的单位向量，表达网格单元沿K轴的棱的方向与长度。
+		/// @param highI    在局部坐标系下，网格的最大I坐标。
+		/// @param highJ    在局部坐标系下，网格的最大J坐标。
+		/// @param highK    在局部坐标系下，网格的最大K坐标。
+		/// @param lowI     在局部坐标系下，网格的最小I坐标。缺省值为0。
+		/// @param lowJ     在局部坐标系下，网格的最小J坐标。缺省值为0。
+		/// @param lowK     在局部坐标系下，网格的最小K坐标。缺省值为0。
 		/// @return			构造的 RectifiedGrid 对象。该指针所指向的对象由调用者负责管理。
 		virtual RectifiedGrid* NewRectifiedGrid(
 			const Point3D& origin,
-			int dimI, int dimJ, int dimK,
-			const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK) = 0;
+			const Vector3D& vecI, const Vector3D& vecJ, const Vector3D& vecK,
+			int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0) = 0;
 		/// @brief 在网格局部坐标系与全局坐标系重合的条件下，构造一个 RectifiedGrid 对象。
 		/// @param origin   网格划分的起始点在全局坐标系中的坐标。
-		/// @param dimI     沿网格I坐标轴划分的网格的总数。
-		/// @param dimJ     沿网格J坐标轴划分的网格的总数。
-		/// @param dimK     沿网格K坐标轴划分的网格的总数。
 		/// @param stepI    网格单元沿I轴的棱的长度。
 		/// @param stepJ    网格单元沿J轴的棱的长度。
 		/// @param stepK    网格单元沿K轴的棱的长度。
+		/// @param highI    在局部坐标系下，网格的最大I坐标。
+		/// @param highJ    在局部坐标系下，网格的最大J坐标。
+		/// @param highK    在局部坐标系下，网格的最大K坐标。
+		/// @param lowI     在局部坐标系下，网格的最小I坐标。缺省值为0。
+		/// @param lowJ     在局部坐标系下，网格的最小J坐标。缺省值为0。
+		/// @param lowK     在局部坐标系下，网格的最小K坐标。缺省值为0。
 		virtual RectifiedGrid* NewRectifiedGrid(
 			const Point3D& origin,
-			int dimI, int dimJ, int dimK,
-			double stepI, double stepJ, double stepK) = 0;
+			double stepI, double stepJ, double stepK,
+			int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0) = 0;
 		//@}
 
 		/// @name shape property.
