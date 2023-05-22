@@ -15,7 +15,7 @@ namespace geo3dml {
 			return min.x > max.x;
 		};
 		
-		bool isValid() const {
+		bool IsValid() const {
 			return !IsEmpty();
 		}
 
