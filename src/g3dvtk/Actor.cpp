@@ -40,6 +40,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	if (tin != nullptr) {
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		mapper->SetInputData(tin->GetPolyData());
+		mapper->StaticOn();
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 		actor->SetMapper(mapper);
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
@@ -63,6 +64,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 			transFilter->SetInputConnection(algo->GetOutputPort());
 			vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 			mapper->SetInputConnection(transFilter->GetOutputPort());
+			mapper->StaticOn();
 			vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 			actor->SetMapper(mapper);
 			SetRandomRenderOption(actor->GetProperty());
@@ -72,6 +74,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 			if (gtp != nullptr) {
 				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 				mapper->SetInputData(gtp->GetVolumeData());
+				mapper->StaticOn();
 				vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 				actor->SetMapper(mapper);
 				SetRandomRenderOption(actor->GetProperty());
@@ -81,6 +84,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 				if (grid != nullptr) {
 					vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 					mapper->SetInputData(grid->GetStructuredGrid());
+					mapper->StaticOn();
 					vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 					actor->SetMapper(mapper);
 					SetRandomRenderOption(actor->GetProperty());
@@ -92,6 +96,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 						algo->SetInputData(grid->GetUniformGrid());
 						vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 						mapper->SetInputConnection(algo->GetOutputPort());
+						mapper->StaticOn();
 						vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 						actor->SetMapper(mapper);
 						SetRandomRenderOption(actor->GetProperty());
@@ -101,6 +106,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 						if (lineString != nullptr) {
 							vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 							mapper->SetInputData(lineString->GetPolyData());
+							mapper->StaticOn();
 							vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 							actor->SetMapper(mapper);
 							geo3dml::LineSymbolizer* lineSymbolizer = dynamic_cast<geo3dml::LineSymbolizer*>(sym);
@@ -115,6 +121,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 							if (point != nullptr) {
 								vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 								mapper->SetInputData(point->GetPolyData());
+								mapper->StaticOn();
 								vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 								actor->SetMapper(mapper);
 								geo3dml::PointSymbolizer* pointSymbolizer = dynamic_cast<geo3dml::PointSymbolizer*>(sym);
@@ -137,6 +144,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 									if (mPoint != nullptr) {
 										vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 										mapper->SetInputData(mPoint->GetPolyData());
+										mapper->StaticOn();
 										vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 										actor->SetMapper(mapper);
 										geo3dml::PointSymbolizer* pointSymbolizer = dynamic_cast<geo3dml::PointSymbolizer*>(sym);
