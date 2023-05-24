@@ -72,6 +72,7 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 	output << "<Name>" << model->GetName() << "</Name>" << std::endl;
 	output << "<Type>" << geo3dml::Model::ModelTypeToName(model->GetType()) << "</Type>" << std::endl;
 	output << "<Metadata>" << std::endl
+		<< "<gmd:dateStamp><gco:Date>" << model->GetDateStamp() << "</gco:Date></gmd:dateStamp>" << std::endl
 		<< "<Description>" << model->GetDescription() << "</Description>" << std::endl
 		<< "<Version>" << model->GetVersion() << "</Version>" << std::endl
 		<< "<ToolName>" << model->GetToolName() << "</ToolName>" << std::endl

@@ -4,10 +4,16 @@
 
 using namespace g3dxml;
 
-std::string XMLModelReader::OldElement = "GeoModel";
 std::string XMLModelReader::Element = "Geo3DModel";
-std::string XMLModelReader::Element_Name = "Name";
-std::string XMLModelReader::Element_Type = "Type";
+const std::string XMLModelReader::OldElement = "GeoModel";
+const std::string XMLModelReader::Element_Name = "Name";
+const std::string XMLModelReader::Element_Type = "Type";
+const std::string XMLModelReader::Element_Metadata = "Metadata";
+const std::string XMLModelReader::Element_DateStamp = "Date";
+const std::string XMLModelReader::Element_Description = "Description";
+const std::string XMLModelReader::Element_Version = "Version";
+const std::string XMLModelReader::Element_ToolName = "ToolName";
+const std::string XMLModelReader::Element_ToolVersion = "ToolVersion";
 
 bool XMLModelReader::IsModelElementName(const std::string& name) {
 	if (geo3dml::IsiEqual(name, Element)) {
@@ -38,7 +44,7 @@ geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		/// TODO: parse metadata, feature relationship.
+		/// TODO: parse feature relationship.
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && IsModelElementName(localName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
@@ -56,6 +62,8 @@ geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 					break;
 				}
 				model->SetType(geo3dml::Model::NameToModelType(v));
+			} else if (geo3dml::IsiEqual(localName, Element_Metadata)) {
+				ReadMetadata(reader, model);
 			} else if (geo3dml::IsiEqual(localName, XMLFeatureClassReader::Element)) {
 				XMLFeatureClassReader fcReader(g3dFactory_);
 				geo3dml::FeatureClass* featureClass = fcReader.ReadFeatureClass(reader);
@@ -113,4 +121,59 @@ geo3dml::Model* XMLModelReader::LoadFromFile(const std::string& file) {
 		SetStatus(false, "failed to open file " + file);
 	}
 	return model;
+}
+
+bool XMLModelReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model) {
+	std::string v;
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Metadata)) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, Element_DateStamp)) {
+				if (XMLReaderHelper::TextNode(reader, Element_DateStamp, v)) {
+					model->SetDateStamp(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, Element_Description)) {
+				if (XMLReaderHelper::TextNode(reader, Element_Description, v)) {
+					model->SetDescription(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, Element_Version)) {
+				if (XMLReaderHelper::TextNode(reader, Element_Version, v)) {
+					model->SetVersion(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, Element_ToolName)) {
+				if (XMLReaderHelper::TextNode(reader, Element_ToolName, v)) {
+					model->SetToolName(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, Element_ToolVersion)) {
+				if (XMLReaderHelper::TextNode(reader, Element_ToolVersion, v)) {
+					model->SetToolVersion(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_Metadata);
+		SetStatus(false, err);
+	}
+	return IsOK();
 }

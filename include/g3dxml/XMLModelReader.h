@@ -21,9 +21,21 @@ namespace g3dxml {
 		geo3dml::Model* LoadFromFile(const std::string& file);
 
 	private:
-		static std::string OldElement;
-		static std::string Element_Name;
-		static std::string Element_Type;
+		bool ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model);
+
+	private:
+		static const std::string OldElement;
+		static const std::string Element_Name;
+		static const std::string Element_Type;
+		/// @name 元数据
+		///@{
+		static const std::string Element_Metadata;
+		static const std::string Element_DateStamp;
+		static const std::string Element_Description;
+		static const std::string Element_Version;
+		static const std::string Element_ToolName;
+		static const std::string Element_ToolVersion;
+		///@}
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;
