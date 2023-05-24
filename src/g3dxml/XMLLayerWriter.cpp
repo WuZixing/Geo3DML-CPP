@@ -38,7 +38,7 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 	if (styleNumber > 0) {
 		output << "<Styles>" << std::endl;
 		for (int s = 0; s < styleNumber; ++s) {
-			geo3dml::Geo3DStyle* style = layer->GetStyleAt(s);
+			geo3dml::Style* style = layer->GetStyleAt(s);
 			WriteStyle(style, output);
 		}
 		output << "</Styles>" << std::endl;
@@ -47,7 +47,7 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 	return true;
 }
 
-void XMLLayerWriter::WriteStyle(geo3dml::Geo3DStyle* style, std::ostream& output) {
+void XMLLayerWriter::WriteStyle(geo3dml::Style* style, std::ostream& output) {
 	output << "<Style>" << std::endl
 		<< "<Geo3DStyle gml:id=\"" << style->GetID() << "\">" << std::endl
 		<< "<gml:name>" << style->GetName() << "</gml:name>" << std::endl;

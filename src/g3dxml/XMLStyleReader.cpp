@@ -1,22 +1,22 @@
-#include <g3dxml/XMLGeo3DStyleReader.h>
+#include <g3dxml/XMLStyleReader.h>
 #include <g3dxml/XMLFeatureTypeStyleReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
-std::string XMLGeo3DStyleReader::Element = "Geo3DStyle";
-std::string XMLGeo3DStyleReader::Element_Name = "name";
+std::string XMLStyleReader::Element = "Geo3DStyle";
+std::string XMLStyleReader::Element_Name = "name";
 
-XMLGeo3DStyleReader::XMLGeo3DStyleReader(geo3dml::ObjectFactory* factory) {
+XMLStyleReader::XMLStyleReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;
 }
 
-XMLGeo3DStyleReader::~XMLGeo3DStyleReader() {
+XMLStyleReader::~XMLStyleReader() {
 	g3dFactory_ = NULL;
 }
 
-geo3dml::Geo3DStyle* XMLGeo3DStyleReader::ReadStyle(xmlTextReaderPtr reader) {
-	geo3dml::Geo3DStyle* style = NULL;
+geo3dml::Style* XMLStyleReader::ReadStyle(xmlTextReaderPtr reader) {
+	geo3dml::Style* style = NULL;
 	std::string styleId = XMLReaderHelper::AttributeGMLID(reader);
 	if (styleId.empty()) {
 		styleId = geo3dml::Object::NewID();

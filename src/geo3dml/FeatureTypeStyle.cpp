@@ -2,7 +2,7 @@
 
 using namespace geo3dml;
 
-FeatureTypeStyle::FeatureTypeStyle() {
+FeatureTypeStyle::FeatureTypeStyle() : Style() {
 
 }
 

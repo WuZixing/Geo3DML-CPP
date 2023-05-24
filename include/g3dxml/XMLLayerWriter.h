@@ -19,7 +19,7 @@ namespace g3dxml {
 		bool Write(geo3dml::Layer* layer, std::ostream& output, SchemaVersion v);
 
 	private:
-		void WriteStyle(geo3dml::Geo3DStyle* style, std::ostream& output);
+		void WriteStyle(geo3dml::Style* style, std::ostream& output);
 		void WriteFeatureTypeStyle(geo3dml::FeatureTypeStyle* featureStyle, std::ostream& output);
 		void WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& output);
 		void WriteSymbolizer(geo3dml::Symbolizer* sym, std::ostream& output);

@@ -2413,7 +2413,7 @@ path_processing:
         }
         uri->path[0] = '/';
         p = uri->path + 1;
-        strncpy(p, path, len + 1);
+        strncpy_s(p, len + 1, path, len + 1);
     } else {
         uri->path = xmlStrdup(path);
         if (uri->path == NULL) {

@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Geo3DStyle.h"
+#include "Style.h"
 
 namespace geo3dml {
 
-	class FeatureTypeStyle : public Geo3DStyle {
+	class FeatureTypeStyle : public Style {
 	public:
 		FeatureTypeStyle();
 		virtual ~FeatureTypeStyle();
 
 	protected:
-		virtual void Reserved() {};
+		virtual void Reserved() override {};
 	};
 }

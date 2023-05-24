@@ -7,10 +7,10 @@
 
 namespace geo3dml {
 
-	class Geo3DStyle {
+	class Style {
 	public:
-		Geo3DStyle();
-		virtual ~Geo3DStyle();
+		Style();
+		virtual ~Style();
 
 		void SetID(const std::string& id);
 		std::string GetID() const;
@@ -24,6 +24,7 @@ namespace geo3dml {
 		StyleRule* MatchWithFeature(Feature* f) const;
 
 	protected:
+		/// 保持当前类为存续类而定义的接口。
 		virtual void Reserved() = 0;
 
 	private:

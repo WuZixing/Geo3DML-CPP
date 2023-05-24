@@ -1,5 +1,5 @@
 #include <g3dxml/XMLLayerReader.h>
-#include <g3dxml/XMLGeo3DStyleReader.h>
+#include <g3dxml/XMLStyleReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -52,9 +52,9 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 					SetStatus(false, err);
 					break;
 				}
-			} else if (geo3dml::IsiEqual(localName, XMLGeo3DStyleReader::Element)) {
-				XMLGeo3DStyleReader styleReader(g3dFactory_);
-				geo3dml::Geo3DStyle* style = styleReader.ReadStyle(reader);
+			} else if (geo3dml::IsiEqual(localName, XMLStyleReader::Element)) {
+				XMLStyleReader styleReader(g3dFactory_);
+				geo3dml::Style* style = styleReader.ReadStyle(reader);
 				if (style != NULL) {
 					layer->AddStyle(style);
 				} else if (!styleReader.IsOK()) {

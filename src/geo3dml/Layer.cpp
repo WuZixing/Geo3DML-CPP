@@ -9,7 +9,7 @@ Layer::Layer() {
 }
 
 Layer::~Layer() {
-	std::vector<Geo3DStyle*>::const_iterator styleItor = styles_.cbegin();
+	std::vector<Style*>::const_iterator styleItor = styles_.cbegin();
 	while (styleItor != styles_.cend()) {
 		delete *styleItor;
 		++styleItor;
@@ -49,11 +49,11 @@ std::string Layer::GetParentMap() const {
 	return parentMapId_;
 }
 
-void Layer::AddStyle(Geo3DStyle* style) {
+void Layer::AddStyle(Style* style) {
 	if (style == NULL) {
 		return;
 	}
-	std::vector<Geo3DStyle*>::const_iterator styleItor = styles_.cbegin();
+	std::vector<Style*>::const_iterator styleItor = styles_.cbegin();
 	while (styleItor != styles_.cend()) {
 		if (*styleItor == style) {
 			return;
@@ -67,7 +67,7 @@ int Layer::GetStyleCount() const {
 	return (int)styles_.size();
 }
 
-Geo3DStyle* Layer::GetStyleAt(int i) const {
+Style* Layer::GetStyleAt(int i) const {
 	return styles_.at(i);
 }
 
@@ -109,7 +109,7 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 	if (bindingFeatureClass_ == NULL) {
 		return;
 	}
-	Geo3DStyle* style = NULL;
+	Style* style = NULL;
 	if (styleIndex >= 0 && styleIndex < styles_.size()) {
 		style = styles_[styleIndex];
 	}

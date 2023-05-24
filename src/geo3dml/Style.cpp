@@ -1,12 +1,12 @@
-#include <geo3dml/Geo3DStyle.h>
+#include <geo3dml/Style.h>
 
 using namespace geo3dml;
 
-Geo3DStyle::Geo3DStyle() {
+Style::Style() {
 
 }
 
-Geo3DStyle::~Geo3DStyle() {
+Style::~Style() {
 	std::vector<StyleRule*>::const_iterator ruleItor = rules_.cbegin();
 	while (ruleItor != rules_.cend()) {
 		delete *ruleItor;
@@ -14,23 +14,23 @@ Geo3DStyle::~Geo3DStyle() {
 	}
 }
 
-void Geo3DStyle::SetID(const std::string& id) {
+void Style::SetID(const std::string& id) {
 	id_ = id;
 }
 
-std::string Geo3DStyle::GetID() const {
+std::string Style::GetID() const {
 	return id_;
 }
 
-void Geo3DStyle::SetName(const std::string& name) {
+void Style::SetName(const std::string& name) {
 	name_ = name;
 }
 
-std::string Geo3DStyle::GetName() const {
+std::string Style::GetName() const {
 	return name_;
 }
 
-void Geo3DStyle::AddRule(StyleRule* rule) {
+void Style::AddRule(StyleRule* rule) {
 	if (rule == NULL) {
 		return;
 	}
@@ -44,15 +44,15 @@ void Geo3DStyle::AddRule(StyleRule* rule) {
 	rules_.push_back(rule);
 }
 
-int Geo3DStyle::GetRuleCount() const {
+int Style::GetRuleCount() const {
 	return (int)rules_.size();
 }
 
-StyleRule* Geo3DStyle::GetRuleAt(int i) {
+StyleRule* Style::GetRuleAt(int i) {
 	return rules_.at(i);
 }
 
-StyleRule* Geo3DStyle::MatchWithFeature(Feature* f) const {
+StyleRule* Style::MatchWithFeature(Feature* f) const {
 	std::vector<StyleRule*>::const_iterator ruleItor = rules_.cbegin();
 	while (ruleItor != rules_.cend()) {
 		if ((*ruleItor)->DoesFeatureMatch(f)) {
