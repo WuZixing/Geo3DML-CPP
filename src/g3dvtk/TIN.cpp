@@ -35,16 +35,6 @@ void TIN::GetVertexAt(int i, double& x, double& y, double& z) const {
 }
 
 void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
-	if (vertex1 < 0 || vertex2 < 0 || vertex3 < 0) {
-		// invalid vertex index.
-		return;
-	}
-	vtkPoints* pts = polyData_->GetPoints();
-	vtkIdType ptNum = pts->GetNumberOfPoints();
-	if (vertex1 >= ptNum || vertex2 >= ptNum || vertex3 >= ptNum) {
-		// invalid vertex index.
-		return;
-	}
 	vtkIdType vertices[3];
 	vertices[0] = vertex1;
 	vertices[1] = vertex2;

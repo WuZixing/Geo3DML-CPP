@@ -11,6 +11,7 @@
 #include <g3dvtk/MultiLineString.h>
 #include <g3dvtk/GTPVolume.h>
 #include <g3dvtk/RectifiedGrid.h>
+#include <g3dvtk/TetrahedronVolume.h>
 
 using namespace g3dvtk;
 
@@ -110,4 +111,8 @@ geo3dml::RectifiedGrid* ObjectFactory::NewRectifiedGrid(
 	double stepI, double stepJ, double stepK,
 	int highI, int highJ, int highK, int lowI, int lowJ, int lowK) {
 	return new RectifiedGrid(origin, stepI, stepJ, stepK, highI, highJ, highK, lowI, lowJ, lowK);
+}
+
+geo3dml::TetrahedronVolume* ObjectFactory::NewTetrahedronVolume() {
+	return new TetrahedronVolume();
 }

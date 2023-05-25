@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLUniformGridReader : public XMLIO {
 	public:
 		/// Name of the rectified grid element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.

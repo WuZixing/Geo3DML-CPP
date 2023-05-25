@@ -1,10 +1,10 @@
 #pragma once
 
-#include "GeoVolume.h"
+#include "Volume.h"
 
 namespace geo3dml {
 
-	class UniformGrid : public GeoVolume {
+	class UniformGrid : public Volume {
 	public:
 		UniformGrid();
 		/// Constructor.

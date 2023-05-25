@@ -44,6 +44,8 @@ namespace g3dvtk {
 			double stepI, double stepJ, double stepK,
 			int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0) override;
 
+		virtual geo3dml::TetrahedronVolume* NewTetrahedronVolume() override;
+
 		virtual geo3dml::ShapeProperty* NewShapeProperty() override;
 
 		virtual geo3dml::Actor* NewActor() override;

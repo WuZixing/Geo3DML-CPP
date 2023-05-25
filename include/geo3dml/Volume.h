@@ -6,7 +6,7 @@
 namespace geo3dml {
 
     /// @brief 体数据的基类。
-    class GeoVolume : public Geometry {
+    class Volume : public Geometry {
     };
 }
 

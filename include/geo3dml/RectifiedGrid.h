@@ -1,14 +1,14 @@
 // UTF-8编码
 #pragma once
 
-#include "GeoVolume.h"
+#include "Volume.h"
 #include "Matrix4x4.h"
 #include "Point3D.h"
 
 namespace geo3dml {
 
     /// @brief 三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。
-    class RectifiedGrid : public GeoVolume {
+    class RectifiedGrid : public Volume {
     public:
         /// @brief 构造函数。
         /// @param origin   网格划分的起始点在全局坐标系中的坐标。

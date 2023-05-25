@@ -13,32 +13,32 @@ XMLGeometryWriter::~XMLGeometryWriter() {
 bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, SchemaVersion v) {
 	output << "<Shape>" << std::endl;
 	geo3dml::TIN* tin = dynamic_cast<geo3dml::TIN*>(geo);
-	if (tin != NULL) {
+	if (tin != nullptr) {
 		WriteTIN(tin, output);
 	} else {
 		geo3dml::LineString* line = dynamic_cast<geo3dml::LineString*>(geo);
-		if (line != NULL) {
+		if (line != nullptr) {
 			WriteLineString(line, output);
 		} else {
 			geo3dml::Point* point = dynamic_cast<geo3dml::Point*>(geo);
-			if (point != NULL) {
+			if (point != nullptr) {
 				WritePoint(point, output);
 			} else {
 				geo3dml::Annotation* annotation = dynamic_cast<geo3dml::Annotation*>(geo);
-				if (annotation != NULL) {
+				if (annotation != nullptr) {
 					WriteAnnotation(annotation, output);
 				} else {
 					geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
-					if (mPoint != NULL) {
+					if (mPoint != nullptr) {
 						WriteMultiPoint(mPoint, output);
 					} else {
 						geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
-						if (cornerGrid != NULL) {
+						if (cornerGrid != nullptr) {
 							WriteCornerPointGrid(cornerGrid, output);
 						} else {
 							if (v != Schema_1_0) {
 								geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
-								if (rectGrid != NULL) {
+								if (rectGrid != nullptr) {
 									WriteUniformGrid(rectGrid, output);
 								} else {
 									geo3dml::GTPVolume* gtpGrid = dynamic_cast<geo3dml::GTPVolume*>(geo);
@@ -48,6 +48,11 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 										geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
 										if (rectGrid != nullptr) {
 											WriteRectifiedGrid(rectGrid, output);
+										} else {
+											geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
+											if (tetraVolume != nullptr) {
+												WriteTetrahedronVolume(tetraVolume, output);
+											}
 										}
 									}
 								}
@@ -246,8 +251,8 @@ void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, s
 	grid->GetCellRange(lowI, lowJ, lowK, highI, highJ, highK);
 	output << "<gml:limits>" << std::endl
 		<< "<gml:GridEnvelope>" << std::endl
-		<< "<gml:low>" << lowI << " " << lowJ << " " << lowK << "</gml:low>" << std::endl
-		<< "<gml:high>" << highI << " " << highJ << " " << highK << "</gml:high>" << std::endl
+		<< "<gml:low>" << lowI << ' ' << lowJ << ' ' << lowK << "</gml:low>" << std::endl
+		<< "<gml:high>" << highI << ' ' << highJ << ' ' << highK << "</gml:high>" << std::endl
 		<< "</gml:GridEnvelope>" << std::endl
 		<< "</gml:limits>" << std::endl;
 	// axis label
@@ -255,7 +260,7 @@ void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, s
 	// origin
 	const geo3dml::Point3D& origin = grid->Origin();
 	output << "<gml:origin>" << std::endl
-		<< "<gml:Point>" << origin.x << " " << origin.y << " " << origin.z << "</gml:Point>" << std::endl
+		<< "<gml:Point>" << origin.x << ' ' << origin.y << ' ' << origin.z << "</gml:Point>" << std::endl
 		<< "</gml:origin>" << std::endl;
 	// offset vectors
 	geo3dml::Vector3D vectors[3];
@@ -263,7 +268,37 @@ void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, s
 	vectors[1] = grid->AxisJ();
 	vectors[2] = grid->AxisK();
 	for (int i = 0; i < 3; ++i) {
-		output << "<gml:offsetVector>" << vectors[i].X() << " " << vectors[i].Y() << " " << vectors[i].Z() << "</gml:offsetVector>" << std::endl;
+		output << "<gml:offsetVector>" << vectors[i].X() << ' ' << vectors[i].Y() << ' ' << vectors[i].Z() << "</gml:offsetVector>" << std::endl;
 	}
 	output << "</gml:RectifiedGrid>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteTetrahedronVolume(const geo3dml::TetrahedronVolume* tetraVolume, std::ostream& output) {
+	output << "<GeoTetrahedronVolume gml:id=\"" << tetraVolume->GetID() << "\">" << std::endl;
+	// vertices
+	int vertexNumber = tetraVolume->GetVertexCount();
+	if (vertexNumber > 0) {
+		output << "<Vertices>" << std::endl;
+		double x, y, z;
+		for (int i = 0; i < vertexNumber; ++i) {
+			tetraVolume->GetVertexAt(i, x, y, z);
+			output << "<Vertex gml:srsDimension=\"3\" IndexNo=\"" << i << "\">" << x << ' ' << y << ' ' << z << "</Vertex>" << std::endl;
+		}
+		output << "</Vertices>" << std::endl;
+	}
+	// tetrahedrons
+	int tetraNumber = tetraVolume->GetTetrahedronCount();
+	if (tetraNumber > 0) {
+		output << "<Tetrahedrons>" << std::endl;
+		int v1, v2, v3, v4;
+		for (int i = 0; i < tetraNumber; ++i) {
+			tetraVolume->GetTetrahedronAt(i, v1, v2, v3, v4);
+			output << "<Tetrahedron IndexNo=\"" << i << "\">" << std::endl
+				<< "<VertexList>" << v1 << ' ' << v2 << ' ' << v3 << ' ' << v4 << "</VertexList>" << std::endl;
+			// << "<NeighborList>-1 -1 -1 -1</NeighborList>" << std::endl;
+			output << "</Tetrahedron>" << std::endl;
+		}
+		output << "</Tetrahedrons>" << std::endl;
+	}
+	output << "</GeoTetrahedronVolume>" << std::endl;
 }

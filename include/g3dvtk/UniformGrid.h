@@ -19,7 +19,7 @@ namespace g3dvtk {
 		virtual ~UniformGrid();
 
 		/// @name Overrided methods inhertied from geo3dml::UniformGrid .
-		//@{
+		///@{
 		/// @see geo3dml::UniformGrid#Init .
 		virtual bool Init(double originX, double originY, double originZ,
 			double stepX, double stepY, double stepZ,
@@ -36,14 +36,14 @@ namespace g3dvtk {
 		virtual bool IsCellValid(int i, int j, int k) const;
 		/// @see geo3dml::UniformGrid#CalculateCellIndex .
 		virtual int CalculateCellIndex(int i, int j, int k) const;
-		//@}
+		///@}
 
 		/// @name Methods inherited from geo3dml::Geometry.
-		//@{
+		///@{
 		virtual geo3dml::Box3D GetMinimumBoundingRectangle() const override;
 		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
 		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
-		//@}
+		///@}
 
 	public:
 		vtkUniformGrid * GetUniformGrid() const;

@@ -96,6 +96,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGTPVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLRectifiedGridReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTetrahedronVolumeReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

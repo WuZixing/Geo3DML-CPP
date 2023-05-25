@@ -21,12 +21,12 @@ namespace g3dvtk {
         virtual ~RectifiedGrid();
 
         /// @name 实现基类 geo3dml::Geometry 定义的接口。
-        //@{
+        ///@{
         /// @see geo3dml::Geometry#SetProperty
         virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) override;
         /// @see geo3dml::Geometry#GetProperty
         virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const override;
-        //@}
+        ///@}
 
     public:
         vtkUniformGrid* GetUniformGrid() const;

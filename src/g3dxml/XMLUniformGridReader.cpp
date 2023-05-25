@@ -3,7 +3,7 @@
 
 using namespace g3dxml;
 
-std::string XMLUniformGridReader::Element = "GeoUniformGrid";
+const std::string XMLUniformGridReader::Element = "GeoUniformGrid";
 
 XMLUniformGridReader::XMLUniformGridReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

@@ -24,8 +24,8 @@ namespace g3dvtk {
 		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
 		virtual geo3dml::Box3D GetMinimumBoundingRectangle() const override;
-		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
-		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
+		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) override;
+		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const override;
 		//@}
 
 		vtkPolyData* GetPolyData() const;

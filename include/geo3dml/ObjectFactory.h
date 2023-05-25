@@ -21,6 +21,7 @@
 #include "MultiLineString.h"
 #include "GTPVolume.h"
 #include "RectifiedGrid.h"
+#include "TetrahedronVolume.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -36,15 +37,15 @@ namespace geo3dml {
 		virtual ObjectFactory* Clone() = 0;
 
 		/// @name model objects.
-		//@{
+		///@{
 		virtual Project* NewProject() = 0;
 		virtual Model* NewModel() = 0;
 		virtual FeatureClass* NewFeatureClass() = 0;
 		virtual Feature* NewFeature() = 0;
-		//@}
+		///@}
 
 		/// @name goemetry(shape) objects.
-		//@{
+		///@{
 		virtual Point* NewPoint() = 0;
 		virtual MultiPoint* NewMultiPoint() = 0;
 		virtual LineString* NewLineString() = 0;
@@ -91,15 +92,16 @@ namespace geo3dml {
 			const Point3D& origin,
 			double stepI, double stepJ, double stepK,
 			int highI, int highJ, int highK, int lowI = 0, int lowJ = 0, int lowK = 0) = 0;
-		//@}
+		virtual TetrahedronVolume* NewTetrahedronVolume() = 0;
+		///@}
 
 		/// @name shape property.
-		//@{
+		///@{
 		virtual ShapeProperty* NewShapeProperty() = 0;
-		//@}
+		///@}
 
 		/// @name map
-		//@{
+		///@{
 		virtual Map* NewMap();
 		virtual Layer* NewLayer();
 		virtual Actor* NewActor() = 0;
@@ -108,7 +110,7 @@ namespace geo3dml {
 		virtual SurfaceSymbolizer* NewSurfaceSymbolizer();
 		virtual GeoDiscreteCoverageSymbolizer* NewGeoDiscreteCoverageSymbolizer();
 		virtual FeatureTypeStyle* NewFeatureTypeStyle();
-		//@}
+		///@}
 
 	public:
 		Geometry* NewGeometry(const std::string& typeName);

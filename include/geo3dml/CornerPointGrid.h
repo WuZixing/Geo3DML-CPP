@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Geometry.h"
+#include "Volume.h"
 
 namespace geo3dml {
 
-	class CornerPointGrid : public Geometry {
+	class CornerPointGrid : public Volume {
 	public:
 		CornerPointGrid();
 		/// Constructor.
