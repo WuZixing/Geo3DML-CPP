@@ -74,4 +74,4 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 > }
 >```
 
-详细示例可参考项目(OpenGeo3D@Github)[https://github.com/WuZixing/OpenGeo3D] 或者 (OpenGeo3D@Gitee)[https://gitee.com/zhizhi-link/OpenGeo3D]。
+详细示例可参考项目[OpenGeo3D@Github](https://github.com/WuZixing/OpenGeo3D)或者[OpenGeo3D@Gitee](https://gitee.com/zhizhi-link/OpenGeo3D)。
