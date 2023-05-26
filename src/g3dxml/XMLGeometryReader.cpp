@@ -10,6 +10,7 @@
 #include <g3dxml/XMLGTPVolumeReader.h>
 #include <g3dxml/XMLRectifiedGridReader.h>
 #include <g3dxml/XMLTetrahedronVolumeReader.h>
+#include <g3dxml/XMLCuboidVolumeReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -131,6 +132,12 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				geo = tetraReader.ReadTetrahedronVolume(reader);
 				if (geo == nullptr) {
 					SetStatus(false, tetraReader.Error());
+				}
+			} else if (geo3dml::IsiEqual(localName, XMLCuboidVolumeReader::Element)) {
+				XMLCuboidVolumeReader cuboidReader(g3dFactory_);
+				geo = cuboidReader.ReadCuboidVolume(reader);
+				if (geo == nullptr) {
+					SetStatus(false, cuboidReader.Error());
 				}
 			}
 		}

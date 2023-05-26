@@ -16,9 +16,9 @@ TIN::~TIN() {
 
 }
 
-void TIN::AddVertex(int index, double x, double y, double z) {
+void TIN::AppendVertex(double x, double y, double z) {
 	vtkPoints* pts = polyData_->GetPoints();
-	pts->InsertPoint(index, x, y, z);
+	pts->InsertNextPoint(x, y, z);
 }
 
 int TIN::GetVertexCount() const {
@@ -34,11 +34,8 @@ void TIN::GetVertexAt(int i, double& x, double& y, double& z) const {
 	z = coords[2];
 }
 
-void TIN::AddTriangle(int index, int vertex1, int vertex2, int vertex3) {
-	vtkIdType vertices[3];
-	vertices[0] = vertex1;
-	vertices[1] = vertex2;
-	vertices[2] = vertex3;
+void TIN::AppendTriangle(int v1, int v2, int v3) {
+	vtkIdType vertices[3] = {v1, v2, v3};
 	polyData_->InsertNextCell(VTK_TRIANGLE, 3, vertices);
 }
 

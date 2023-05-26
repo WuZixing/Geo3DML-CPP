@@ -34,58 +34,28 @@ bool GTPVolume::GetVertexAt(int i, double& x, double& y, double& z) const {
     return true;
 }
 
-int GTPVolume::AppendPrism(int topVertex1, int topVertex2, int topVertex3, int bottomVertex1, int bottomVertex2, int bottomVertex3) {
-    vtkIdType ptIds[6] = { topVertex1, topVertex2, topVertex3, bottomVertex1, bottomVertex2, bottomVertex3 };
-    vtkNew<vtkIdList> faces;
-    // 顶面
-    faces->InsertNextId(3);
-    faces->InsertNextId(topVertex1);
-    faces->InsertNextId(topVertex2);
-    faces->InsertNextId(topVertex3);
-    // 底面
-    faces->InsertNextId(3);
-    faces->InsertNextId(bottomVertex1);
-    faces->InsertNextId(bottomVertex2);
-    faces->InsertNextId(bottomVertex3);
-    // 侧面：1
-    faces->InsertNextId(4);
-    faces->InsertNextId(topVertex1);
-    faces->InsertNextId(topVertex2);
-    faces->InsertNextId(bottomVertex2);
-    faces->InsertNextId(bottomVertex1);
-    // 侧面：2
-    faces->InsertNextId(4);
-    faces->InsertNextId(topVertex2);
-    faces->InsertNextId(topVertex3);
-    faces->InsertNextId(bottomVertex3);
-    faces->InsertNextId(bottomVertex2);
-    // 侧面：3
-    faces->InsertNextId(4);
-    faces->InsertNextId(topVertex3);
-    faces->InsertNextId(topVertex1);
-    faces->InsertNextId(bottomVertex1);
-    faces->InsertNextId(bottomVertex3);
-
-    return gridData_->InsertNextCell(VTK_POLYHEDRON, 6, ptIds, 5, faces->GetPointer(0));
+int GTPVolume::AppendPrism(int top1, int top2, int top3, int bottom1, int bottom2, int bottom3) {
+    vtkIdType ptIds[6] = { top1, top2, top3, bottom1, bottom2, bottom3 };
+    return gridData_->InsertNextCell(VTK_WEDGE, 6, ptIds);
 }
 
 int GTPVolume::GetPrismCount() const {
     return gridData_->GetNumberOfCells();
 }
 
-bool GTPVolume::GetPrismAt(int i, int& topVertex1, int& topVertex2, int& topVertex3, int& bottomVertex1, int& bottomVertex2, int& bottomVertex3) const {
+bool GTPVolume::GetPrismAt(int i, int& top1, int& top2, int& top3, int& bottom1, int& bottom2, int& bottom3) const {
     vtkIdType npts = 0;
     const vtkIdType* pts = nullptr;
     gridData_->GetCellPoints(i, npts, pts);
     if (npts != 6 || pts == nullptr) {
         return false;
     }
-    topVertex1 = pts[0];
-    topVertex2 = pts[1];
-    topVertex3 = pts[2];
-    bottomVertex1 = pts[3];
-    bottomVertex2 = pts[4];
-    bottomVertex3 = pts[5];
+    top1 = pts[0];
+    top2 = pts[1];
+    top3 = pts[2];
+    bottom1 = pts[3];
+    bottom2 = pts[4];
+    bottom3 = pts[5];
     return true;
 }
 

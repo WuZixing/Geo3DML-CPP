@@ -12,6 +12,7 @@
 #include <g3dvtk/GTPVolume.h>
 #include <g3dvtk/RectifiedGrid.h>
 #include <g3dvtk/TetrahedronVolume.h>
+#include <g3dvtk/CuboidVolume.h>
 
 using namespace g3dvtk;
 
@@ -115,4 +116,8 @@ geo3dml::RectifiedGrid* ObjectFactory::NewRectifiedGrid(
 
 geo3dml::TetrahedronVolume* ObjectFactory::NewTetrahedronVolume() {
 	return new TetrahedronVolume();
+}
+
+geo3dml::CuboidVolume* ObjectFactory::NewCuboidVolume() {
+	return new CuboidVolume();
 }

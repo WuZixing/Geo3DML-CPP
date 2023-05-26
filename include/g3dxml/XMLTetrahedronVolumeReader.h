@@ -8,7 +8,7 @@ namespace g3dxml {
 
     class XMLTetrahedronVolumeReader : public XMLIO {
     public:
-        /// Name of the rectified grid element.
+        /// Name of the tetrahedron volume element.
         static const std::string Element;
 
     public:

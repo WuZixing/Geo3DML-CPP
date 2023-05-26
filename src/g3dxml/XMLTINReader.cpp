@@ -51,15 +51,15 @@ geo3dml::TIN* XMLTINReader::ReadTIN(xmlTextReaderPtr reader) {
 }
 
 bool XMLTINReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
-	std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
-	long idx = strtol(index.c_str(), NULL, 10);
+	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
+	// long idx = strtol(index.c_str(), NULL, 10);
 	std::string coordinates;
 	if (XMLReaderHelper::TextNode(reader, Element_Vertex, coordinates)) {
 		char* end = NULL;
 		double x = strtod(coordinates.c_str(), &end);
 		double y = strtod(end, &end);
 		double z = strtod(end, NULL);
-		tin->AddVertex(idx, x, y, z);
+		tin->AppendVertex(x, y, z);
 		return true;
 	} else {
 		SetStatus(false, coordinates);
@@ -68,8 +68,8 @@ bool XMLTINReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
 }
 
 bool XMLTINReader::ReadTriangle(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
-	std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
-	long triangleIndex = strtol(index.c_str(), NULL, 10);
+	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
+	// long triangleIndex = strtol(index.c_str(), NULL, 10);
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -84,7 +84,7 @@ bool XMLTINReader::ReadTriangle(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
 					long v1 = strtol(ids.c_str(), &end, 10);
 					long v2 = strtol(end, &end, 10);
 					long v3 = strtol(end, NULL, 10);
-					tin->AddTriangle(triangleIndex, v1, v2, v3);
+					tin->AppendTriangle(v1, v2, v3);
 				} else {
 					SetStatus(false, ids);
 					break;

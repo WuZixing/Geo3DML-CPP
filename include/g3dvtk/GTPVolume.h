@@ -19,9 +19,9 @@ namespace g3dvtk {
         virtual int AppendVertex(double x, double y, double z) override;
         virtual int GetVertexCount() const override;
         virtual bool GetVertexAt(int i, double& x, double& y, double& z) const override;
-        virtual int AppendPrism(int topVertex1, int topVertex2, int topVertex3, int bottomVertex1, int bottomVertex2, int bottomVertex3) override;
+        virtual int AppendPrism(int top1, int top2, int top3, int bottom1, int bottom2, int bottom3) override;
         virtual int GetPrismCount() const override;
-        virtual bool GetPrismAt(int i, int& topVertex1, int& topVertex2, int& topVertex3, int& bottomVertex1, int& bottomVertex2, int& bottomVertex3) const override;
+        virtual bool GetPrismAt(int i, int& top1, int& top2, int& top3, int& bottom1, int& bottom2, int& bottom3) const override;
         ///@}
 
         /// @name 实现geo3dml::Geometry定义的虚函数。

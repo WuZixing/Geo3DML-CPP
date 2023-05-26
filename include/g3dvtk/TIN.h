@@ -13,12 +13,12 @@ namespace g3dvtk {
 
 		/// @name Methods inherited from geo3dml::TIN.
 		//@{
-		virtual void AddVertex(int index, double x, double y, double z);
-		virtual int GetVertexCount() const;
-		virtual void GetVertexAt(int i, double& x, double& y, double& z) const;
-		virtual void AddTriangle(int index, int vertex1, int vertex2, int vertex3);
-		virtual int GetTriangleCount() const;
-		virtual void GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) const;
+		virtual void AppendVertex(double x, double y, double z) override;
+		virtual int GetVertexCount() const override;
+		virtual void GetVertexAt(int i, double& x, double& y, double& z) const override;
+		virtual void AppendTriangle(int v1, int v2, int v3) override;
+		virtual int GetTriangleCount() const override;
+		virtual void GetTriangleAt(int i, int& vertex1, int& vertex2, int& vertex3) const override;
 		//@}
 
 		/// @name Methods inherited from geo3dml::Geometry.

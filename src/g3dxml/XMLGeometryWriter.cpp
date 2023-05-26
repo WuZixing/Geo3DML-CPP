@@ -52,6 +52,11 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 											geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
 											if (tetraVolume != nullptr) {
 												WriteTetrahedronVolume(tetraVolume, output);
+											} else {
+												geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
+												if (geo != nullptr) {
+													WriteCuboidVolume(cuboidVolume, output);
+												}
 											}
 										}
 									}
@@ -301,4 +306,33 @@ void XMLGeometryWriter::WriteTetrahedronVolume(const geo3dml::TetrahedronVolume*
 		output << "</Tetrahedrons>" << std::endl;
 	}
 	output << "</GeoTetrahedronVolume>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteCuboidVolume(const geo3dml::CuboidVolume* cuboidVolume, std::ostream& output) {
+	output << "<GeoCuboidVolume gml:id=\"" << cuboidVolume->GetID() << "\">" << std::endl;
+	// vertices
+	int vertexNumber = cuboidVolume->GetVertexCount();
+	if (vertexNumber > 0) {
+		output << "<Vertices>" << std::endl;
+		double x, y, z;
+		for (int i = 0; i < vertexNumber; ++i) {
+			cuboidVolume->GetVertexAt(i, x, y, z);
+			output << "<Vertex gml:srsDimension=\"3\" IndexNo=\"" << i << "\">" << x << ' ' << y << ' ' << z << "</Vertex>" << std::endl;
+		}
+		output << "</Vertices>" << std::endl;
+	}
+	// cuboids
+	int cuboidNumber = cuboidVolume->GetCuboidCount();
+	if (cuboidNumber > 0) {
+		output << "<Cuboids>" << std::endl;
+		int v1, v2, v3, v4, v5, v6, v7, v8;
+		for (int i = 0; i < cuboidNumber; ++i) {
+			cuboidVolume->GetCuboidAt(i, v1, v2, v3, v4, v5, v6, v7, v8);
+			output << "<Cuboid IndexNo=\"" << i << "\">" << std::endl
+				<< "<VertexList>" << v1 << ' ' << v2 << ' ' << v3 << ' ' << v4 << ' ' << v5 << ' ' << v6 << ' ' << v7 << ' ' << v8 << "</VertexList>" << std::endl;
+			output << "</Cuboid>" << std::endl;
+		}
+		output << "</Cuboids>" << std::endl;
+	}
+	output << "</GeoCuboidVolume>" << std::endl;
 }
