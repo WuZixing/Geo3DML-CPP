@@ -3530,7 +3530,7 @@ xmlOutputBufferFlush(xmlOutputBufferPtr out) {
 char *
 xmlParserGetDirectory(const char *filename) {
     char *ret = NULL;
-    char dir[1024];
+    char dir[1024] = {'\0'};
     char *cur;
     char sep = '/';
 
@@ -3546,7 +3546,7 @@ xmlParserGetDirectory(const char *filename) {
     sep = '\\';
 #endif
 
-    strncpy_s(dir, 1024, filename, 1023);
+    strncpy(dir, filename, 1024);
     dir[1023] = 0;
     cur = &dir[strlen(dir)];
     while (cur > dir) {
@@ -3558,7 +3558,7 @@ xmlParserGetDirectory(const char *filename) {
         else *cur = 0;
         ret = xmlMemStrdup(dir);
     } else {
-        if (_getcwd(dir, 1024) != NULL) {
+        if (getcwd(dir, 1024) != NULL) {
             dir[1023] = 0;
             ret = xmlMemStrdup(dir);
         }

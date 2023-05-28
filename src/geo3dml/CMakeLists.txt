@@ -1,4 +1,6 @@
-add_compile_options(/utf-8)
+if(MSVC)
+  add_compile_options(/utf-8)
+endif()
 
 # output variables
 set(GEO3DML_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include CACHE PATH "")

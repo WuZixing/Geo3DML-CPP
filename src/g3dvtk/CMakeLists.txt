@@ -1,9 +1,11 @@
-add_compile_options(/utf-8)
+if(MSVC)
+  add_compile_options(/utf-8)
+endif()
 
 # Geo3DML SDK
 find_file(GEO3DML_HEADER "geo3dml/ObjectFactory.h" PATHS ${GEO3DML_INCLUDE_DIRS})
 if(NOT GEO3DML_HEADER)
-	message(SEND_ERROR "Can not find Geo3DML headers. Please set GEO3DML_INCLUDE_DIRS to the directory that contains file geo3dml/ObjectFactory.h.")
+  message(SEND_ERROR "Can not find Geo3DML headers. Please set GEO3DML_INCLUDE_DIRS to the directory that contains file geo3dml/ObjectFactory.h.")
 endif()
 
 # VTK
@@ -55,4 +57,7 @@ include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${G3DVTK_LIBRARIES}
 	${G3DVTK_SOURCES}
 	${G3DVTK_HEADERS}
+)
+target_link_libraries(${G3DVTK_LIBRARIES} 
+  PRIVATE ${GEO3DML_LIBRARIES} ${VTK_LIBRARIES}
 )
