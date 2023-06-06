@@ -19,12 +19,16 @@ namespace g3dxml {
 		bool ReadMaterial(xmlTextReaderPtr reader, geo3dml::Material& toMaterial);
 
 	private:
+		bool ReadTexture(xmlTextReaderPtr reader, geo3dml::Texture& texture);
+
+	private:
 		const std::string Element_AmbientIntensity;
 		const std::string Element_DiffuseColor;
 		const std::string Element_EmissiveColor;
 		const std::string Element_Shininess;
 		const std::string Element_SpecularColor;
 		const std::string Element_Transparency;
+		const std::string Element_Texture;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

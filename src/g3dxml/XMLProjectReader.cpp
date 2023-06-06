@@ -1,7 +1,6 @@
 #include <g3dxml/XMLProjectReader.h>
 #include <g3dxml/XMLModelReader.h>
 #include <g3dxml/XMLMapReader.h>
-#include <regex>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -95,7 +94,7 @@ geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {
 				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 				if (href != NULL) {
 					XMLModelReader modelReader(g3dFactory_);
-					if (IsRelativePath((const char*)href)) {
+					if (XMLReaderHelper::IsRelativePath((const char*)href)) {
 						model = modelReader.LoadFromFile(projectDirectory_ + (const char*)href);
 					} else {
 						model = modelReader.LoadFromFile((const char*)href);
@@ -274,7 +273,7 @@ geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
 				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 				if (href != NULL) {
 					XMLMapReader mapReader(g3dFactory_);
-					if (IsRelativePath((const char*)href)) {
+					if (XMLReaderHelper::IsRelativePath((const char*)href)) {
 						map = mapReader.LoadFromFile(projectDirectory_ + (const char*)href);
 					} else {
 						map = mapReader.LoadFromFile((const char*)href);
@@ -303,32 +302,4 @@ geo3dml::Map* XMLProjectReader::ReadMap(xmlTextReaderPtr reader) {
 		SetStatus(false, err);
 	}
 	return map;
-}
-
-bool XMLProjectReader::IsRelativePath(const std::string& path) {
-#if defined(_WIN32)
-	bool isRelative = true;
-	wchar_t* wPath = __xmlIOWin32UTF8ToWChar(path.c_str());
-	if (wPath != NULL) {
-		std::wregex re(L"^[a-zA-Z]:\\\\.*$");
-		std::wcmatch m;
-		if (std::regex_match(wPath, m, re)) {
-			isRelative = false;
-		}
-		xmlFree(wPath);
-	} else {
-		std::regex re("^[a-zA-Z]:\\\\.*$");
-		std::cmatch m;
-		if (std::regex_match(path.c_str(), m, re)) {
-			isRelative = false;
-		}
-	}
-	return isRelative;
-#else
-	if (!path.empty() && path.at(0) == '/') {
-		return false;
-	} else {
-		return true;
-	}
-#endif
 }

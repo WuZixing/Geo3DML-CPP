@@ -12,14 +12,14 @@ namespace geo3dml {
 
 		//@{
 		void SetFrontMaterial(const Material& m);
-		Material GetFrontMaterial() const;
+		const Material& GetFrontMaterial() const;
 		//@}
 		
 		//@{
 		void EnableBackRender(bool enabled = false);
 		bool IsBackRenderEnabled() const;
 		void SetBackMaterial(const Material& m);
-		Material GetBackMaterial() const;
+		const Material& GetBackMaterial() const;
 		//@}
 
 		//@{

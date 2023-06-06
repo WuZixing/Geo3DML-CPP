@@ -1,6 +1,9 @@
+// UTF-8编码
 #pragma once
 
+#include <string>
 #include "Color.h"
+#include "Texture.h"
 
 namespace geo3dml {
 
@@ -10,35 +13,39 @@ namespace geo3dml {
 		virtual ~Material();
 
 		/// @name Ambient intensity: [0, 1.0]
-		//@{
+		///@{
 		void SetAmbientIntensity(double d = 0.2);
 		double GetAmbientIntensity() const;
-		//@}
+		///@}
 
 		/// @name Shininess: [0, 1.0]
-		//@{
+		///@{
 		void SetShininess(double d = 0.2);
 		double GetShininess() const;
-		//@}
+		///@}
 
 		/// @name Transparency: [0, 1.0]
-		//@{
+		///@{
 		void SetTransparency(double d = 0);
 		double GetTransparency() const;
-		//@}
+		///@}
 
 		/// @name Colors
-		//@{
+		///@{
 		void SetDiffuseColor(const Color& clr);
 		Color GetDiffuseColor() const;
 		void SetEmissiveColor(const Color& clr);
 		Color GetEmissiveColor() const;
 		void SetSpecularColor(const Color& clr);
 		Color GetSpecularColor() const;
-		//@}
+		///@}
+
+		void SetTexture(const Texture& tex);
+		const Texture& GetTexture() const;
 
 	private:
 		double ambientIntensity_, shininess_, transparency_;
 		Color diffuseColor_, emissiveColor_, specularColor_;
+		Texture texture_;
 	};
 }

@@ -31,7 +31,7 @@ void SurfaceSymbolizer::SetFrontMaterial(const Material& m) {
 	frontMaterial_ = m;
 }
 
-Material SurfaceSymbolizer::GetFrontMaterial() const {
+const Material& SurfaceSymbolizer::GetFrontMaterial() const {
 	return frontMaterial_;
 }
 
@@ -47,7 +47,7 @@ void SurfaceSymbolizer::SetBackMaterial(const Material& m) {
 	backMaterial_ = m;
 }
 
-Material SurfaceSymbolizer::GetBackMaterial() const {
+const Material& SurfaceSymbolizer::GetBackMaterial() const {
 	return backMaterial_;
 }
 

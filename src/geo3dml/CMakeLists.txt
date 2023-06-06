@@ -54,6 +54,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Matrix4x4.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/CuboidVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TetrahedronVolume.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/Texture.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC

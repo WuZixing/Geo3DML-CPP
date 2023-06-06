@@ -15,11 +15,17 @@
 #include <g3dvtk/ColorMap.h>
 #include <vtkActor2D.h>
 #include <vtkDataSetMapper.h>
+#include <vtkImageReader2.h>
+#include <vtkImageReader2Factory.h>
 #include <vtkImageToStructuredGrid.h>
 #include <vtkOpenGLActor.h>
 #include <vtkPolyData.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
+#include <vtkTexture.h>
+#include <vtkTextureMapToCylinder.h>
+#include <vtkTextureMapToPlane.h>
+#include <vtkTextureMapToSphere.h>
 #include <vtkTransformFilter.h>
 
 using namespace g3dvtk;
@@ -41,12 +47,53 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	}
 	g3dvtk::TIN* tin = dynamic_cast<g3dvtk::TIN*>(bindingGeometry_);
 	if (tin != nullptr) {
-		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-		mapper->SetInputData(tin->GetPolyData());
-		mapper->StaticOn();
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
-		actor->SetMapper(mapper);
+		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
+		if (surfaceSymbolizer != nullptr) {
+			const geo3dml::Texture& texture = surfaceSymbolizer->GetFrontMaterial().GetTexture();
+			if (texture.IsValid()) {
+				vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
+				texPlane->AutomaticPlaneGenerationOn();
+				texPlane->SetInputData(tin->GetPolyData());
+				mapper->SetInputConnection(texPlane->GetOutputPort());
+				vtkNew<vtkImageReader2Factory> readerFactory;
+				vtkSmartPointer<vtkImageReader2> texImage;
+				texImage.TakeReference(readerFactory->CreateImageReader2(texture.GetImageURI().c_str()));
+				texImage->SetFileName(texture.GetImageURI().c_str());
+                vtkSmartPointer<vtkTexture> tex = vtkSmartPointer<vtkTexture>::New();
+                tex->SetInputConnection(texImage->GetOutputPort());
+                tex->InterpolateOn();
+				switch (texture.GetWrapMode()) {
+				case geo3dml::Texture::WrapMode::Repeat: {
+					tex->SetWrap(vtkTexture::Repeat);
+					break;
+				}
+				case geo3dml::Texture::WrapMode::MirrorRepeat: {
+					tex->SetWrap(vtkTexture::MirroredRepeat);
+					break;
+				}
+				case geo3dml::Texture::WrapMode::ClampToBorder: {
+					const geo3dml::Color& borderColor = texture.GetBorderColor();
+					tex->SetBorderColor(borderColor.R(), borderColor.G(), borderColor.B(), borderColor.A());
+					tex->SetWrap(vtkTexture::ClampToBorder);
+					break;
+				}
+				default: {
+					tex->SetWrap(vtkTexture::ClampToEdge);
+					break;
+				}
+				}
+				actor->SetTexture(tex);
+			} else {
+				mapper->SetInputData(tin->GetPolyData());
+			}
+		} else {
+			mapper->SetInputData(tin->GetPolyData());
+		}
+		mapper->Update();
+		mapper->StaticOn();
+		actor->SetMapper(mapper);
 		if (surfaceSymbolizer != nullptr) {
 			ConfigBySurfaceSymbolizer(surfaceSymbolizer, actor->GetProperty());
 		} else {

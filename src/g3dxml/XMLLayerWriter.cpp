@@ -168,6 +168,43 @@ void XMLLayerWriter::WriteMaterial(const geo3dml::Material& m, std::ostream& out
 		<< "<EmissiveColor>" << emissiveColor.R() << " " << emissiveColor.G() << " " << emissiveColor.B() << "</EmissiveColor>" << std::endl
 		<< "<Shininess>" << m.GetShininess() << "</Shininess>" << std::endl
 		<< "<SpecularColor>" << specularColor.R() << " " << specularColor.G() << " " << specularColor.B() << "</SpecularColor>" << std::endl
-		<< "<Transparency>" << m.GetTransparency() << "</Transparency>" << std::endl
-		<< "</Material>" << std::endl;
+		<< "<Transparency>" << m.GetTransparency() << "</Transparency>" << std::endl;
+	const geo3dml::Texture& texture = m.GetTexture();
+	if (texture.IsValid()) {
+		output << "<Texture>" << std::endl
+			<< "<ParameterizedTextureType>" << std::endl
+			<< "<ImageURI>" << texture.GetImageURI() << "</ImageURI>" << std::endl
+			<< "<MimeType>" << texture.GetImageMime() << "</MimeType>" << std::endl
+			<< "<WrapMode>";
+		switch (texture.GetWrapMode()) {
+		case geo3dml::Texture::WrapMode::Default: {
+			output << "None";
+			break;
+		}
+		case geo3dml::Texture::WrapMode::Repeat: {
+			output << "Wrap";
+			break;
+		}
+		case geo3dml::Texture::WrapMode::MirrorRepeat: {
+			output << "Mirror";
+			break;
+		}
+		case geo3dml::Texture::WrapMode::ClampToEdge: {
+			output << "Clamp";
+			break;
+		}
+		case geo3dml::Texture::WrapMode::ClampToBorder: {
+			output << "Border";
+			break;
+		}
+		}
+		output << "</WrapMode>" << std::endl;
+		const geo3dml::Color& color = texture.GetBorderColor();
+		if (texture.GetWrapMode() == geo3dml::Texture::WrapMode::ClampToBorder) {
+			output << "<BorderColor>" << color.R() << ' ' << color.G() << ' ' << color.B() << ' ' << color.A() << "</BorderColor>" << std::endl;
+		}
+		output << "</ParameterizedTextureType>" << std::endl
+			<< "</Texture>" << std::endl;
+	}
+	output << "</Material>" << std::endl;
 }

@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include <libxml/xmlreader.h>
@@ -10,6 +11,9 @@ namespace g3dxml {
 		/// Detect file's encoding.
 		static std::string DectectFileEncoding(const std::string& file);
 		static bool IsUTF8(const std::string& encodingName);
+
+		/// Check whether a path is relative.
+		static bool IsRelativePath(const std::string& path);
 
 		/// Get an element's text value.
 		/// @param reader the XML reader.

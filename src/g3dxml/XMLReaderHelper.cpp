@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
+#include <regex>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -80,6 +81,34 @@ bool XMLReaderHelper::IsUTF8(const std::string& encodingName) {
 		return true;
 	}
 	return false;
+}
+
+bool XMLReaderHelper::IsRelativePath(const std::string& path) {
+#if defined(_WIN32)
+	bool isRelative = true;
+	wchar_t* wPath = __xmlIOWin32UTF8ToWChar(path.c_str());
+	if (wPath != NULL) {
+		std::wregex re(L"^[a-zA-Z]:\\\\.*$");
+		std::wcmatch m;
+		if (std::regex_match(wPath, m, re)) {
+			isRelative = false;
+		}
+		xmlFree(wPath);
+	} else {
+		std::regex re("^[a-zA-Z]:\\\\.*$");
+		std::cmatch m;
+		if (std::regex_match(path.c_str(), m, re)) {
+			isRelative = false;
+		}
+	}
+	return isRelative;
+#else
+	if (!path.empty() && path.at(0) == '/') {
+		return false;
+	} else {
+		return true;
+	}
+#endif
 }
 
 bool XMLReaderHelper::TextNode(xmlTextReaderPtr reader, const std::string& element, std::string& str) {
