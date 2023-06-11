@@ -48,7 +48,7 @@ void Model::SetName(const std::string& name) {
 	name_ = name;
 }
 
-std::string Model::GetName() const {
+const std::string& Model::GetName() const {
 	return name_;
 }
 
@@ -111,50 +111,18 @@ Box3D Model::GetMinimumBoundingRectangle() const {
 	return box;
 }
 
-std::string Model::GetDateStamp() const {
-	return dateStamp_;
+void Model::SetMetadata(const Metadata& meta) {
+	metadata_ = meta;
 }
 
-void Model::SetDateStamp(const std::string& s) {
-	dateStamp_ = s;
-}
-
-std::string Model::GetDescription() const {
-	return description_;
-}
-
-void Model::SetDescription(const std::string& s) {
-	description_ = s;
-}
-
-std::string Model::GetVersion() const {
-	return version_;
-}
-
-void Model::SetVersion(const std::string& s) {
-	version_ = s;
-}
-
-std::string Model::GetToolName() const {
-	return toolName_;
-}
-
-void Model::SetToolName(const std::string& s) {
-	toolName_ = s;
-}
-
-std::string Model::GetToolVersion() const {
-	return toolVersion_;
-}
-
-void Model::SetToolVersion(const std::string& s) {
-	toolVersion_ = s;
+const Metadata& Model::GetMetadata() const {
+	return metadata_;
 }
 
 void Model::SetParentProject(const std::string& id) {
 	parentProjectId_ = id;
 }
 
-std::string Model::GetParentProject() const {
+const std::string& Model::GetParentProject() const {
 	return parentProjectId_;
 }

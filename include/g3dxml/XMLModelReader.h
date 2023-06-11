@@ -22,6 +22,10 @@ namespace g3dxml {
 
 	private:
 		bool ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model);
+		bool ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		std::string ReadCharacterString(xmlTextReaderPtr reader, const std::string& parentNode);
+		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
 
 	private:
 		static const std::string OldElement;

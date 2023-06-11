@@ -71,12 +71,59 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 		<< "ID=\"" << model->GetID() << "\">" << std::endl;
 	output << "<Name>" << model->GetName() << "</Name>" << std::endl;
 	output << "<Type>" << geo3dml::Model::ModelTypeToName(model->GetType()) << "</Type>" << std::endl;
+	const geo3dml::Metadata& meta = model->GetMetadata();
 	output << "<Metadata>" << std::endl
-		<< "<gmd:dateStamp><gco:Date>" << model->GetDateStamp() << "</gco:Date></gmd:dateStamp>" << std::endl
-		<< "<Description>" << model->GetDescription() << "</Description>" << std::endl
-		<< "<Version>" << model->GetVersion() << "</Version>" << std::endl
-		<< "<ToolName>" << model->GetToolName() << "</ToolName>" << std::endl
-		<< "<ToolVersion>" << model->GetToolVersion() << "</ToolVersion>" << std::endl
+		<< "<gmd:contact>" << std::endl
+		<< "<gmd:CI_ResponsibleParty>" << std::endl
+		<< "<gmd:individualName>" << std::endl
+		<< "<gco:CharacterString>" << meta.GetResponsibleIndividualName() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:individualName>" << std::endl
+		<< "<gmd:organisationName>" << std::endl
+		<< "<gco:CharacterString>" << meta.GetResponsibleOrganisationName() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:organisationName>" << std::endl
+		<< "<gmd:contactInfo>" << std::endl
+		<< "<gmd:CI_Contact>" << std::endl
+		<< "<gmd:phone>" << std::endl
+		<< "<gmd:CI_Telephone>" << std::endl
+		<< "<gmd:voice>" << std::endl
+		<< "<gco:CharacterString>" << meta.GetContactPhone() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:voice>" << std::endl
+		<< "</gmd:CI_Telephone>" << std::endl
+		<< "</gmd:phone>" << std::endl
+		<< "<gmd:address>" << std::endl
+		<< "<gmd:CI_Address>" << std::endl
+		<< "<gmd:deliveryPoint>" << std::endl
+		<< "<gco:CharacterString>" << meta.GetContactAddress() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:deliveryPoint>" << std::endl
+		<< "<gmd:electronicMailAddress>" << std::endl
+		<< "<gco:CharacterString>" << meta.GetContactEmail() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:electronicMailAddress>" << std::endl
+		<< "</gmd:CI_Address>" << std::endl
+		<< "</gmd:address>" << std::endl
+		<< "</gmd:CI_Contact>" << std::endl
+		<< "</gmd:contactInfo>" << std::endl
+		<< "</gmd:CI_ResponsibleParty>" << std::endl
+		<< "</gmd:contact>" << std::endl;
+	bool isDateTime = false;
+	const std::string& dateStamp = meta.GetDateStamp(isDateTime);
+	output << "<gmd:dateStamp>" << std::endl;
+	if (isDateTime) {
+		output << "<gco:DateTime>" << dateStamp << "</gco:DateTime>" << std::endl;
+	} else {
+		output << "<gco:Date>" << dateStamp << "</gco:Date>" << std::endl;
+	}
+	output << "</gmd:dateStamp>" << std::endl;
+	output << "<Description>" << meta.GetDescription() << "</Description>" << std::endl
+		<< "<Version>" << meta.GetVersion() << "</Version>" << std::endl
+		<< "<SpatialReferenceSystem>" << std::endl
+		<< "<CoordinateReferenceSystem>" << std::endl
+		<< "<CoordinateReferenceSystemIdentifier>" << meta.GetCoordRefSysID() << "</CoordinateReferenceSystemIdentifier>" << std::endl
+		<< "<CoordinateSystemType>" << meta.GetCoordSysType() << "</CoordinateSystemType>" << std::endl
+		<< "<CoordinateSystemIdentifier>" << meta.GetCoordSysID() << "</CoordinateSystemIdentifier>" << std::endl
+		<< "</CoordinateReferenceSystem>" << std::endl
+		<< "</SpatialReferenceSystem>" << std::endl
+		<< "<ToolName>" << meta.GetToolName() << "</ToolName>" << std::endl
+		<< "<ToolVersion>" << meta.GetToolVersion() << "</ToolVersion>" << std::endl
 		<< "</Metadata>" << std::endl;
 	int featureClassNumber = model->GetFeatureClassCount();
 	if (featureClassNumber > 0) {
