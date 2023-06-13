@@ -14,12 +14,12 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName() const;
+		const std::string& GetName() const;
 		//@}
 
 		//@{
 		void SetDescription(const std::string& desc);
-		std::string GetDescription() const;
+		const std::string& GetDescription() const;
 		//@}
 
 		//@{

@@ -24,7 +24,7 @@ void Project::SetName(const std::string& name) {
 	name_ = name;
 }
 
-std::string Project::GetName() const {
+const std::string& Project::GetName() const {
 	return name_;
 }
 
@@ -32,7 +32,7 @@ void Project::SetDescription(const std::string& desc) {
 	description_ = desc;
 }
 
-std::string Project::GetDescription() const {
+const std::string& Project::GetDescription() const {
 	return description_;
 }
 
