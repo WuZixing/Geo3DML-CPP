@@ -48,6 +48,8 @@ namespace g3dvtk {
 
 		virtual geo3dml::CuboidVolume* NewCuboidVolume() override;
 
+		virtual geo3dml::SGrid* NewSGrid() override;
+
 		virtual geo3dml::ShapeProperty* NewShapeProperty() override;
 
 		virtual geo3dml::Actor* NewActor() override;

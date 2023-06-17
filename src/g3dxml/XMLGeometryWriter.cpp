@@ -54,8 +54,13 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 												WriteTetrahedronVolume(tetraVolume, output);
 											} else {
 												geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
-												if (geo != nullptr) {
+												if (cuboidVolume != nullptr) {
 													WriteCuboidVolume(cuboidVolume, output);
+												} else {
+													geo3dml::SGrid* sGrid = dynamic_cast<geo3dml::SGrid*>(geo);
+													if (sGrid != nullptr) {
+														WriteSGrid(sGrid, output);
+													}
 												}
 											}
 										}
@@ -335,4 +340,70 @@ void XMLGeometryWriter::WriteCuboidVolume(const geo3dml::CuboidVolume* cuboidVol
 		output << "</Cuboids>" << std::endl;
 	}
 	output << "</GeoCuboidVolume>" << std::endl;
+}
+
+void XMLGeometryWriter::WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& output) {
+	output << "<GeoSGrid gml:id=\"" << sGrid->GetID() << "\">" << std::endl;
+	// plane grid 
+	const geo3dml::Point3D& origin = sGrid->GetPlaneGridOrigin();
+	double stepX = 0, stepY = 0;
+	sGrid->GetPlaneGridCellSize(stepX, stepY);
+	int dimX = 0, dimY = 0;
+	sGrid->GetPlaneGridCellNumber(dimX, dimY);
+	output << "<PlaneGrid>" << std::endl
+		<< "<Origin gml:srsDimension=\"3\">" << origin.x << ' ' << origin.y << ' ' << origin.z << "</Origin>" << std::endl
+		<< "<Azimuth>" << sGrid->GetPlaneGridAzimuth() << "</Azimuth>" << std::endl
+		<< "<Steps>" << stepX << ' ' << stepY << "</Steps>" << std::endl
+		<< "<Dimension>" << dimX << ' ' << dimY << "</Dimension>" << std::endl
+		<< "</PlaneGrid>";
+	// vertices
+	int vertexNumber = sGrid->GetVertexCount();
+	output << "<Vertices>" << std::endl;
+	double x = 0, y = 0, z = 0;
+	for (int n = 0; n < vertexNumber; ++n) {
+		sGrid->GetVertexAt(n, x, y, z);
+		output << "<Vertex gml:srsDimension=\"3\" IndexNo=\"" << n << "\">" << x << ' ' << y << ' ' << z << "</Vertex>" << std::endl;
+	}
+	output << "</Vertices>" << std::endl;
+	// faces
+	std::list<int> idList;
+	int faceNumber = sGrid->GetFaceCount();
+	output << "<Faces>" << std::endl;
+	for (int n = 0; n < faceNumber; ++n) {
+		sGrid->GetFaceAt(n, idList);
+		output << "<Face IndexNo=\"" << n << "\">" << std::endl;
+		output << "<VertexList Length=\"" << idList.size() << "\">";
+		auto cItor = idList.cbegin();
+		if (cItor != idList.cend()) {
+			output << *cItor;
+			++cItor;
+		}
+		for (; cItor != idList.cend(); ++cItor) {
+			output << ' ' << *cItor;
+		}
+		output << "</VertexList>" << std::endl;
+		output << "</Face>" << std::endl;
+	}
+	output << "</Faces>" << std::endl;
+	// cells
+	int i = 0, j = 0, k = 0;
+	int cellNumber = sGrid->GetCellCount();
+	output << "<Cells>" << std::endl;
+	for (int n = 0; n < cellNumber; ++n) {
+		sGrid->GetCellAt(n, idList, i, j, k);
+		output << "<Cell IndexNo=\"" << n << "\" I=\"" << i << "\" J=\"" << j << "\" K=\"" << k << "\">" << std::endl;
+		output << "<FaceList Length=\"" << idList.size() << "\">";
+		auto cItor = idList.cbegin();
+		if (cItor != idList.cend()) {
+			output << *cItor;
+			++cItor;
+		}
+		for (; cItor != idList.cend(); ++cItor) {
+			output << ' ' << *cItor;
+		}
+		output << "</FaceList>" << std::endl;
+		output << "</Cell>" << std::endl;
+	}
+	output << "</Cells>" << std::endl;
+	output << "</GeoSGrid>" << std::endl;
 }

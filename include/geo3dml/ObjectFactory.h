@@ -23,6 +23,7 @@
 #include "RectifiedGrid.h"
 #include "TetrahedronVolume.h"
 #include "CuboidVolume.h"
+#include "SGrid.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -112,6 +113,8 @@ namespace geo3dml {
 		virtual TetrahedronVolume* NewTetrahedronVolume() = 0;
 
 		virtual CuboidVolume* NewCuboidVolume() = 0;
+
+		virtual SGrid* NewSGrid() = 0;
 		///@}
 
 		/// @name shape property.

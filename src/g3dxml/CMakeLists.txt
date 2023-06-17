@@ -100,6 +100,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLRectifiedGridReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTetrahedronVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLCuboidVolumeReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSGridReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

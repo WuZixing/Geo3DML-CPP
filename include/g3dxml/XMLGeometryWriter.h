@@ -12,6 +12,7 @@
 #include <geo3dml/RectifiedGrid.h>
 #include <geo3dml/TetrahedronVolume.h>
 #include <geo3dml/CuboidVolume.h>
+#include <geo3dml/SGrid.h>
 #include <g3dxml/XMLIO.h>
 
 namespace g3dxml {
@@ -35,5 +36,6 @@ namespace g3dxml {
 		void WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output);
 		void WriteTetrahedronVolume(const geo3dml::TetrahedronVolume* tetraVolume, std::ostream& output);
 		void WriteCuboidVolume(const geo3dml::CuboidVolume* cuboidVolume, std::ostream& output);
+		void WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& output);
 	};
 }
