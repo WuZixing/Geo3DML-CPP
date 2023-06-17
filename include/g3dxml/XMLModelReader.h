@@ -24,8 +24,10 @@ namespace g3dxml {
 		bool ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model);
 		bool ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
 		std::string ReadCharacterString(xmlTextReaderPtr reader, const std::string& parentNode);
-		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
 		bool ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
 
 	private:
 		static const std::string OldElement;
@@ -39,6 +41,9 @@ namespace g3dxml {
 		static const std::string Element_Version;
 		static const std::string Element_ToolName;
 		static const std::string Element_ToolVersion;
+		static const std::string Element_SpatialReferenceSystem;
+		static const std::string Element_CoordinateReferenceSystem;
+		static const std::string Element_VerticalReferenceSystem;
 		///@}
 
 	private:

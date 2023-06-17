@@ -38,15 +38,18 @@ namespace geo3dml {
 
 		/// @name 空间坐标参照系。
 		///@{
-		/// 对应于元素"CoordinateReferenceSystemIdentifier"。
+		/// 对应于元素"CoordinateReferenceSystem:Identifier"。
 		const std::string& GetCoordRefSysID() const;
 		void SetCoordRefSysID(const std::string& crsID);
-		/// 对应于元素"CoordinateSystemType"。
-		const std::string& GetCoordSysType() const;
-		void SetCoordSysType(const std::string& sysType);
-		/// 对应于元素"CoordinateSystemIdentifier"。
-		const std::string& GetCoordSysID() const;
-		void SetCoordSysID(const std::string& csID);
+		/// 对应于元素"CoordinateReferenceSystem:Parameter"。
+		const std::string& GetCoordRefSysParam() const;
+		void SetCoordRefSysParam(const std::string& crsParam);
+		/// 对应于元素"VerticalReferenceSystem:Category"。
+		const std::string& GetVerticalRefSysCategory() const;
+		void SetVerticalRefSysCategory(const std::string& vrsCategory);
+		/// 对应于元素"VerticalReferenceSystem:ReferenceSystem"。
+		const std::string& GetVerticalRefSysValue() const;
+		void SetVerticalRefSysValue(const std::string& vRefSys);
 		///@}
 
 		/// @name 责任人、单位与联系方式。
@@ -71,7 +74,7 @@ namespace geo3dml {
 	private:
 		bool isDateStampDateTime_;
 		std::string dateStamp_, description_, version_, toolName_, toolVersion_;
-		std::string coordRefSysId_, coordSysType_, coordSysId_;
+		std::string coordRefSysId_, coordRefSysParam_, verticalRefSysCategory_, verticalRefSysValue_;
 		std::string nameOfResponsibleIndividual_, nameOfResponsibleOrganisation_, contactPhone_, contactAddress_, contactEmail_;
     };
 }

@@ -14,6 +14,9 @@ const std::string XMLModelReader::Element_Description = "Description";
 const std::string XMLModelReader::Element_Version = "Version";
 const std::string XMLModelReader::Element_ToolName = "ToolName";
 const std::string XMLModelReader::Element_ToolVersion = "ToolVersion";
+const std::string XMLModelReader::Element_SpatialReferenceSystem = "SpatialReferenceSystem";
+const std::string XMLModelReader::Element_CoordinateReferenceSystem = "CoordinateReferenceSystem";
+const std::string XMLModelReader::Element_VerticalReferenceSystem = "VerticalReferenceSystem";
 
 bool XMLModelReader::IsModelElementName(const std::string& name) {
 	if (geo3dml::IsiEqual(name, Element)) {
@@ -167,7 +170,7 @@ bool XMLModelReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model
 				}
 			} else if (geo3dml::IsiEqual(localName, "CI_ResponsibleParty")) {
 				ReadMetadataContact(reader, meta);
-			} else if (geo3dml::IsiEqual(localName, "CoordinateReferenceSystem")) {
+			} else if (geo3dml::IsiEqual(localName, Element_SpatialReferenceSystem)) {
 				ReadMetadataSpatialCoordinateReference(reader, meta);
 			}
 		}
@@ -265,36 +268,83 @@ bool XMLModelReader::ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr rea
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, "CoordinateReferenceSystem")) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_SpatialReferenceSystem)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
-			if (geo3dml::IsiEqual(localName, "CoordinateReferenceSystemIdentifier")) {
-				if (XMLReaderHelper::TextNode(reader, "CoordinateReferenceSystemIdentifier", v)) {
-					meta.SetCoordRefSysID(v);
-				} else {
-					SetStatus(false, v);
-					break;
-				}
-			} else if (geo3dml::IsiEqual(localName, "CoordinateSystemType")) {
-				if (XMLReaderHelper::TextNode(reader, "CoordinateSystemType", v)) {
-					meta.SetCoordSysType(v);
-				} else {
-					SetStatus(false, v);
-					break;
-				}
-			} else if (geo3dml::IsiEqual(localName, "CoordinateSystemIdentifier")) {
-				if (XMLReaderHelper::TextNode(reader, "CoordinateSystemIdentifier", v)) {
-					meta.SetCoordSysID(v);
-				} else {
-					SetStatus(false, v);
-					break;
-				}
+			if (geo3dml::IsiEqual(localName, Element_CoordinateReferenceSystem)) {
+				ReadMetadataCRS(reader, meta);
+			} else if (geo3dml::IsiEqual(localName, Element_VerticalReferenceSystem)) {
+				ReadMetadataVRS(reader, meta);
 			}
 		}
 		status = xmlTextReaderRead(reader);
 	}
 	if (status != 1) {
-		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of CoordinateReferenceSystem");
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_SpatialReferenceSystem);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+	std::string v;
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_CoordinateReferenceSystem)) {
+			break;
+		} else if (geo3dml::IsiEqual(localName, "Identifier")) {
+			if (XMLReaderHelper::TextNode(reader, "Identifier", v)) {
+				meta.SetCoordRefSysID(v);
+			} else {
+				SetStatus(false, v);
+				break;
+			}
+		} else if (geo3dml::IsiEqual(localName, "Parameter")) {
+			if (XMLReaderHelper::TextNode(reader, "Parameter", v)) {
+				meta.SetCoordRefSysParam(v);
+			} else {
+				SetStatus(false, v);
+				break;
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_CoordinateReferenceSystem);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+	std::string v;
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_VerticalReferenceSystem)) {
+			break;
+		} else if (geo3dml::IsiEqual(localName, "Category")) {
+			if (XMLReaderHelper::TextNode(reader, "Category", v)) {
+				meta.SetVerticalRefSysCategory(v);
+			} else {
+				SetStatus(false, v);
+				break;
+			}
+		} else if (geo3dml::IsiEqual(localName, "ReferenceSystem")) {
+			if (XMLReaderHelper::TextNode(reader, "ReferenceSystem", v)) {
+				meta.SetVerticalRefSysValue(v);
+			} else {
+				SetStatus(false, v);
+				break;
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_VerticalReferenceSystem);
 		SetStatus(false, err);
 	}
 	return IsOK();

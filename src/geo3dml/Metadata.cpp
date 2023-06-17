@@ -60,20 +60,28 @@ void Metadata::SetCoordRefSysID(const std::string& crsID) {
     coordRefSysId_ = crsID;
 }
 
-const std::string& Metadata::GetCoordSysType() const {
-    return coordSysType_;
+const std::string& Metadata::GetCoordRefSysParam() const {
+    return coordRefSysParam_;
 }
 
-void Metadata::SetCoordSysType(const std::string& sysType) {
-    coordSysType_ = sysType;
+void Metadata::SetCoordRefSysParam(const std::string& crsParam) {
+    coordRefSysParam_ = crsParam;
 }
 
-const std::string& Metadata::GetCoordSysID() const {
-    return coordSysId_;
+const std::string& Metadata::GetVerticalRefSysCategory() const {
+    return verticalRefSysCategory_;
 }
 
-void Metadata::SetCoordSysID(const std::string& csID) {
-    coordSysId_ = csID;
+void Metadata::SetVerticalRefSysCategory(const std::string& vrsCategory) {
+    verticalRefSysCategory_ = vrsCategory;
+}
+
+const std::string& Metadata::GetVerticalRefSysValue() const {
+    return verticalRefSysValue_;
+}
+
+void Metadata::SetVerticalRefSysValue(const std::string& vRefSys) {
+    verticalRefSysValue_ = vRefSys;
 }
 
 const std::string& Metadata::GetResponsibleIndividualName() const {

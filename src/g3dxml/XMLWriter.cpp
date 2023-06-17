@@ -117,10 +117,13 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 		<< "<Version>" << meta.GetVersion() << "</Version>" << std::endl
 		<< "<SpatialReferenceSystem>" << std::endl
 		<< "<CoordinateReferenceSystem>" << std::endl
-		<< "<CoordinateReferenceSystemIdentifier>" << meta.GetCoordRefSysID() << "</CoordinateReferenceSystemIdentifier>" << std::endl
-		<< "<CoordinateSystemType>" << meta.GetCoordSysType() << "</CoordinateSystemType>" << std::endl
-		<< "<CoordinateSystemIdentifier>" << meta.GetCoordSysID() << "</CoordinateSystemIdentifier>" << std::endl
+		<< "<Identifier>" << meta.GetCoordRefSysID() << "</Identifier>" << std::endl
+		<< "<Parameter>" << meta.GetCoordRefSysParam() << "</Parameter>" << std::endl
 		<< "</CoordinateReferenceSystem>" << std::endl
+		<< "<VerticalReferenceSystem>" << std::endl
+		<< "<Category>" << meta.GetVerticalRefSysCategory() << "</Category>" << std::endl
+		<< "<ReferenceSystem>" << meta.GetVerticalRefSysValue() << "</ReferenceSystem>" << std::endl
+		<< "</VerticalReferenceSystem>" << std::endl
 		<< "</SpatialReferenceSystem>" << std::endl
 		<< "<ToolName>" << meta.GetToolName() << "</ToolName>" << std::endl
 		<< "<ToolVersion>" << meta.GetToolVersion() << "</ToolVersion>" << std::endl
