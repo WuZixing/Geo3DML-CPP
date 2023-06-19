@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Geometry.h"
@@ -17,9 +18,12 @@ namespace geo3dml {
 		//@}
 
 		//@{
-		Feature& AddGeometry(Geometry* g);
-		int GetGeometryCount() const;
-		Geometry* GetGeometryAt(int i) const;
+		/// 一个Feature只能有一个Geometry。
+		Feature& SetGeometry(Geometry* g);
+		Geometry* GetGeometry() const;
+		// Feature& AddGeometry(Geometry* g);
+		// int GetGeometryCount() const;
+		// Geometry* GetGeometryAt(int i) const;
 		//@}
 
 		//@{
@@ -40,7 +44,8 @@ namespace geo3dml {
 	private:
 		std::string name_;
 		std::string parentFeatureClassId_;
-		std::vector<Geometry*> geometries_;
+		// std::vector<Geometry*> geometries_;
+		Geometry* geometry_;
 		std::map<std::string, geo3dml::FieldValue> fieldValues_;
 	};
 }

@@ -114,7 +114,6 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 		style = styles_[styleIndex];
 	}
 	DeleteAllActors();
-	std::ostringstream ostr;
 	int numberOfFeatures = bindingFeatureClass_->GetFeatureCount();
 	for (int f = 0; f < numberOfFeatures; ++f) {
 		geo3dml::Feature* feature = bindingFeatureClass_->GetFeatureAt(f);
@@ -125,20 +124,14 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 				sym = rule->GetSymbolizer();
 			}
 		}
-		int numberOfGeometries = feature->GetGeometryCount();
-		if (numberOfGeometries > 0) {
-			for (int g = 0; g < numberOfGeometries; ++g) {
-				geo3dml::Geometry* geo = feature->GetGeometryAt(g);
-				geo3dml::Actor* actor = g3dFactory->NewActor();
-				ostr.str("");
-				ostr << feature->GetName() << "_" << geo->GetName() << "[LOD-" << geo->GetLODLevel() << "]";
-				actor->SetName(ostr.str());
-				actor->BindGeometry(feature, geo, sym);
-				AddActor(actor);
-			}
+		geo3dml::Geometry* geo = feature->GetGeometry();
+		if (geo != nullptr) {
+			geo3dml::Actor* actor = g3dFactory->NewActor();
+			actor->SetName(feature->GetName() + "_" + geo->GetName());
+			actor->BindGeometry(feature, geo, sym);
+			AddActor(actor);
 		} else {
 			geo3dml::Actor* actor = g3dFactory->NewActor();
-			ostr.str("");
 			actor->SetName(feature->GetName());
 			actor->BindGeometry(feature, nullptr, nullptr);
 			AddActor(actor);

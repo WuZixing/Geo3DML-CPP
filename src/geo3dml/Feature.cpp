@@ -1,16 +1,20 @@
+// UTF-8编码
 #include <geo3dml/Feature.h>
 
 using namespace geo3dml;
 
 Feature::Feature() {
-
+	geometry_ = nullptr;
 }
 
 Feature::~Feature() {
-	std::vector<Geometry*>::const_iterator citor = geometries_.cbegin();
-	while (citor != geometries_.end()) {
-		delete *citor;
-		citor++;
+	// std::vector<Geometry*>::const_iterator citor = geometries_.cbegin();
+	// while (citor != geometries_.end()) {
+	//     delete *citor;
+	//	   citor++;
+	// }
+	if (geometry_ != nullptr) {
+		delete geometry_;
 	}
 }
 
@@ -23,6 +27,19 @@ std::string Feature::GetName() const {
 	return name_;
 }
 
+Feature& Feature::SetGeometry(Geometry* g) {
+	if (geometry_ != nullptr && geometry_ != g) {
+		delete geometry_;
+	}
+	geometry_ = g;
+	return *this;
+}
+
+Geometry* Feature::GetGeometry() const {
+	return geometry_;
+}
+
+/*
 Feature& Feature::AddGeometry(Geometry* g) {
 	if (g == NULL)
 		return *this;
@@ -42,8 +59,8 @@ int Feature::GetGeometryCount() const {
 
 Geometry* Feature::GetGeometryAt(int i) const {
 	return geometries_.at(i);
-
 }
+*/
 
 Feature& Feature::SetParentFeatureClass(const std::string& id) {
 	parentFeatureClassId_ = id;
@@ -78,9 +95,14 @@ std::vector<std::string> Feature::GetFieldNames() const {
 }
 
 Box3D Feature::GetMinimumBoundingRectangle() const {
-	Box3D box;
-	for (size_t i = 0; i < geometries_.size(); ++i) {
-		box.UnionWith(geometries_[i]->GetMinimumBoundingRectangle());
+	// Box3D box;
+	// for (size_t i = 0; i < geometries_.size(); ++i) {
+	// 	box.UnionWith(geometries_[i]->GetMinimumBoundingRectangle());
+	// }
+	// return box;
+	if (geometry_ != nullptr) {
+		return geometry_->GetMinimumBoundingRectangle();
+	} else {
+		return Box3D();
 	}
-	return box;
 }

@@ -47,7 +47,7 @@ geo3dml::Feature* XMLFeatureReader::ReadFeature(xmlTextReaderPtr reader) {
 				XMLGeometryReader geoReader(g3dFactory_);
 				geo3dml::Geometry* geometry = geoReader.ReadGeometry(reader);
 				if (geometry != NULL) {
-					feature->AddGeometry(geometry);
+					feature->SetGeometry(geometry);
 				} else if (!geoReader.IsOK()) {
 					SetStatus(false, geoReader.Error());
 					break;
