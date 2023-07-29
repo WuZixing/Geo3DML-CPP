@@ -7,7 +7,6 @@
 #include <geo3dml/Point.h>
 #include <geo3dml/MultiPoint.h>
 #include <geo3dml/CornerPointGrid.h>
-#include <geo3dml/UniformGrid.h>
 #include <geo3dml/TriangularPrismVolume.h>
 #include <geo3dml/RectifiedGrid.h>
 #include <geo3dml/TetrahedronVolume.h>
@@ -31,7 +30,6 @@ namespace g3dxml {
 		void WriteAnnotation(geo3dml::Annotation* annotation, std::ostream& output);
 		void WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output);
 		void WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output);
-		void WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output);
 		void WriteTriangularPrismVolume(geo3dml::TriangularPrismVolume* gtpGrid, std::ostream& output);
 		void WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output);
 		void WriteTetrahedronVolume(const geo3dml::TetrahedronVolume* tetraVolume, std::ostream& output);

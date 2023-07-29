@@ -32,7 +32,6 @@ list(APPEND G3DVTK_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ObjectFactory.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/TIN.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/CornerPointGrid.h
-	${PROJECT_SOURCE_DIR}/include/g3dvtk/UniformGrid.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ShapeProperty.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/LineString.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ShapeHelper.h

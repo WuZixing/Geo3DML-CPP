@@ -7,7 +7,6 @@
 #include "Feature.h"
 #include "TIN.h"
 #include "CornerPointGrid.h"
-#include "UniformGrid.h"
 #include "LineString.h"
 #include "Point.h"
 #include "MultiPoint.h"
@@ -132,14 +131,6 @@ namespace geo3dml {
 
 		virtual FeatureTypeStyle* NewFeatureTypeStyle();
 		///@}
-
-		virtual UniformGrid* NewUniformGrid() = 0;
-
-		virtual UniformGrid* NewUniformGrid(
-			double originX, double originY, double originZ,
-			double stepX, double stepY, double stepZ,
-			int dimI, int dimJ, int dimK
-		) = 0;
 
 	public:
 		Geometry* NewGeometry(const std::string& typeName);

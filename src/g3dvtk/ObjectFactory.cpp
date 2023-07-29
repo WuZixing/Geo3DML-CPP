@@ -1,7 +1,6 @@
 #include <g3dvtk/ObjectFactory.h>
 #include <g3dvtk/TIN.h>
 #include <g3dvtk/CornerPointGrid.h>
-#include <g3dvtk/UniformGrid.h>
 #include <g3dvtk/LineString.h>
 #include <g3dvtk/ShapeProperty.h>
 #include <g3dvtk/Point.h>
@@ -71,18 +70,6 @@ geo3dml::CornerPointGrid* ObjectFactory::NewCornerPointGrid() {
 
 geo3dml::CornerPointGrid* ObjectFactory::NewCornerPointGrid(int dimI, int dimJ, int dimK) {
 	return new CornerPointGrid(dimI, dimJ, dimK);
-}
-
-geo3dml::UniformGrid* ObjectFactory::NewUniformGrid() {
-	return new UniformGrid();
-}
-
-geo3dml::UniformGrid* ObjectFactory::NewUniformGrid(
-	double originX, double originY, double originZ,
-	double stepX, double stepY, double stepZ,
-	int dimI, int dimJ, int dimK
-) {
-	return new UniformGrid(originX, originY, originZ, stepX, stepY, stepZ, dimI, dimJ, dimK);
 }
 
 geo3dml::Annotation* ObjectFactory::NewAnnotation() {

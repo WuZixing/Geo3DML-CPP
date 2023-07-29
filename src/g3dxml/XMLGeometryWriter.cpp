@@ -37,30 +37,25 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 							WriteCornerPointGrid(cornerGrid, output);
 						} else {
 							if (v != Schema_1_0) {
-								geo3dml::UniformGrid* rectGrid = dynamic_cast<geo3dml::UniformGrid*>(geo);
-								if (rectGrid != nullptr) {
-									WriteUniformGrid(rectGrid, output);
+								geo3dml::TriangularPrismVolume* gtpGrid = dynamic_cast<geo3dml::TriangularPrismVolume*>(geo);
+								if (gtpGrid != nullptr) {
+									WriteTriangularPrismVolume(gtpGrid, output);
 								} else {
-									geo3dml::TriangularPrismVolume* gtpGrid = dynamic_cast<geo3dml::TriangularPrismVolume*>(geo);
-									if (gtpGrid != nullptr) {
-										WriteTriangularPrismVolume(gtpGrid, output);
+									geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
+									if (rectGrid != nullptr) {
+										WriteRectifiedGrid(rectGrid, output);
 									} else {
-										geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
-										if (rectGrid != nullptr) {
-											WriteRectifiedGrid(rectGrid, output);
+										geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
+										if (tetraVolume != nullptr) {
+											WriteTetrahedronVolume(tetraVolume, output);
 										} else {
-											geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
-											if (tetraVolume != nullptr) {
-												WriteTetrahedronVolume(tetraVolume, output);
+											geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
+											if (cuboidVolume != nullptr) {
+												WriteCuboidVolume(cuboidVolume, output);
 											} else {
-												geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
-												if (cuboidVolume != nullptr) {
-													WriteCuboidVolume(cuboidVolume, output);
-												} else {
-													geo3dml::TruncatedRegularGrid* trGrid = dynamic_cast<geo3dml::TruncatedRegularGrid*>(geo);
-													if (trGrid != nullptr) {
-														WriteTruncatedRegularGrid(trGrid, output);
-													}
+												geo3dml::TruncatedRegularGrid* trGrid = dynamic_cast<geo3dml::TruncatedRegularGrid*>(geo);
+												if (trGrid != nullptr) {
+													WriteTruncatedRegularGrid(trGrid, output);
 												}
 											}
 										}
@@ -196,31 +191,6 @@ void XMLGeometryWriter::WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGri
 	}
 	output << "</Cells>" << std::endl;
 	output << "</GeoCornerPointGrid>" << std::endl;
-}
-
-void XMLGeometryWriter::WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output) {
-	output << "<GeoUniformGrid gml:id=\"" << uniformGrid->GetID() << "\">" << std::endl;
-	double x = 0, y = 0, z = 0;
-	uniformGrid->GetOrigin(x, y, z);
-	output << "<Origin>" << x << " " << y << " " << z << "</Origin>" << std::endl;
-	uniformGrid->GetSteps(x, y, z);
-	output << "<Steps>" << x << " " << y << " " << z << "</Steps>" << std::endl;
-	int dimI = 0, dimJ = 0, dimK = 0;
-	uniformGrid->GetDimensions(dimI, dimJ, dimK);
-	output << "<Dimension>" << dimI << " " << dimJ << " " << dimK << "</Dimension>" << std::endl;
-	// blank cells
-	output << "<Cells>" << std::endl;
-	for (int k = 0; k < dimK; ++k) {
-		for (int j = 0; j < dimJ; ++j) {
-			for (int i = 0; i < dimI; ++i) {
-				if (!uniformGrid->IsCellValid(i, j, k)) {
-					output << "<Cell I=\"" << i << "\" J=\"" << j << "\" K=\"" << k << "\" Valid=\"false\"/>" << std::endl;
-				}
-			}
-		}
-	}
-	output << "</Cells>" << std::endl;
-	output << "</GeoUniformGrid>" << std::endl;
 }
 
 void XMLGeometryWriter::WriteTriangularPrismVolume(geo3dml::TriangularPrismVolume* gtpGrid, std::ostream& output) {

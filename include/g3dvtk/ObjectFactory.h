@@ -25,12 +25,6 @@ namespace g3dvtk {
 		virtual geo3dml::TIN* NewTIN() override;
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid() override;
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid(int dimI, int dimJ, int dimK) override;
-		virtual geo3dml::UniformGrid* NewUniformGrid() override;
-		virtual geo3dml::UniformGrid* NewUniformGrid(
-			double originX, double originY, double originZ,
-			double stepX, double stepY, double stepZ,
-			int dimI, int dimJ, int dimK
-		) override;
 		virtual geo3dml::Annotation* NewAnnotation() override;
 
 		virtual geo3dml::TriangularPrismVolume* NewTriangularPrismVolume() override;
