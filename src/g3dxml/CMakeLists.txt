@@ -96,11 +96,11 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSurfaceSymbolizerReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMaterialReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageSymbolizerReader.h
-	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGTPVolumeReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTriangularPrismVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLRectifiedGridReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTetrahedronVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLCuboidVolumeReader.h
-	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLSGridReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTruncatedRegularGridReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

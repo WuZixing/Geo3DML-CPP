@@ -34,15 +34,10 @@ geo3dml::Style* XMLStyleReader::ReadStyle(xmlTextReaderPtr reader) {
 					SetStatus(false, styleName);
 					break;
 				}
-				if (style != NULL) {
-					style->SetName(styleName);
-				}
 			} else if (geo3dml::IsiEqual(localName, XMLFeatureTypeStyleReader::Element)) {
 				XMLFeatureTypeStyleReader ftStyleReader(g3dFactory_);
 				style = ftStyleReader.ReadFeatureTypeStyle(reader);
-				if (style != NULL) {
-					style->SetName(styleName);
-				} else {
+				if (style == nullptr) {
 					SetStatus(false, ftStyleReader.Error());
 					break;
 				}
@@ -51,13 +46,17 @@ geo3dml::Style* XMLStyleReader::ReadStyle(xmlTextReaderPtr reader) {
 		}
 		status = xmlTextReaderRead(reader);
 	}
+	if (style != nullptr) {
+		style->SetID(styleId);
+		style->SetName(styleName);
+	}
 	if (status != 1) {
 		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element);
 		SetStatus(false, err);
 	}
-	if (!IsOK() && style != NULL) {
+	if (!IsOK() && style != nullptr) {
 		delete style;
-		style = NULL;
+		style = nullptr;
 	}
 	return style;
 }

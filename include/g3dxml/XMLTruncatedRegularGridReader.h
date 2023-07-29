@@ -6,7 +6,7 @@
 
 namespace g3dxml {
 
-    class XMLSGridReader: public XMLIO {
+    class XMLTruncatedRegularGridReader: public XMLIO {
     public:
         /// Name of the SGrid element.
         static const std::string Element;
@@ -14,16 +14,16 @@ namespace g3dxml {
     public:
         /// 构造函数。
         /// @param factory 创建Geo3DML对象的工厂对象。该对象由调用者负责管理。
-        XMLSGridReader(geo3dml::ObjectFactory* factory);
-        virtual ~XMLSGridReader();
+        XMLTruncatedRegularGridReader(geo3dml::ObjectFactory* factory);
+        virtual ~XMLTruncatedRegularGridReader();
 
-        geo3dml::SGrid* ReadSGrid(xmlTextReaderPtr reader);
+        geo3dml::TruncatedRegularGrid* ReadGrid(xmlTextReaderPtr reader);
 
     private:
-        bool ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid);
-        bool ReadVertex(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid);
-        bool ReadFace(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid);
-        bool ReadCell(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid);
+        bool ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid);
+        bool ReadVertex(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid);
+        bool ReadFace(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid);
+        bool ReadCell(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid);
 
     private:
         static const std::string Element_PlaneGrid;

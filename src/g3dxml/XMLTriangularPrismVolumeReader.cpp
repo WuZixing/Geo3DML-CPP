@@ -1,27 +1,27 @@
 // UTF-8编码
-#include <g3dxml/XMLGTPVolumeReader.h>
+#include <g3dxml/XMLTriangularPrismVolumeReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
-const std::string XMLGTPVolumeReader::Element = "GTPVolume";
-const std::string XMLGTPVolumeReader::Element_Vertex = "Vertex";
-const std::string XMLGTPVolumeReader::Element_Prism = "Prism";
-const std::string XMLGTPVolumeReader::Element_TopTriangle = "TopTriangle";
-const std::string XMLGTPVolumeReader::Element_BottomTriangle = "BottomTriangle";
-const std::string XMLGTPVolumeReader::Element_NeighborList = "NeighborList";
+const std::string XMLTriangularPrismVolumeReader::Element = "GeoTriangularPrismVolume";
+const std::string XMLTriangularPrismVolumeReader::Element_Vertex = "Vertex";
+const std::string XMLTriangularPrismVolumeReader::Element_Prism = "Prism";
+const std::string XMLTriangularPrismVolumeReader::Element_TopTriangle = "TopTriangle";
+const std::string XMLTriangularPrismVolumeReader::Element_BottomTriangle = "BottomTriangle";
+const std::string XMLTriangularPrismVolumeReader::Element_NeighborList = "NeighborList";
 
 
-XMLGTPVolumeReader::XMLGTPVolumeReader(geo3dml::ObjectFactory* factory) {
+XMLTriangularPrismVolumeReader::XMLTriangularPrismVolumeReader(geo3dml::ObjectFactory* factory) {
     g3dFactory_ = factory;
 }
 
-XMLGTPVolumeReader::~XMLGTPVolumeReader() {
+XMLTriangularPrismVolumeReader::~XMLTriangularPrismVolumeReader() {
 
 }
 
-geo3dml::GTPVolume* XMLGTPVolumeReader::ReadVolume(xmlTextReaderPtr reader) {
-    geo3dml::GTPVolume* gtp = g3dFactory_->NewGTPVolume();
+geo3dml::TriangularPrismVolume* XMLTriangularPrismVolumeReader::ReadVolume(xmlTextReaderPtr reader) {
+    geo3dml::TriangularPrismVolume* gtp = g3dFactory_->NewTriangularPrismVolume();
     gtp->SetID(XMLReaderHelper::AttributeGMLID(reader));
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -53,7 +53,7 @@ geo3dml::GTPVolume* XMLGTPVolumeReader::ReadVolume(xmlTextReaderPtr reader) {
     return gtp;
 }
 
-bool XMLGTPVolumeReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::GTPVolume* gtp) {
+bool XMLTriangularPrismVolumeReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::TriangularPrismVolume* gtp) {
 	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
 	// long idx = strtol(index.c_str(), nullptr, 10);
 	std::string coordinates;
@@ -70,7 +70,7 @@ bool XMLGTPVolumeReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::GTPVolume*
 	}
 }
 
-bool XMLGTPVolumeReader::ReadPrism(xmlTextReaderPtr reader, geo3dml::GTPVolume* gtp) {
+bool XMLTriangularPrismVolumeReader::ReadPrism(xmlTextReaderPtr reader, geo3dml::TriangularPrismVolume* gtp) {
 	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
 	// long prismIndex = strtol(index.c_str(), nullptr, 10);
 	int status = xmlTextReaderRead(reader);

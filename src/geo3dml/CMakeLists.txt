@@ -47,7 +47,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Point3D.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiLineString.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Volume.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/GTPVolume.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/TriangularPrismVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/RectifiedGrid.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Vector3D.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Matrix3x3.h
@@ -56,7 +56,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TetrahedronVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Texture.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Metadata.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/SGrid.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/TruncatedRegularGrid.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${GEO3DML_LIBRARIES} STATIC

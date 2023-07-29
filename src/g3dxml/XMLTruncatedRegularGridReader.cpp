@@ -1,26 +1,26 @@
 // UTF-8编码
-#include <g3dxml/XMLSGridReader.h>
+#include <g3dxml/XMLTruncatedRegularGridReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
 
-const std::string XMLSGridReader::Element = "GeoSGrid";
-const std::string XMLSGridReader::Element_PlaneGrid = "PlaneGrid";
-const std::string XMLSGridReader::Element_Vertex = "Vertex";
-const std::string XMLSGridReader::Element_Face = "Face";
-const std::string XMLSGridReader::Element_Cell = "Cell";
+const std::string XMLTruncatedRegularGridReader::Element = "GeoTruncatedRegularGrid";
+const std::string XMLTruncatedRegularGridReader::Element_PlaneGrid = "PlaneGrid";
+const std::string XMLTruncatedRegularGridReader::Element_Vertex = "Vertex";
+const std::string XMLTruncatedRegularGridReader::Element_Face = "Face";
+const std::string XMLTruncatedRegularGridReader::Element_Cell = "Cell";
 
-XMLSGridReader::XMLSGridReader(geo3dml::ObjectFactory* factory) {
+XMLTruncatedRegularGridReader::XMLTruncatedRegularGridReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;
 }
 
-XMLSGridReader::~XMLSGridReader() {
+XMLTruncatedRegularGridReader::~XMLTruncatedRegularGridReader() {
 
 }
 
-geo3dml::SGrid* XMLSGridReader::ReadSGrid(xmlTextReaderPtr reader) {
-	geo3dml::SGrid* sGrid = g3dFactory_->NewSGrid();
-	sGrid->SetID(XMLReaderHelper::AttributeGMLID(reader));
+geo3dml::TruncatedRegularGrid* XMLTruncatedRegularGridReader::ReadGrid(xmlTextReaderPtr reader) {
+	geo3dml::TruncatedRegularGrid* trGrid = g3dFactory_->NewTruncatedRegularGrid();
+	trGrid->SetID(XMLReaderHelper::AttributeGMLID(reader));
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -29,19 +29,19 @@ geo3dml::SGrid* XMLSGridReader::ReadSGrid(xmlTextReaderPtr reader) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_PlaneGrid)) {
-				if (!ReadPlaneGrid(reader, sGrid)) {
+				if (!ReadPlaneGrid(reader, trGrid)) {
 					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, Element_Vertex)) {
-				if (!ReadVertex(reader, sGrid)) {
+				if (!ReadVertex(reader, trGrid)) {
 					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, Element_Face)) {
-				if (!ReadFace(reader, sGrid)) {
+				if (!ReadFace(reader, trGrid)) {
 					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, Element_Cell)) {
-				if (!ReadCell(reader, sGrid)) {
+				if (!ReadCell(reader, trGrid)) {
 					break;
 				}
 			}
@@ -53,13 +53,13 @@ geo3dml::SGrid* XMLSGridReader::ReadSGrid(xmlTextReaderPtr reader) {
 		SetStatus(false, err);
 	}
 	if (!IsOK()) {
-		delete sGrid;
-		sGrid = nullptr;
+		delete trGrid;
+		trGrid = nullptr;
 	}
-	return sGrid;
+	return trGrid;
 }
 
-bool XMLSGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
+bool XMLTruncatedRegularGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -81,14 +81,14 @@ bool XMLSGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGri
 				if (dim > 2) {
 					pt3D.z = strtod(end, nullptr);
 				}
-				sGrid->SetPlaneGridOrigin(pt3D);
+				trGrid->SetPlaneGridOrigin(pt3D);
 			} else {
 				SetStatus(false, v);
 				break;
 			}
 		} else if (geo3dml::IsiEqual(localName, "Azimuth")) {
 			if (XMLReaderHelper::TextNode(reader, "Azimuth", v)) {
-				sGrid->SetPlaneGridAzimuth(strtod(v.c_str(), nullptr));
+				trGrid->SetPlaneGridAzimuth(strtod(v.c_str(), nullptr));
 			} else {
 				SetStatus(false, v);
 				break;
@@ -98,7 +98,7 @@ bool XMLSGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGri
 				char* end = nullptr;
 				double stepX = strtod(v.c_str(), &end);
 				double stepY = strtod(end, nullptr);
-				sGrid->SetPlaneGridCellSize(stepX, stepY);
+				trGrid->SetPlaneGridCellSize(stepX, stepY);
 			} else {
 				SetStatus(false, v);
 				break;
@@ -108,7 +108,7 @@ bool XMLSGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGri
 				char* end = nullptr;
 				long dimX = strtol(v.c_str(), &end, 10);
 				long dimY = strtol(end, nullptr, 10);
-				sGrid->SetPlaneGridCellNumber(dimX, dimY);
+				trGrid->SetPlaneGridCellNumber(dimX, dimY);
 			} else {
 				SetStatus(false, v);
 				break;
@@ -123,7 +123,7 @@ bool XMLSGridReader::ReadPlaneGrid(xmlTextReaderPtr reader, geo3dml::SGrid* sGri
 	return IsOK();
 }
 
-bool XMLSGridReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
+bool XMLTruncatedRegularGridReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid) {
 	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
 	// long idx = strtol(index.c_str(), nullptr, 10);
 	std::string coordinates;
@@ -132,7 +132,7 @@ bool XMLSGridReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) 
 		double x = strtod(coordinates.c_str(), &end);
 		double y = strtod(end, &end);
 		double z = strtod(end, nullptr);
-		sGrid->AppendVertex(x, y, z);
+		trGrid->AppendVertex(x, y, z);
 		return true;
 	} else {
 		SetStatus(false, coordinates);
@@ -140,7 +140,7 @@ bool XMLSGridReader::ReadVertex(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) 
 	}
 }
 
-bool XMLSGridReader::ReadFace(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
+bool XMLTruncatedRegularGridReader::ReadFace(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid) {
 	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
 	// long idx = strtol(index.c_str(), NULL, 10);
 	int status = xmlTextReaderRead(reader);
@@ -164,7 +164,7 @@ bool XMLSGridReader::ReadFace(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
 						pts.push_back(idx);
 					}
 					if (len < 1) {
-						sGrid->AppendFace(pts);
+						trGrid->AppendFace(pts);
 					} else {
 						std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "invalid vertex list for a face");
 						SetStatus(false, err);
@@ -185,7 +185,7 @@ bool XMLSGridReader::ReadFace(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
 	return IsOK();
 }
 
-bool XMLSGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
+bool XMLTruncatedRegularGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::TruncatedRegularGrid* trGrid) {
 	// std::string index = XMLReaderHelper::Attribute(reader, "IndexNo");
 	// long idx = strtol(index.c_str(), NULL, 10);
 	std::string v = XMLReaderHelper::Attribute(reader, "I");
@@ -214,7 +214,7 @@ bool XMLSGridReader::ReadCell(xmlTextReaderPtr reader, geo3dml::SGrid* sGrid) {
 						faces.push_back(idx);
 					}
 					if (len < 1) {
-						sGrid->AppendCell(faces, i, j, k);
+						trGrid->AppendCell(faces, i, j, k);
 					} else {
 						std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "invalid face list for a cell");
 						SetStatus(false, err);

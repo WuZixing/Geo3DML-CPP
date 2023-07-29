@@ -12,6 +12,8 @@ geo3dml::Field::ValueType XMLFieldReader::NameToValueType(const std::string& n) 
 		return geo3dml::Field::Double;
 	} else if (geo3dml::IsiEqual(n, "Count")) {
 		return geo3dml::Field::Integer;
+	} else if (geo3dml::IsiEqual(n, "Category")) {
+		return geo3dml::Field::Category;
 	} else if (geo3dml::IsiEqual(n, "Boolean")) {
 		return geo3dml::Field::Boolean;
 	} else {
@@ -27,6 +29,8 @@ std::string XMLFieldReader::ValueTypeToName(geo3dml::Field::ValueType t) {
 		return "Count";
 	case geo3dml::Field::Double:
 		return "Quantity";
+	case geo3dml::Field::Category:
+		return "Category";
 	case geo3dml::Field::Boolean:
 		return "Boolean";
 	default:
@@ -45,15 +49,11 @@ bool XMLFieldReader::ReadField(xmlTextReaderPtr reader, geo3dml::Field* field) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			geo3dml::Field::ValueType vType = NameToValueType(localName);
-			if (vType != geo3dml::Field::Unknown) {
-				field->DataType(vType);
-				if (!ReadFieldDefinition(reader, localName, field)) {
-					break;
-				}
-			} else {
+			field->DataType(vType);
+			ReadFieldDefinition(reader, localName, field);
+			if (vType == geo3dml::Field::Unknown) {
 				std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, std::string("unknown field: ") + std::string(localName));
 				SetStatus(false, err);
-				break;
 			}
 		}
 		status = xmlTextReaderRead(reader);
@@ -83,7 +83,7 @@ bool XMLFieldReader::ReadFieldDefinition(xmlTextReaderPtr reader, const std::str
 					field->Label(label);
 				} else {
 					SetStatus(false, label);
-					break;
+					// break;
 				}
 			} else if (geo3dml::IsiEqual(localName, "description")) {
 				std::string description;
@@ -91,7 +91,7 @@ bool XMLFieldReader::ReadFieldDefinition(xmlTextReaderPtr reader, const std::str
 					field->Description(description);
 				} else {
 					SetStatus(false, description);
-					break;
+					// break;
 				}
 			} else if (geo3dml::IsiEqual(localName, "uom")) {
 				std::string uom = XMLReaderHelper::Attribute(reader, "code");
@@ -125,7 +125,7 @@ void XMLFieldReader::WriteField(const geo3dml::Field& field, std::ostream& outpu
 	}
 	std::string uom = field.Uom();
 	if (uom.length() > 0) {
-		output << "<swe:uom>" << uom << "</swe:uom>" << std::endl;
+		output << "<swe:uom code=\"" << uom << "\"/>" << std::endl;
 	}
 	output << "</swe:" << XMLFieldReader::ValueTypeToName(field.DataType()) << ">" << std::endl;
 	output << "</swe:field>" << std::endl;

@@ -33,7 +33,7 @@ namespace g3dvtk {
 		) override;
 		virtual geo3dml::Annotation* NewAnnotation() override;
 
-		virtual geo3dml::GTPVolume* NewGTPVolume() override;
+		virtual geo3dml::TriangularPrismVolume* NewTriangularPrismVolume() override;
 
 		virtual geo3dml::RectifiedGrid* NewRectifiedGrid(
 			const geo3dml::Point3D& origin,
@@ -48,7 +48,7 @@ namespace g3dvtk {
 
 		virtual geo3dml::CuboidVolume* NewCuboidVolume() override;
 
-		virtual geo3dml::SGrid* NewSGrid() override;
+		virtual geo3dml::TruncatedRegularGrid* NewTruncatedRegularGrid() override;
 
 		virtual geo3dml::ShapeProperty* NewShapeProperty() override;
 

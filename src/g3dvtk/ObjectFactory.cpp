@@ -9,11 +9,11 @@
 #include <g3dvtk/Actor.h>
 #include <g3dvtk/Annotation.h>
 #include <g3dvtk/MultiLineString.h>
-#include <g3dvtk/GTPVolume.h>
+#include <g3dvtk/TriangularPrismVolume.h>
 #include <g3dvtk/RectifiedGrid.h>
 #include <g3dvtk/TetrahedronVolume.h>
 #include <g3dvtk/CuboidVolume.h>
-#include <g3dvtk/SGrid.h>
+#include <g3dvtk/TruncatedRegularGrid.h>
 
 using namespace g3dvtk;
 
@@ -89,8 +89,8 @@ geo3dml::Annotation* ObjectFactory::NewAnnotation() {
 	return new Annotation();
 }
 
-geo3dml::GTPVolume* ObjectFactory::NewGTPVolume() {
-	return new GTPVolume();
+geo3dml::TriangularPrismVolume* ObjectFactory::NewTriangularPrismVolume() {
+	return new TriangularPrismVolume();
 }
 
 geo3dml::ShapeProperty* ObjectFactory::NewShapeProperty() {
@@ -123,6 +123,6 @@ geo3dml::CuboidVolume* ObjectFactory::NewCuboidVolume() {
 	return new CuboidVolume();
 }
 
-geo3dml::SGrid* ObjectFactory::NewSGrid() {
-	return new SGrid();
+geo3dml::TruncatedRegularGrid* ObjectFactory::NewTruncatedRegularGrid() {
+	return new TruncatedRegularGrid();
 }

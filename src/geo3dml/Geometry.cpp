@@ -14,7 +14,7 @@ void Geometry::SetName(const std::string& name) {
 	name_ = name;
 }
 
-std::string Geometry::GetName() const {
+const std::string& Geometry::GetName() const {
 	return name_;
 }
 

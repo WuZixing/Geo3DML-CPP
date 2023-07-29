@@ -19,11 +19,11 @@
 #include "FeatureTypeStyle.h"
 #include "Annotation.h"
 #include "MultiLineString.h"
-#include "GTPVolume.h"
+#include "TriangularPrismVolume.h"
 #include "RectifiedGrid.h"
 #include "TetrahedronVolume.h"
 #include "CuboidVolume.h"
-#include "SGrid.h"
+#include "TruncatedRegularGrid.h"
 
 namespace geo3dml {
 	/// Factory for Geo3DML objects. It is not thread safe.
@@ -65,17 +65,9 @@ namespace geo3dml {
 
 		virtual CornerPointGrid* NewCornerPointGrid(int dimI, int dimJ, int dimK) = 0;
 
-		virtual UniformGrid* NewUniformGrid() = 0;
-
-		virtual UniformGrid* NewUniformGrid(
-			double originX, double originY, double originZ,
-			double stepX, double stepY, double stepZ,
-			int dimI, int dimJ, int dimK
-		) = 0;
-
 		virtual Annotation* NewAnnotation() = 0;
 
-		virtual GTPVolume* NewGTPVolume() = 0;
+		virtual TriangularPrismVolume* NewTriangularPrismVolume() = 0;
 
 		/// @brief 构造一个 RectifiedGrid 对象。
 		/// @param origin   网格划分的起始点在全局坐标系中的坐标。
@@ -114,7 +106,7 @@ namespace geo3dml {
 
 		virtual CuboidVolume* NewCuboidVolume() = 0;
 
-		virtual SGrid* NewSGrid() = 0;
+		virtual TruncatedRegularGrid* NewTruncatedRegularGrid() = 0;
 		///@}
 
 		/// @name shape property.
@@ -140,6 +132,14 @@ namespace geo3dml {
 
 		virtual FeatureTypeStyle* NewFeatureTypeStyle();
 		///@}
+
+		virtual UniformGrid* NewUniformGrid() = 0;
+
+		virtual UniformGrid* NewUniformGrid(
+			double originX, double originY, double originZ,
+			double stepX, double stepY, double stepZ,
+			int dimI, int dimJ, int dimK
+		) = 0;
 
 	public:
 		Geometry* NewGeometry(const std::string& typeName);

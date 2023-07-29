@@ -7,11 +7,11 @@
 #include <g3dvtk/Point.h>
 #include <g3dvtk/MultiPoint.h>
 #include <g3dvtk/Annotation.h>
-#include <g3dvtk/GTPVolume.h>
+#include <g3dvtk/TriangularPrismVolume.h>
 #include <g3dvtk/RectifiedGrid.h>
 #include <g3dvtk/TetrahedronVolume.h>
 #include <g3dvtk/CuboidVolume.h>
-#include <g3dvtk/SGrid.h>
+#include <g3dvtk/TruncatedRegularGrid.h>
 #include <g3dvtk/ObjectFactory.h>
 #include <g3dvtk/ColorMap.h>
 #include <vtkActor2D.h>
@@ -122,7 +122,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 			SetRandomRenderOption(actor->GetProperty());
 			vtkProp_ = actor;
 		} else {
-			g3dvtk::GTPVolume* gtp = dynamic_cast<g3dvtk::GTPVolume*>(bindingGeometry_);
+			g3dvtk::TriangularPrismVolume* gtp = dynamic_cast<g3dvtk::TriangularPrismVolume*>(bindingGeometry_);
 			if (gtp != nullptr) {
 				vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
 				mapper->SetInputData(gtp->GetVolumeData());
@@ -174,10 +174,10 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 								SetRandomRenderOption(actor->GetProperty());
 								vtkProp_ = actor;
 							} else {
-								g3dvtk::SGrid* sGrid = dynamic_cast<g3dvtk::SGrid*>(bindingGeometry_);
-								if (sGrid != nullptr) {
+								g3dvtk::TruncatedRegularGrid* trGrid = dynamic_cast<g3dvtk::TruncatedRegularGrid*>(bindingGeometry_);
+								if (trGrid != nullptr) {
 									vtkSmartPointer<vtkDataSetMapper> mapper = vtkSmartPointer<vtkDataSetMapper>::New();
-									mapper->SetInputData(sGrid->GetVolumeData());
+									mapper->SetInputData(trGrid->GetVolumeData());
 									mapper->StaticOn();
 									vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 									actor->SetMapper(mapper);

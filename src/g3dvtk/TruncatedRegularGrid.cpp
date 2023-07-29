@@ -1,30 +1,30 @@
 // UTF-8编码
-#include <g3dvtk/SGrid.h>
+#include <g3dvtk/TruncatedRegularGrid.h>
 #include <vtkIdList.h>
 #include "Utils.h"
 
 using namespace g3dvtk;
 
-SGrid::SGrid() {
+TruncatedRegularGrid::TruncatedRegularGrid() {
     gridData_ = vtkSmartPointer<vtkUnstructuredGrid>::New();
     vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
     gridData_->SetPoints(pts);
 }
 
-SGrid::~SGrid() {
+TruncatedRegularGrid::~TruncatedRegularGrid() {
 
 }
 
-int SGrid::AppendVertex(double x, double y, double z) {
+int TruncatedRegularGrid::AppendVertex(double x, double y, double z) {
     vtkPoints* pts = gridData_->GetPoints();
     return pts->InsertNextPoint(x, y, z);
 }
 
-int SGrid::GetVertexCount() const {
+int TruncatedRegularGrid::GetVertexCount() const {
     return gridData_->GetNumberOfPoints();
 }
 
-bool SGrid::GetVertexAt(int i, double& x, double& y, double& z) const {
+bool TruncatedRegularGrid::GetVertexAt(int i, double& x, double& y, double& z) const {
     vtkPoints* pts = gridData_->GetPoints();
     double coords[3];
     pts->GetPoint(i, coords);
@@ -34,18 +34,18 @@ bool SGrid::GetVertexAt(int i, double& x, double& y, double& z) const {
     return true;
 }
 
-int SGrid::AppendFace(const std::list<int>& vertices) {
+int TruncatedRegularGrid::AppendFace(const std::list<int>& vertices) {
     Face face;
     face.vertices = vertices;
     faces_.push_back(face);
     return faces_.size() - 1;
 }
 
-int SGrid::GetFaceCount() const {
+int TruncatedRegularGrid::GetFaceCount() const {
     return faces_.size();
 }
 
-bool SGrid::GetFaceAt(int i, std::list<int>& vertices) const {
+bool TruncatedRegularGrid::GetFaceAt(int i, std::list<int>& vertices) const {
     if (i < 0 || i >= faces_.size()) {
         return false;
     }
@@ -53,7 +53,7 @@ bool SGrid::GetFaceAt(int i, std::list<int>& vertices) const {
     return true;
 }
 
-int SGrid::AppendCell(const std::list<int>& faces, int i, int j, int k) {
+int TruncatedRegularGrid::AppendCell(const std::list<int>& faces, int i, int j, int k) {
     vtkNew<vtkIdList> ptIds;
     ptIds->InsertNextId(faces.size());
     for (auto faceItor = faces.cbegin(); faceItor != faces.cend(); ++faceItor) {
@@ -72,11 +72,11 @@ int SGrid::AppendCell(const std::list<int>& faces, int i, int j, int k) {
     return gridData_->InsertNextCell(VTK_POLYHEDRON, ptIds);
 }
 
-int SGrid::GetCellCount() const {
+int TruncatedRegularGrid::GetCellCount() const {
     return gridData_->GetNumberOfCells();
 }
 
-bool SGrid::GetCellAt(int n, std::list<int>& faces, int& i, int& j, int& k) const {
+bool TruncatedRegularGrid::GetCellAt(int n, std::list<int>& faces, int& i, int& j, int& k) const {
     if (n < 0 || n >= cells_.size()) {
         return false;
     }
@@ -88,7 +88,7 @@ bool SGrid::GetCellAt(int n, std::list<int>& faces, int& i, int& j, int& k) cons
     return true;
 }
 
-geo3dml::Box3D SGrid::GetMinimumBoundingRectangle() const {
+geo3dml::Box3D TruncatedRegularGrid::GetMinimumBoundingRectangle() const {
     geo3dml::Box3D box;
     if (gridData_ != nullptr && gridData_->GetNumberOfPoints() > 0) {
         SetBox3DFromVTKBound(gridData_->GetBounds(), box);
@@ -96,15 +96,15 @@ geo3dml::Box3D SGrid::GetMinimumBoundingRectangle() const {
     return box;
 }
 
-void SGrid::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
+void TruncatedRegularGrid::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
 	shapeHelper_.SetProperty(prop, t, GetID(), gridData_);
 }
 
-geo3dml::ShapeProperty* SGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
+geo3dml::ShapeProperty* TruncatedRegularGrid::GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const {
     return shapeHelper_.GetProperty(t, GetID(), gridData_.Get());
 }
 
-vtkUnstructuredGrid* SGrid::GetVolumeData() const {
+vtkUnstructuredGrid* TruncatedRegularGrid::GetVolumeData() const {
     return gridData_.Get();
 }
 

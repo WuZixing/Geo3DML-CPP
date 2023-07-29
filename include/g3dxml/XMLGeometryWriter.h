@@ -8,11 +8,11 @@
 #include <geo3dml/MultiPoint.h>
 #include <geo3dml/CornerPointGrid.h>
 #include <geo3dml/UniformGrid.h>
-#include <geo3dml/GTPVolume.h>
+#include <geo3dml/TriangularPrismVolume.h>
 #include <geo3dml/RectifiedGrid.h>
 #include <geo3dml/TetrahedronVolume.h>
 #include <geo3dml/CuboidVolume.h>
-#include <geo3dml/SGrid.h>
+#include <geo3dml/TruncatedRegularGrid.h>
 #include <g3dxml/XMLIO.h>
 
 namespace g3dxml {
@@ -32,10 +32,10 @@ namespace g3dxml {
 		void WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output);
 		void WriteCornerPointGrid(geo3dml::CornerPointGrid* cornerGrid, std::ostream& output);
 		void WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std::ostream& output);
-		void WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream& output);
+		void WriteTriangularPrismVolume(geo3dml::TriangularPrismVolume* gtpGrid, std::ostream& output);
 		void WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output);
 		void WriteTetrahedronVolume(const geo3dml::TetrahedronVolume* tetraVolume, std::ostream& output);
 		void WriteCuboidVolume(const geo3dml::CuboidVolume* cuboidVolume, std::ostream& output);
-		void WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& output);
+		void WriteTruncatedRegularGrid(const geo3dml::TruncatedRegularGrid* trGrid, std::ostream& output);
 	};
 }

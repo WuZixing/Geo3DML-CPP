@@ -1,19 +1,19 @@
 // UTF-8编码
 #pragma once
 
-#include <geo3dml/SGrid.h>
+#include <geo3dml/TruncatedRegularGrid.h>
 #include <vtkUnstructuredGrid.h>
 #include <g3dvtk/ShapeHelper.h>
 
 namespace g3dvtk {
     /// @brief 基于VTK数据结构的顺层网格/截断网格实现。
-    class SGrid : public geo3dml::SGrid {
+    class TruncatedRegularGrid : public geo3dml::TruncatedRegularGrid {
     public:
-        SGrid();
-        virtual ~SGrid();
+        TruncatedRegularGrid();
+        virtual ~TruncatedRegularGrid();
 
     public:
-        /// @name 实现geo3dml::SGrid定义的接口。
+        /// @name 实现geo3dml::TruncatedRegularGrid定义的接口。
         ///@{
         virtual int AppendVertex(double x, double y, double z) override;
         virtual int GetVertexCount() const override;

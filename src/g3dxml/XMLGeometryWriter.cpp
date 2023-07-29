@@ -41,9 +41,9 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 								if (rectGrid != nullptr) {
 									WriteUniformGrid(rectGrid, output);
 								} else {
-									geo3dml::GTPVolume* gtpGrid = dynamic_cast<geo3dml::GTPVolume*>(geo);
+									geo3dml::TriangularPrismVolume* gtpGrid = dynamic_cast<geo3dml::TriangularPrismVolume*>(geo);
 									if (gtpGrid != nullptr) {
-										WriteGTPVolume(gtpGrid, output);
+										WriteTriangularPrismVolume(gtpGrid, output);
 									} else {
 										geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
 										if (rectGrid != nullptr) {
@@ -57,9 +57,9 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 												if (cuboidVolume != nullptr) {
 													WriteCuboidVolume(cuboidVolume, output);
 												} else {
-													geo3dml::SGrid* sGrid = dynamic_cast<geo3dml::SGrid*>(geo);
-													if (sGrid != nullptr) {
-														WriteSGrid(sGrid, output);
+													geo3dml::TruncatedRegularGrid* trGrid = dynamic_cast<geo3dml::TruncatedRegularGrid*>(geo);
+													if (trGrid != nullptr) {
+														WriteTruncatedRegularGrid(trGrid, output);
 													}
 												}
 											}
@@ -223,8 +223,8 @@ void XMLGeometryWriter::WriteUniformGrid(geo3dml::UniformGrid* uniformGrid, std:
 	output << "</GeoUniformGrid>" << std::endl;
 }
 
-void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream& output) {
-	output << "<GTPVolume gml:id=\"" << gtpGrid->GetID() << "\">" << std::endl;
+void XMLGeometryWriter::WriteTriangularPrismVolume(geo3dml::TriangularPrismVolume* gtpGrid, std::ostream& output) {
+	output << "<GeoTriangularPrismVolume gml:id=\"" << gtpGrid->GetID() << "\">" << std::endl;
 	// vertices
 	int vertexNumber = gtpGrid->GetVertexCount();
 	if (vertexNumber > 0) {
@@ -232,7 +232,7 @@ void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream
 		double x, y, z;
 		for (int i = 0; i < vertexNumber; ++i) {
 			gtpGrid->GetVertexAt(i, x, y, z);
-			output << "<Vertex gml:srsDimension=\"3\">" << x << " " << y << " " << z << "</Vertex>" << std::endl;
+			output << "<Vertex gml:srsDimension=\"3\" IndexNo=\"" << i << "\">" << x << " " << y << " " << z << "</Vertex>" << std::endl;
 		}
 		output << "</Vertices>" << std::endl;
 	}
@@ -243,7 +243,7 @@ void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream
 		int tv1, tv2, tv3, bv1, bv2, bv3;
 		for (int i = 0; i < prismNumber; ++i) {
 			gtpGrid->GetPrismAt(i, tv1, tv2, tv3, bv1, bv2, bv3);
-			output << "<Prism>" << std::endl
+			output << "<Prism IndexNo=\"" << i << "\">" << std::endl
 				<< "<TopTriangle>" << tv1 << " " << tv2 << " " << tv3 << "</TopTriangle>" << std::endl
 				<< "<BottomTriangle>" << bv1 << " " << bv2 << " " << bv3 << "</BottomTriangle>" << std::endl;
 			// << "<NeighborList>-1 -1 -1</NeighborList>" << std::endl;
@@ -251,7 +251,7 @@ void XMLGeometryWriter::WriteGTPVolume(geo3dml::GTPVolume* gtpGrid, std::ostream
 		}
 		output << "</Prisms>" << std::endl;
 	}
-	output << "</GTPVolume>" << std::endl;
+	output << "</GeoTriangularPrismVolume>" << std::endl;
 }
 
 void XMLGeometryWriter::WriteRectifiedGrid(const geo3dml::RectifiedGrid* grid, std::ostream& output) {
@@ -342,35 +342,35 @@ void XMLGeometryWriter::WriteCuboidVolume(const geo3dml::CuboidVolume* cuboidVol
 	output << "</GeoCuboidVolume>" << std::endl;
 }
 
-void XMLGeometryWriter::WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& output) {
-	output << "<GeoSGrid gml:id=\"" << sGrid->GetID() << "\">" << std::endl;
+void XMLGeometryWriter::WriteTruncatedRegularGrid(const geo3dml::TruncatedRegularGrid* trGrid, std::ostream& output) {
+	output << "<GeoTruncatedRegularGrid gml:id=\"" << trGrid->GetID() << "\">" << std::endl;
 	// plane grid 
-	const geo3dml::Point3D& origin = sGrid->GetPlaneGridOrigin();
+	const geo3dml::Point3D& origin = trGrid->GetPlaneGridOrigin();
 	double stepX = 0, stepY = 0;
-	sGrid->GetPlaneGridCellSize(stepX, stepY);
+	trGrid->GetPlaneGridCellSize(stepX, stepY);
 	int dimX = 0, dimY = 0;
-	sGrid->GetPlaneGridCellNumber(dimX, dimY);
+	trGrid->GetPlaneGridCellNumber(dimX, dimY);
 	output << "<PlaneGrid>" << std::endl
 		<< "<Origin gml:srsDimension=\"3\">" << origin.x << ' ' << origin.y << ' ' << origin.z << "</Origin>" << std::endl
-		<< "<Azimuth>" << sGrid->GetPlaneGridAzimuth() << "</Azimuth>" << std::endl
+		<< "<Azimuth>" << trGrid->GetPlaneGridAzimuth() << "</Azimuth>" << std::endl
 		<< "<Steps>" << stepX << ' ' << stepY << "</Steps>" << std::endl
 		<< "<Dimension>" << dimX << ' ' << dimY << "</Dimension>" << std::endl
 		<< "</PlaneGrid>";
 	// vertices
-	int vertexNumber = sGrid->GetVertexCount();
+	int vertexNumber = trGrid->GetVertexCount();
 	output << "<Vertices>" << std::endl;
 	double x = 0, y = 0, z = 0;
 	for (int n = 0; n < vertexNumber; ++n) {
-		sGrid->GetVertexAt(n, x, y, z);
+		trGrid->GetVertexAt(n, x, y, z);
 		output << "<Vertex gml:srsDimension=\"3\" IndexNo=\"" << n << "\">" << x << ' ' << y << ' ' << z << "</Vertex>" << std::endl;
 	}
 	output << "</Vertices>" << std::endl;
 	// faces
 	std::list<int> idList;
-	int faceNumber = sGrid->GetFaceCount();
+	int faceNumber = trGrid->GetFaceCount();
 	output << "<Faces>" << std::endl;
 	for (int n = 0; n < faceNumber; ++n) {
-		sGrid->GetFaceAt(n, idList);
+		trGrid->GetFaceAt(n, idList);
 		output << "<Face IndexNo=\"" << n << "\">" << std::endl;
 		output << "<VertexList Length=\"" << idList.size() << "\">";
 		auto cItor = idList.cbegin();
@@ -387,10 +387,10 @@ void XMLGeometryWriter::WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& ou
 	output << "</Faces>" << std::endl;
 	// cells
 	int i = 0, j = 0, k = 0;
-	int cellNumber = sGrid->GetCellCount();
+	int cellNumber = trGrid->GetCellCount();
 	output << "<Cells>" << std::endl;
 	for (int n = 0; n < cellNumber; ++n) {
-		sGrid->GetCellAt(n, idList, i, j, k);
+		trGrid->GetCellAt(n, idList, i, j, k);
 		output << "<Cell IndexNo=\"" << n << "\" I=\"" << i << "\" J=\"" << j << "\" K=\"" << k << "\">" << std::endl;
 		output << "<FaceList Length=\"" << idList.size() << "\">";
 		auto cItor = idList.cbegin();
@@ -405,5 +405,5 @@ void XMLGeometryWriter::WriteSGrid(const geo3dml::SGrid* sGrid, std::ostream& ou
 		output << "</Cell>" << std::endl;
 	}
 	output << "</Cells>" << std::endl;
-	output << "</GeoSGrid>" << std::endl;
+	output << "</GeoTruncatedRegularGrid>" << std::endl;
 }

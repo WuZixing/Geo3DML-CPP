@@ -14,7 +14,7 @@ namespace geo3dml {
 
 		//@{
 		void SetName(const std::string& name);
-		std::string GetName() const;
+		const std::string& GetName() const;
 		//@}
 
 		//@{

@@ -7,11 +7,11 @@
 #include <g3dxml/XMLPointReader.h>
 #include <g3dxml/XMLMultiPointReader.h>
 #include <g3dxml/XMLAnnotationReader.h>
-#include <g3dxml/XMLGTPVolumeReader.h>
+#include <g3dxml/XMLTriangularPrismVolumeReader.h>
 #include <g3dxml/XMLRectifiedGridReader.h>
 #include <g3dxml/XMLTetrahedronVolumeReader.h>
 #include <g3dxml/XMLCuboidVolumeReader.h>
-#include <g3dxml/XMLSGridReader.h>
+#include <g3dxml/XMLTruncatedRegularGridReader.h>
 #include <geo3dml/Utils.h>
 
 using namespace g3dxml;
@@ -116,8 +116,8 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				if (geo == nullptr) {
 					SetStatus(false, annotationReader.Error());
 				}
-			} else if (geo3dml::IsiEqual(localName, XMLGTPVolumeReader::Element)) {
-				XMLGTPVolumeReader gtpReader(g3dFactory_);
+			} else if (geo3dml::IsiEqual(localName, XMLTriangularPrismVolumeReader::Element)) {
+				XMLTriangularPrismVolumeReader gtpReader(g3dFactory_);
 				geo = gtpReader.ReadVolume(reader);
 				if (geo == nullptr) {
 					SetStatus(false, gtpReader.Error());
@@ -140,11 +140,11 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				if (geo == nullptr) {
 					SetStatus(false, cuboidReader.Error());
 				}
-			} else if (geo3dml::IsiEqual(localName, XMLSGridReader::Element)) {
-				XMLSGridReader sGridReader(g3dFactory_);
-				geo = sGridReader.ReadSGrid(reader);
+			} else if (geo3dml::IsiEqual(localName, XMLTruncatedRegularGridReader::Element)) {
+				XMLTruncatedRegularGridReader trGridReader(g3dFactory_);
+				geo = trGridReader.ReadGrid(reader);
 				if (geo == nullptr) {
-					SetStatus(false, sGridReader.Error());
+					SetStatus(false, trGridReader.Error());
 				}
 			}
 		}

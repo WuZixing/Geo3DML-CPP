@@ -1,17 +1,17 @@
 // UTF-8编码
 #pragma once
 
-#include <geo3dml/GTPVolume.h>
+#include <geo3dml/TriangularPrismVolume.h>
 #include <vtkUnstructuredGrid.h>
 #include <g3dvtk/ShapeHelper.h>
 
 namespace g3dvtk {
 
     /// @brief 基于VTK数据结构的广义三棱柱数据结构实现。
-    class GTPVolume : public geo3dml::GTPVolume {
+    class TriangularPrismVolume : public geo3dml::TriangularPrismVolume {
     public:
-        GTPVolume();
-        virtual ~GTPVolume();
+        TriangularPrismVolume();
+        virtual ~TriangularPrismVolume();
 
     public:
         /// @name 实现geo3dml::GTPVolume定义的虚函数。

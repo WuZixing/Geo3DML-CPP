@@ -15,6 +15,8 @@ std::string Field::ValueTypeToName(ValueType t) {
 		return "Boolean";
 	case geo3dml::Field::ValueType::Object:
 		return "Object";
+	case geo3dml::Field::ValueType::Category:
+		return "Category";
 	default:
 		return "Unknown";
 	}
@@ -29,6 +31,8 @@ Field::ValueType Field::NameToValueType(const std::string& name) {
 		return geo3dml::Field::Integer;
 	} else if (geo3dml::IsiEqual(name, "Boolean")) {
 		return geo3dml::Field::Boolean;
+	} else if (geo3dml::IsiEqual(name, "Category")) {
+		return geo3dml::Field::Category;
 	} else if (geo3dml::IsiEqual(name, "Object")) {
 		return geo3dml::Field::Object;
 	} else {
@@ -58,7 +62,7 @@ Field& Field::Name(const std::string& s) {
 	return *this;
 }
 
-std::string Field::Name() const {
+const std::string& Field::Name() const {
 	return name_;
 }
 
@@ -67,7 +71,7 @@ Field& Field::Label(const std::string& s) {
 	return *this;
 }
 
-std::string Field::Label() const {
+const std::string& Field::Label() const {
 	return label_;
 }
 
@@ -85,7 +89,7 @@ Field& Field::Uom(const std::string& s) {
 	return *this;
 }
 
-std::string Field::Uom() const {
+const std::string& Field::Uom() const {
 	return uom_;
 }
 
@@ -94,7 +98,7 @@ Field& Field::Definition(const std::string& s) {
 	return *this;
 }
 
-std::string Field::Definition() const {
+const std::string& Field::Definition() const {
 	return definition_;
 }
 
@@ -103,7 +107,7 @@ Field& Field::Description(const std::string& s) {
 	return *this;
 }
 
-std::string Field::Description() const {
+const std::string& Field::Description() const {
 	return description_;
 }
 

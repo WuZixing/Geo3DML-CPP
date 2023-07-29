@@ -5,11 +5,11 @@
 #include "Volume.h"
 
 namespace geo3dml {
-    /// @brief GeoSGrid：顺层网格或截断网格。
-    class SGrid : public Volume {
+    /// @brief TruncatedRegularGrid：截断规则网格。
+    class TruncatedRegularGrid : public Volume {
     public:
-        SGrid();
-        virtual ~SGrid();
+        TruncatedRegularGrid();
+        virtual ~TruncatedRegularGrid();
 
         /// @name 平面网格划分参数。
         ///@{

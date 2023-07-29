@@ -11,7 +11,7 @@ XMLShapePropertyWriter::~XMLShapePropertyWriter() {
 
 }
 
-bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output, SchemaVersion v) {
+bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::ostream& output, SchemaVersion v) const {
 	output << "<ShapeProperty>" << std::endl
 		<< "<GeoDiscreteCoverage gml:id=\"" << shapeProperty->GetID() << "\">" << std::endl;
 	output << "<gml:name>" << shapeProperty->Name() << "</gml:name>" << std::endl;
@@ -48,6 +48,9 @@ bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::o
 		case geo3dml::Field::Text:
 			WriteTextFieldValues(shapeProperty, i, output);
 			break;
+		case geo3dml::Field::Category:
+			WriteCategoryFieldValues(shapeProperty, i, output);
+			break;
 		default:
 			break;
 		}
@@ -58,7 +61,7 @@ bool XMLShapePropertyWriter::Write(geo3dml::ShapeProperty* shapeProperty, std::o
 	return IsOK();
 }
 
-void XMLShapePropertyWriter::WriteDoubleFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) {
+void XMLShapePropertyWriter::WriteDoubleFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) const {
 	output << "<gml:ValueArray gml:id=\"\">" << std::endl
 		<< "<gml:valueComponents>" << std::endl;
 	int valueNumber = shapeProperty->GetValueCount(fieldIndex);
@@ -69,7 +72,7 @@ void XMLShapePropertyWriter::WriteDoubleFieldValues(geo3dml::ShapeProperty* shap
 		<< "</gml:ValueArray>" << std::endl;
 }
 
-void XMLShapePropertyWriter::WriteIntFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) {
+void XMLShapePropertyWriter::WriteIntFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) const {
 	output << "<gml:ValueArray gml:id=\"\">" << std::endl
 		<< "<gml:valueComponents>" << std::endl;
 	int valueNumber = shapeProperty->GetValueCount(fieldIndex);
@@ -80,7 +83,7 @@ void XMLShapePropertyWriter::WriteIntFieldValues(geo3dml::ShapeProperty* shapePr
 		<< "</gml:ValueArray>" << std::endl;
 }
 
-void XMLShapePropertyWriter::WriteTextFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) {
+void XMLShapePropertyWriter::WriteTextFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) const {
 	output << "<gml:ValueArray gml:id=\"\">" << std::endl
 		<< "<gml:valueComponents>" << std::endl;
 	int valueNumber = shapeProperty->GetValueCount(fieldIndex);
@@ -92,7 +95,19 @@ void XMLShapePropertyWriter::WriteTextFieldValues(geo3dml::ShapeProperty* shapeP
 		<< "</gml:ValueArray>" << std::endl;
 }
 
-void XMLShapePropertyWriter::WriteBooleanFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) {
+void XMLShapePropertyWriter::WriteCategoryFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) const {
+	output << "<gml:ValueArray gml:id=\"\">" << std::endl
+		<< "<gml:valueComponents>" << std::endl;
+	int valueNumber = shapeProperty->GetValueCount(fieldIndex);
+	for (int i = 0; i < valueNumber; ++i) {
+		// gml 本身没有一般的 Text 数据类型，所以使用 swe:Text 对象。
+		output << "<gml:Category>" << shapeProperty->TextValue(fieldIndex, i) << "</gml:Category>" << std::endl;
+	}
+	output << "</gml:valueComponents>" << std::endl
+		<< "</gml:ValueArray>" << std::endl;
+}
+
+void XMLShapePropertyWriter::WriteBooleanFieldValues(geo3dml::ShapeProperty* shapeProperty, int fieldIndex, std::ostream& output) const {
 	output << "<gml:ValueArray gml:id=\"\">" << std::endl
 		<< "<gml:valueComponents>" << std::endl;
 	int valueNumber = shapeProperty->GetValueCount(fieldIndex);

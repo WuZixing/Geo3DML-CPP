@@ -31,6 +31,7 @@ bool ShapeProperty::AddField(const geo3dml::Field& f) {
 	case geo3dml::Field::Double:
 	case geo3dml::Field::Integer:
 	case geo3dml::Field::Text:
+	case geo3dml::Field::Category:
 		break;
 	default:
 		return false;
@@ -64,6 +65,7 @@ bool ShapeProperty::AddField(const geo3dml::Field& f) {
 			dataSet_->AddArray(intArray);
 			break;
 		}
+		case geo3dml::Field::Category:
 		case geo3dml::Field::Text: {
 			vtkSmartPointer<vtkStringArray> stringArray = vtkSmartPointer<vtkStringArray>::New();
 			stringArray->SetName(fieldName.c_str());

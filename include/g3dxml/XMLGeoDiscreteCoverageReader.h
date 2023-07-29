@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include <g3dxml/XMLReaderHelper.h>
@@ -21,8 +22,8 @@ namespace g3dxml {
 		bool ReadRangeSet(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty);
 		bool ReadRangeSetField(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty, int fieldIndex);
 		bool ReadFieldValues(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty, int fieldIndex);
-		/// Read element value of a field of array type.
-		bool ReadElementValueAsArray(xmlTextReaderPtr reader, geo3dml::ShapeProperty* shapeProperty, int fieldIndex);
+		/// Read element value of a field of unsupported type.
+		bool ReadElementValueAsOther(xmlTextReaderPtr reader, const std::string& elemName);
 
 	private:
 		static std::string Element_RangeType;
