@@ -53,38 +53,42 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		if (surfaceSymbolizer != nullptr) {
 			const geo3dml::Texture& texture = surfaceSymbolizer->GetFrontMaterial().GetTexture();
 			if (texture.IsValid()) {
-				vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
-				texPlane->AutomaticPlaneGenerationOn();
-				texPlane->SetInputData(tin->GetPolyData());
-				mapper->SetInputConnection(texPlane->GetOutputPort());
 				vtkNew<vtkImageReader2Factory> readerFactory;
 				vtkSmartPointer<vtkImageReader2> texImage;
 				texImage.TakeReference(readerFactory->CreateImageReader2(texture.GetImageURI().c_str()));
-				texImage->SetFileName(texture.GetImageURI().c_str());
-                vtkSmartPointer<vtkTexture> tex = vtkSmartPointer<vtkTexture>::New();
-                tex->SetInputConnection(texImage->GetOutputPort());
-                tex->InterpolateOn();
-				switch (texture.GetWrapMode()) {
-				case geo3dml::Texture::WrapMode::Repeat: {
-					tex->SetWrap(vtkTexture::Repeat);
-					break;
+				if (texImage.Get() != nullptr) {
+					vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
+					texPlane->AutomaticPlaneGenerationOn();
+					texPlane->SetInputData(tin->GetPolyData());
+					mapper->SetInputConnection(texPlane->GetOutputPort());
+					texImage->SetFileName(texture.GetImageURI().c_str());
+					vtkSmartPointer<vtkTexture> tex = vtkSmartPointer<vtkTexture>::New();
+					tex->SetInputConnection(texImage->GetOutputPort());
+					tex->InterpolateOn();
+					switch (texture.GetWrapMode()) {
+					case geo3dml::Texture::WrapMode::Repeat: {
+						tex->SetWrap(vtkTexture::Repeat);
+						break;
+					}
+					case geo3dml::Texture::WrapMode::MirrorRepeat: {
+						tex->SetWrap(vtkTexture::MirroredRepeat);
+						break;
+					}
+					case geo3dml::Texture::WrapMode::ClampToBorder: {
+						const geo3dml::Color& borderColor = texture.GetBorderColor();
+						tex->SetBorderColor(borderColor.R(), borderColor.G(), borderColor.B(), borderColor.A());
+						tex->SetWrap(vtkTexture::ClampToBorder);
+						break;
+					}
+					default: {
+						tex->SetWrap(vtkTexture::ClampToEdge);
+						break;
+					}
+					}
+					actor->SetTexture(tex);
+				} else {
+					mapper->SetInputData(tin->GetPolyData());
 				}
-				case geo3dml::Texture::WrapMode::MirrorRepeat: {
-					tex->SetWrap(vtkTexture::MirroredRepeat);
-					break;
-				}
-				case geo3dml::Texture::WrapMode::ClampToBorder: {
-					const geo3dml::Color& borderColor = texture.GetBorderColor();
-					tex->SetBorderColor(borderColor.R(), borderColor.G(), borderColor.B(), borderColor.A());
-					tex->SetWrap(vtkTexture::ClampToBorder);
-					break;
-				}
-				default: {
-					tex->SetWrap(vtkTexture::ClampToEdge);
-					break;
-				}
-				}
-				actor->SetTexture(tex);
 			} else {
 				mapper->SetInputData(tin->GetPolyData());
 			}
