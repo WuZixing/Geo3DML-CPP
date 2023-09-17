@@ -54,6 +54,7 @@ double Matrix4x4::Element(int row, int col) const {
 }
 
 double Matrix4x4::Determinant() const {
+    // 按第一行展开计算行列式
     Matrix3x3 m;
     for (int r = 1; r < 4; ++r) {
         m.Element(r, 1, Element(r + 1, 2));
