@@ -14,8 +14,7 @@ namespace g3dvtk {
 	public:
 		/// @name Methods inherited from geo3dml::MultiLineString.
 		//@{
-		virtual int AddLineString();
-		virtual void AddVertexToLineString(int lineIndex, double x, double y, double z);
+		virtual int AddLineString(const geo3dml::LineString* line);
 		virtual int GetLineStringCount() const;
 		virtual int GetVertexCountOfLineString(int lineIndex) const;
 		virtual void GetVertexOfLineString(int lineIndex, int vertexIndex, double& x, double& y, double& z) const;

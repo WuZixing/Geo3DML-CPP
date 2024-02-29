@@ -18,22 +18,17 @@ MultiLineString::~MultiLineString() {
 }
 
 
-int MultiLineString::AddLineString() {
-	vtkSmartPointer<vtkPolyLine> polyLine = vtkSmartPointer<vtkPolyLine>::New();
-	return polyData_->GetLines()->InsertNextCell(polyLine);
-}
-
-void MultiLineString::AddVertexToLineString(int lineIndex, double x, double y, double z) {
-	vtkCellArray* lineArray = polyData_->GetLines();
-	if (lineIndex < 0 || lineIndex >= lineArray->GetNumberOfCells()) {
-		return;
-	}
-	vtkIdType ptIndex = polyData_->GetPoints()->InsertNextPoint(x, y, z);
+int MultiLineString::AddLineString(const geo3dml::LineString* line) {
 	vtkSmartPointer<vtkIdList> ptList = vtkSmartPointer<vtkIdList>::New();
-	lineArray->GetCell(lineIndex, ptList);
-	ptList->InsertNextId(ptIndex);
-	lineArray->ReplaceCell(lineIndex, ptList->GetNumberOfIds(), ptList->begin());
+	double x = 0, y = 0, z = 0;
+	for (int n = 0; n < line->GetVertexCount(); ++n) {
+		line->GetVertexAt(n, x, y, z);
+		vtkIdType ptIndex = polyData_->GetPoints()->InsertNextPoint(x, y, z);
+		ptList->InsertNextId(ptIndex);
+	}
+	int lineIndex = polyData_->GetLines()->InsertNextCell(ptList);
 	polyData_->Modified();
+	return lineIndex;
 }
 
 int MultiLineString::GetVertexCountOfLineString(int lineIndex) const {
