@@ -52,7 +52,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
 		if (surfaceSymbolizer != nullptr) {
-			const geo3dml::Texture& texture = surfaceSymbolizer->GetFrontMaterial().GetTexture();
+			const geo3dml::Texture& texture = surfaceSymbolizer->GetFrontMaterial().GetBaseTexture();
 			if (texture.IsValid()) {
 				vtkNew<vtkImageReader2Factory> readerFactory;
 				vtkSmartPointer<vtkImageReader2> texImage;
@@ -363,13 +363,9 @@ void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtk
 }
 
 void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) const {
-	geo3dml::Color diffuseColor = m.GetDiffuseColor();
-	geo3dml::Color specularColor = m.GetSpecularColor();
-	p->SetAmbient(m.GetAmbientIntensity());
-	p->SetAmbientColor(diffuseColor.R(), diffuseColor.G(), diffuseColor.B());
-	p->SetDiffuseColor(diffuseColor.R(), diffuseColor.G(), diffuseColor.B());
-	p->SetSpecularColor(specularColor.R(), specularColor.G(), specularColor.B());
-	p->SetOpacity(1 - m.GetTransparency());
+	geo3dml::Color baseColor = m.GetBaseColor();
+	p->SetColor(baseColor.R(), baseColor.G(), baseColor.B());
+	p->SetOpacity(baseColor.A());
 }
 
 void Actor::SetRandomRenderOption(vtkProperty* p) const {
@@ -384,12 +380,8 @@ void Actor::SetRandomRenderOption(vtkProperty* p) const {
 
 geo3dml::Material Actor::ToMaterial(vtkProperty* p) const {
 	geo3dml::Material m;
-	m.SetAmbientIntensity(p->GetAmbient());
-	double* clr = p->GetDiffuseColor();
-	m.SetDiffuseColor(geo3dml::Color(clr[0], clr[1], clr[2]));
-	clr = p->GetSpecularColor();
-	m.SetSpecularColor(geo3dml::Color(clr[0], clr[1], clr[2]));
-	m.SetTransparency(1 - p->GetOpacity());
+	double* clr = p->GetColor();
+	m.SetBaseColor(geo3dml::Color(clr[0], clr[1], clr[2], p->GetOpacity()));
 	return m;
 }
 

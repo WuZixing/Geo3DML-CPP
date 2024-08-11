@@ -107,4 +107,5 @@ add_library(${G3DXML_LIBRARIES} STATIC
 	${g3dlibxml2_la_SOURCES}
 	${G3DXML_SOURCES}
 	${G3DXML_HEADERS}
+	README.md
 )

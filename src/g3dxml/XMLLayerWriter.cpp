@@ -13,7 +13,8 @@ XMLLayerWriter::~XMLLayerWriter() {
 }
 
 bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVersion v) {
-	output << "<Layer gml:id=\"" << layer->GetID() << "\">" << std::endl
+	output << "<Layer>" << std::endl
+		<< "<Geo3DLayer gml:id=\"" << layer->GetID() << "\">" << std::endl
 		<< "<gml:name>" << layer->GetName() << "</gml:name>" << std::endl;
 	geo3dml::FeatureClass* bindingFC = layer->GetBindingFeatureClass();
 	if (bindingFC != NULL) {
@@ -43,7 +44,8 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 		}
 		output << "</Styles>" << std::endl;
 	}
-	output << "</Layer>" << std::endl;
+	output << "</Geo3DLayer>" << std::endl
+		<< "</Layer>" << std::endl;
 	return true;
 }
 
@@ -60,13 +62,15 @@ void XMLLayerWriter::WriteStyle(geo3dml::Style* style, std::ostream& output) {
 }
 
 void XMLLayerWriter::WriteFeatureTypeStyle(geo3dml::FeatureTypeStyle* featureStyle, std::ostream& output) {
-	output << "<se:FeatureTypeStyle>" << std::endl;
+	output << "<FeatureStyle>" << std::endl
+		<< "<se:FeatureTypeStyle>" << std::endl;
 	int ruleNumber = featureStyle->GetRuleCount();
 	for (int i = 0; i < ruleNumber; ++i) {
 		geo3dml::StyleRule* rule = featureStyle->GetRuleAt(i);
 		WriteStyleRule(rule, output);
 	}
-	output << "</se:FeatureTypeStyle>" << std::endl;
+	output << "</se:FeatureTypeStyle>" << std::endl
+		<< "</FeatureStyle>" << std::endl;
 }
 
 void XMLLayerWriter::WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& output) {

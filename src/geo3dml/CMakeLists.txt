@@ -8,6 +8,8 @@ set(GEO3DML_LIBRARIES libGeo3DML CACHE STRING "")
 
 aux_source_directory(. Geo3DML_SOURCES)
 list(APPEND GEO3DML_HEADERS
+	${PROJECT_SOURCE_DIR}/LICENSE
+	${PROJECT_SOURCE_DIR}/README.md
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Geo3DML.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Project.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Model.h
@@ -54,7 +56,9 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/CuboidVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TetrahedronVolume.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Texture.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/Metadata.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/AbstractMetadata.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/ModelMetadata.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/ProjectMetadata.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TruncatedRegularGrid.h
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})

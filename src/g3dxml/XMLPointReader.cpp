@@ -3,7 +3,7 @@
 
 using namespace g3dxml;
 
-std::string XMLPointReader::Element = "Point";
+const std::string XMLPointReader::Element = "Point";
 
 XMLPointReader::XMLPointReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

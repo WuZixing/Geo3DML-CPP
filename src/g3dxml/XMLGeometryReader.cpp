@@ -15,9 +15,9 @@
 
 using namespace g3dxml;
 
-std::string XMLGeometryReader::Element = "Geometry";
-std::string XMLGeometryReader::Element_Shape = "Shape";
-std::string XMLGeometryReader::Element_ShapeProperty = "ShapeProperty";
+const std::string XMLGeometryReader::Element = "Geometry";
+const std::string XMLGeometryReader::Element_Shape = "Shape";
+const std::string XMLGeometryReader::Element_ShapeProperty = "ShapeProperty";
 
 XMLGeometryReader::XMLGeometryReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;
@@ -29,8 +29,6 @@ XMLGeometryReader::~XMLGeometryReader() {
 
 geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 	geo3dml::Geometry* geometry = nullptr;
-	std::string geoName = XMLReaderHelper::Attribute(reader, "Name");
-	std::string geoLOD = XMLReaderHelper::Attribute(reader, "LOD");
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -40,10 +38,6 @@ geo3dml::Geometry* XMLGeometryReader::ReadGeometry(xmlTextReaderPtr reader) {
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_Shape)) {
 				geometry = ReadShape(reader);
-				if (geometry != nullptr) {
-					geometry->SetName(geoName);
-					geometry->SetLODLevel(strtol(geoLOD.c_str(), nullptr, 10));
-				}
 			} else if (geo3dml::IsiEqual(localName, Element_ShapeProperty)) {
 				if (geometry != nullptr) {
 					// Shape object must be available before reading shape property.

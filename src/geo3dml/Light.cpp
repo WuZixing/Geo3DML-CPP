@@ -1,3 +1,4 @@
+// UTF-8编码
 #include <geo3dml/Light.h>
 #include <geo3dml/Utils.h>
 
@@ -8,14 +9,22 @@ Light::Type Light::NameToLightType(const std::string& name) {
 		return Light_Head;
 	} else if (IsiEqual(name, "Camera")) {
 		return Light_Camera;
-	} else {
+	} else if (IsiEqual(name, "Scene")) {
 		return Light_Scene;
+	} else if (IsiEqual(name, "directionallight")) {
+		return Light_DirectionalLight;
+	} else if (IsiEqual(name, "pointlight")) {
+		return Light_PointLight;
+	} else if (IsiEqual(name, "spotlight")) {
+		return Light_SpotLight;
+	} else {
+		return Light_Unknown;
 	}
 }
 
 Light::Light() {
 	isOn_ = true;
-	lightType_ = Light_Scene;
+	lightType_ = Light_Unknown;
 	for (int i = 0; i < 3; ++i) {
 		position_[i] = 0;
 		focalPosition_[i] = 0;

@@ -19,6 +19,7 @@ namespace g3dxml {
 		bool Write(geo3dml::Project* project, std::ostream& output, SchemaVersion v);
 		bool Write(geo3dml::Model* model, std::ostream& output, SchemaVersion v);
 		bool Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v);
+		void WriteContactOfMetadata(const geo3dml::AbstractMetadata* metadata, std::ostream& output);
 		void WriteXMLDeclaration(std::ostream& output);
 		std::string NSGeo3DML(SchemaVersion v);
 		std::string NSDefault(SchemaVersion v);

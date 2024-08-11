@@ -4,68 +4,49 @@
 using namespace geo3dml;
 
 Material::Material() {
-	ambientIntensity_ = 0.2;
-	shininess_ = 0.2;
-	transparency_ = 0;
+
 }
 
 Material::~Material() {
 
 }
 
-void Material::SetAmbientIntensity(double d) {
-	ambientIntensity_ = d;
+void Material::SetBaseColor(const Color& clr) {
+	baseColor_ = clr;
 }
 
-double Material::GetAmbientIntensity() const {
-	return ambientIntensity_;
-}
-
-void Material::SetShininess(double d) {
-	shininess_ = d;
-}
-
-double Material::GetShininess() const {
-	return shininess_;
-}
-
-void Material::SetTransparency(double d) {
-	transparency_ = d;
-}
-
-double Material::GetTransparency() const {
-	return transparency_;
-}
-
-void Material::SetDiffuseColor(const Color& clr) {
-	diffuseColor_ = clr;
-}
-
-Color Material::GetDiffuseColor() const {
-	return diffuseColor_;
+const Color& Material::GetBaseColor() const {
+	return baseColor_;
 }
 
 void Material::SetEmissiveColor(const Color& clr) {
 	emissiveColor_ = clr;
 }
 
-Color Material::GetEmissiveColor() const {
+const Color& Material::GetEmissiveColor() const {
 	return emissiveColor_;
 }
 
-void Material::SetSpecularColor(const Color& clr) {
-	specularColor_ = clr;
+void Material::SetBaseTexture(const Texture& tex) {
+	baseTexture_ = tex;
 }
 
-Color Material::GetSpecularColor() const {
-	return specularColor_;
+const Texture& Material::GetBaseTexture() const {
+	return baseTexture_;
 }
 
-void Material::SetTexture(const Texture& tex) {
-	texture_ = tex;
+void Material::SetNormalTexture(const Texture& tex) {
+	normalTexture_ = tex;
 }
 
-const Texture& Material::GetTexture() const {
-	return texture_;
+const Texture& Material::GetNormalTexture() const {
+	return normalTexture_;
 }
 
+void Material::SetOcclusionTexture(const Texture& tex) {
+	occlusionTexture_ = tex;
+}
+
+const Texture& Material::GetOcclusionTexture() const {
+	return occlusionTexture_;
+}

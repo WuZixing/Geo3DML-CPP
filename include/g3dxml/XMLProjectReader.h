@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLProjectReader : public XMLIO {
 	public:
 		/// Name of the project elment.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -20,19 +20,23 @@ namespace g3dxml {
 		geo3dml::Project* ReadProject(xmlTextReaderPtr reader);
 
 	private:
+		bool ReadMetadata(xmlTextReaderPtr reader, geo3dml::Project* project);
+		bool ReadProjectInfo(xmlTextReaderPtr reader, geo3dml::ProjectMetadata& meta);
 		geo3dml::Model* ReadModel(xmlTextReaderPtr reader);
 		geo3dml::Map* ReadMap(xmlTextReaderPtr reader);
 		bool ReadStyle(xmlTextReaderPtr reader, geo3dml::Project* project);
 		bool ReadLight(xmlTextReaderPtr reader, geo3dml::Light& light);
 
 	private:
-		static std::string Element_Name;
-		static std::string Element_Description;
-		static std::string Element_Model;
-		static std::string Element_Include;
-		static std::string Element_Style;
-		static std::string Element_Light;
-		static std::string Element_Map;
+		static const std::string Element_Name;
+		static const std::string Element_Metadata;
+		static const std::string Element_Description;
+		static const std::string Element_ProjectInfo;
+		static const std::string Element_Model;
+		static const std::string Element_Include;
+		static const std::string Element_Style;
+		static const std::string Element_Light;
+		static const std::string Element_Map;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

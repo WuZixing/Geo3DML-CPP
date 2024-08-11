@@ -6,46 +6,39 @@
 #include "Texture.h"
 
 namespace geo3dml {
-
+	/// @brief 可视化材质参数。
+	/// 地调局标准（简称局标，或v1版标准）与地理信息协会标准（简称协会标准，或v2版标准）使用不同的材质定义。
+	/// 两个版本使用完全不同的属性。但从实际效果看，v2版本涵盖了v1版本。
 	class Material {
 	public:
 		Material();
 		virtual ~Material();
 
-		/// @name Ambient intensity: [0, 1.0]
-		///@{
-		void SetAmbientIntensity(double d = 0.2);
-		double GetAmbientIntensity() const;
-		///@}
+		/// @brief 基础颜色
+		void SetBaseColor(const Color& clr);
+		const Color& GetBaseColor() const;
 
-		/// @name Shininess: [0, 1.0]
-		///@{
-		void SetShininess(double d = 0.2);
-		double GetShininess() const;
-		///@}
+		/// @brief 基础纹理。有纹理时忽略基础颜色参数。
+		void SetBaseTexture(const Texture& tex);
+		const Texture& GetBaseTexture() const;
 
-		/// @name Transparency: [0, 1.0]
-		///@{
-		void SetTransparency(double d = 0);
-		double GetTransparency() const;
-		///@}
-
-		/// @name Colors
-		///@{
-		void SetDiffuseColor(const Color& clr);
-		Color GetDiffuseColor() const;
+		/// 对象发光时的颜色。
 		void SetEmissiveColor(const Color& clr);
-		Color GetEmissiveColor() const;
-		void SetSpecularColor(const Color& clr);
-		Color GetSpecularColor() const;
-		///@}
+		const Color& GetEmissiveColor() const;
 
-		void SetTexture(const Texture& tex);
-		const Texture& GetTexture() const;
+		/// 对象的法向纹理。
+		void SetNormalTexture(const Texture& tex);
+		const Texture& GetNormalTexture() const;
+
+		/// 环境光遮蔽纹理。仅使用其R通道的值。
+		void SetOcclusionTexture(const Texture& tex);
+		const Texture& GetOcclusionTexture() const;
 
 	private:
-		double ambientIntensity_, shininess_, transparency_;
-		Color diffuseColor_, emissiveColor_, specularColor_;
-		Texture texture_;
+		Color baseColor_;		///< 对象自身的颜色。
+		Texture baseTexture_;	///< 对象自身纹理。有纹理时忽略baseColor_。
+		Color emissiveColor_;	///< 若对象发光，指定其发光的颜色。
+		Texture normalTexture_;	///< 对象的法向纹理。使用其RGB通道的值。
+		Texture occlusionTexture_;	///< 环境光遮蔽纹理。仅使用其R通道的值。
 	};
 }

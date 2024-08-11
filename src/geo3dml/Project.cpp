@@ -28,12 +28,12 @@ const std::string& Project::GetName() const {
 	return name_;
 }
 
-void Project::SetDescription(const std::string& desc) {
-	description_ = desc;
+void Project::SetMetadata(const ProjectMetadata& meta) {
+	metadata_ = meta;
 }
 
-const std::string& Project::GetDescription() const {
-	return description_;
+const ProjectMetadata& Project::GetMetadata() const {
+	return metadata_;
 }
 
 void Project::AddModel(Model* model) {

@@ -5,9 +5,9 @@
 
 using namespace g3dxml;
 
-std::string XMLGeoDiscreteCoverageReader::Element = "GeoDiscreteCoverage";
-std::string XMLGeoDiscreteCoverageReader::Element_RangeType = "rangeType";
-std::string XMLGeoDiscreteCoverageReader::Element_RangeSet = "rangeSet";
+const std::string XMLGeoDiscreteCoverageReader::Element = "GeoDiscreteCoverage";
+const std::string XMLGeoDiscreteCoverageReader::Element_RangeType = "rangeType";
+const std::string XMLGeoDiscreteCoverageReader::Element_RangeSet = "rangeSet";
 
 XMLGeoDiscreteCoverageReader::XMLGeoDiscreteCoverageReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

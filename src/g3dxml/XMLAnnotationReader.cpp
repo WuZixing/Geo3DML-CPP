@@ -3,9 +3,9 @@
 
 using namespace g3dxml;
 
-std::string XMLAnnotationReader::Element = "GeoAnnotation";
-std::string XMLAnnotationReader::Element_Pos = "pos";
-std::string XMLAnnotationReader::Element_Label = "Label";
+const std::string XMLAnnotationReader::Element = "GeoAnnotation";
+const std::string XMLAnnotationReader::Element_Pos = "pos";
+const std::string XMLAnnotationReader::Element_Label = "Label";
 
 XMLAnnotationReader::XMLAnnotationReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

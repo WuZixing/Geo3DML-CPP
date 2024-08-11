@@ -9,7 +9,7 @@ namespace g3dxml {
 	class XMLFeatureReader : public XMLIO {
 	public:
 		/// Name of the feature element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -25,8 +25,8 @@ namespace g3dxml {
 		bool ReadFieldValue(xmlTextReaderPtr reader, const std::string& elementName, geo3dml::Field::ValueType valueType, geo3dml::FieldValue* value);
 
 	private:
-		static std::string Element_Name;
-		static std::string Element_Fields;
+		static const std::string Element_Name;
+		static const std::string Element_Fields;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

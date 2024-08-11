@@ -4,8 +4,8 @@
 
 using namespace g3dxml;
 
-std::string XMLStyleReader::Element = "Geo3DStyle";
-std::string XMLStyleReader::Element_Name = "name";
+const std::string XMLStyleReader::Element = "Geo3DStyle";
+const std::string XMLStyleReader::Element_Name = "name";
 
 XMLStyleReader::XMLStyleReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

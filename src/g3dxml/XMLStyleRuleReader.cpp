@@ -8,7 +8,7 @@
 
 using namespace g3dxml;
 
-std::string XMLStyleRuleReader::Element = "Rule";
+const std::string XMLStyleRuleReader::Element = "Rule";
 
 XMLStyleRuleReader::XMLStyleRuleReader(geo3dml::ObjectFactory* factory) :
 	Element_Filter("Filter"),

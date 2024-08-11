@@ -3,7 +3,7 @@
 
 using namespace g3dxml;
 
-std::string XMLMultiPointReader::Element = "MultiPoint";
+const std::string XMLMultiPointReader::Element = "MultiPoint";
 
 XMLMultiPointReader::XMLMultiPointReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

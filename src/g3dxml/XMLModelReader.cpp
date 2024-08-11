@@ -4,7 +4,7 @@
 
 using namespace g3dxml;
 
-std::string XMLModelReader::Element = "Geo3DModel";
+const std::string XMLModelReader::Element = "Geo3DModel";
 const std::string XMLModelReader::OldElement = "GeoModel";
 const std::string XMLModelReader::Element_Name = "Name";
 const std::string XMLModelReader::Element_Type = "Type";
@@ -14,6 +14,7 @@ const std::string XMLModelReader::Element_Description = "Description";
 const std::string XMLModelReader::Element_Version = "Version";
 const std::string XMLModelReader::Element_ToolName = "ToolName";
 const std::string XMLModelReader::Element_ToolVersion = "ToolVersion";
+const std::string XMLModelReader::Element_TopicCategory = "TopicCategory";
 const std::string XMLModelReader::Element_SpatialReferenceSystem = "SpatialReferenceSystem";
 const std::string XMLModelReader::Element_CoordinateReferenceSystem = "CoordinateReferenceSystem";
 const std::string XMLModelReader::Element_VerticalReferenceSystem = "VerticalReferenceSystem";
@@ -128,7 +129,7 @@ geo3dml::Model* XMLModelReader::LoadFromFile(const std::string& file) {
 
 bool XMLModelReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model) {
 	std::string v;
-	geo3dml::Metadata meta;
+	geo3dml::ModelMetadata meta;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
@@ -168,6 +169,13 @@ bool XMLModelReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model
 					SetStatus(false, v);
 					break;
 				}
+			} else if (geo3dml::IsiEqual(localName, Element_TopicCategory)) {
+				if (XMLReaderHelper::TextNode(reader, Element_TopicCategory, v)) {
+					meta.SetTopicCategory(v);
+				} else {
+					SetStatus(false, v);
+					break;
+				}
 			} else if (geo3dml::IsiEqual(localName, "CI_ResponsibleParty")) {
 				ReadMetadataContact(reader, meta);
 			} else if (geo3dml::IsiEqual(localName, Element_SpatialReferenceSystem)) {
@@ -184,7 +192,7 @@ bool XMLModelReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model
 	return IsOK();
 }
 
-bool XMLModelReader::ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+bool XMLModelReader::ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -262,7 +270,7 @@ std::string XMLModelReader::ReadCharacterString(xmlTextReaderPtr reader, const s
 	return v;
 }
 
-bool XMLModelReader::ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+bool XMLModelReader::ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -286,7 +294,7 @@ bool XMLModelReader::ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr rea
 	return IsOK();
 }
 
-bool XMLModelReader::ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+bool XMLModelReader::ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -318,7 +326,7 @@ bool XMLModelReader::ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::Metadata&
 	return IsOK();
 }
 
-bool XMLModelReader::ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+bool XMLModelReader::ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
@@ -350,7 +358,7 @@ bool XMLModelReader::ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::Metadata&
 	return IsOK();
 }
 
-bool XMLModelReader::ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::Metadata& meta) {
+bool XMLModelReader::ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta) {
 	std::string v;
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {

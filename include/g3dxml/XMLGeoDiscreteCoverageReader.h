@@ -9,7 +9,7 @@ namespace g3dxml {
 	class XMLGeoDiscreteCoverageReader : public XMLIO {
 	public:
 		/// Name of the GeoDiscreteCoverage element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -26,8 +26,8 @@ namespace g3dxml {
 		bool ReadElementValueAsOther(xmlTextReaderPtr reader, const std::string& elemName);
 
 	private:
-		static std::string Element_RangeType;
-		static std::string Element_RangeSet;
+		static const std::string Element_RangeType;
+		static const std::string Element_RangeSet;
 
 	private:
 		geo3dml::ObjectFactory * g3dFactory_;

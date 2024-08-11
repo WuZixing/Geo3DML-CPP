@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLStyleRuleReader : public XMLIO {
 	public:
 		/// Name of the layer element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.

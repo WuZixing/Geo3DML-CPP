@@ -4,7 +4,7 @@
 
 using namespace g3dxml;
 
-std::string XMLFeatureTypeStyleReader::Element = "FeatureTypeStyle";
+const std::string XMLFeatureTypeStyleReader::Element = "FeatureTypeStyle";
 
 XMLFeatureTypeStyleReader::XMLFeatureTypeStyleReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

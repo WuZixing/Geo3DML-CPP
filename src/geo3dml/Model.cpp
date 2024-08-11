@@ -111,11 +111,11 @@ Box3D Model::GetMinimumBoundingRectangle() const {
 	return box;
 }
 
-void Model::SetMetadata(const Metadata& meta) {
+void Model::SetMetadata(const ModelMetadata& meta) {
 	metadata_ = meta;
 }
 
-const Metadata& Model::GetMetadata() const {
+const ModelMetadata& Model::GetMetadata() const {
 	return metadata_;
 }
 

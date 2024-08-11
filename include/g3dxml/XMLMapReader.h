@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLMapReader : public XMLIO {
 	public:
 		/// Name of the map element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -20,8 +20,8 @@ namespace g3dxml {
 		geo3dml::Map* LoadFromFile(const std::string& file);
 
 	private:
-		static std::string Element_Name;
-		static std::string Element_Description;
+		static const std::string Element_Name;
+		static const std::string Element_Description;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

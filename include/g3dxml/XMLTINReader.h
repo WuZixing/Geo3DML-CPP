@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLTINReader : public XMLIO {
 	public:
 		/// Name of the geometry element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -23,10 +23,10 @@ namespace g3dxml {
 		bool ReadTriangle(xmlTextReaderPtr reader, geo3dml::TIN* tin);
 
 	private:
-		static std::string Element_Vertex;
-		static std::string Element_Triangle;
-		static std::string Element_VertexList;
-		static std::string Element_NeighborList;
+		static const std::string Element_Vertex;
+		static const std::string Element_Triangle;
+		static const std::string Element_VertexList;
+		static const std::string Element_NeighborList;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

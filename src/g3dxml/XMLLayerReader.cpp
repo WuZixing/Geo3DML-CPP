@@ -4,9 +4,9 @@
 
 using namespace g3dxml;
 
-std::string XMLLayerReader::Element = "Layer";
-std::string XMLLayerReader::Element_Name = "name";
-std::string XMLLayerReader::Element_FeatureClass= "FeatureClass";
+const std::string XMLLayerReader::Element = "Geo3DLayer";
+const std::string XMLLayerReader::Element_Name = "name";
+const std::string XMLLayerReader::Element_FeatureClass= "FeatureClass";
 
 XMLLayerReader::XMLLayerReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

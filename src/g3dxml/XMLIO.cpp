@@ -1,3 +1,4 @@
+// UTF-8编码
 #include <g3dxml/XMLIO.h>
 #include <geo3dml/Utils.h>
 

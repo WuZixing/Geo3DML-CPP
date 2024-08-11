@@ -4,13 +4,13 @@
 
 using namespace g3dxml;
 
-std::string XMLCornerPointGridReader::Element = "GeoCornerPointGrid";
-std::string XMLCornerPointGridReader::Element_Dimension = "Dimension";
-std::string XMLCornerPointGridReader::Element_Pillar = "Pillar";
-std::string XMLCornerPointGridReader::Element_Pillar_HeadPos = "HeadPos";
-std::string XMLCornerPointGridReader::Element_Pillar_TailPos = "TailPos";
-std::string XMLCornerPointGridReader::Element_Cells = "Cells";
-std::string XMLCornerPointGridReader::Element_Cell = "Cell";
+const std::string XMLCornerPointGridReader::Element = "GeoCornerPointGrid";
+const std::string XMLCornerPointGridReader::Element_Dimension = "Dimension";
+const std::string XMLCornerPointGridReader::Element_Pillar = "Pillar";
+const std::string XMLCornerPointGridReader::Element_Pillar_HeadPos = "HeadPos";
+const std::string XMLCornerPointGridReader::Element_Pillar_TailPos = "TailPos";
+const std::string XMLCornerPointGridReader::Element_Cells = "Cells";
+const std::string XMLCornerPointGridReader::Element_Cell = "Cell";
 
 XMLCornerPointGridReader::XMLCornerPointGridReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

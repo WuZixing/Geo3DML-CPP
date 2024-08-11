@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLAnnotationReader : public XMLIO {
 	public:
 		/// Name of the geometry element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -23,8 +23,8 @@ namespace g3dxml {
 		bool ReadLabel(xmlTextReaderPtr reader, geo3dml::Annotation* annotation);
 
 	private:
-		static std::string Element_Pos;
-		static std::string Element_Label;
+		static const std::string Element_Pos;
+		static const std::string Element_Label;
 
 	private:
 		geo3dml::ObjectFactory* g3dFactory_;

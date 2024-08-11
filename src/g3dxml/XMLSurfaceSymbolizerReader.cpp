@@ -73,7 +73,7 @@ bool XMLSurfaceSymbolizerReader::ReadFront(xmlTextReaderPtr reader, geo3dml::Sur
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				geo3dml::Material material;
-				XMLMaterialReader materialReader(g3dFactory_);
+				XMLMaterialReader materialReader;
 				if (materialReader.ReadMaterial(reader, material)) {
 					toSurfaceSym->SetFrontMaterial(material);
 				} else {
@@ -101,7 +101,7 @@ bool XMLSurfaceSymbolizerReader::ReadBack(xmlTextReaderPtr reader, geo3dml::Surf
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
 				geo3dml::Material material;
-				XMLMaterialReader materialReader(g3dFactory_);
+				XMLMaterialReader materialReader;
 				if (materialReader.ReadMaterial(reader, material)) {
 					toSurfaceSym->SetBackMaterial(material);
 				} else {

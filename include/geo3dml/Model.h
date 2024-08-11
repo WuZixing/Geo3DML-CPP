@@ -2,7 +2,7 @@
 #pragma once
 
 #include "FeatureClass.h"
-#include "Metadata.h"
+#include "ModelMetadata.h"
 
 namespace geo3dml {
 
@@ -43,8 +43,8 @@ namespace geo3dml {
 
 		/// @name 元数据。
 		///@{
-		void SetMetadata(const Metadata& meta);
-		const Metadata& GetMetadata() const;
+		void SetMetadata(const ModelMetadata& meta);
+		const ModelMetadata& GetMetadata() const;
 		///@}
 		
 		///@{
@@ -62,7 +62,7 @@ namespace geo3dml {
 		std::string name_;
 		ModelType type_;
 		std::vector<FeatureClass*> featureClasses_;
-		Metadata metadata_;
+		ModelMetadata metadata_;
 		std::string parentProjectId_;
 	};
 }

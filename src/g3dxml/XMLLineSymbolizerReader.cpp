@@ -28,7 +28,7 @@ geo3dml::LineSymbolizer* XMLLineSymbolizerReader::ReadLineSym(xmlTextReaderPtr r
 					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
-				XMLMaterialReader materialReader(g3dFactory_);
+				XMLMaterialReader materialReader;
 				geo3dml::Material material;
 				if (!materialReader.ReadMaterial(reader, material)) {
 					SetStatus(false, materialReader.Error());

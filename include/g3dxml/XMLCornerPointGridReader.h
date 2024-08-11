@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLCornerPointGridReader : public XMLIO {
 	public:
 		/// Name of the corner point grid element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -26,12 +26,12 @@ namespace g3dxml {
 		void ComputeZByLength(const double headPosOfPillar[3], const double tailPosOfPillar[3], const double& len, double pos[3]);
 
 	private:
-		static std::string Element_Dimension;
-		static std::string Element_Pillar;
-		static std::string Element_Pillar_HeadPos;
-		static std::string Element_Pillar_TailPos;
-		static std::string Element_Cells;
-		static std::string Element_Cell;
+		static const std::string Element_Dimension;
+		static const std::string Element_Pillar;
+		static const std::string Element_Pillar_HeadPos;
+		static const std::string Element_Pillar_TailPos;
+		static const std::string Element_Cells;
+		static const std::string Element_Cell;
 
 	private:
 		geo3dml::ObjectFactory * g3dFactory_;

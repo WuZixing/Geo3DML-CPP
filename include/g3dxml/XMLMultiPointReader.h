@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLMultiPointReader : public XMLIO {
 	public:
 		/// Name of the geometry element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.

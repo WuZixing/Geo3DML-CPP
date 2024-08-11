@@ -96,12 +96,7 @@ void XMLFeatureClassWriter::WriteFeature(geo3dml::Feature* feature, std::ostream
 	// Geometries
 	geo3dml::Geometry* geometry = feature->GetGeometry();
 	if (geometry != nullptr) {
-		const std::string& name = geometry->GetName();
-		if (name.empty()) {
-			output << "<Geometry>" << std::endl;
-		} else {
-			output << "<Geometry Name=\"" << name << "\">" << std::endl;
-		}
+		output << "<Geometry>" << std::endl;
 		// Shape
 		XMLGeometryWriter geoWriter;
 		geoWriter.Write(geometry, output, v);

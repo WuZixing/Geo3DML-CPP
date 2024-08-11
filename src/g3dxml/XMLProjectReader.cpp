@@ -5,14 +5,16 @@
 
 using namespace g3dxml;
 
-std::string XMLProjectReader::Element = "Geo3DProject";
-std::string XMLProjectReader::Element_Name = "Name";
-std::string XMLProjectReader::Element_Description = "Description";
-std::string XMLProjectReader::Element_Model = "Model";
-std::string XMLProjectReader::Element_Include = "include";
-std::string XMLProjectReader::Element_Style = "GeoSceneStyle";
-std::string XMLProjectReader::Element_Light = "Light";
-std::string XMLProjectReader::Element_Map = "Map";
+const std::string XMLProjectReader::Element = "Geo3DProject";
+const std::string XMLProjectReader::Element_Name = "Name";
+const std::string XMLProjectReader::Element_Metadata = "Metadata";
+const std::string XMLProjectReader::Element_Description = "Description";
+const std::string XMLProjectReader::Element_ProjectInfo = "ProjectInfo";
+const std::string XMLProjectReader::Element_Model = "Model";
+const std::string XMLProjectReader::Element_Include = "include";
+const std::string XMLProjectReader::Element_Style = "GeoSceneStyle";
+const std::string XMLProjectReader::Element_Light = "Light";
+const std::string XMLProjectReader::Element_Map = "Map";
 
 XMLProjectReader::XMLProjectReader(geo3dml::ObjectFactory* factory, const std::string& projectDirectory) {
 	g3dFactory_ = factory;
@@ -39,13 +41,10 @@ geo3dml::Project* XMLProjectReader::ReadProject(xmlTextReaderPtr reader) {
 					break;
 				}
 				project->SetName(v);
-			} else if (geo3dml::IsiEqual(localName, Element_Description)) {
-				std::string v;
-				if (!XMLReaderHelper::TextNode(reader, Element_Description, v)) {
-					SetStatus(false, v);
+			} else if (geo3dml::IsiEqual(localName, Element_Metadata)) {
+				if (!ReadMetadata(reader, project)) {
 					break;
 				}
-				project->SetDescription(v);
 			} else if (geo3dml::IsiEqual(localName, Element_Model)) {
 				geo3dml::Model* model = ReadModel(reader);
 				if (model != NULL) {
@@ -77,6 +76,92 @@ geo3dml::Project* XMLProjectReader::ReadProject(xmlTextReaderPtr reader) {
 		project = NULL;
 	}
 	return project;
+}
+
+bool XMLProjectReader::ReadMetadata(xmlTextReaderPtr reader, geo3dml::Project* project) {
+	geo3dml::ProjectMetadata metadata;
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_Metadata)) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, Element_Description)) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, Element_Description, v)) {
+					SetStatus(false, v);
+					break;
+				}
+				metadata.SetDescription(v);
+			} else if (geo3dml::IsiEqual(localName, Element_ProjectInfo)) {
+				if (!ReadProjectInfo(reader, metadata)) {
+					break;
+				}
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	project->SetMetadata(metadata);
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_Metadata);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLProjectReader::ReadProjectInfo(xmlTextReaderPtr reader, geo3dml::ProjectMetadata& meta) {
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_ProjectInfo)) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, "Name")) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, "Name", v)) {
+					SetStatus(false, v);
+					break;
+				}
+				meta.SetProjectName(v);
+			} else if (geo3dml::IsiEqual(localName, "Code")) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, "Code", v)) {
+					SetStatus(false, v);
+					break;
+				}
+				meta.SetProjectCode(v);
+			} else if (geo3dml::IsiEqual(localName, "StartDate")) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, "StartDate", v)) {
+					SetStatus(false, v);
+					break;
+				}
+				meta.SetStartDate(v);
+			} else if (geo3dml::IsiEqual(localName, "CompletedDate")) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, "CompletedDate", v)) {
+					SetStatus(false, v);
+					break;
+				}
+				meta.SetCompleteDate(v);
+			} else if (geo3dml::IsiEqual(localName, "Contractor")) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, "Contractor", v)) {
+					SetStatus(false, v);
+					break;
+				}
+				meta.SetContractor(v);
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_ProjectInfo);
+		SetStatus(false, err);
+	}
+	return IsOK();
 }
 
 geo3dml::Model* XMLProjectReader::ReadModel(xmlTextReaderPtr reader) {

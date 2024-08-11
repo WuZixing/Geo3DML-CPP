@@ -3,7 +3,7 @@
 
 using namespace g3dxml;
 
-std::string XMLLineStringReader::Element = "LineString";
+const std::string XMLLineStringReader::Element = "LineString";
 
 XMLLineStringReader::XMLLineStringReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

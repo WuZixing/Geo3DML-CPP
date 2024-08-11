@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLGeometryReader : public XMLIO {
 	public:
 		/// Name of the geometry element.
-		static std::string Element;
+		static const std::string Element;
 
 	public:
 		/// Constructor.
@@ -23,8 +23,8 @@ namespace g3dxml {
 		bool ReadShapeProperty(xmlTextReaderPtr reader, geo3dml::Geometry* toShape);
 
 	private:
-		static std::string Element_Shape;
-		static std::string Element_ShapeProperty;
+		static const std::string Element_Shape;
+		static const std::string Element_ShapeProperty;
 
 	private:
 		geo3dml::ObjectFactory * g3dFactory_;

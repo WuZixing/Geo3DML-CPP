@@ -4,7 +4,7 @@
 
 using namespace g3dxml;
 
-std::string XMLPointSymbolizerReader::Element = "GeoPointSymbolizer";
+const std::string XMLPointSymbolizerReader::Element = "GeoPointSymbolizer";
 
 XMLPointSymbolizerReader::XMLPointSymbolizerReader(geo3dml::ObjectFactory* factory) : Element_Graphic("Graphic") {
 	g3dFactory_ = factory;
@@ -28,7 +28,7 @@ geo3dml::PointSymbolizer* XMLPointSymbolizerReader::ReadPointSym(xmlTextReaderPt
 					break;
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
-				XMLMaterialReader materialReader(g3dFactory_);
+				XMLMaterialReader materialReader;
 				geo3dml::Material material;
 				if (materialReader.ReadMaterial(reader, material)) {
 					pointSym->SetMaterial(material);

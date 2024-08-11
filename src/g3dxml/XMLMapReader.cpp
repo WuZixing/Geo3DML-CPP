@@ -4,9 +4,9 @@
 
 using namespace g3dxml;
 
-std::string XMLMapReader::Element = "Geo3DMap";
-std::string XMLMapReader::Element_Name = "Name";
-std::string XMLMapReader::Element_Description = "Description";
+const std::string XMLMapReader::Element = "Geo3DMap";
+const std::string XMLMapReader::Element_Name = "Name";
+const std::string XMLMapReader::Element_Description = "Description";
 
 XMLMapReader::XMLMapReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;

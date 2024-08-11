@@ -71,39 +71,9 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 		<< "ID=\"" << model->GetID() << "\">" << std::endl;
 	output << "<Name>" << model->GetName() << "</Name>" << std::endl;
 	output << "<Type>" << geo3dml::Model::ModelTypeToName(model->GetType()) << "</Type>" << std::endl;
-	const geo3dml::Metadata& meta = model->GetMetadata();
-	output << "<Metadata>" << std::endl
-		<< "<gmd:contact>" << std::endl
-		<< "<gmd:CI_ResponsibleParty>" << std::endl
-		<< "<gmd:individualName>" << std::endl
-		<< "<gco:CharacterString>" << meta.GetResponsibleIndividualName() << "</gco:CharacterString>" << std::endl
-		<< "</gmd:individualName>" << std::endl
-		<< "<gmd:organisationName>" << std::endl
-		<< "<gco:CharacterString>" << meta.GetResponsibleOrganisationName() << "</gco:CharacterString>" << std::endl
-		<< "</gmd:organisationName>" << std::endl
-		<< "<gmd:contactInfo>" << std::endl
-		<< "<gmd:CI_Contact>" << std::endl
-		<< "<gmd:phone>" << std::endl
-		<< "<gmd:CI_Telephone>" << std::endl
-		<< "<gmd:voice>" << std::endl
-		<< "<gco:CharacterString>" << meta.GetContactPhone() << "</gco:CharacterString>" << std::endl
-		<< "</gmd:voice>" << std::endl
-		<< "</gmd:CI_Telephone>" << std::endl
-		<< "</gmd:phone>" << std::endl
-		<< "<gmd:address>" << std::endl
-		<< "<gmd:CI_Address>" << std::endl
-		<< "<gmd:deliveryPoint>" << std::endl
-		<< "<gco:CharacterString>" << meta.GetContactAddress() << "</gco:CharacterString>" << std::endl
-		<< "</gmd:deliveryPoint>" << std::endl
-		<< "<gmd:electronicMailAddress>" << std::endl
-		<< "<gco:CharacterString>" << meta.GetContactEmail() << "</gco:CharacterString>" << std::endl
-		<< "</gmd:electronicMailAddress>" << std::endl
-		<< "</gmd:CI_Address>" << std::endl
-		<< "</gmd:address>" << std::endl
-		<< "</gmd:CI_Contact>" << std::endl
-		<< "</gmd:contactInfo>" << std::endl
-		<< "</gmd:CI_ResponsibleParty>" << std::endl
-		<< "</gmd:contact>" << std::endl;
+	const geo3dml::ModelMetadata& meta = model->GetMetadata();
+	output << "<Metadata>" << std::endl;
+	WriteContactOfMetadata(&meta, output);
 	bool isDateTime = false;
 	const std::string& dateStamp = meta.GetDateStamp(isDateTime);
 	output << "<gmd:dateStamp>" << std::endl;
@@ -126,8 +96,11 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 		<< "</VerticalReferenceSystem>" << std::endl
 		<< "</SpatialReferenceSystem>" << std::endl
 		<< "<ToolName>" << meta.GetToolName() << "</ToolName>" << std::endl
-		<< "<ToolVersion>" << meta.GetToolVersion() << "</ToolVersion>" << std::endl
-		<< "</Metadata>" << std::endl;
+		<< "<ToolVersion>" << meta.GetToolVersion() << "</ToolVersion>" << std::endl;
+	if (v != SchemaVersion::Schema_1_0) {
+		output << "<TopicCategory>" << meta.GetTopicCategory() << "</TopicCategory>" << std::endl;
+	}
+	output << "</Metadata>" << std::endl;
 	int featureClassNumber = model->GetFeatureClassCount();
 	if (featureClassNumber > 0) {
 		output << "<FeatureClasses>" << std::endl;
@@ -150,8 +123,27 @@ bool XMLWriter::Write(geo3dml::Project* project, std::ostream& output, SchemaVer
 		<< NS_xi << std::endl
 		<< NS_xsi << std::endl
 		<< xsi_SchemaLocation << ">" << std::endl;
-	output << "<Name>" << project->GetName() << "</Name>" << std::endl
-		<< "<Description>" << project->GetDescription() << "</Description>" << std::endl;
+	output << "<Name>" << project->GetName() << "</Name>" << std::endl;
+	const geo3dml::ProjectMetadata& meta = project->GetMetadata();
+	if (v == SchemaVersion::Schema_1_0) {
+		output << "<Description>" << meta.GetDescription() << "</Description>" << std::endl;
+	} else {
+		if (!meta.IsEmpty()) {
+			output << "<Metadata>" << std::endl
+				<< "<Description>" << meta.GetDescription() << "</Description>" << std::endl;
+			if (!meta.IsProjectInfoEmpty()) {
+				output << "<ProjectInfo>" << std::endl
+					<< "<Name>" << meta.GetProjectName() << "</Name>" << std::endl
+					<< "<Code>" << meta.GetProjectCode() << "</Code>" << std::endl
+					<< "<StartDate>" << meta.GetStartDate() << "</StartDate>" << std::endl
+					<< "<CompletedDate>" << meta.GetCompleteDate() << "</CompletedDate>" << std::endl
+					<< "<Contractor>" << meta.GetContractor() << "</Contractor>" << std::endl
+					<< "</ProjectInfo>" << std::endl;
+			}
+			WriteContactOfMetadata(&meta, output);
+			output << "</Metadata>" << std::endl;
+		}
+	}
 	int modelNumber = project->GetModelCount();
 	if (modelNumber > 0) {
 		output << "<Models>" << std::endl;
@@ -218,6 +210,43 @@ bool XMLWriter::Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v) 
 	}
 	output << "</geo3dml:Geo3DMap>" << std::endl;
 	return IsOK();
+}
+
+void XMLWriter::WriteContactOfMetadata(const geo3dml::AbstractMetadata* metadata, std::ostream& output) {
+	if (metadata->IsContactEmpty()) {
+		return;
+	}
+	output << "<gmd:contact>" << std::endl
+		<< "<gmd:CI_ResponsibleParty>" << std::endl
+		<< "<gmd:individualName>" << std::endl
+		<< "<gco:CharacterString>" << metadata->GetResponsibleIndividualName() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:individualName>" << std::endl
+		<< "<gmd:organisationName>" << std::endl
+		<< "<gco:CharacterString>" << metadata->GetResponsibleOrganisationName() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:organisationName>" << std::endl
+		<< "<gmd:contactInfo>" << std::endl
+		<< "<gmd:CI_Contact>" << std::endl
+		<< "<gmd:phone>" << std::endl
+		<< "<gmd:CI_Telephone>" << std::endl
+		<< "<gmd:voice>" << std::endl
+		<< "<gco:CharacterString>" << metadata->GetContactPhone() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:voice>" << std::endl
+		<< "</gmd:CI_Telephone>" << std::endl
+		<< "</gmd:phone>" << std::endl
+		<< "<gmd:address>" << std::endl
+		<< "<gmd:CI_Address>" << std::endl
+		<< "<gmd:deliveryPoint>" << std::endl
+		<< "<gco:CharacterString>" << metadata->GetContactAddress() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:deliveryPoint>" << std::endl
+		<< "<gmd:electronicMailAddress>" << std::endl
+		<< "<gco:CharacterString>" << metadata->GetContactEmail() << "</gco:CharacterString>" << std::endl
+		<< "</gmd:electronicMailAddress>" << std::endl
+		<< "</gmd:CI_Address>" << std::endl
+		<< "</gmd:address>" << std::endl
+		<< "</gmd:CI_Contact>" << std::endl
+		<< "</gmd:contactInfo>" << std::endl
+		<< "</gmd:CI_ResponsibleParty>" << std::endl
+		<< "</gmd:contact>" << std::endl;
 }
 
 void XMLWriter::WriteXMLDeclaration(std::ostream& output) {

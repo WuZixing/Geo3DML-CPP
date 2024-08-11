@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Color.h"
@@ -5,12 +6,24 @@
 
 namespace geo3dml {
 
+	/// @brief 光源配置。
 	class Light {
 	public:
+		/// @brief 光源的类型。
 		enum Type {
-			Light_Head,
-			Light_Camera,
-			Light_Scene
+			Light_Unknown,	///< 未知类型。
+			/// @name 局标的光源类型定义。
+			///@{
+			Light_Head,		///< 头灯
+			Light_Camera,	///< 相机灯
+			Light_Scene,	///< 场景等
+			///@}
+			/// @name 地理信息协会标准的光源类型定义。
+			///@{
+			Light_DirectionalLight,	///< 定向光源，模拟环境光。
+			Light_PointLight,		///< 点光源，模拟各种点状光源。
+			Light_SpotLight,		///< 聚光灯，模拟手电筒、探照灯等光源类型。
+			///@}
 		};
 		static Type NameToLightType(const std::string& name);
 

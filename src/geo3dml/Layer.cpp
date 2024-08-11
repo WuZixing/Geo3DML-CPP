@@ -127,7 +127,7 @@ void Layer::RebuildActorsFromFeaturesByStyle(int styleIndex, ObjectFactory* g3dF
 		geo3dml::Geometry* geo = feature->GetGeometry();
 		if (geo != nullptr) {
 			geo3dml::Actor* actor = g3dFactory->NewActor();
-			actor->SetName(feature->GetName() + "_" + geo->GetName());
+			actor->SetName(feature->GetName());
 			actor->BindGeometry(feature, geo, sym);
 			AddActor(actor);
 		} else {

@@ -8,7 +8,7 @@ namespace g3dxml {
 	class XMLModelReader : public XMLIO {
 	public:
 		/// Name of the model element.
-		static std::string Element;
+		static const std::string Element;
 		static bool IsModelElementName(const std::string& name);
 
 	public:
@@ -22,12 +22,12 @@ namespace g3dxml {
 
 	private:
 		bool ReadMetadata(xmlTextReaderPtr reader, geo3dml::Model* model);
-		bool ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataContact(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
 		std::string ReadCharacterString(xmlTextReaderPtr reader, const std::string& parentNode);
-		bool ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
-		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
-		bool ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
-		bool ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::Metadata& meta);
+		bool ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
+		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
+		bool ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
+		bool ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
 
 	private:
 		static const std::string OldElement;
@@ -41,6 +41,7 @@ namespace g3dxml {
 		static const std::string Element_Version;
 		static const std::string Element_ToolName;
 		static const std::string Element_ToolVersion;
+		static const std::string Element_TopicCategory;
 		static const std::string Element_SpatialReferenceSystem;
 		static const std::string Element_CoordinateReferenceSystem;
 		static const std::string Element_VerticalReferenceSystem;

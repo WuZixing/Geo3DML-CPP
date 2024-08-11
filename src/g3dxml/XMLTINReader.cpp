@@ -3,11 +3,11 @@
 
 using namespace g3dxml;
 
-std::string XMLTINReader::Element = "GeoTin";
-std::string XMLTINReader::Element_Vertex = "Vertex";
-std::string XMLTINReader::Element_Triangle = "Triangle";
-std::string XMLTINReader::Element_VertexList = "VertexList";
-std::string XMLTINReader::Element_NeighborList = "NeighborList";
+const std::string XMLTINReader::Element = "GeoTin";
+const std::string XMLTINReader::Element_Vertex = "Vertex";
+const std::string XMLTINReader::Element_Triangle = "Triangle";
+const std::string XMLTINReader::Element_VertexList = "VertexList";
+const std::string XMLTINReader::Element_NeighborList = "NeighborList";
 
 XMLTINReader::XMLTINReader(geo3dml::ObjectFactory* factory) {
 	g3dFactory_ = factory;
