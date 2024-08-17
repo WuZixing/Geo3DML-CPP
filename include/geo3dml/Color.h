@@ -5,8 +5,8 @@ namespace geo3dml {
 	class Color {
 	public:
 		Color();
-		Color(double r, double g, double b, double a = 0.0);
-		Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 0);
+		Color(double r, double g, double b, double a = 1.0);
+		Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255);
 		virtual ~Color();
 
 		Color& SetR(double r);

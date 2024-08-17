@@ -212,7 +212,7 @@ void XMLLayerWriter::WriteMaterial(const geo3dml::PBRMaterial& m, std::ostream& 
 		if (baseTexture.IsValid()) {
 			WriteTexture("BaseTexture", baseTexture, output, v);
 		} else {
-			output << "<BaseColor>" << baseColor.R() << " " << baseColor.G() << " " << baseColor.B() << baseColor.A() << "</BaseColor>" << std::endl;
+			output << "<BaseColor>" << baseColor.R() << " " << baseColor.G() << " " << baseColor.B() << " " << baseColor.A() << "</BaseColor>" << std::endl;
 		}
 		const geo3dml::Texture& normalTexture = m.GetNormalTexture();
 		if (!normalTexture.IsValid()) {

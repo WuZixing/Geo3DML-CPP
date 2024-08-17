@@ -38,7 +38,7 @@ bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, const std::string&
 				double r = strtod(diffuseColor.c_str(), &end);
 				double g = strtod(end, &end);
 				double b = strtod(end, nullptr);
-				toMaterial.SetBaseColor(geo3dml::Color(r, g, b));
+				toMaterial.SetBaseColor(geo3dml::Color(r, g, b, 1));
 			} else if (geo3dml::IsiEqual(localName, Element_BaseColor)) {
 				std::string baseColor;
 				if (!XMLReaderHelper::TextNode(reader, Element_BaseColor, baseColor)) {
@@ -61,7 +61,7 @@ bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, const std::string&
 				double r = strtod(emissiveColor.c_str(), &end);
 				double g = strtod(end, &end);
 				double b = strtod(end, nullptr);
-				toMaterial.SetEmissiveColor(geo3dml::Color(r, g, b));
+				toMaterial.SetEmissiveColor(geo3dml::Color(r, g, b, 1));
 			} else if (geo3dml::IsiEqual(localName, Element_BaseTexture)) {
 				geo3dml::Texture tex;
 				if (ReadTexture(reader, Element_BaseTexture, tex)) {
@@ -116,7 +116,7 @@ bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, const std::string&
 				double r = strtod(specularColor.c_str(), &end);
 				double g = strtod(end, &end);
 				double b = strtod(end, nullptr);
-				toMaterial.SetSpecularColor(geo3dml::Color(r, g, b));
+				toMaterial.SetSpecularColor(geo3dml::Color(r, g, b, 1));
 			} else if (geo3dml::IsiEqual(localName, Element_IndexOfRefraction)) {
 				std::string v;
 				if (!XMLReaderHelper::TextNode(reader, Element_IndexOfRefraction, v)) {
@@ -220,7 +220,7 @@ bool XMLMaterialReader::ReadTexture(xmlTextReaderPtr reader, const std::string& 
 					double r = strtod(color.c_str(), &end);
 					double g = strtod(end, &end);
 					double b = strtod(end, nullptr);
-					gbSymbol.SetStrokeColor(geo3dml::Color(r, g, b));
+					gbSymbol.SetStrokeColor(geo3dml::Color(r, g, b, 1));
 				} else {
 					SetStatus(false, color);
 					break;
@@ -232,7 +232,7 @@ bool XMLMaterialReader::ReadTexture(xmlTextReaderPtr reader, const std::string& 
 					double r = strtod(color.c_str(), &end);
 					double g = strtod(end, &end);
 					double b = strtod(end, nullptr);
-					gbSymbol.SetFillColor(geo3dml::Color(r, g, b));
+					gbSymbol.SetFillColor(geo3dml::Color(r, g, b, 1));
 				} else {
 					SetStatus(false, color);
 					break;
