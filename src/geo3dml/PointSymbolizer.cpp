@@ -18,10 +18,10 @@ float PointSymbolizer::GetSize() const {
 	return pointSize_;
 }
 
-void PointSymbolizer::SetMaterial(const Material& m) {
+void PointSymbolizer::SetMaterial(const PBRMaterial& m) {
 	material_ = m;
 }
 
-Material PointSymbolizer::GetMaterial() const {
+const PBRMaterial& PointSymbolizer::GetMaterial() const {
 	return material_;
 }

@@ -19,14 +19,15 @@ namespace g3dxml {
 		bool Write(geo3dml::Layer* layer, std::ostream& output, SchemaVersion v);
 
 	private:
-		void WriteStyle(geo3dml::Style* style, std::ostream& output);
-		void WriteFeatureTypeStyle(geo3dml::FeatureTypeStyle* featureStyle, std::ostream& output);
-		void WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& output);
-		void WriteSymbolizer(geo3dml::Symbolizer* sym, std::ostream& output);
-		void WritePointSymbolizer(geo3dml::PointSymbolizer* pointSym, std::ostream& output);
-		void WriteLineSymbolizer(geo3dml::LineSymbolizer* lineSym, std::ostream& output);
-		void WriteSurfaceSymbolizer(geo3dml::SurfaceSymbolizer* surfaceSym, std::ostream& output);
-		void WriteGeoDiscreteCoverageSymbolizer(geo3dml::GeoDiscreteCoverageSymbolizer* coverageSym, std::ostream& output);
-		void WriteMaterial(const geo3dml::Material& m, std::ostream& output);
+		void WriteStyle(geo3dml::Style* style, std::ostream& output, SchemaVersion v);
+		void WriteFeatureTypeStyle(geo3dml::FeatureTypeStyle* featureStyle, std::ostream& output, SchemaVersion v);
+		void WriteStyleRule(geo3dml::StyleRule* rule, std::ostream& output, SchemaVersion v);
+		void WriteSymbolizer(geo3dml::Symbolizer* sym, std::ostream& output, SchemaVersion v);
+		void WritePointSymbolizer(geo3dml::PointSymbolizer* pointSym, std::ostream& output, SchemaVersion v);
+		void WriteLineSymbolizer(geo3dml::LineSymbolizer* lineSym, std::ostream& output, SchemaVersion v);
+		void WriteSurfaceSymbolizer(geo3dml::SurfaceSymbolizer* surfaceSym, std::ostream& output, SchemaVersion v);
+		void WriteGeoDiscreteCoverageSymbolizer(geo3dml::GeoDiscreteCoverageSymbolizer* coverageSym, std::ostream& output, SchemaVersion v);
+		void WriteMaterial(const geo3dml::PBRMaterial& m, std::ostream& output, SchemaVersion v);
+		void WriteTexture(const std::string& texTag, const geo3dml::Texture& tex, std::ostream& output, SchemaVersion v);
 	};
 }

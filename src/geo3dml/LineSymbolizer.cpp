@@ -18,10 +18,10 @@ float LineSymbolizer::GetWidth() const {
 	return lineWidth_;
 }
 
-void LineSymbolizer::SetMaterial(const Material& m) {
+void LineSymbolizer::SetMaterial(const PBRMaterial& m) {
 	material_ = m;
 }
 
-Material LineSymbolizer::GetMaterial() const {
+const PBRMaterial& LineSymbolizer::GetMaterial() const {
 	return material_;
 }

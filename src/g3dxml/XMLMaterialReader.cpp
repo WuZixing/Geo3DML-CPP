@@ -4,6 +4,7 @@
 using namespace g3dxml;
 
 const std::string XMLMaterialReader::Element = "Material";
+const std::string XMLMaterialReader::Element_PBRMaterial = "PBRMaterial";
 
 XMLMaterialReader::XMLMaterialReader() :
 	Element_DiffuseColor("DiffuseColor"),
@@ -12,18 +13,19 @@ XMLMaterialReader::XMLMaterialReader() :
 	Element_EmissiveColor("EmissiveColor"),
 	Element_BaseTexture("BaseTexture"),
 	Element_NormalTexture("NormalTexture"),
-	Element_OcclusionTexture("OcclusionTexture") {
+	Element_OcclusionTexture("OcclusionTexture"),
+	Element_Metallic("Metallic"), Element_Roughness("Roughness"), Element_SpecularColor("SpecularColor"), Element_IndexOfRefraction("IndexOfRefraction") {
 }
 
 XMLMaterialReader::~XMLMaterialReader() {
 }
 
-bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, geo3dml::Material& toMaterial) {
+bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, const std::string& materialTag, geo3dml::PBRMaterial& toMaterial) {
 	int status = xmlTextReaderRead(reader);
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, materialTag)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, Element_DiffuseColor)) {
@@ -88,12 +90,47 @@ bool XMLMaterialReader::ReadMaterial(xmlTextReaderPtr reader, geo3dml::Material&
 				} else {
 					break;
 				}
+			} else if (geo3dml::IsiEqual(localName, Element_Metallic)) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, Element_Metallic, v)) {
+					SetStatus(false, v);
+					break;
+				}
+				double metallic = strtod(v.c_str(), nullptr);
+				toMaterial.SetMetallic(metallic);
+			} else if (geo3dml::IsiEqual(localName, Element_Roughness)) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, Element_Roughness, v)) {
+					SetStatus(false, v);
+					break;
+				}
+				double roughness = strtod(v.c_str(), nullptr);
+				toMaterial.SetRoughness(roughness);
+			} else if (geo3dml::IsiEqual(localName, Element_SpecularColor)) {
+				std::string specularColor;
+				if (!XMLReaderHelper::TextNode(reader, Element_SpecularColor, specularColor)) {
+					SetStatus(false, specularColor);
+					break;
+				}
+				char* end = nullptr;
+				double r = strtod(specularColor.c_str(), &end);
+				double g = strtod(end, &end);
+				double b = strtod(end, nullptr);
+				toMaterial.SetSpecularColor(geo3dml::Color(r, g, b));
+			} else if (geo3dml::IsiEqual(localName, Element_IndexOfRefraction)) {
+				std::string v;
+				if (!XMLReaderHelper::TextNode(reader, Element_IndexOfRefraction, v)) {
+					SetStatus(false, v);
+					break;
+				}
+				double refraction = strtod(v.c_str(), nullptr);
+				toMaterial.SetIndexOfRefraction(refraction);
 			}
 		}
 		status = xmlTextReaderRead(reader);
 	}
 	if (status != 1) {
-		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element);
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + materialTag);
 		SetStatus(false, err);
 	}
 	return IsOK();
@@ -214,4 +251,3 @@ bool XMLMaterialReader::ReadTexture(xmlTextReaderPtr reader, const std::string& 
 	return IsOK();
 }
 
-const std::string XMLPBRMaterialReader::Element = "PBRMaterial";

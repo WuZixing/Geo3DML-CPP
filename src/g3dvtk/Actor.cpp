@@ -51,51 +51,14 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
-		if (surfaceSymbolizer != nullptr) {
-			const geo3dml::Texture& texture = surfaceSymbolizer->GetFrontMaterial().GetBaseTexture();
-			if (texture.IsValid()) {
-				vtkNew<vtkImageReader2Factory> readerFactory;
-				vtkSmartPointer<vtkImageReader2> texImage;
-				texImage.TakeReference(readerFactory->CreateImageReader2(texture.GetImageURI().c_str()));
-				if (texImage.Get() != nullptr) {
-					vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
-					texPlane->AutomaticPlaneGenerationOn();
-					texPlane->SetInputData(tin->GetPolyData());
-					mapper->SetInputConnection(texPlane->GetOutputPort());
-					texImage->SetFileName(texture.GetImageURI().c_str());
-					vtkSmartPointer<vtkTexture> tex = vtkSmartPointer<vtkTexture>::New();
-					tex->SetInputConnection(texImage->GetOutputPort());
-					tex->InterpolateOn();
-					switch (texture.GetWrapMode()) {
-					case geo3dml::Texture::WrapMode::Repeat: {
-						tex->SetWrap(vtkTexture::Repeat);
-						break;
-					}
-					case geo3dml::Texture::WrapMode::MirrorRepeat: {
-						tex->SetWrap(vtkTexture::MirroredRepeat);
-						break;
-					}
-					case geo3dml::Texture::WrapMode::ClampToBorder: {
-						const geo3dml::Color& borderColor = texture.GetBorderColor();
-						tex->SetBorderColor(borderColor.R(), borderColor.G(), borderColor.B(), borderColor.A());
-						tex->SetWrap(vtkTexture::ClampToBorder);
-						break;
-					}
-					default: {
-						tex->SetWrap(vtkTexture::ClampToEdge);
-						break;
-					}
-					}
-					actor->SetTexture(tex);
-				} else {
-					mapper->SetInputData(tin->GetPolyData());
-				}
-			} else {
-				mapper->SetInputData(tin->GetPolyData());
-			}
-		} else {
-			mapper->SetInputData(tin->GetPolyData());
-		}
+		///////////////////////////////
+		// vtkTextureMapToPlane是为可能存在的纹理做准备。
+		vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
+		texPlane->AutomaticPlaneGenerationOn();
+		texPlane->SetInputData(tin->GetPolyData());
+		mapper->SetInputConnection(texPlane->GetOutputPort());
+		// mapper->SetInputData(tin->GetPolyData());
+		///////////////////////////////
 		mapper->Update();
 		mapper->StaticOn();
 		actor->SetMapper(mapper);
@@ -362,10 +325,43 @@ void Actor::ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtk
 	}
 }
 
-void Actor::ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) const {
-	geo3dml::Color baseColor = m.GetBaseColor();
-	p->SetColor(baseColor.R(), baseColor.G(), baseColor.B());
-	p->SetOpacity(baseColor.A());
+void Actor::ConfigByMaterial(const geo3dml::PBRMaterial& m, vtkProperty* p) const {
+	const geo3dml::Texture& baseTex = m.GetBaseTexture();
+	if (baseTex.IsValid()) {
+		vtkNew<vtkImageReader2Factory> readerFactory;
+		vtkSmartPointer<vtkImageReader2> texImage;
+		texImage.TakeReference(readerFactory->CreateImageReader2(baseTex.GetImageURI().c_str()));
+		if (texImage.Get() != nullptr) {
+			texImage->SetFileName(baseTex.GetImageURI().c_str());
+			vtkSmartPointer<vtkTexture> tex = vtkSmartPointer<vtkTexture>::New();
+			tex->SetInputConnection(texImage->GetOutputPort());
+			tex->InterpolateOn();
+			switch (baseTex.GetWrapMode()) {
+			case geo3dml::Texture::WrapMode::Repeat:
+				tex->SetWrap(vtkTexture::Repeat);
+				break;
+			case geo3dml::Texture::WrapMode::MirrorRepeat:
+				tex->SetWrap(vtkTexture::MirroredRepeat);
+				break;
+			case geo3dml::Texture::WrapMode::ClampToBorder: {
+				const geo3dml::Color& borderColor = baseTex.GetBorderColor();
+				tex->SetBorderColor(borderColor.R(), borderColor.G(), borderColor.B(), borderColor.A());
+				tex->SetWrap(vtkTexture::ClampToBorder);
+				break;
+			}
+			default:
+				tex->SetWrap(vtkTexture::ClampToEdge);
+				break;
+			}
+			p->SetTexture("texture0", tex);
+		}
+	} else {
+		geo3dml::Color baseColor = m.GetBaseColor();
+		p->SetColor(baseColor.R(), baseColor.G(), baseColor.B());
+		p->SetOpacity(baseColor.A());
+		p->SetMetallic(m.GetMetallic());
+		p->SetRoughness(m.GetRoughness());
+	}
 }
 
 void Actor::SetRandomRenderOption(vtkProperty* p) const {
@@ -378,10 +374,12 @@ void Actor::SetRandomRenderOption(vtkProperty* p) const {
 	p->SetAmbient(0.25);
 }
 
-geo3dml::Material Actor::ToMaterial(vtkProperty* p) const {
-	geo3dml::Material m;
+geo3dml::PBRMaterial Actor::ToMaterial(vtkProperty* p) const {
+	geo3dml::PBRMaterial m;
 	double* clr = p->GetColor();
 	m.SetBaseColor(geo3dml::Color(clr[0], clr[1], clr[2], p->GetOpacity()));
+	m.SetMetallic(p->GetMetallic());
+	m.SetRoughness(p->GetRoughness());
 	return m;
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Symbolizer.h"
-#include "Material.h"
+#include "PBRMaterial.h"
 
 namespace geo3dml {
 
@@ -10,14 +10,14 @@ namespace geo3dml {
 		LineSymbolizer();
 		virtual ~LineSymbolizer();
 
-		virtual void SetWidth(float w = 2);
-		virtual float GetWidth() const;
+		void SetWidth(float w = 2);
+		float GetWidth() const;
 
-		virtual void SetMaterial(const Material& m);
-		virtual Material GetMaterial() const;
+		void SetMaterial(const PBRMaterial& m);
+		const PBRMaterial& GetMaterial() const;
 
 	private:
 		float lineWidth_;
-		Material material_;
+		PBRMaterial material_;
 	};
 }

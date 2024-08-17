@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Symbolizer.h"
-#include "Material.h"
+#include "PBRMaterial.h"
 
 namespace geo3dml {
 

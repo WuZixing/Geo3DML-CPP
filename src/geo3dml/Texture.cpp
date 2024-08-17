@@ -7,6 +7,10 @@ bool GBSymbol::IsEmpty() const {
 	return code_.empty();
 }
 
+void GBSymbol::Clear() {
+	code_.clear();
+}
+
 void GBSymbol::SetCode(const std::string& code) {
 	code_ = code;
 }

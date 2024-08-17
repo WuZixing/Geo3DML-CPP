@@ -1,37 +1,29 @@
 #include <geo3dml/SurfaceSymbolizer.h>
 
-#ifndef NULL
-#ifdef __cplusplus
-#define NULL 0
-#else
-#define NULL ((void *)0)
-#endif
-#endif
-
 using namespace geo3dml;
 
 SurfaceSymbolizer::SurfaceSymbolizer() {
 	isBackRenderEnabled_ = false;
 	isVertexRenderEnabled_ = false;
 	isFrameRenderEnabled_ = false;
-	vertexSymbolizer_ = NULL;
-	frameSymbolizer_ = NULL;
+	vertexSymbolizer_ = nullptr;
+	frameSymbolizer_ = nullptr;
 }
 
 SurfaceSymbolizer::~SurfaceSymbolizer() {
-	if (vertexSymbolizer_ != NULL) {
+	if (vertexSymbolizer_ != nullptr) {
 		delete vertexSymbolizer_;
 	}
-	if (frameSymbolizer_ != NULL) {
+	if (frameSymbolizer_ != nullptr) {
 		delete frameSymbolizer_;
 	}
 }
 
-void SurfaceSymbolizer::SetFrontMaterial(const Material& m) {
+void SurfaceSymbolizer::SetFrontMaterial(const PBRMaterial& m) {
 	frontMaterial_ = m;
 }
 
-const Material& SurfaceSymbolizer::GetFrontMaterial() const {
+const PBRMaterial& SurfaceSymbolizer::GetFrontMaterial() const {
 	return frontMaterial_;
 }
 
@@ -43,11 +35,11 @@ bool SurfaceSymbolizer::IsBackRenderEnabled() const {
 	return isBackRenderEnabled_;
 }
 
-void SurfaceSymbolizer::SetBackMaterial(const Material& m) {
+void SurfaceSymbolizer::SetBackMaterial(const PBRMaterial& m) {
 	backMaterial_ = m;
 }
 
-const Material& SurfaceSymbolizer::GetBackMaterial() const {
+const PBRMaterial& SurfaceSymbolizer::GetBackMaterial() const {
 	return backMaterial_;
 }
 

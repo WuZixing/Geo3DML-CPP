@@ -11,15 +11,15 @@ namespace geo3dml {
 		virtual ~SurfaceSymbolizer();
 
 		//@{
-		void SetFrontMaterial(const Material& m);
-		const Material& GetFrontMaterial() const;
+		void SetFrontMaterial(const PBRMaterial& m);
+		const PBRMaterial& GetFrontMaterial() const;
 		//@}
 		
 		//@{
 		void EnableBackRender(bool enabled = false);
 		bool IsBackRenderEnabled() const;
-		void SetBackMaterial(const Material& m);
-		const Material& GetBackMaterial() const;
+		void SetBackMaterial(const PBRMaterial& m);
+		const PBRMaterial& GetBackMaterial() const;
 		//@}
 
 		//@{
@@ -38,7 +38,7 @@ namespace geo3dml {
 
 	private:
 		bool isBackRenderEnabled_, isVertexRenderEnabled_, isFrameRenderEnabled_;
-		Material frontMaterial_, backMaterial_;
+		PBRMaterial frontMaterial_, backMaterial_;
 		PointSymbolizer* vertexSymbolizer_;
 		LineSymbolizer* frameSymbolizer_;
 	};

@@ -27,10 +27,10 @@ geo3dml::PointSymbolizer* XMLPointSymbolizerReader::ReadPointSym(xmlTextReaderPt
 				if (!ReadGraphic(reader, pointSym)) {
 					break;
 				}
-			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element)) {
+			} else if (geo3dml::IsiEqual(localName, XMLMaterialReader::Element) || geo3dml::IsiEqual(localName, XMLMaterialReader::Element_PBRMaterial)) {
 				XMLMaterialReader materialReader;
-				geo3dml::Material material;
-				if (materialReader.ReadMaterial(reader, material)) {
+				geo3dml::PBRMaterial material;
+				if (materialReader.ReadMaterial(reader, localName, material)) {
 					pointSym->SetMaterial(material);
 				} else {
 					SetStatus(false, materialReader.Error());

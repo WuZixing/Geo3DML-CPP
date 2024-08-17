@@ -10,7 +10,7 @@ namespace g3dxml {
 		Schema_Unknown,
 		Schema_1_0,		///< v1.0，即中国地质调查局标准。
 		Schema_2_0,		///< v2.0，即中国地理信息协会标准。
-		Schame_2_x,		///< v2.x
+		Schema_2_x,		///< v2.x
 	};
 	std::string SchemaVersionToString(SchemaVersion v);
 	SchemaVersion StringToSchemaVersion(const std::string& s);

@@ -258,8 +258,10 @@ std::string XMLWriter::NSGeo3DML(SchemaVersion v) {
 	switch (v) {
 	case Schema_1_0:
 		return nsGeo3DMLBase + "\"";
-	case Schema_1_x:
-		return nsGeo3DMLBase + "/1.x\"";
+	case Schema_2_0:
+		return nsGeo3DMLBase + "/2.0\"";
+	case Schema_2_x:
+		return nsGeo3DMLBase + "/2.x\"";
 	default:
 		return nsGeo3DMLBase + "\"";
 	}
@@ -270,8 +272,10 @@ std::string XMLWriter::NSDefault(SchemaVersion v) {
 	switch (v) {
 	case Schema_1_0:
 		return nsDefaultBase + "\"";
-	case Schema_1_x:
-		return nsDefaultBase + "/1.x\"";
+	case Schema_2_0:
+		return nsDefaultBase + "/2.0\"";
+	case Schema_2_x:
+		return nsDefaultBase + "/2.x\"";
 	default:
 		return nsDefaultBase + "\"";
 	}

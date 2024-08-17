@@ -31,7 +31,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiPoint.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Map.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Layer.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/Material.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/PBRMaterial.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Symbolizer.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/PointSymbolizer.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/LineSymbolizer.h

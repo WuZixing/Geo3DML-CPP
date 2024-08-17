@@ -34,10 +34,10 @@ namespace g3dvtk {
 		void ConfigByPointSymbolizer(const geo3dml::PointSymbolizer* sym, vtkProperty* p) const;
 		void ConfigByLineSymbolizer(const geo3dml::LineSymbolizer* sym, vtkProperty* p) const;
 		void ConfigBySurfaceSymbolizer(const geo3dml::SurfaceSymbolizer* sym, vtkProperty* p) const;
-		void ConfigByMaterial(const geo3dml::Material& m, vtkProperty* p) const;
+		void ConfigByMaterial(const geo3dml::PBRMaterial& m, vtkProperty* p) const;
 		void SetRandomRenderOption(vtkProperty* p) const;
 
-		geo3dml::Material ToMaterial(vtkProperty* p) const;
+		geo3dml::PBRMaterial ToMaterial(vtkProperty* p) const;
 		void ToPointSymbolizer(vtkProperty* p, geo3dml::PointSymbolizer* sym) const;
 		void ToLineSymbolizer(vtkProperty* p, geo3dml::LineSymbolizer* sym) const;
 		void ToSurfaceSymbolizer(vtkProperty* p, geo3dml::SurfaceSymbolizer* sym) const;
