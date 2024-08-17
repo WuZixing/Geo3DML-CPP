@@ -50,7 +50,6 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 	if (tin != nullptr) {
 		vtkSmartPointer<vtkOpenGLActor> actor = vtkSmartPointer<vtkOpenGLActor>::New();
 		vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
-		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
 		///////////////////////////////
 		// vtkTextureMapToPlane是为可能存在的纹理做准备。
 		vtkSmartPointer<vtkTextureMapToPlane> texPlane = vtkSmartPointer<vtkTextureMapToPlane>::New();
@@ -62,6 +61,7 @@ void Actor::BindGeometry(geo3dml::Feature* feature, geo3dml::Geometry* geo, geo3
 		mapper->Update();
 		mapper->StaticOn();
 		actor->SetMapper(mapper);
+		geo3dml::SurfaceSymbolizer* surfaceSymbolizer = dynamic_cast<geo3dml::SurfaceSymbolizer*>(sym);
 		if (surfaceSymbolizer != nullptr) {
 			ConfigBySurfaceSymbolizer(surfaceSymbolizer, actor->GetProperty());
 		} else {
