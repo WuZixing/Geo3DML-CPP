@@ -21,15 +21,16 @@ namespace g3dxml {
 		bool Write(geo3dml::Map* map, std::ostream& output, SchemaVersion v);
 		void WriteContactOfMetadata(const geo3dml::AbstractMetadata* metadata, std::ostream& output);
 		void WriteXMLDeclaration(std::ostream& output);
-		std::string NSGeo3DML(SchemaVersion v);
-		std::string NSDefault(SchemaVersion v);
+		std::string RawNameSpaceBase(SchemaVersion v) const;
+		std::string NSGeo3DML(SchemaVersion v) const;
+		std::string NSDefault(SchemaVersion v) const;
+		std::string SchemaLocation(SchemaVersion v) const;
 
 		void OpenXMLFileForOutput(const std::string& xmlFilePath, std::ofstream& xmlFile);
 
 	private:
 		const std::string NS_xi;
 		const std::string NS_xsi;
-		const std::string xsi_SchemaLocation;
 		const std::string NS_gml;
 		const std::string NS_swe;
 		const std::string NS_gco;
