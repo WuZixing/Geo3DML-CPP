@@ -257,9 +257,9 @@ std::string XMLWriter::RawNameSpaceBase(SchemaVersion v) const {
 	case Schema_1_0:
 		return "http://www.cgs.gov.cn/geo3dml";
 	case Schema_2_x:
-		return "https://www.iheg.cgs.gov.cn/Standard/geo3dml/2.x";
+		return "http://www.iheg.cgs.gov.cn/Standard/geo3dml/2.x";
 	default:
-		return "https://www.iheg.cgs.gov.cn/Standard/geo3dml";
+		return "http://www.iheg.cgs.gov.cn/Standard/geo3dml";
 	}
 }
 
@@ -277,7 +277,7 @@ std::string XMLWriter::SchemaLocation(SchemaVersion v) const {
 	case Schema_1_0:
 		return prefix + "\"";
 	default:
-		return prefix + " https://www.iheg.cgs.gov.cn/Standard/Geo3DML/Schemas/Geo3DML.xsd\"";
+		return prefix + " Geo3DML.xsd\"";
 	}
 }
 
