@@ -6,6 +6,7 @@ using namespace g3dvtk;
 LineString::LineString() {
 	polyData_ = vtkSmartPointer<vtkPolyData>::New();
 	vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+	pts->SetDataTypeToDouble();
 	vtkSmartPointer<vtkCellArray> lines = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetLines(lines);
