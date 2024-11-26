@@ -8,6 +8,7 @@ using namespace g3dvtk;
 MultiLineString::MultiLineString() {
 	polyData_ = vtkSmartPointer<vtkPolyData>::New();
 	vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
 	vtkSmartPointer<vtkCellArray> lines = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetLines(lines);

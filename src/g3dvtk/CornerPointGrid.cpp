@@ -24,12 +24,14 @@ bool CornerPointGrid::Init(int dimI, int dimJ, int dimK) {
 	int numberOfPoints = (dimI + 1) * (dimJ + 1) * (dimK + 1);
 	pillars_ = vtkSmartPointer<vtkPolyData>::New();
 	vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+	pts->SetDataTypeToDouble();
 	pts->Allocate(numberOfPillars * 2);
 	vtkSmartPointer<vtkCellArray> lines = vtkSmartPointer<vtkCellArray>::New();
 	lines->Allocate(numberOfPillars);
 	pillars_->SetPoints(pts);
 	pillars_->SetLines(lines);
 	pts = vtkSmartPointer<vtkPoints>::New();
+	pts->SetDataTypeToDouble();
 	pts->Allocate(numberOfPoints);
 	cells_ = vtkSmartPointer<vtkStructuredGrid>::New();
 	cells_->SetDimensions(dimI + 1, dimJ + 1, dimK + 1);	// vtkStructuredGrid needs to know dimensions in vertices.

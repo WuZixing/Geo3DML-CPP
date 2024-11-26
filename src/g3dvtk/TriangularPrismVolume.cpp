@@ -8,6 +8,7 @@ using namespace g3dvtk;
 TriangularPrismVolume::TriangularPrismVolume() {
     gridData_ = vtkSmartPointer<vtkUnstructuredGrid>::New();
     vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
     gridData_->SetPoints(pts);
 }
 

@@ -7,6 +7,7 @@ using namespace g3dvtk;
 TetrahedronVolume::TetrahedronVolume() : geo3dml::TetrahedronVolume() {
     grid_ = vtkSmartPointer<vtkUnstructuredGrid>::New();
     vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
     grid_->SetPoints(pts);
 }
 

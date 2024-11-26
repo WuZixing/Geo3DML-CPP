@@ -7,6 +7,7 @@ using namespace g3dvtk;
 TIN::TIN() {
 	polyData_ = vtkSmartPointer<vtkPolyData>::New();
 	vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
 	vtkSmartPointer<vtkCellArray> polys = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetPolys(polys);

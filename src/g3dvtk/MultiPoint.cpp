@@ -6,6 +6,7 @@ using namespace g3dvtk;
 MultiPoint::MultiPoint() {
 	polyData_ = vtkSmartPointer<vtkPolyData>::New();
 	vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
 	vtkSmartPointer<vtkCellArray> verts = vtkSmartPointer<vtkCellArray>::New();
 	polyData_->SetPoints(pts);
 	polyData_->SetVerts(verts);

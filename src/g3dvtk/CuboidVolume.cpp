@@ -7,6 +7,7 @@ using namespace g3dvtk;
 CuboidVolume::CuboidVolume() : geo3dml::CuboidVolume() {
     grid_ = vtkSmartPointer<vtkUnstructuredGrid>::New();
     vtkSmartPointer<vtkPoints> pts = vtkSmartPointer<vtkPoints>::New();
+    pts->SetDataTypeToDouble();
     grid_->SetPoints(pts);
 }
 
