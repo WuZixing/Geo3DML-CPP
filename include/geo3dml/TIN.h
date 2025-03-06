@@ -19,7 +19,6 @@ namespace geo3dml {
 		//@{
 		/// @brief 指定3个顶点，添加一个三角形。
 		/// @param v1,v2,v3 构成三角形的3个顶点的索引号。v1、v2和v3按右手系规则构成的三角形的法向为面的外侧。
-		/// @return 返回新添加的三角形的索引号。
 		virtual void AppendTriangle(int v1, int v2, int v3) = 0;
 		virtual int GetTriangleCount() const = 0;
 		virtual void GetTriangleAt(int i, int& v1, int& v2, int& v3) const = 0;
