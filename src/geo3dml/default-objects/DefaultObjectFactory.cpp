@@ -6,6 +6,7 @@
 #include "LineString.h"
 #include "MultiLineString.h"
 #include "TIN.h"
+#include "CornerPointGrid.h"
 
 using namespace geo3dml;
 
@@ -42,11 +43,11 @@ TIN* DefaultObjectFactory::NewTIN() {
 }
 
 CornerPointGrid* DefaultObjectFactory::NewCornerPointGrid() {
-	return nullptr;
+	return new geometry::CornerPointGrid();
 }
 
 CornerPointGrid* DefaultObjectFactory::NewCornerPointGrid(int dimI, int dimJ, int dimK) {
-	return nullptr;
+	return new geometry::CornerPointGrid(dimI, dimJ, dimK);
 }
 
 Annotation* DefaultObjectFactory::NewAnnotation() {
@@ -61,13 +62,13 @@ RectifiedGrid* DefaultObjectFactory::NewRectifiedGrid(
 	const geo3dml::Point3D& origin,
 	const geo3dml::Vector3D& vecI, const geo3dml::Vector3D& vecJ, const geo3dml::Vector3D& vecK,
 	int highI, int highJ, int highK, int lowI, int lowJ, int lowK) {
-	return nullptr;
+	return new geo3dml::RectifiedGrid(origin, vecI, vecJ, vecK, highI, highJ, highK, lowI, lowJ, lowK);
 }
 RectifiedGrid* DefaultObjectFactory::NewRectifiedGrid(
 	const geo3dml::Point3D& origin,
 	double stepI, double stepJ, double stepK,
 	int highI, int highJ, int highK, int lowI, int lowJ, int lowK) {
-	return nullptr;
+	return new geo3dml::RectifiedGrid(origin, stepI, stepJ, stepK, highI, highJ, highK, lowI, lowJ, lowK);
 }
 
 TetrahedronVolume* DefaultObjectFactory::NewTetrahedronVolume() {
