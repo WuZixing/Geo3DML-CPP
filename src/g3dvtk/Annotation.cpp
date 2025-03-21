@@ -19,7 +19,7 @@ void Annotation::SetLabelOfPointAt(int i, const std::string& s) {
 	labels_->InsertValue(i, s.c_str());
 }
 
-std::string Annotation::GetLabelOfPointAt(int i) const {
+const std::string& Annotation::GetLabelOfPointAt(int i) const {
 	return labels_->GetValue(i);
 }
 

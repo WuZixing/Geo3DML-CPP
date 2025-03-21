@@ -13,7 +13,7 @@ namespace geo3dml {
 
 		public:
 			/// @name 实现父类定义的接口。
-			///@{ 
+			///@{
 			virtual void AddPoint(double x, double y, double z) override;
 			virtual int GetPointCount() const override;
 			virtual void GetPointAt(int i, double& x, double& y, double& z) const override;
