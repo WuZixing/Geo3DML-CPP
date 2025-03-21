@@ -8,6 +8,7 @@
 #include "MultiLineString.h"
 #include "Point.h"
 #include "TIN.h"
+#include "TetrahedronVolume.h"
 #include "TriangularPrismVolume.h"
 
 using namespace geo3dml;
@@ -74,7 +75,7 @@ RectifiedGrid* DefaultObjectFactory::NewRectifiedGrid(
 }
 
 TetrahedronVolume* DefaultObjectFactory::NewTetrahedronVolume() {
-	return nullptr;
+	return new geometry::TetrahedronVolume();
 }
 
 CuboidVolume* DefaultObjectFactory::NewCuboidVolume() {
