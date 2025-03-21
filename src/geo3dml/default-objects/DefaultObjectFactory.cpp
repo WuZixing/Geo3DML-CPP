@@ -1,12 +1,14 @@
 // UTF-8编码
 #include <geo3dml/DefaultObjectFactory.h>
 #include "ShapeProperty.h"
-#include "Point.h"
-#include "MultiPoint.h"
-#include "LineString.h"
-#include "MultiLineString.h"
-#include "TIN.h"
+#include "Annotation.h"
 #include "CornerPointGrid.h"
+#include "LineString.h"
+#include "MultiPoint.h"
+#include "MultiLineString.h"
+#include "Point.h"
+#include "TIN.h"
+#include "TriangularPrismVolume.h"
 
 using namespace geo3dml;
 
@@ -51,11 +53,11 @@ CornerPointGrid* DefaultObjectFactory::NewCornerPointGrid(int dimI, int dimJ, in
 }
 
 Annotation* DefaultObjectFactory::NewAnnotation() {
-	return nullptr;
+	return new geometry::Annotation();
 }
 
 TriangularPrismVolume* DefaultObjectFactory::NewTriangularPrismVolume() {
-	return nullptr;
+	return new geometry::TriangularPrismVolume();
 }
 
 RectifiedGrid* DefaultObjectFactory::NewRectifiedGrid(
