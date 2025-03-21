@@ -3,6 +3,7 @@
 #include "ShapeProperty.h"
 #include "Annotation.h"
 #include "CornerPointGrid.h"
+#include "CuboidVolume.h"
 #include "LineString.h"
 #include "MultiPoint.h"
 #include "MultiLineString.h"
@@ -79,7 +80,7 @@ TetrahedronVolume* DefaultObjectFactory::NewTetrahedronVolume() {
 }
 
 CuboidVolume* DefaultObjectFactory::NewCuboidVolume() {
-	return nullptr;
+	return new geometry::CuboidVolume();
 }
 
 TruncatedRegularGrid* DefaultObjectFactory::NewTruncatedRegularGrid() {
