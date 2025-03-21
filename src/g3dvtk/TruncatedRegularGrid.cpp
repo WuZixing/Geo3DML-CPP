@@ -47,10 +47,8 @@ int TruncatedRegularGrid::GetFaceCount() const {
 }
 
 bool TruncatedRegularGrid::GetFaceAt(int i, std::list<int>& vertices) const {
-    if (i < 0 || i >= faces_.size()) {
-        return false;
-    }
-    vertices = faces_[i].vertices;
+    const Face& face = faces_.at(i);
+    vertices = face.vertices;
     return true;
 }
 
@@ -78,9 +76,6 @@ int TruncatedRegularGrid::GetCellCount() const {
 }
 
 bool TruncatedRegularGrid::GetCellAt(int n, std::list<int>& faces, int& i, int& j, int& k) const {
-    if (n < 0 || n >= cells_.size()) {
-        return false;
-    }
     const Cell& cell = cells_.at(n);
     faces = cell.faces;
     i = cell.i;

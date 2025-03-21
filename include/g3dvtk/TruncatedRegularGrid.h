@@ -48,7 +48,7 @@ namespace g3dvtk {
             std::list<int> faces;
             int i, j, k;
 
-            Cell() { i = j = k = 0; };
+            Cell() { i = j = k = -1; };
         };
         std::vector<Face> faces_;
         std::vector<Cell> cells_;

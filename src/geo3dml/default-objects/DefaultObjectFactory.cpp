@@ -11,6 +11,7 @@
 #include "TIN.h"
 #include "TetrahedronVolume.h"
 #include "TriangularPrismVolume.h"
+#include "TruncatedRegularGrid.h"
 
 using namespace geo3dml;
 
@@ -84,7 +85,7 @@ CuboidVolume* DefaultObjectFactory::NewCuboidVolume() {
 }
 
 TruncatedRegularGrid* DefaultObjectFactory::NewTruncatedRegularGrid() {
-	return nullptr;
+	return new geometry::TruncatedRegularGrid();
 }
 
 ShapeProperty* DefaultObjectFactory::NewShapeProperty() {
