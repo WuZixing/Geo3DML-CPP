@@ -49,6 +49,33 @@ namespace geo3dml {
 			return *this;
 		}
 
+		Box3D& ExtendWith(const Point3D& pt) {
+			if (IsEmpty()) {
+				min = pt;
+				max = pt;
+				return *this;
+			}
+			if (min.x > pt.x) {
+				min.x = pt.x;
+			}
+			if (min.y > pt.y) {
+				min.y = pt.y;
+			}
+			if (min.z > pt.z) {
+				min.z = pt.z;
+			}
+			if (max.x < pt.x) {
+				max.x = pt.x;
+			}
+			if (max.y < pt.y) {
+				max.y = pt.y;
+			}
+			if (max.z < pt.z) {
+				max.z = pt.z;
+			}
+			return *this;
+		}
+
 		/// Extent in X, Y, and Z axies.
 		Point3D Extent() const {
 			return Point3D(max.x - min.x, max.y - min.y, max.z - min.z);

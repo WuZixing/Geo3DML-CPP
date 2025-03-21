@@ -18,18 +18,18 @@ namespace g3dvtk {
 
 		/// @name Attribute setting / getting methods for target elements by field name.
 		//@{
-		virtual void FillDoubleValue(const std::string field, int numberOfValues, double v);
-		virtual double DoubleValue(const std::string& field, int targetIndex) const;
-		virtual ShapeProperty& DoubleValue(const std::string& field, int targetIndex, double v);
-		virtual void FillTextValue(const std::string& field, int numberOfValues, const std::string& v);
-		virtual std::string TextValue(const std::string& field, int targetIndex) const;
-		virtual ShapeProperty& TextValue(const std::string& field, int targetIndex, const std::string& v);
-		virtual void FillIntValue(const std::string& field, int numberOfValues, int v);
-		virtual int IntValue(const std::string& field, int targetIndex) const;
-		virtual ShapeProperty& IntValue(const std::string& field, int targetIndex, int v);
-		virtual void FillBooleanValue(const std::string& field, int numberOfValues, bool v);
-		virtual bool BooleanValue(const std::string& field, int targetIndex) const;
-		virtual ShapeProperty& BooleanValue(const std::string& field, int targetIndex, bool v);
+		virtual void FillDoubleValue(const std::string& fieldName, int numberOfValues, double v);
+		virtual double DoubleValue(const std::string& fieldName, int targetIndex) const;
+		virtual ShapeProperty& DoubleValue(const std::string& fieldName, int targetIndex, double v);
+		virtual void FillTextValue(const std::string& fieldName, int numberOfValues, const std::string& v);
+		virtual std::string TextValue(const std::string& fieldName, int targetIndex) const;
+		virtual ShapeProperty& TextValue(const std::string& fieldName, int targetIndex, const std::string& v);
+		virtual void FillIntValue(const std::string& fieldName, int numberOfValues, int v);
+		virtual int IntValue(const std::string& fieldName, int targetIndex) const;
+		virtual ShapeProperty& IntValue(const std::string& fieldName, int targetIndex, int v);
+		virtual void FillBooleanValue(const std::string& fieldName, int numberOfValues, bool v);
+		virtual bool BooleanValue(const std::string& fieldName, int targetIndex) const;
+		virtual ShapeProperty& BooleanValue(const std::string& fieldName, int targetIndex, bool v);
 		//@}
 
 		/// @name Attribute setting / getting methods for target elements by field index.

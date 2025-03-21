@@ -9,6 +9,22 @@ ObjectFactory::ObjectFactory() {
 ObjectFactory::~ObjectFactory() {
 }
 
+Project* ObjectFactory::NewProject() {
+	return new Project();
+}
+
+Model* ObjectFactory::NewModel() {
+	return new Model();
+}
+
+FeatureClass* ObjectFactory::NewFeatureClass() {
+	return new FeatureClass();
+}
+
+Feature* ObjectFactory::NewFeature() {
+	return new Feature();
+}
+
 Map* ObjectFactory::NewMap() {
 	return new Map();
 }
@@ -17,6 +33,9 @@ Layer* ObjectFactory::NewLayer() {
 	return new Layer();
 }
 
+Actor* ObjectFactory::NewActor() {
+	return nullptr;
+}
 
 Geometry* ObjectFactory::NewGeometry(const std::string& typeName) {
 	if (IsiEqual(typeName, "TIN")) {

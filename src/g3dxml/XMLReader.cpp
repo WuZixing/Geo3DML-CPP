@@ -2,31 +2,41 @@
 #include <g3dxml/XMLProjectReader.h>
 #include <g3dxml/XMLModelReader.h>
 #include <geo3dml/Utils.h>
+#include <geo3dml/DefaultObjectFactory.h>
 
 using namespace g3dxml;
 
 XMLReader::XMLReader(geo3dml::ObjectFactory* factory) {
-	g3dFactory_ = factory;
+	if (factory != nullptr) {
+		g3dFactory_ = factory;
+		isPrivateFactory_ = false;
+	} else {
+		g3dFactory_ = new geo3dml::DefaultObjectFactory();
+		isPrivateFactory_ = true;
+	}
 }
 
 XMLReader::~XMLReader() {
-	g3dFactory_ = NULL;
+	if (isPrivateFactory_ && g3dFactory_ != nullptr) {
+		delete g3dFactory_;
+	}
+	g3dFactory_ = nullptr;
 }
 
 geo3dml::Object* XMLReader::LoadXMLFile(const std::string& file) {
-	if (g3dFactory_ == NULL) {
+	if (g3dFactory_ == nullptr) {
 		SetStatus(false, "G3DObjectFactory is NULL");
-		return NULL;
+		return nullptr;
 	}
 	std::string fileEncoding = XMLReaderHelper::DectectFileEncoding(file);
 	if (!XMLReaderHelper::IsUTF8(fileEncoding)) {
 		SetStatus(false, "unsupported encoding " + fileEncoding + " of file " + file);
-		return NULL;
+		return nullptr;
 	}
 	LIBXML_TEST_VERSION
-	geo3dml::Object* g3dObject = NULL;
+	geo3dml::Object* g3dObject = nullptr;
 	xmlTextReaderPtr reader = xmlReaderForFile(file.c_str(), fileEncoding.c_str(), 0);
-	if (reader != NULL) {
+	if (reader != nullptr) {
 		int status = xmlTextReaderRead(reader);
 		while (status == 1) {
 			const char* localName = (const char*)xmlTextReaderConstLocalName(reader);

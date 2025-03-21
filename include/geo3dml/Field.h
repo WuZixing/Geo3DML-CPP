@@ -25,32 +25,47 @@ namespace geo3dml {
 		Field(const Field& f);
 		virtual ~Field();
 
-		/// @name Name is the formal name of the field.
-		//@{
+		/// @name 字段的标准名字。可用作数据库表的字段定义。
+		///@{
 		Field& Name(const std::string& s);
 		const std::string& Name() const;
-		//@}
+		///@}
 
-		/// @name Label is a human readable name of the field.
-		//@{
+		/// @name 字段的别名，或者显示名称。
+		///@{
 		Field& Label(const std::string& s);
 		const std::string& Label() const;
-		//@}
+		///@}
 
 		Field& DataType(ValueType t);
 		ValueType DataType() const;
 
+		/// @name 字段值的单位。
+		///@{
 		Field& Uom(const std::string& s);
 		const std::string& Uom() const;
+		///@}
 
+		/// @name 字段的规范语义定义。
+		///@{
 		Field& Definition(const std::string& s);
 		const std::string& Definition() const;
+		///@}
 
+		/// @name 字段的说明信息。
+		///@{
 		Field& Description(const std::string& s);
 		const std::string& Description() const;
+		///@}
 
+		/// @name 字段的无效值。统一使用字符串形式记录。
+		///@{
 		Field& NoDataValue(const std::string& v);
 		const std::string& NoDataValue() const;
+		int NoDataAsInt() const;
+		double NoDataAsDouble() const;
+		bool NoDataAsBool() const;
+		///@}
 
 	private:
 		std::string name_;

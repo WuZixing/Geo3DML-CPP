@@ -1,18 +1,18 @@
-// UTF-8编码
+// UTF8-编码
 #pragma once
 
-#include <geo3dml/ObjectFactory.h>
+#include "ObjectFactory.h"
 
-namespace g3dvtk {
-	/// @brief 基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。
-	class ObjectFactory : public geo3dml::ObjectFactory {
-	public:
-		ObjectFactory();
-		virtual ~ObjectFactory();
+namespace geo3dml {
+    /// @brief 缺省的ObjectFactory实现类。提供几何对象的缺省实现。
+    class DefaultObjectFactory : public ObjectFactory {
+    public:
+        DefaultObjectFactory();
+        virtual ~DefaultObjectFactory();
 
-		/// @name Overrided methods inherited from geo3dml::ObjectFactory.
-		//@{
-		virtual ObjectFactory* Clone() override;
+        /// @name 实现父类定义的接口。
+        ///@{
+        virtual ObjectFactory* Clone() override;
 
 		virtual geo3dml::Point* NewPoint() override;
 		virtual geo3dml::MultiPoint* NewMultiPoint() override;
@@ -43,6 +43,6 @@ namespace g3dvtk {
 		virtual geo3dml::ShapeProperty* NewShapeProperty() override;
 
 		virtual geo3dml::Actor* NewActor() override;
-		//@}
-	};
+        ///@}
+    };
 }
