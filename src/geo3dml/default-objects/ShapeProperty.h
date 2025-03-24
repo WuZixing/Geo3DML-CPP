@@ -42,14 +42,14 @@ namespace geo3dml {
             ///@}
 
 		private:
-			/// @brief 整数类型的属性字段的值。
-			std::map<std::string, std::vector<int>> intFields_;
+			/// @brief 整数类型的属性字段的值。键是字段定义在数组中的索引号。
+			std::map<int, std::vector<int>> intFields_;
 			/// @brief 双精度浮点数类型的属性字段的值。
-			std::map<std::string, std::vector<double>> doubleFields_;
+			std::map<int, std::vector<double>> doubleFields_;
 			/// @brief 布尔值类型的属性字段的值。
-			std::map<std::string, std::vector<bool>> boolFields_;
+			std::map<int, std::vector<bool>> boolFields_;
 			/// @brief 字符串类型的属性字段的值。
-			std::map<std::string, std::vector<std::string>> textFields_;
+			std::map<int, std::vector<std::string>> textFields_;
         };
     }
 }

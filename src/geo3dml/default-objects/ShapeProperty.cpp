@@ -16,29 +16,23 @@ void ShapeProperty::FillDoubleValue(const std::string& fieldName, int numberOfVa
     if (field.DataType() != Field::ValueType::Double) {
         return;
     }
-    auto itor = doubleFields_.find(fieldName);
+    int fieldIndex = GetFieldIndex(field.Name());
+    auto itor = doubleFields_.find(fieldIndex);
     if (itor == doubleFields_.end()) {
-        doubleFields_[fieldName] = std::vector<double>(numberOfValues, v);
+        doubleFields_[fieldIndex] = std::vector<double>(numberOfValues, v);
     } else {
         itor->second.assign(numberOfValues, v);
     }
 }
 
 double ShapeProperty::DoubleValue(const std::string& fieldName, int targetIndex) const {
-    auto citor = doubleFields_.find(fieldName);
-    if (citor != doubleFields_.cend()) {
-        return citor->second[targetIndex];
-    } else {
-        return 0;
-    }
+    int fieldIndex = GetFieldIndex(fieldName);
+    return DoubleValue(fieldIndex, targetIndex);
 }
 
 geo3dml::ShapeProperty& ShapeProperty::DoubleValue(const std::string& fieldName, int targetIndex, double v) {
-    auto itor = doubleFields_.find(fieldName);
-    if (itor != doubleFields_.end()) {
-        itor->second[targetIndex] = v;
-    }
-    return *this;
+    int fieldIndex = GetFieldIndex(fieldName);
+    return DoubleValue(fieldIndex, targetIndex, v);
 }
 
 void ShapeProperty::FillTextValue(const std::string& fieldName, int numberOfValues, const std::string& v) {
@@ -46,29 +40,23 @@ void ShapeProperty::FillTextValue(const std::string& fieldName, int numberOfValu
     if (field.DataType() != Field::ValueType::Text && field.DataType() != Field::ValueType::Category) {
         return;
     }
-    auto itor = textFields_.find(fieldName);
+    int fieldIndex = GetFieldIndex(field.Name());
+    auto itor = textFields_.find(fieldIndex);
     if (itor == textFields_.end()) {
-        textFields_[fieldName] = std::vector<std::string>(numberOfValues, v);
+        textFields_[fieldIndex] = std::vector<std::string>(numberOfValues, v);
     } else {
         itor->second.assign(numberOfValues, v);
     }
 }
 
 std::string ShapeProperty::TextValue(const std::string& fieldName, int targetIndex) const {
-    auto citor = textFields_.find(fieldName);
-    if (citor != textFields_.cend()) {
-        return citor->second[targetIndex];
-    } else {
-        return std::string();
-    }
+    int fieldIndex = GetFieldIndex(fieldName);
+    return TextValue(fieldIndex, targetIndex);
 }
 
 geo3dml::ShapeProperty& ShapeProperty::TextValue(const std::string& fieldName, int targetIndex, const std::string& v) {
-    auto itor = textFields_.find(fieldName);
-    if (itor != textFields_.end()) {
-        itor->second[targetIndex] = v;
-    }
-    return *this;
+    int fieldIndex = GetFieldIndex(fieldName);
+    return TextValue(fieldIndex, targetIndex, v);
 }
 
 void ShapeProperty::FillIntValue(const std::string& fieldName, int numberOfValues, int v) {
@@ -76,29 +64,23 @@ void ShapeProperty::FillIntValue(const std::string& fieldName, int numberOfValue
     if (field.DataType() != Field::ValueType::Integer) {
         return;
     }
-    auto itor = intFields_.find(fieldName);
+    int fieldIndex = GetFieldIndex(fieldName);
+    auto itor = intFields_.find(fieldIndex);
     if (itor == intFields_.end()) {
-        intFields_[fieldName] = std::vector<int>(numberOfValues, v);
+        intFields_[fieldIndex] = std::vector<int>(numberOfValues, v);
     } else {
         itor->second.assign(numberOfValues, v);
     }
 }
 
 int ShapeProperty::IntValue(const std::string& fieldName, int targetIndex) const {
-    auto citor = intFields_.find(fieldName);
-    if (citor != intFields_.cend()) {
-        return citor->second[targetIndex];
-    } else {
-        return 0;
-    }
+    int fieldIndex = GetFieldIndex(fieldName);
+    return IntValue(fieldIndex, targetIndex);
 }
 
 geo3dml::ShapeProperty& ShapeProperty::IntValue(const std::string& fieldName, int targetIndex, int v) {
-    auto itor = intFields_.find(fieldName);
-    if (itor != intFields_.end()) {
-        itor->second[targetIndex] = v;
-    }
-    return *this;
+    int fieldIndex = GetFieldIndex(fieldName);
+    return IntValue(fieldIndex, targetIndex, v);
 }
 
 void ShapeProperty::FillBooleanValue(const std::string& fieldName, int numberOfValues, bool v) {
@@ -106,16 +88,97 @@ void ShapeProperty::FillBooleanValue(const std::string& fieldName, int numberOfV
     if (field.DataType() != Field::ValueType::Boolean) {
         return;
     }
-    auto itor = boolFields_.find(fieldName);
+    int fieldIndex = GetFieldIndex(fieldName);
+    auto itor = boolFields_.find(fieldIndex);
     if (itor == boolFields_.end()) {
-        boolFields_[fieldName] = std::vector<bool>(numberOfValues, v);
+        boolFields_[fieldIndex] = std::vector<bool>(numberOfValues, v);
     } else {
         itor->second.assign(numberOfValues, v);
     }
 }
 
 bool ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex) const {
-    auto citor = boolFields_.find(fieldName);
+    int fieldIndex = GetFieldIndex(fieldName);
+    return BooleanValue(fieldIndex, targetIndex);
+}
+
+geo3dml::ShapeProperty& ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex, bool v) {
+    int fieldIndex = GetFieldIndex(fieldName);
+    return BooleanValue(fieldIndex, targetIndex, v);
+}
+
+double ShapeProperty::DoubleValue(int fieldIndex, int targetIndex) const {
+    auto citor = doubleFields_.find(fieldIndex);
+    if (citor != doubleFields_.cend()) {
+        return citor->second[targetIndex];
+    } else {
+        return 0;
+    }
+}
+
+geo3dml::ShapeProperty& ShapeProperty::DoubleValue(int fieldIndex, int targetIndex, double v) {
+    auto itor = doubleFields_.find(fieldIndex);
+    if (itor == doubleFields_.end()) {
+        doubleFields_[fieldIndex] = std::vector<double>(targetIndex + 1, v);
+    } else {
+        // 只允许向当前数组末尾添加元素。
+        if (targetIndex < itor->second.size()) {
+            itor->second[targetIndex] = v;
+        } else if (targetIndex == itor->second.size()){
+            itor->second.push_back(v);
+        }
+    }
+    return *this;
+}
+
+std::string ShapeProperty::TextValue(int fieldIndex, int targetIndex) const {
+    auto citor = textFields_.find(fieldIndex);
+    if (citor != textFields_.cend()) {
+        return citor->second[targetIndex];
+    } else {
+        return std::string();
+    }
+}
+
+geo3dml::ShapeProperty& ShapeProperty::TextValue(int fieldIndex, int targetIndex, const std::string& v) {
+    auto itor = textFields_.find(fieldIndex);
+    if (itor == textFields_.end()) {
+        textFields_[fieldIndex] = std::vector<std::string>(targetIndex + 1, v);
+    } else {
+        if (targetIndex < itor->second.size()) {
+            itor->second[targetIndex] = v;
+        } else if (targetIndex == itor->second.size()) {
+            itor->second.emplace_back(v);
+        }
+    }
+    return *this;
+}
+
+int ShapeProperty::IntValue(int fieldIndex, int targetIndex) const {
+    auto citor = intFields_.find(fieldIndex);
+    if (citor != intFields_.cend()) {
+        return citor->second[targetIndex];
+    } else {
+        return 0;
+    }
+}
+
+geo3dml::ShapeProperty& ShapeProperty::IntValue(int fieldIndex, int targetIndex, int v) {
+    auto itor = intFields_.find(fieldIndex);
+    if (itor == intFields_.end()) {
+        intFields_[fieldIndex] = std::vector<int>(targetIndex + 1, v);
+    } else {
+        if (targetIndex < itor->second.size()) {
+            itor->second[targetIndex] = v;
+        } else if (targetIndex == itor->second.size()) {
+            itor->second.push_back(v);
+        }
+    }
+    return *this;
+}
+
+bool ShapeProperty::BooleanValue(int fieldIndex, int targetIndex) const {
+    auto citor = boolFields_.find(fieldIndex);
     if (citor != boolFields_.cend()) {
         return citor->second[targetIndex];
     } else {
@@ -123,59 +186,25 @@ bool ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex) 
     }
 }
 
-geo3dml::ShapeProperty& ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex, bool v) {
-    auto itor = boolFields_.find(fieldName);
-    if (itor != boolFields_.end()) {
-        itor->second[targetIndex] = v;
+geo3dml::ShapeProperty& ShapeProperty::BooleanValue(int fieldIndex, int targetIndex, bool v) {
+    auto itor = boolFields_.find(fieldIndex);
+    if (itor == boolFields_.end()) {
+        boolFields_[fieldIndex] = std::vector<bool>(targetIndex + 1, v);
+    } else {
+        if (targetIndex < itor->second.size()) {
+            itor->second[targetIndex] = v;
+        } else if (targetIndex == itor->second.size()){
+            itor->second.push_back(v);
+        }
     }
     return *this;
-}
-
-double ShapeProperty::DoubleValue(int fieldIndex, int targetIndex) const {
-    const auto& field = GetFieldAt(fieldIndex);
-    return DoubleValue(field.Name(), targetIndex);
-}
-
-geo3dml::ShapeProperty& ShapeProperty::DoubleValue(int fieldIndex, int targetIndex, double v) {
-    const auto& field = GetFieldAt(fieldIndex);
-    return DoubleValue(field.Name(), targetIndex, v);
-}
-
-std::string ShapeProperty::TextValue(int fieldIndex, int targetIndex) const {
-    const auto& field = GetFieldAt(fieldIndex);
-    return TextValue(field.Name(), targetIndex);
-}
-
-geo3dml::ShapeProperty& ShapeProperty::TextValue(int fieldIndex, int targetIndex, const std::string& v) {
-    const auto& field = GetFieldAt(fieldIndex);
-    return TextValue(field.Name(), targetIndex, v);
-}
-
-int ShapeProperty::IntValue(int fieldIndex, int targetIndex) const {
-    const auto& field = GetFieldAt(fieldIndex);
-    return IntValue(field.Name(), targetIndex);
-}
-
-geo3dml::ShapeProperty& ShapeProperty::IntValue(int fieldIndex, int targetIndex, int v) {
-    const auto& field = GetFieldAt(fieldIndex);
-    return IntValue(field.Name(), targetIndex, v);
-}
-
-bool ShapeProperty::BooleanValue(int fieldIndex, int targetIndex) const {
-    const auto& field = GetFieldAt(fieldIndex);
-    return BooleanValue(field.Name(), targetIndex);
-}
-
-geo3dml::ShapeProperty& ShapeProperty::BooleanValue(int fieldIndex, int targetIndex, bool v) {
-    const auto& field = GetFieldAt(fieldIndex);
-    return BooleanValue(field.Name(), targetIndex, v);
 }
 
 int ShapeProperty::GetValueCount(int fieldIndex) const {
     const Field& field = GetFieldAt(fieldIndex);
     switch (field.DataType()) {
     case Field::ValueType::Integer: {
-        auto citor = intFields_.find(field.Name());
+        auto citor = intFields_.find(fieldIndex);
         if (citor != intFields_.cend()) {
             return citor->second.size();
         } else {
@@ -183,7 +212,7 @@ int ShapeProperty::GetValueCount(int fieldIndex) const {
         }
     }
     case Field::ValueType::Double: {
-        auto citor = doubleFields_.find(field.Name());
+        auto citor = doubleFields_.find(fieldIndex);
         if (citor != doubleFields_.cend()) {
             return citor->second.size();
         } else {
@@ -191,7 +220,7 @@ int ShapeProperty::GetValueCount(int fieldIndex) const {
         }
     }
     case Field::ValueType::Boolean: {
-        auto citor = boolFields_.find(field.Name());
+        auto citor = boolFields_.find(fieldIndex);
         if (citor != boolFields_.cend()) {
             return citor->second.size();
         } else {
@@ -200,7 +229,7 @@ int ShapeProperty::GetValueCount(int fieldIndex) const {
     }
     case Field::ValueType::Text:
     case Field::ValueType::Category: {
-        auto citor = textFields_.find(field.Name());
+        auto citor = textFields_.find(fieldIndex);
         if (citor != textFields_.cend()) {
             return citor->second.size();
         } else {

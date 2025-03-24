@@ -26,6 +26,7 @@ Geometry::~Geometry() {
 }
 
 void Geometry::SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t) {
+    prop->Target(GetID(), t);
     switch (t) {
     case ShapeProperty::SamplingTarget::Vertex: {
         if (vertexProperty_ != prop) {

@@ -9,7 +9,7 @@ namespace g3dxml {
 	class XMLReader : public XMLIO {
 	public:
 		/// 构造函数。
-		/// @param factory 构造Geo3DML对象的工厂类对象。该对象在读取文件期间应一直有效，并由调用者负责销毁。如果该参数为nullptr，则使用缺省的构造类对象。
+		/// @param factory 构造Geo3DML对象的工厂类对象。该对象在读取文件期间应一直有效，并由调用者负责销毁。如果该参数为nullptr，则使用缺省的构造类对象（此时，构造类对象由本XMLReader对象负责管理）。
 		XMLReader(geo3dml::ObjectFactory* factory = nullptr);
 		virtual ~XMLReader();
 

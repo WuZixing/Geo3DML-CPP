@@ -54,9 +54,9 @@ Geo3DML XML文件读写库。仅支持UTF8编码。
 > 
 > //......
 > std::string xmlFilePath = "d:\\data.xml";
-> // 构造Geo3DML对象工厂。
+> // 构造自定义的Geo3DML对象工厂。
 > g3dvtk::ObjectFactory g3dFactory;
-> // 读取文件。
+> // 读取文件。如不使用自定义的Geo3DML对象工厂（如 g3dvtk::ObjectFactory），即构造 g3dxml::XMLReader 时使用 nullptr 指针，那么 g3dxml::XMLReader 将使用缺省的对象工厂。
 > g3dxml::XMLReader xmlReader(&g3dFactory);
 > geo3dml::Object* g3dObject = xmlReader.LoadXMLFile(xmlFilePath);  // 该方法可读取工程或者模型。
 > // 检查返回的对象类型。
