@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Volume.h"
@@ -7,13 +8,17 @@ namespace geo3dml {
 	class CornerPointGrid : public Volume {
 	public:
 		CornerPointGrid();
-		/// Constructor.
-		/// @param dimI Number of cells along the X axis.
-		/// @param dimJ Number of cells along the Y axis.
-		/// @param dimK Number of cells along the Z axis.
+		/// 构造函数。本方法相当于调用缺省的构造函数后再调用Init方法构造角点网格。
+		/// @param dimI I轴（或X轴）方向划分的网格的数目。
+		/// @param dimJ J轴（或Y轴）方向划分的网格的数目。
+		/// @param dimK K轴（或Z轴）方向划分的网格的数目。
 		CornerPointGrid(int dimI, int dimJ, int dimK);
 		virtual ~CornerPointGrid();
-		/// Initialize the grid.
+		/// 初始化网格。使用缺省的构造函数实例化对象后，需要调用本方法构造角点网格。
+		/// @param dimI I轴（或X轴）方向划分的网格的数目。
+		/// @param dimJ J轴（或Y轴）方向划分的网格的数目。
+		/// @param dimK K轴（或Z轴）方向划分的网格的数目。
+		/// @return 返回true表示网格构造成功，否则表示失败。
 		virtual bool Init(int dimI, int dimJ, int dimK) = 0;
 
 	public:

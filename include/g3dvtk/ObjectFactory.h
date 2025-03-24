@@ -1,9 +1,10 @@
+// UTF-8编码
 #pragma once
 
 #include <geo3dml/ObjectFactory.h>
 
 namespace g3dvtk {
-
+	/// @brief 基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。
 	class ObjectFactory : public geo3dml::ObjectFactory {
 	public:
 		ObjectFactory();
@@ -12,11 +13,6 @@ namespace g3dvtk {
 		/// @name Overrided methods inherited from geo3dml::ObjectFactory.
 		//@{
 		virtual ObjectFactory* Clone() override;
-
-		virtual geo3dml::Project* NewProject() override;
-		virtual geo3dml::Model* NewModel() override;
-		virtual geo3dml::FeatureClass* NewFeatureClass() override;
-		virtual geo3dml::Feature* NewFeature() override;
 
 		virtual geo3dml::Point* NewPoint() override;
 		virtual geo3dml::MultiPoint* NewMultiPoint() override;

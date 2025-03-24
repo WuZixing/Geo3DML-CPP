@@ -16,7 +16,7 @@ namespace g3dvtk {
 		/// @name Methods inherited from geo3dml::Annotation.
 		//@{
 		virtual void SetLabelOfPointAt(int i, const std::string& s);
-		virtual std::string GetLabelOfPointAt(int i) const;
+		virtual const std::string& GetLabelOfPointAt(int i) const;
 		//@}
 
 		/// @name Methods inherited from geo3dml::MultiPoint.

@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include <g3dxml/XMLIO.h>

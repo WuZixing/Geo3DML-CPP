@@ -10,3 +10,5 @@ set(USE_G3DSQLITE_LIBRARIES OFF CACHE BOOL "Whether the G3DSQLITE library which 
 if(USE_G3DSQLITE_LIBRARIES)
     add_subdirectory(g3dsqlite)
 endif()
+
+add_subdirectory(test)

@@ -40,6 +40,35 @@ void Point::GetPosition(double& x, double& y, double& z) const {
 	}
 }
 
+double Point::GetX() const {
+	vtkPoints* pts = polyData_->GetPoints();
+	if (pts->GetNumberOfPoints() > 0) {
+		const double* buf = pts->GetPoint(0);
+		return buf[0];
+	} else {
+		return 0;
+	}
+}
+double Point::GetY() const {
+	vtkPoints* pts = polyData_->GetPoints();
+	if (pts->GetNumberOfPoints() > 0) {
+		const double* buf = pts->GetPoint(0);
+		return buf[1];
+	} else {
+		return 0;
+	}
+}
+
+double Point::GetZ() const {
+	vtkPoints* pts = polyData_->GetPoints();
+	if (pts->GetNumberOfPoints() > 0) {
+		const double* buf = pts->GetPoint(0);
+		return buf[2];
+	} else {
+		return 0;
+	}
+}
+
 void Point::SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) {
 	shapeHelper_.SetProperty(prop, t, GetID(), polyData_);
 }

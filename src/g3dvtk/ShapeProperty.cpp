@@ -79,11 +79,11 @@ bool ShapeProperty::AddField(const geo3dml::Field& f) {
 	return true;
 }
 
-void ShapeProperty::FillDoubleValue(const std::string field, int numberOfValues, double v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+void ShapeProperty::FillDoubleValue(const std::string& fieldName, int numberOfValues, double v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkDoubleArray> dataArray = vtkSmartPointer<vtkDoubleArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataArray->SetNumberOfTuples(numberOfValues);
 		dataArray->Fill(v);
@@ -99,8 +99,8 @@ void ShapeProperty::FillDoubleValue(const std::string field, int numberOfValues,
 	}
 }
 
-double ShapeProperty::DoubleValue(const std::string& field, int targetIndex) const {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+double ShapeProperty::DoubleValue(const std::string& fieldName, int targetIndex) const {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		return 0;
 	}
@@ -112,11 +112,11 @@ double ShapeProperty::DoubleValue(const std::string& field, int targetIndex) con
 	}
 }
 
-ShapeProperty& ShapeProperty::DoubleValue(const std::string& field, int targetIndex, double v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+ShapeProperty& ShapeProperty::DoubleValue(const std::string& fieldName, int targetIndex, double v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkDoubleArray> dataArray = vtkSmartPointer<vtkDoubleArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataSet_->AddArray(dataArray);
 		ary = dataArray.Get();
@@ -130,12 +130,12 @@ ShapeProperty& ShapeProperty::DoubleValue(const std::string& field, int targetIn
 	return *this;
 }
 
-void ShapeProperty::FillTextValue(const std::string& field, int numberOfValues, const std::string& v) {
+void ShapeProperty::FillTextValue(const std::string& fieldName, int numberOfValues, const std::string& v) {
 	vtkStringArray* stringArray = NULL;
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkStringArray> dataArray = vtkSmartPointer<vtkStringArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataSet_->AddArray(dataArray);
 		stringArray = dataArray.Get();
@@ -151,8 +151,8 @@ void ShapeProperty::FillTextValue(const std::string& field, int numberOfValues, 
 	}
 }
 
-std::string ShapeProperty::TextValue(const std::string& field, int targetIndex) const {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+std::string ShapeProperty::TextValue(const std::string& fieldName, int targetIndex) const {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		return "";
 	}
@@ -164,11 +164,11 @@ std::string ShapeProperty::TextValue(const std::string& field, int targetIndex) 
 	}
 }
 
-ShapeProperty& ShapeProperty::TextValue(const std::string& field, int targetIndex, const std::string& v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+ShapeProperty& ShapeProperty::TextValue(const std::string& fieldName, int targetIndex, const std::string& v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkStringArray> dataArray = vtkSmartPointer<vtkStringArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataSet_->AddArray(dataArray);
 		ary = dataArray;
@@ -182,11 +182,11 @@ ShapeProperty& ShapeProperty::TextValue(const std::string& field, int targetInde
 	return *this;
 }
 
-void ShapeProperty::FillIntValue(const std::string& field, int numberOfValues, int v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+void ShapeProperty::FillIntValue(const std::string& fieldName, int numberOfValues, int v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkIntArray> dataArray = vtkSmartPointer<vtkIntArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataArray->SetNumberOfTuples(numberOfValues);
 		dataArray->Fill(v);
@@ -202,8 +202,8 @@ void ShapeProperty::FillIntValue(const std::string& field, int numberOfValues, i
 	}
 }
 
-int ShapeProperty::IntValue(const std::string& field, int targetIndex) const {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+int ShapeProperty::IntValue(const std::string& fieldName, int targetIndex) const {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		return 0;
 	}
@@ -215,11 +215,11 @@ int ShapeProperty::IntValue(const std::string& field, int targetIndex) const {
 	}
 }
 
-ShapeProperty& ShapeProperty::IntValue(const std::string& field, int targetIndex, int v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+ShapeProperty& ShapeProperty::IntValue(const std::string& fieldName, int targetIndex, int v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkIntArray> dataArray = vtkSmartPointer<vtkIntArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataSet_->AddArray(dataArray);
 		ary = dataArray.Get();
@@ -233,12 +233,12 @@ ShapeProperty& ShapeProperty::IntValue(const std::string& field, int targetIndex
 	return *this;
 }
 
-void ShapeProperty::FillBooleanValue(const std::string& field, int numberOfValues, bool v) {
+void ShapeProperty::FillBooleanValue(const std::string& fieldName, int numberOfValues, bool v) {
 	unsigned char cv = v ? (unsigned char)1 : (unsigned char)0;
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkUnsignedCharArray> dataArray = vtkSmartPointer<vtkUnsignedCharArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataArray->SetNumberOfTuples(numberOfValues);
 		dataArray->Fill(cv);
@@ -254,8 +254,8 @@ void ShapeProperty::FillBooleanValue(const std::string& field, int numberOfValue
 	}
 }
 
-bool ShapeProperty::BooleanValue(const std::string& field, int targetIndex) const {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+bool ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex) const {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		return false;
 	}
@@ -267,11 +267,11 @@ bool ShapeProperty::BooleanValue(const std::string& field, int targetIndex) cons
 	}
 }
 
-ShapeProperty& ShapeProperty::BooleanValue(const std::string& field, int targetIndex, bool v) {
-	vtkAbstractArray* ary = dataSet_->GetAbstractArray(field.c_str());
+ShapeProperty& ShapeProperty::BooleanValue(const std::string& fieldName, int targetIndex, bool v) {
+	vtkAbstractArray* ary = dataSet_->GetAbstractArray(fieldName.c_str());
 	if (ary == NULL) {
 		vtkSmartPointer<vtkUnsignedCharArray> dataArray = vtkSmartPointer<vtkUnsignedCharArray>::New();
-		dataArray->SetName(field.c_str());
+		dataArray->SetName(fieldName.c_str());
 		dataArray->SetNumberOfComponents(1);
 		dataSet_->AddArray(dataArray);
 		ary = dataArray.Get();

@@ -19,7 +19,7 @@ Object::~Object() {
 
 }
 
-std::string Object::GetID() const {
+const std::string& Object::GetID() const {
 	return id_;
 }
 

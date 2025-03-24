@@ -119,3 +119,19 @@ Field& Field::NoDataValue(const std::string& v) {
 const std::string& Field::NoDataValue() const {
 	return noDataValue_;
 }
+
+int Field::NoDataAsInt() const {
+	return std::atoi(noDataValue_.c_str());
+}
+
+double Field::NoDataAsDouble() const {
+	return std::atof(noDataValue_.c_str());
+}
+
+bool Field::NoDataAsBool() const {
+	if (noDataValue_.compare("0") == 0 || noDataValue_.compare("false") == 0 || noDataValue_.compare("False") == 0 || noDataValue_.compare("FALSE") == 0 || noDataValue_.compare("f") == 0 || noDataValue_.compare("F") == 0) {
+		return false;
+	} else {
+		return true;
+	}
+}

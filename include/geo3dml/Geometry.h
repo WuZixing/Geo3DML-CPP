@@ -13,10 +13,27 @@ namespace geo3dml {
 		Geometry();
 		virtual ~Geometry();
 
-		/// Compute the minimum bounding rectangle of the shape.
-		/// @return In case of a null shape which means a geometry without any vertex, it will return an invalid Box3D.
+		/// @brief 计算几何对象的最小外包矩形.
+		/// @return 几何对象的最小外包矩形。
 		virtual Box3D GetMinimumBoundingRectangle() const = 0;
-		virtual void SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t) = 0;
-		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) const = 0;
+
+		/// @brief 设置几何对象关联的属性场对象。
+		/// @param prop 属性场对象。该属性场对象的内存将由本几何对象负责释放。
+		/// @param t 属性场关联的目标位置。
+		virtual void SetProperty(ShapeProperty* prop, ShapeProperty::SamplingTarget t);
+		/// @brief 取几何对象关联属性场。
+		/// @param t 属性场关联的目标位置。
+		/// @return 属性场对象。该属性场对象的内存将由本几何对象负责释放。
+		virtual ShapeProperty* GetProperty(ShapeProperty::SamplingTarget t) const;
+
+	private:
+		/// @brief 顶点集合上的属性场。
+		ShapeProperty* vertexProperty_;
+		/// @brief 边（或棱）集合上的属性场。
+		ShapeProperty* edgeProperty_;
+		/// @brief 面片集合上的属性场。
+		ShapeProperty* faceProperty_;
+		/// @brief 体元集合上的属性场。
+		ShapeProperty* voxelProperty_;
 	};
 }

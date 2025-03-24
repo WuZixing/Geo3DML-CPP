@@ -28,22 +28,6 @@ ObjectFactory* ObjectFactory::Clone() {
 	return new ObjectFactory();
 }
 
-geo3dml::Project* ObjectFactory::NewProject() {
-	return new geo3dml::Project();
-}
-
-geo3dml::Model* ObjectFactory::NewModel() {
-	return new geo3dml::Model();
-}
-
-geo3dml::FeatureClass* ObjectFactory::NewFeatureClass() {
-	return new geo3dml::FeatureClass();
-}
-
-geo3dml::Feature* ObjectFactory::NewFeature() {
-	return new geo3dml::Feature();
-}
-
 geo3dml::Point* ObjectFactory::NewPoint() {
 	return new Point();
 }

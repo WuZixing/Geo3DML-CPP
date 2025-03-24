@@ -14,15 +14,18 @@ namespace g3dvtk {
 	public:
 		/// @name Methods inherited from geo3dml::Point.
 		//@{
-		virtual void SetPosition(double x, double y, double z);
-		virtual void GetPosition(double& x, double& y, double& z) const;
+		virtual void SetPosition(double x, double y, double z) override;
+		virtual void GetPosition(double& x, double& y, double& z) const override;
+		virtual double GetX() const override;
+		virtual double GetY() const override;
+		virtual double GetZ() const override;
 		//@}
 
 		/// @name Methods inherited from geo3dml::Geometry.
 		//@{
 		virtual geo3dml::Box3D GetMinimumBoundingRectangle() const override;
-		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t);
-		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const;
+		virtual void SetProperty(geo3dml::ShapeProperty* prop, geo3dml::ShapeProperty::SamplingTarget t) override;
+		virtual geo3dml::ShapeProperty* GetProperty(geo3dml::ShapeProperty::SamplingTarget t) const override;
 		//@}
 
 		vtkPolyData* GetPolyData() const;

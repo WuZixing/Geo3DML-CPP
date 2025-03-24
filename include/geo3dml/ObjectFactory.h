@@ -39,13 +39,13 @@ namespace geo3dml {
 
 		/// @name model objects.
 		///@{
-		virtual Project* NewProject() = 0;
+		virtual Project* NewProject();
 
-		virtual Model* NewModel() = 0;
+		virtual Model* NewModel();
 
-		virtual FeatureClass* NewFeatureClass() = 0;
+		virtual FeatureClass* NewFeatureClass();
 
-		virtual Feature* NewFeature() = 0;
+		virtual Feature* NewFeature();
 		///@}
 
 		/// @name goemetry(shape) objects.
@@ -119,7 +119,7 @@ namespace geo3dml {
 
 		virtual Layer* NewLayer();
 
-		virtual Actor* NewActor() = 0;
+		virtual Actor* NewActor();
 
 		virtual PointSymbolizer* NewPointSymbolizer();
 

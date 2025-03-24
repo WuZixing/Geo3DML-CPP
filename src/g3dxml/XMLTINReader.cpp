@@ -90,7 +90,7 @@ bool XMLTINReader::ReadTriangle(xmlTextReaderPtr reader, geo3dml::TIN* tin) {
 					break;
 				}
 			}
-			// TODO: reader neighbours.
+			// TODO: read neighbours.
 		}
 		status = xmlTextReaderRead(reader);
 	}

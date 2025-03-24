@@ -11,7 +11,7 @@ namespace geo3dml {
 		Object();
 		virtual ~Object();
 
-		std::string GetID() const;
+		const std::string& GetID() const;
 		void SetID(const std::string& id);
 
 	private:

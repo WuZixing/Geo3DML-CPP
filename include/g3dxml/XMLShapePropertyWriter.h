@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include <geo3dml/ShapeProperty.h>
