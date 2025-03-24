@@ -11,4 +11,6 @@ if(USE_G3DSQLITE_LIBRARIES)
     add_subdirectory(g3dsqlite)
 endif()
 
-add_subdirectory(test)
+if(${Build_Geo3DML_CPP_Test})
+  add_subdirectory(test)
+endif()

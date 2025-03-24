@@ -10,3 +10,5 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 add_subdirectory(src)
+
+option(Build_Geo3DML_CPP_Test "是否编译Geo3DML-CPP库的测试程序？" OFF)
