@@ -27,7 +27,6 @@ geo3dml::Map* XMLMapReader::ReadMap(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		/// TODO: parse metadata, feature relationship.
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {

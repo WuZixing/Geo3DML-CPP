@@ -166,6 +166,21 @@ std::string XMLReaderHelper::Attribute(xmlTextReaderPtr reader, const std::strin
 	return attri;
 }
 
+std::string XMLReaderHelper::AttributeHref(xmlTextReaderPtr reader) {
+	xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
+	if (href == NULL) {
+		href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"xlink:href");
+	}
+	if (href != NULL) {
+		std::string id((const char*)href);
+		id = id.substr(id.find_last_of('#') + 1);
+		xmlFree(href);
+		return id;
+	} else {
+		return std::string();
+	}
+}
+
 std::string XMLReaderHelper::FormatErrorMessageWithPosition(xmlTextReaderPtr reader, const std::string& message) {
 	std::ostringstream ostr;
 	ostr << "line " << xmlTextReaderGetParserLineNumber(reader) << ", column " << xmlTextReaderGetParserColumnNumber(reader) << ": " << message;

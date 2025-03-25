@@ -24,6 +24,7 @@ namespace g3dxml {
 
 		static std::string AttributeGMLID(xmlTextReaderPtr reader);
 		static std::string Attribute(xmlTextReaderPtr reader, const std::string& attribute);
+		static std::string AttributeHref(xmlTextReaderPtr reader);
 
 		static std::string FormatErrorMessageWithPosition(xmlTextReaderPtr reader, const std::string& message);
 	};

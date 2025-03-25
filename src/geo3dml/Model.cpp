@@ -37,10 +37,15 @@ Model::Model() {
 }
 
 Model::~Model() {
-	std::vector<FeatureClass*>::const_iterator citor = featureClasses_.cbegin();
-	while (citor != featureClasses_.cend()) {
-		delete *citor;
-		citor++;
+	std::vector<FeatureRelation*>::const_iterator ritor = featureRelations_.cbegin();
+	while (ritor != featureRelations_.cend()) {
+		delete* ritor;
+		ritor++;
+	}
+	std::vector<FeatureClass*>::const_iterator fitor = featureClasses_.cbegin();
+	while (fitor != featureClasses_.cend()) {
+		delete * fitor;
+		fitor++;
 	}
 }
 
@@ -101,6 +106,32 @@ void Model::RemoveFeatureClass(const std::string& id) {
 		}
 		citor++;
 	}
+}
+
+void Model::AddFeatureRelation(FeatureRelation* fr) {
+	if (fr == nullptr)
+		return;
+	std::vector<FeatureRelation*>::const_iterator citor = featureRelations_.cbegin();
+	while (citor != featureRelations_.cend()) {
+		if (*citor == fr)
+			return;
+		citor++;
+	}
+	featureRelations_.push_back(fr);
+}
+
+int Model::GetFeatureRelationCount() const {
+	return featureRelations_.size();
+}
+
+FeatureRelation* Model::GetFeatureRelation(int i) const {
+	return featureRelations_.at(i);
+}
+
+FeatureRelation* Model::RemoveFeatureRelation(int i) {
+	FeatureRelation* fr = featureRelations_.at(i);
+	featureRelations_.erase(std::find(featureRelations_.begin(), featureRelations_.end(), fr));
+	return fr;
 }
 
 Box3D Model::GetMinimumBoundingRectangle() const {

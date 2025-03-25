@@ -2,6 +2,7 @@
 #include <g3dxml/XMLFeatureClassWriter.h>
 #include <g3dxml/XMLLayerWriter.h>
 #include <libxml/xmlreader.h>
+#include "FeatureRelationWriter.h"
 
 using namespace g3dxml;
 
@@ -111,6 +112,18 @@ bool XMLWriter::Write(geo3dml::Model* model, std::ostream& output, SchemaVersion
 			}
 		}
 		output << "</FeatureClasses>" << std::endl;
+	}
+	int relationNumber = model->GetFeatureRelationCount();
+	if (relationNumber > 0) {
+		output << "<FeatureRelationship>" << std::endl;
+		FeatureRelationWriter frWriter;
+		for (int i = 0; i < relationNumber; ++i) {
+			if (!frWriter.Write(model->GetFeatureRelation(i), output)) {
+				SetStatus(false, frWriter.Error());
+				break;
+			}
+		}
+		output << "</FeatureRelationship>" << std::endl;
 	}
 	output << "</geo3dml:Geo3DModel>" << std::endl;
 	return IsOK();

@@ -1,6 +1,11 @@
 #include <g3dxml/XMLModelReader.h>
 #include <g3dxml/XMLFeatureClassReader.h>
 #include <geo3dml/Utils.h>
+#include <geo3dml/BoundaryRelation.h>
+#include <geo3dml/ContactRelation.h>
+#include <geo3dml/GeologicalHistory.h>
+#include <geo3dml/GeologicalStructure.h>
+#include <geo3dml/AggregationRelation.h>
 
 using namespace g3dxml;
 
@@ -8,6 +13,7 @@ const std::string XMLModelReader::Element = "Geo3DModel";
 const std::string XMLModelReader::OldElement = "GeoModel";
 const std::string XMLModelReader::Element_Name = "Name";
 const std::string XMLModelReader::Element_Type = "Type";
+const std::string XMLModelReader::Element_FeatureRelation = "Relation";
 const std::string XMLModelReader::Element_Metadata = "Metadata";
 const std::string XMLModelReader::Element_DateStamp = "dateStamp";
 const std::string XMLModelReader::Element_Description = "Description";
@@ -48,7 +54,6 @@ geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 	while (status == 1) {
 		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
 		int nodeType = xmlTextReaderNodeType(reader);
-		/// TODO: parse feature relationship.
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && IsModelElementName(localName)) {
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
@@ -77,6 +82,8 @@ geo3dml::Model* XMLModelReader::ReadModel(xmlTextReaderPtr reader) {
 					SetStatus(false, fcReader.Error());
 					break;
 				}
+			} else if (geo3dml::IsiEqual(localName, Element_FeatureRelation)) {
+				ReadFeatureRelation(reader, model);
 			}
 		}
 		status = xmlTextReaderRead(reader);
@@ -387,6 +394,178 @@ bool XMLModelReader::ReadMetadataDateStamp(xmlTextReaderPtr reader, geo3dml::Mod
 	}
 	if (status != 1) {
 		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_DateStamp);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model* model) {
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_FeatureRelation)) {
+			break;
+		} else if (geo3dml::IsiEqual(localName, "BoundaryRelation")) {
+			geo3dml::BoundaryRelation* boundaryRelation = new geo3dml::BoundaryRelation();
+			if (boundaryRelation != nullptr) {
+				if (ReadFeatureRelationContent(reader, "BoundaryRelation", boundaryRelation)) {
+					model->AddFeatureRelation(boundaryRelation);
+				} else {
+					delete boundaryRelation;
+					break;
+				}
+			}
+		} else if (geo3dml::IsiEqual(localName, "ContactRelation")) {
+			geo3dml::ContactRelation* contactRelation = new geo3dml::ContactRelation();
+			if (contactRelation != nullptr) {
+				if (ReadFeatureRelationContent(reader, "ContactRelation", contactRelation)) {
+					model->AddFeatureRelation(contactRelation);
+				} else {
+					delete contactRelation;
+					break;
+				}
+			}
+		} else if (geo3dml::IsiEqual(localName, "GeologicalHistory")) {
+			geo3dml::GeologicalHistory* geologicalHistory = new geo3dml::GeologicalHistory();
+			if (geologicalHistory != nullptr) {
+				if (ReadFeatureRelationContent(reader, "GeologicalHistory", geologicalHistory)) {
+					model->AddFeatureRelation(geologicalHistory);
+				} else {
+					delete geologicalHistory;
+					break;
+				}
+			}
+		} else if (geo3dml::IsiEqual(localName, "GeologicalStructure")) {
+			geo3dml::GeologicalStructure* geologicalStructure = new geo3dml::GeologicalStructure();
+			if (geologicalStructure != nullptr) {
+				if (ReadFeatureRelationContent(reader, "GeologicalStructure", geologicalStructure)) {
+					model->AddFeatureRelation(geologicalStructure);
+				} else {
+					delete geologicalStructure;
+					break;
+				}
+			}
+		} else if (geo3dml::IsiEqual(localName, "AggregationRelation")) {
+			geo3dml::AggregationRelation* aggregationRelation = new geo3dml::AggregationRelation();
+			if (aggregationRelation != nullptr) {
+				if (ReadFeatureRelationContent(reader, "AggregationRelation", aggregationRelation)) {
+					model->AddFeatureRelation(aggregationRelation);
+				} else {
+					delete aggregationRelation;
+					break;
+				}
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + Element_FeatureRelation);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadFeatureRelationContent(xmlTextReaderPtr reader, const std::string& relationElemTag, geo3dml::FeatureRelation* featureRelation) {
+	featureRelation->SetID(XMLReaderHelper::AttributeGMLID(reader));
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, relationElemTag)) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, "name")) {
+				std::string name;
+				if (!XMLReaderHelper::TextNode(reader, "name", name)) {
+					SetStatus(false, name);
+					break;
+				}
+				featureRelation->SetName(name);
+			} else if (geo3dml::IsiEqual(localName, "Source")) {
+				if (!ReadSourceFeatureInRelation(reader, featureRelation)) {
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, "Targets")) {
+				if (!ReadTargetFeaturesInRelation(reader, featureRelation)) {
+					break;
+				}
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of " + relationElemTag);
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadSourceFeatureInRelation(xmlTextReaderPtr reader, geo3dml::FeatureRelation* featureRelation) {
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, "Source")) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, "Feature")) {
+				std::string featureId = XMLReaderHelper::AttributeHref(reader);
+				if (!featureId.empty()) {
+					featureRelation->SetSourceFeatureId(featureId);
+				} else {
+					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of xlink:href");
+					SetStatus(false, err);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, "Role")) {
+				std::string role;
+				if (!XMLReaderHelper::TextNode(reader, "Role", role)) {
+					SetStatus(false, role);
+					break;
+				}
+				featureRelation->SetSourceRole(role);
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of Source");
+		SetStatus(false, err);
+	}
+	return IsOK();
+}
+
+bool XMLModelReader::ReadTargetFeaturesInRelation(xmlTextReaderPtr reader, geo3dml::FeatureRelation* featureRelation) {
+	int status = xmlTextReaderRead(reader);
+	while (status == 1) {
+		const char* localName = (const char*)xmlTextReaderConstLocalName(reader);
+		int nodeType = xmlTextReaderNodeType(reader);
+		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, "Targets")) {
+			break;
+		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
+			if (geo3dml::IsiEqual(localName, "Feature")) {
+				std::string featureId = XMLReaderHelper::AttributeHref(reader);
+				if (!featureId.empty()) {
+					featureRelation->AddTargetFeatureId(featureId);
+				} else {
+					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of xlink:href");
+					SetStatus(false, err);
+					break;
+				}
+			} else if (geo3dml::IsiEqual(localName, "Role")) {
+				std::string role;
+				if (!XMLReaderHelper::TextNode(reader, "Role", role)) {
+					SetStatus(false, role);
+					break;
+				}
+				featureRelation->SetTargetRole(role);
+			}
+		}
+		status = xmlTextReaderRead(reader);
+	}
+	if (status != 1) {
+		std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing end element of Targets");
 		SetStatus(false, err);
 	}
 	return IsOK();

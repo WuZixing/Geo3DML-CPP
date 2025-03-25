@@ -104,8 +104,9 @@ list(APPEND G3DXML_HEADERS
 
 include_directories(${GEO3DML_INCLUDE_DIRS})
 add_library(${G3DXML_LIBRARIES} STATIC
+	README.md
 	${g3dlibxml2_la_SOURCES}
 	${G3DXML_SOURCES}
 	${G3DXML_HEADERS}
-	README.md
+	FeatureRelationWriter.h
 )

@@ -8,7 +8,7 @@ std::string Object::NewID() {
 	uuid id;
 	uuid4_generate(&id);
 	char strId[37] = {'\0'};
-	return uuid_to_string(&id, strId);
+	return std::string(uuid_to_string(&id, strId));
 }
 
 Object::Object() {

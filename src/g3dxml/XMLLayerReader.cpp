@@ -38,15 +38,9 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 				}
 				layer->SetName(v);
 			} else if (geo3dml::IsiEqual(localName, Element_FeatureClass)) {
-				xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
-				if (href == NULL) {
-					href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"xlink:href");
-				}
-				if (href != NULL) {
-					std::string fcID((const char*)href);
-					fcID = fcID.substr(fcID.find_last_of('#') + 1);
+				std::string fcID = XMLReaderHelper::AttributeHref(reader);
+				if (!fcID.empty()) {
 					layer->SetBindingFeatureClassID(fcID);
-					xmlFree(href);
 				} else {
 					std::string err = XMLReaderHelper::FormatErrorMessageWithPosition(reader, "missing attribute of xlink:href");
 					SetStatus(false, err);

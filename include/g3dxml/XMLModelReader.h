@@ -29,11 +29,16 @@ namespace g3dxml {
 		bool ReadMetadataSpatialCoordinateReference(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
 		bool ReadMetadataCRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
 		bool ReadMetadataVRS(xmlTextReaderPtr reader, geo3dml::ModelMetadata& meta);
+		bool ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model* model);
+		bool ReadFeatureRelationContent(xmlTextReaderPtr reader, const std::string& relationElemTag, geo3dml::FeatureRelation* featureRelation);
+		bool ReadSourceFeatureInRelation(xmlTextReaderPtr reader, geo3dml::FeatureRelation* featureRelation);
+		bool ReadTargetFeaturesInRelation(xmlTextReaderPtr reader, geo3dml::FeatureRelation* featureRelation);
 
 	private:
 		static const std::string OldElement;
 		static const std::string Element_Name;
 		static const std::string Element_Type;
+		static const std::string Element_FeatureRelation;
 		/// @name 元数据
 		///@{
 		static const std::string Element_Metadata;
