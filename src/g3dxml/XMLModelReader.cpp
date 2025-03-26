@@ -456,6 +456,16 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 					break;
 				}
 			}
+		} else if (geo3dml::IsiEqual(localName, "GeoFeatureRelation")) {
+			geo3dml::FeatureRelation* featureRelation = new geo3dml::FeatureRelation();
+			if (featureRelation != nullptr) {
+				if (ReadFeatureRelationContent(reader, "GeoFeatureRelation", featureRelation)) {
+					model->AddFeatureRelation(featureRelation);
+				} else {
+					delete featureRelation;
+					break;
+				}
+			}
 		}
 		status = xmlTextReaderRead(reader);
 	}

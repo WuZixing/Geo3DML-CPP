@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>地质要素的关系。  
+<p>地质要素的关系的基类。可通过派生类型定义具体的要素关系。  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_feature_relation_8h_source.html">FeatureRelation.h</a>&gt;</code></p>
@@ -123,7 +123,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ade9d699d7188ea7a48c457590c70a130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af61136bddbe391594c32ad7ed3047f4c" id="r_af61136bddbe391594c32ad7ed3047f4c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af61136bddbe391594c32ad7ed3047f4c">~FeatureRelation</a> ()</td></tr>
 <tr class="separator:af61136bddbe391594c32ad7ed3047f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">要素关系的名称。</div></td></tr>
+<tr><td colspan="2"><div class="groupHeader">要素关系实例的名称（不是抽象关系的名称）。如“要素A与B的年代关系”等。</div></td></tr>
 <tr class="memitem:aa62ac76473834d8dff59342a659c553c" id="r_aa62ac76473834d8dff59342a659c553c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa62ac76473834d8dff59342a659c553c">SetName</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:aa62ac76473834d8dff59342a659c553c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b3245f5cb64aa134043ce052674caaa" id="r_a9b3245f5cb64aa134043ce052674caaa"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b3245f5cb64aa134043ce052674caaa">GetName</a> () const</td></tr>
@@ -193,7 +193,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>地质要素的关系。 </p>
+<div class="textblock"><p>地质要素的关系的基类。可通过派生类型定义具体的要素关系。 </p>
+<p>现在派生的类型有：ContactRelation，GeologicalHistory，GeologicalStructure，AggregationRelation，BoundaryRelation。 </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ade9d699d7188ea7a48c457590c70a130" name="ade9d699d7188ea7a48c457590c70a130"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ade9d699d7188ea7a48c457590c70a130">&#9670;&#160;</a></span>FeatureRelation()</h2>

@@ -4,14 +4,15 @@
 #include "Feature.h"
 
 namespace geo3dml {
-    /// 地质要素的关系。
+    /// @brief 地质要素的关系的基类。可通过派生类型定义具体的要素关系。
+    /// @details 现在派生的类型有：ContactRelation，GeologicalHistory，GeologicalStructure，AggregationRelation，BoundaryRelation。
     class FeatureRelation : public Object {
     public:
         FeatureRelation();
         virtual ~FeatureRelation();
 
     public:
-        /// @name 要素关系的名称。
+        /// @name 要素关系实例的名称（不是抽象关系的名称）。如“要素A与B的年代关系”等。
         ///@{
         FeatureRelation& SetName(const std::string& name);
         const std::string& GetName() const;

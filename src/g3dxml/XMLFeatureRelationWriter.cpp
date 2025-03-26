@@ -74,6 +74,8 @@ std::string XMLFeatureRelationWriter::GetRelationTagName(const geo3dml::FeatureR
                     const geo3dml::GeologicalStructure* geoStructure = dynamic_cast<const geo3dml::GeologicalStructure*>(fr);
                     if (geoStructure != nullptr) {
                         return std::string("GeologicalStructure");
+                    } else {
+                        return std::string("GeoFeatureRelation");   // 通用的要素关系。
                     }
                 }
             }
