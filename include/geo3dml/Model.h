@@ -40,8 +40,10 @@ namespace geo3dml {
 		int GetFeatureClassCount() const;
 		FeatureClass* GetFeatureClassAt(int i) const;
 		FeatureClass* GetFeatureClass(const std::string& id) const;
-		/// Remove a feature class from the model but not delete it.
-		void RemoveFeatureClass(const std::string& id);
+		/// @brief 从模型中移除某指定的要素类，但是不销毁它。
+		/// @param id 要移除的要素类的ID。
+		/// @return 返回指向被移除的要素类对象的指针。该要素类对象将由调用者负责销毁。
+		FeatureClass* RemoveFeatureClass(const std::string& id);
 		///@}
 
 		/// @name 要素之间的关系。
@@ -60,6 +62,10 @@ namespace geo3dml {
 		/// @param i 要被移除的要素关系对象的索引位置（从0开始计数）。
 		/// @return 返回指向被移除的对象的指针。该对象的内存将由调用者负责管理。
 		FeatureRelation* RemoveFeatureRelation(int i);
+		/// @brief 指定要素的ID，从模型中查找对应的要素对象。
+		/// @param id 要素的ID。
+		/// @return 指向目标要素的指针。调用者不能删除该要素对象。
+		Feature* FindFeatureById(const std::string& id);
 		///@}
 
 		/// @name 元数据。

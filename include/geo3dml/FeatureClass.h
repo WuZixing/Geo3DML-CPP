@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Geo3DML.h"
@@ -26,6 +27,9 @@ namespace geo3dml {
 		FeatureClass& AddFeature(Feature* f);
 		int GetFeatureCount() const;
 		Feature* GetFeatureAt(int i) const;
+		/// @brief 指定要素的ID，查找要素。
+		/// @param id 要素的ID。
+		/// @return 指向目标要素的指针。调用者不能删除该要素对象。
 		Feature* GetFeature(const std::string& id) const;
 		//@}
 

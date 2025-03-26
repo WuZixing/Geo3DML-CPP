@@ -1,3 +1,4 @@
+// UTF-8编码
 #include <geo3dml/FeatureClass.h>
 
 using namespace geo3dml;

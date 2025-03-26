@@ -38,7 +38,7 @@ geo3dml::Layer* XMLLayerReader::ReadLayer(xmlTextReaderPtr reader) {
 				}
 				layer->SetName(v);
 			} else if (geo3dml::IsiEqual(localName, Element_FeatureClass)) {
-				std::string fcID = XMLReaderHelper::AttributeHref(reader);
+				std::string fcID = XMLReaderHelper::AttributeIdInHref(reader);
 				if (!fcID.empty()) {
 					layer->SetBindingFeatureClassID(fcID);
 				} else {

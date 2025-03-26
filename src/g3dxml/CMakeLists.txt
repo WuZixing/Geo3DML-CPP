@@ -82,7 +82,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLineStringReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLPointReader.h
-    ${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
+  ${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiPointReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLayerWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMapReader.h
@@ -108,5 +108,5 @@ add_library(${G3DXML_LIBRARIES} STATIC
 	${g3dlibxml2_la_SOURCES}
 	${G3DXML_SOURCES}
 	${G3DXML_HEADERS}
-	FeatureRelationWriter.h
+	XMLFeatureRelationWriter.h
 )

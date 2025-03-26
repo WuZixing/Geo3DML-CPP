@@ -510,7 +510,7 @@ bool XMLModelReader::ReadSourceFeatureInRelation(xmlTextReaderPtr reader, geo3dm
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, "Feature")) {
-				std::string featureId = XMLReaderHelper::AttributeHref(reader);
+				std::string featureId = XMLReaderHelper::AttributeIdInHref(reader);
 				if (!featureId.empty()) {
 					featureRelation->SetSourceFeatureId(featureId);
 				} else {
@@ -545,7 +545,7 @@ bool XMLModelReader::ReadTargetFeaturesInRelation(xmlTextReaderPtr reader, geo3d
 			break;
 		} else if (nodeType == XML_READER_TYPE_ELEMENT) {
 			if (geo3dml::IsiEqual(localName, "Feature")) {
-				std::string featureId = XMLReaderHelper::AttributeHref(reader);
+				std::string featureId = XMLReaderHelper::AttributeIdInHref(reader);
 				if (!featureId.empty()) {
 					featureRelation->AddTargetFeatureId(featureId);
 				} else {

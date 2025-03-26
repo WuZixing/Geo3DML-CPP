@@ -1,5 +1,5 @@
 // UTF-8编码
-#include "FeatureRelationWriter.h"
+#include "XMLFeatureRelationWriter.h"
 #include <geo3dml/AggregationRelation.h>
 #include <geo3dml/BoundaryRelation.h>
 #include <geo3dml/ContactRelation.h>
@@ -8,15 +8,15 @@
 
 using namespace g3dxml;
 
-FeatureRelationWriter::FeatureRelationWriter() {
+XMLFeatureRelationWriter::XMLFeatureRelationWriter() {
 
 }
 
-FeatureRelationWriter::~FeatureRelationWriter() {
+XMLFeatureRelationWriter::~XMLFeatureRelationWriter() {
 
 }
 
-bool FeatureRelationWriter::Write(geo3dml::FeatureRelation* fr, std::ostream& output) {
+bool XMLFeatureRelationWriter::Write(geo3dml::FeatureRelation* fr, std::ostream& output) {
     if (fr == nullptr) {
         SetStatus(false, "null FeatureRelation");
         return false;
@@ -28,26 +28,33 @@ bool FeatureRelationWriter::Write(geo3dml::FeatureRelation* fr, std::ostream& ou
     }
     output << "<" << rTag << " gml:id=\"" << fr->GetID() << "\">" << std::endl
         << "<gml:name>" << fr->GetName() << "</gml:name>" << std::endl
-        << "<Source>" << std::endl
-        << "<Role>" << fr->GetSourceRole() << "</Role>" << std::endl
-        << "<Feature xlink:type=\"simple\" xlink:href=\"" << fr->GetSourceFeatureId() << "\" />" << std::endl
-        << "</Source>" << std::endl
-        << "<Targets>" << std::endl
-        << "<Role>" << fr->GetTargetRole() << "</Role>" << std::endl;
+        << "<Source>" << std::endl;
+    const std::string& sourceRole = fr->GetSourceRole();
+    if (!sourceRole.empty()) {
+        output << "<Role>" << sourceRole << "</Role>" << std::endl;
+    }
+    WriteFeature(fr->GetSourceFeatureId(), output);
+    output << "</Source>" << std::endl
+        << "<Targets>" << std::endl;
+    const std::string& targetRole = fr->GetTargetRole();
+    if (!targetRole.empty()) {
+        output << "<Role>" << targetRole << "</Role>" << std::endl;
+    }
     int targetFeatureNumber = fr->GetTargetFeatureCount();
     for (int i = 0; i < targetFeatureNumber; ++i) {
         const std::string& featureId = fr->GetTargetFeatureId(i);
-        output << "<Feature xlink:type=\"simple\" xlink:href=\"" << featureId << "\" />" << std::endl;
+        WriteFeature(featureId, output);
     }
     output << "</Targets>" << std::endl
         << "</" << rTag << ">" << std::endl;
+    return true;
 }
 
-void FeatureRelationWriter::WriteFeature(const std::string& id, std::ostream& output) {
-
+void XMLFeatureRelationWriter::WriteFeature(const std::string& id, std::ostream& output) {
+    output << "<Feature xlink:type=\"simple\" xlink:href=\"" << id << "\" />" << std::endl;
 }
 
-std::string FeatureRelationWriter::GetRelationTagName(const geo3dml::FeatureRelation* fr) const {
+std::string XMLFeatureRelationWriter::GetRelationTagName(const geo3dml::FeatureRelation* fr) const {
     const geo3dml::AggregationRelation* aggregation = dynamic_cast<const geo3dml::AggregationRelation*>(fr);
     if (aggregation != nullptr) {
         return std::string("AggregationRelation");

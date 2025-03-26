@@ -97,15 +97,29 @@ FeatureClass* Model::GetFeatureClass(const std::string& id) const {
 	return NULL;
 }
 
-void Model::RemoveFeatureClass(const std::string& id) {
+FeatureClass* Model::RemoveFeatureClass(const std::string& id) {
+	FeatureClass* fc = nullptr;
 	std::vector<FeatureClass*>::const_iterator citor = featureClasses_.cbegin();
 	while (citor != featureClasses_.cend()) {
 		if ((*citor)->GetID() == id) {
+			fc = *citor;
 			featureClasses_.erase(citor);
 			break;
 		}
 		citor++;
 	}
+	return fc;
+}
+
+Feature* Model::FindFeatureById(const std::string& id) {
+	Feature* feature = nullptr;
+	for (auto citor = featureClasses_.cbegin(); citor != featureClasses_.cend(); ++citor) {
+		feature = (*citor)->GetFeature(id);
+		if (feature != nullptr) {
+			break;
+		}
+	}
+	return feature;
 }
 
 void Model::AddFeatureRelation(FeatureRelation* fr) {

@@ -166,7 +166,7 @@ std::string XMLReaderHelper::Attribute(xmlTextReaderPtr reader, const std::strin
 	return attri;
 }
 
-std::string XMLReaderHelper::AttributeHref(xmlTextReaderPtr reader) {
+std::string XMLReaderHelper::AttributeIdInHref(xmlTextReaderPtr reader) {
 	xmlChar* href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"href");
 	if (href == NULL) {
 		href = xmlTextReaderGetAttribute(reader, (const xmlChar*)"xlink:href");

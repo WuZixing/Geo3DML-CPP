@@ -7,10 +7,10 @@
 
 namespace g3dxml {
 
-	class FeatureRelationWriter : public XMLIO {
+	class XMLFeatureRelationWriter : public XMLIO {
 	public:
-		FeatureRelationWriter();
-		virtual ~FeatureRelationWriter();
+		XMLFeatureRelationWriter();
+		virtual ~XMLFeatureRelationWriter();
 
 		bool Write(geo3dml::FeatureRelation* fr, std::ostream& output);
 
