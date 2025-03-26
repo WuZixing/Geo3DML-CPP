@@ -24,7 +24,7 @@ var searchData=
   ['xmlpointreader_21',['XMLPointReader',['../classg3dxml_1_1_x_m_l_point_reader.html#ad075b70b7149a70cf4ba416af0c16a0d',1,'g3dxml::XMLPointReader']]],
   ['xmlpointsymbolizerreader_22',['XMLPointSymbolizerReader',['../classg3dxml_1_1_x_m_l_point_symbolizer_reader.html#a4530eceefaec27f1b247899771f24153',1,'g3dxml::XMLPointSymbolizerReader']]],
   ['xmlprojectreader_23',['XMLProjectReader',['../classg3dxml_1_1_x_m_l_project_reader.html#a2623883a0a883de7bce66fd042f13bdf',1,'g3dxml::XMLProjectReader']]],
-  ['xmlreader_24',['XMLReader',['../classg3dxml_1_1_x_m_l_reader.html#a15cbd774b7468e5ff6670d49629dba00',1,'g3dxml::XMLReader']]],
+  ['xmlreader_24',['XMLReader',['../classg3dxml_1_1_x_m_l_reader.html#a1f71ef9824a23f34373fef721aa4610b',1,'g3dxml::XMLReader']]],
   ['xmlrectifiedgridreader_25',['XMLRectifiedGridReader',['../classg3dxml_1_1_x_m_l_rectified_grid_reader.html#ac6100635c022b20ac470a9f1ec2009f2',1,'g3dxml::XMLRectifiedGridReader']]],
   ['xmlshapepropertywriter_26',['XMLShapePropertyWriter',['../classg3dxml_1_1_x_m_l_shape_property_writer.html#ad5bc4cdd25f97b2931758a63b5e132c3',1,'g3dxml::XMLShapePropertyWriter']]],
   ['xmlstylereader_27',['XMLStyleReader',['../classg3dxml_1_1_x_m_l_style_reader.html#aaaab3b10713e299bcf9ea6cdeb99389a',1,'g3dxml::XMLStyleReader']]],

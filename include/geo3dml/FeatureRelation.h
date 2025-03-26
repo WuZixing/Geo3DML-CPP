@@ -23,14 +23,16 @@ namespace geo3dml {
         /// @param featureId 源地质要素的ID。
         /// @return 返回关于本要素对象自身的引用。
         FeatureRelation& SetSourceFeatureId(const std::string& featureId);
+
         /// @brief 取关系中的源地质要素的ID。
         /// @return 源地质要素的ID。
         const std::string& GetSourceFeatureId() const;
 
-        /// @name 设置源地质要素在关系中的角色。
+        /// @brief 设置源地质要素在关系中的角色。
         /// @param role 源地质要素在关系中的角色。
         /// @return 返回关于本要素对象自身的引用。
         FeatureRelation& SetSourceRole(const std::string& role);
+
         /// @brief 取源地质要素在关系中的角色。
         /// @return 源地质要素在关系中的角色。
         const std::string& GetSourceRole() const;
@@ -41,9 +43,11 @@ namespace geo3dml {
         /// @brief 添加关系中的目标地质要素。
         /// @param featureId 目标地质要素的ID。
         void AddTargetFeatureId(const std::string& featureId);
+
         /// @brief 查询目标地质要素的数目。
         /// @return 目标地质要素的数目。
         int GetTargetFeatureCount() const;
+
         /// @brief 查询目标地质要素的ID。
         /// @param i 目标地质要素的索引号（从0开始计数）。
         /// @return 目标地质要素的ID。
@@ -53,9 +57,10 @@ namespace geo3dml {
         /// @param role 目标地质要素在关系中的角色。
         /// @return 返回关于本要素对象自身的引用。
         FeatureRelation& SetTargetRole(const std::string& role);
+
         /// @brief 取目标地质要素在关系中的角色。
         /// @return 目标地质要素在关系中的角色。
-        const std::string GetTargetRole() const;
+        const std::string& GetTargetRole() const;
         ///@}
 
     private:

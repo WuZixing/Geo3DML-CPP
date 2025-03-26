@@ -140,6 +140,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1d4c6e6e82203b13459046cd07e85652"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:aa3dbebb1f8d7d1f8f1c2e8772db322e6" id="r_aa3dbebb1f8d7d1f8f1c2e8772db322e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3dbebb1f8d7d1f8f1c2e8772db322e6">AddFeatureClass</a> (<a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *f)</td></tr>
+<tr class="memdesc:aa3dbebb1f8d7d1f8f1c2e8772db322e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">向模型中添加一个要素类。  <br /></td></tr>
 <tr class="separator:aa3dbebb1f8d7d1f8f1c2e8772db322e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3c8aacdcec793b30dbf13454408b283" id="r_aa3c8aacdcec793b30dbf13454408b283"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa3c8aacdcec793b30dbf13454408b283">GetFeatureClassCount</a> () const</td></tr>
 <tr class="separator:aa3c8aacdcec793b30dbf13454408b283"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,9 +148,25 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abf2c10b86cba6a6424f111a1a72b54a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa553c3fba85b25d2dbab5b3b435e8cf3" id="r_aa553c3fba85b25d2dbab5b3b435e8cf3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa553c3fba85b25d2dbab5b3b435e8cf3">GetFeatureClass</a> (const std::string &amp;id) const</td></tr>
 <tr class="separator:aa553c3fba85b25d2dbab5b3b435e8cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca3d89aedb634ad20cf33353c05db07e" id="r_aca3d89aedb634ad20cf33353c05db07e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aca3d89aedb634ad20cf33353c05db07e">RemoveFeatureClass</a> (const std::string &amp;id)</td></tr>
-<tr class="memdesc:aca3d89aedb634ad20cf33353c05db07e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a feature class from the model but not delete it.  <br /></td></tr>
-<tr class="separator:aca3d89aedb634ad20cf33353c05db07e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484f26b33dcbc770249ee352abfe148e" id="r_a484f26b33dcbc770249ee352abfe148e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a484f26b33dcbc770249ee352abfe148e">RemoveFeatureClass</a> (const std::string &amp;id)</td></tr>
+<tr class="memdesc:a484f26b33dcbc770249ee352abfe148e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从模型中移除某指定的要素类，但是不销毁它。  <br /></td></tr>
+<tr class="separator:a484f26b33dcbc770249ee352abfe148e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">要素之间的关系。</div></td></tr>
+<tr class="memitem:a83104a8dba70114101ac43249dd87398" id="r_a83104a8dba70114101ac43249dd87398"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83104a8dba70114101ac43249dd87398">AddFeatureRelation</a> (<a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> *fr)</td></tr>
+<tr class="memdesc:a83104a8dba70114101ac43249dd87398"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加一个要素关系。  <br /></td></tr>
+<tr class="separator:a83104a8dba70114101ac43249dd87398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fc668a7a75af30ec7fcae4894f087d" id="r_a61fc668a7a75af30ec7fcae4894f087d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61fc668a7a75af30ec7fcae4894f087d">GetFeatureRelationCount</a> () const</td></tr>
+<tr class="memdesc:a61fc668a7a75af30ec7fcae4894f087d"><td class="mdescLeft">&#160;</td><td class="mdescRight">取模型中记录的要素关系的数目。  <br /></td></tr>
+<tr class="separator:a61fc668a7a75af30ec7fcae4894f087d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6d8eae22d2dae31247c75b1959b90b" id="r_a3a6d8eae22d2dae31247c75b1959b90b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a6d8eae22d2dae31247c75b1959b90b">GetFeatureRelation</a> (int i) const</td></tr>
+<tr class="memdesc:a3a6d8eae22d2dae31247c75b1959b90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">取模型中的要素关系。  <br /></td></tr>
+<tr class="separator:a3a6d8eae22d2dae31247c75b1959b90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fa4ff6a418048f0c95194604a58c33f" id="r_a3fa4ff6a418048f0c95194604a58c33f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3fa4ff6a418048f0c95194604a58c33f">RemoveFeatureRelation</a> (int i)</td></tr>
+<tr class="memdesc:a3fa4ff6a418048f0c95194604a58c33f"><td class="mdescLeft">&#160;</td><td class="mdescRight">从模型中移除要素关系对象，但是不删除它。  <br /></td></tr>
+<tr class="separator:a3fa4ff6a418048f0c95194604a58c33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6adee2907db57e828f75664bd99da1e1" id="r_a6adee2907db57e828f75664bd99da1e1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature.html">Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6adee2907db57e828f75664bd99da1e1">FindFeatureById</a> (const std::string &amp;id)</td></tr>
+<tr class="memdesc:a6adee2907db57e828f75664bd99da1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定要素的ID，从模型中查找对应的要素对象。  <br /></td></tr>
+<tr class="separator:a6adee2907db57e828f75664bd99da1e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">元数据。</div></td></tr>
 <tr class="memitem:abadc311506b38f792d6e6cf036d26494" id="r_abadc311506b38f792d6e6cf036d26494"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abadc311506b38f792d6e6cf036d26494">SetMetadata</a> (const <a class="el" href="classgeo3dml_1_1_model_metadata.html">ModelMetadata</a> &amp;meta)</td></tr>
 <tr class="separator:abadc311506b38f792d6e6cf036d26494"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,8 +185,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d1e9d56ffd3f4e6e4c568ef64fc1130 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object" id="r_aba98285ff2a966457ab77c3843c4a511"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aba98285ff2a966457ab77c3843c4a511">~Object</a> ()</td></tr>
 <tr class="separator:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object" id="r_abaf76d9b74bc3ba18f5bba103b324625"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#abaf76d9b74bc3ba18f5bba103b324625">GetID</a> () const</td></tr>
-<tr class="separator:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object" id="r_a1345c5e0d1d09c3a83f703682baefa70"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a1345c5e0d1d09c3a83f703682baefa70">GetID</a> () const</td></tr>
+<tr class="separator:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object" id="r_aeff3db60972171b6b700227948c2ab55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aeff3db60972171b6b700227948c2ab55">SetID</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -181,6 +198,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a047d43012963f13c3534fc9dbc940dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_static_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
 <tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
+<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
 <tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -191,6 +209,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a195e85717af32f7fddcd00e03f8723cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d35fe8cf571b02e8ab696663a6fc307" id="r_a9d35fe8cf571b02e8ab696663a6fc307"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d35fe8cf571b02e8ab696663a6fc307">featureClasses_</a></td></tr>
 <tr class="separator:a9d35fe8cf571b02e8ab696663a6fc307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa82ae4cfbd65ea03aec55895ad82be52" id="r_aa82ae4cfbd65ea03aec55895ad82be52"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa82ae4cfbd65ea03aec55895ad82be52">featureRelations_</a></td></tr>
+<tr class="separator:aa82ae4cfbd65ea03aec55895ad82be52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b0a397d037c6138f4175ce687fe0755" id="r_a7b0a397d037c6138f4175ce687fe0755"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_model_metadata.html">ModelMetadata</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b0a397d037c6138f4175ce687fe0755">metadata_</a></td></tr>
 <tr class="separator:a7b0a397d037c6138f4175ce687fe0755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0097d06f9aa9b64fc57161abfd4f695d" id="r_a0097d06f9aa9b64fc57161abfd4f695d"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0097d06f9aa9b64fc57161abfd4f695d">parentProjectId_</a></td></tr>
@@ -277,6 +297,65 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>向模型中添加一个要素类。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">f</td><td>新添加的要素类对象。该要素类对象将由本模型对象负责管理。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a83104a8dba70114101ac43249dd87398" name="a83104a8dba70114101ac43249dd87398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83104a8dba70114101ac43249dd87398">&#9670;&#160;</a></span>AddFeatureRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void geo3dml::Model::AddFeatureRelation </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> *</td>          <td class="paramname"><span class="paramname"><em>fr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加一个要素关系。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fr</td><td>新添加的要素关系对象。该要素关系对象将由本模型对象负责管理。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6adee2907db57e828f75664bd99da1e1" name="a6adee2907db57e828f75664bd99da1e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6adee2907db57e828f75664bd99da1e1">&#9670;&#160;</a></span>FindFeatureById()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_feature.html">Feature</a> * geo3dml::Model::FindFeatureById </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>指定要素的ID，从模型中查找对应的要素对象。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>要素的ID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>指向目标要素的指针。调用者不能删除该要素对象。 </dd></dl>
+
 </div>
 </div>
 <a id="aa553c3fba85b25d2dbab5b3b435e8cf3" name="aa553c3fba85b25d2dbab5b3b435e8cf3"></a>
@@ -327,6 +406,52 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3a6d8eae22d2dae31247c75b1959b90b" name="a3a6d8eae22d2dae31247c75b1959b90b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a6d8eae22d2dae31247c75b1959b90b">&#9670;&#160;</a></span>GetFeatureRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> * geo3dml::Model::GetFeatureRelation </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取模型中的要素关系。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>要素关系对象的索引位置（从0开始计数）。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>指向要素关系对象的指针。返回的要素关系对象仍由本对象负责管理。 </dd></dl>
+
+</div>
+</div>
+<a id="a61fc668a7a75af30ec7fcae4894f087d" name="a61fc668a7a75af30ec7fcae4894f087d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61fc668a7a75af30ec7fcae4894f087d">&#9670;&#160;</a></span>GetFeatureRelationCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int geo3dml::Model::GetFeatureRelationCount </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取模型中记录的要素关系的数目。 </p>
+<dl class="section return"><dt>Returns</dt><dd>模型中要素关系的数目。 </dd></dl>
 
 </div>
 </div>
@@ -466,14 +591,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aca3d89aedb634ad20cf33353c05db07e" name="aca3d89aedb634ad20cf33353c05db07e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca3d89aedb634ad20cf33353c05db07e">&#9670;&#160;</a></span>RemoveFeatureClass()</h2>
+<a id="a484f26b33dcbc770249ee352abfe148e" name="a484f26b33dcbc770249ee352abfe148e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a484f26b33dcbc770249ee352abfe148e">&#9670;&#160;</a></span>RemoveFeatureClass()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void geo3dml::Model::RemoveFeatureClass </td>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> * geo3dml::Model::RemoveFeatureClass </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span></td><td>)</td>
           <td></td>
@@ -481,7 +606,40 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Remove a feature class from the model but not delete it. </p>
+<p>从模型中移除某指定的要素类，但是不销毁它。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>要移除的要素类的ID。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>返回指向被移除的要素类对象的指针。该要素类对象将由调用者负责销毁。 </dd></dl>
+
+</div>
+</div>
+<a id="a3fa4ff6a418048f0c95194604a58c33f" name="a3fa4ff6a418048f0c95194604a58c33f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fa4ff6a418048f0c95194604a58c33f">&#9670;&#160;</a></span>RemoveFeatureRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> * geo3dml::Model::RemoveFeatureRelation </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>从模型中移除要素关系对象，但是不删除它。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>要被移除的要素关系对象的索引位置（从0开始计数）。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>返回指向被移除的对象的指针。该对象的内存将由调用者负责管理。 </dd></dl>
 
 </div>
 </div>
@@ -565,6 +723,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt;<a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a>*&gt; geo3dml::Model::featureClasses_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa82ae4cfbd65ea03aec55895ad82be52" name="aa82ae4cfbd65ea03aec55895ad82be52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa82ae4cfbd65ea03aec55895ad82be52">&#9670;&#160;</a></span>featureRelations_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a>*&gt; geo3dml::Model::featureRelations_</td>
         </tr>
       </table>
   </td>

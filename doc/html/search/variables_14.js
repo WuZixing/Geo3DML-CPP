@@ -8,12 +8,12 @@ var searchData=
   ['version_5f_5',['version_',['../classgeo3dml_1_1_model_metadata.html#a333fd62337240fe3ab1267821da513df',1,'geo3dml::ModelMetadata']]],
   ['versioninfo_5f_6',['versionInfo_',['../classgeo3dml_1_1_shape_property.html#a6782253ec61a4159728749d9e1c5ef81',1,'geo3dml::ShapeProperty']]],
   ['versionno_5f_7',['versionNo_',['../classgeo3dml_1_1_shape_property_1_1_version.html#a6f1b3ad469b5faa06df3d26b00060a50',1,'geo3dml::ShapeProperty::Version']]],
-  ['vertexproperty_5f_8',['vertexProperty_',['../classg3dvtk_1_1_shape_helper.html#afb894e45485ff764f33cb6d3d6e42d39',1,'g3dvtk::ShapeHelper']]],
+  ['vertexproperty_5f_8',['vertexProperty_',['../classg3dvtk_1_1_shape_helper.html#afb894e45485ff764f33cb6d3d6e42d39',1,'g3dvtk::ShapeHelper::vertexProperty_'],['../classgeo3dml_1_1_geometry.html#a11c26d127a7e4a18270cfdbb6604b6b1',1,'geo3dml::Geometry::vertexProperty_']]],
   ['vertexsymbolizer_5f_9',['vertexSymbolizer_',['../classgeo3dml_1_1_surface_symbolizer.html#a220020966f17b588c34dd89de9b3fbe6',1,'geo3dml::SurfaceSymbolizer']]],
   ['verticalrefsyscategory_5f_10',['verticalRefSysCategory_',['../classgeo3dml_1_1_model_metadata.html#a643c3fb42e7d07c8bdeb7de2a4f9a8cc',1,'geo3dml::ModelMetadata']]],
   ['verticalrefsysvalue_5f_11',['verticalRefSysValue_',['../classgeo3dml_1_1_model_metadata.html#a93ce3f0cd685b952f6108886cdba2929',1,'geo3dml::ModelMetadata']]],
   ['vertices_12',['vertices',['../structg3dvtk_1_1_truncated_regular_grid_1_1_face.html#a0c7a2965ed5076bab78829c4c623b860',1,'g3dvtk::TruncatedRegularGrid::Face']]],
   ['vint_13',['vInt',['../uniongeo3dml_1_1_field_value_1_1_value.html#abb251282132e65d02b1e3df0126f85da',1,'geo3dml::FieldValue::Value']]],
-  ['voxelproperty_5f_14',['voxelProperty_',['../classg3dvtk_1_1_shape_helper.html#a42792850a056f516597d1bd4e3364c13',1,'g3dvtk::ShapeHelper']]],
+  ['voxelproperty_5f_14',['voxelProperty_',['../classg3dvtk_1_1_shape_helper.html#a42792850a056f516597d1bd4e3364c13',1,'g3dvtk::ShapeHelper::voxelProperty_'],['../classgeo3dml_1_1_geometry.html#a3e2b763540c31a4a51057074d12404fe',1,'geo3dml::Geometry::voxelProperty_']]],
   ['vtkprop_5f_15',['vtkProp_',['../classg3dvtk_1_1_actor.html#ae68bd4dbf6882574491e20cee3ef8025',1,'g3dvtk::Actor']]]
 ];

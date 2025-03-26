@@ -104,15 +104,16 @@ Inheritance diagram for geo3dml::Object:</div>
  <div class="center">
   <img src="classgeo3dml_1_1_object.png" usemap="#geo3dml::Object_map" alt=""/>
   <map id="geo3dml::Object_map" name="geo3dml::Object_map">
-<area href="classgeo3dml_1_1_actor.html" title="A rendered object in a layer." alt="geo3dml::Actor" shape="rect" coords="160,56,310,80"/>
-<area href="classgeo3dml_1_1_feature.html" alt="geo3dml::Feature" shape="rect" coords="160,112,310,136"/>
-<area href="classgeo3dml_1_1_feature_class.html" alt="geo3dml::FeatureClass" shape="rect" coords="160,168,310,192"/>
-<area href="classgeo3dml_1_1_geometry.html" title="A Geometry object is thread safe." alt="geo3dml::Geometry" shape="rect" coords="160,224,310,248"/>
-<area href="classgeo3dml_1_1_layer.html" alt="geo3dml::Layer" shape="rect" coords="160,280,310,304"/>
-<area href="classgeo3dml_1_1_map.html" alt="geo3dml::Map" shape="rect" coords="160,336,310,360"/>
-<area href="classgeo3dml_1_1_model.html" alt="geo3dml::Model" shape="rect" coords="160,392,310,416"/>
-<area href="classgeo3dml_1_1_project.html" title="工程对象" alt="geo3dml::Project" shape="rect" coords="160,448,310,472"/>
-<area href="classgeo3dml_1_1_shape_property.html" alt="geo3dml::ShapeProperty" shape="rect" coords="160,504,310,528"/>
+<area href="classgeo3dml_1_1_actor.html" title="A rendered object in a layer." alt="geo3dml::Actor" shape="rect" coords="164,56,318,80"/>
+<area href="classgeo3dml_1_1_feature.html" alt="geo3dml::Feature" shape="rect" coords="164,112,318,136"/>
+<area href="classgeo3dml_1_1_feature_class.html" alt="geo3dml::FeatureClass" shape="rect" coords="164,168,318,192"/>
+<area href="classgeo3dml_1_1_feature_relation.html" title="地质要素的关系。" alt="geo3dml::FeatureRelation" shape="rect" coords="164,224,318,248"/>
+<area href="classgeo3dml_1_1_geometry.html" title="A Geometry object is thread safe." alt="geo3dml::Geometry" shape="rect" coords="164,280,318,304"/>
+<area href="classgeo3dml_1_1_layer.html" alt="geo3dml::Layer" shape="rect" coords="164,336,318,360"/>
+<area href="classgeo3dml_1_1_map.html" alt="geo3dml::Map" shape="rect" coords="164,392,318,416"/>
+<area href="classgeo3dml_1_1_model.html" alt="geo3dml::Model" shape="rect" coords="164,448,318,472"/>
+<area href="classgeo3dml_1_1_project.html" title="工程对象" alt="geo3dml::Project" shape="rect" coords="164,504,318,528"/>
+<area href="classgeo3dml_1_1_shape_property.html" title="几何对象关联的属性场。 @detials 属性场的定义域可以是几何对象的顶点集、边集、面片集或者体元集；其值域可以包含多个属性字段。属性字段规定了其取值类型、无效值等信息。 ShapeProperty ..." alt="geo3dml::ShapeProperty" shape="rect" coords="164,560,318,584"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -122,14 +123,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d1e9d56ffd3f4e6e4c568ef64fc1130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba98285ff2a966457ab77c3843c4a511" id="r_aba98285ff2a966457ab77c3843c4a511"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba98285ff2a966457ab77c3843c4a511">~Object</a> ()</td></tr>
 <tr class="separator:aba98285ff2a966457ab77c3843c4a511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf76d9b74bc3ba18f5bba103b324625" id="r_abaf76d9b74bc3ba18f5bba103b324625"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abaf76d9b74bc3ba18f5bba103b324625">GetID</a> () const</td></tr>
-<tr class="separator:abaf76d9b74bc3ba18f5bba103b324625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1345c5e0d1d09c3a83f703682baefa70" id="r_a1345c5e0d1d09c3a83f703682baefa70"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1345c5e0d1d09c3a83f703682baefa70">GetID</a> () const</td></tr>
+<tr class="separator:a1345c5e0d1d09c3a83f703682baefa70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff3db60972171b6b700227948c2ab55" id="r_aeff3db60972171b6b700227948c2ab55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeff3db60972171b6b700227948c2ab55">SetID</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:aeff3db60972171b6b700227948c2ab55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
+<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
 <tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
@@ -181,14 +183,14 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abaf76d9b74bc3ba18f5bba103b324625" name="abaf76d9b74bc3ba18f5bba103b324625"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaf76d9b74bc3ba18f5bba103b324625">&#9670;&#160;</a></span>GetID()</h2>
+<a id="a1345c5e0d1d09c3a83f703682baefa70" name="a1345c5e0d1d09c3a83f703682baefa70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1345c5e0d1d09c3a83f703682baefa70">&#9670;&#160;</a></span>GetID()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::string geo3dml::Object::GetID </td>
+          <td class="memname">const std::string &amp; geo3dml::Object::GetID </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -220,6 +222,9 @@ Private Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>生成一个新的对象ID。 </p>
+<dl class="section return"><dt>Returns</dt><dd>新ID。 </dd></dl>
 
 </div>
 </div>

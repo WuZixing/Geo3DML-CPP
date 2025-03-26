@@ -13,5 +13,6 @@ var searchData=
   ['isframerenderenabled_5f_10',['isFrameRenderEnabled_',['../classgeo3dml_1_1_surface_symbolizer.html#a3582304c702f7d9b2c937b8e0539360a',1,'geo3dml::SurfaceSymbolizer']]],
   ['isok_5f_11',['isOK_',['../classg3dxml_1_1_x_m_l_i_o.html#a33e2e87be99e77e202752336e4bd99aa',1,'g3dxml::XMLIO::isOK_'],['../classgeo3dml_1_1_context.html#a4723fb507d402279be08ecaea69cd090',1,'geo3dml::Context::isOK_']]],
   ['ison_5f_12',['isOn_',['../classgeo3dml_1_1_light.html#a981cd8b66070609b91dcf885e7edda61',1,'geo3dml::Light']]],
-  ['isvertexrenderenabled_5f_13',['isVertexRenderEnabled_',['../classgeo3dml_1_1_surface_symbolizer.html#a3c47cd2ee03c100df82ff72c97421add',1,'geo3dml::SurfaceSymbolizer']]]
+  ['isprivatefactory_5f_13',['isPrivateFactory_',['../classg3dxml_1_1_x_m_l_reader.html#a2f8a473934ec5463d026739e1e46b8cb',1,'g3dxml::XMLReader']]],
+  ['isvertexrenderenabled_5f_14',['isVertexRenderEnabled_',['../classgeo3dml_1_1_surface_symbolizer.html#a3c47cd2ee03c100df82ff72c97421add',1,'geo3dml::SurfaceSymbolizer']]]
 ];

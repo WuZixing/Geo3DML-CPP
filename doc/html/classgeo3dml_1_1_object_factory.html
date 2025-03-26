@@ -106,7 +106,8 @@ Inheritance diagram for geo3dml::ObjectFactory:</div>
  <div class="center">
   <img src="classgeo3dml_1_1_object_factory.png" usemap="#geo3dml::ObjectFactory_map" alt=""/>
   <map id="geo3dml::ObjectFactory_map" name="geo3dml::ObjectFactory_map">
-<area href="classg3dvtk_1_1_object_factory.html" alt="g3dvtk::ObjectFactory" shape="rect" coords="0,56,146,80"/>
+<area href="classg3dvtk_1_1_object_factory.html" title="基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。" alt="g3dvtk::ObjectFactory" shape="rect" coords="0,56,186,80"/>
+<area href="classgeo3dml_1_1_default_object_factory.html" title="缺省的ObjectFactory实现类。提供几何对象的缺省实现。" alt="geo3dml::DefaultObjectFactory" shape="rect" coords="196,56,382,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -122,14 +123,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a13c2472014e8cf7d51862abdaa72f5b8" id="r_a13c2472014e8cf7d51862abdaa72f5b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_geometry.html">Geometry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a13c2472014e8cf7d51862abdaa72f5b8">NewGeometry</a> (const std::string &amp;typeName)</td></tr>
 <tr class="separator:a13c2472014e8cf7d51862abdaa72f5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">model objects.</div></td></tr>
-<tr class="memitem:afe0e7998f92679c8a992ae5bfe2d25ee" id="r_afe0e7998f92679c8a992ae5bfe2d25ee"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_project.html">Project</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe0e7998f92679c8a992ae5bfe2d25ee">NewProject</a> ()=0</td></tr>
-<tr class="separator:afe0e7998f92679c8a992ae5bfe2d25ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ad2b6d941dad843fb584c373dc49efa" id="r_a3ad2b6d941dad843fb584c373dc49efa"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_model.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ad2b6d941dad843fb584c373dc49efa">NewModel</a> ()=0</td></tr>
-<tr class="separator:a3ad2b6d941dad843fb584c373dc49efa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7d321d0460e8fb866374704a853dfbbb" id="r_a7d321d0460e8fb866374704a853dfbbb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7d321d0460e8fb866374704a853dfbbb">NewFeatureClass</a> ()=0</td></tr>
-<tr class="separator:a7d321d0460e8fb866374704a853dfbbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f0e497a29f90e1c40c222d285b1ce9e" id="r_a8f0e497a29f90e1c40c222d285b1ce9e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature.html">Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f0e497a29f90e1c40c222d285b1ce9e">NewFeature</a> ()=0</td></tr>
-<tr class="separator:a8f0e497a29f90e1c40c222d285b1ce9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9b1678e69d595124ec9f65a3fe2440" id="r_ade9b1678e69d595124ec9f65a3fe2440"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_project.html">Project</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade9b1678e69d595124ec9f65a3fe2440">NewProject</a> ()</td></tr>
+<tr class="separator:ade9b1678e69d595124ec9f65a3fe2440"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06ddc1e180fb45f0722b3b7c9628d7c" id="r_ae06ddc1e180fb45f0722b3b7c9628d7c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_model.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae06ddc1e180fb45f0722b3b7c9628d7c">NewModel</a> ()</td></tr>
+<tr class="separator:ae06ddc1e180fb45f0722b3b7c9628d7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6c8eb9d0bc1229c15bf23b57ce003ce" id="r_ae6c8eb9d0bc1229c15bf23b57ce003ce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae6c8eb9d0bc1229c15bf23b57ce003ce">NewFeatureClass</a> ()</td></tr>
+<tr class="separator:ae6c8eb9d0bc1229c15bf23b57ce003ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23cfd63b067e5600328f1385b6475a1" id="r_ad23cfd63b067e5600328f1385b6475a1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature.html">Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad23cfd63b067e5600328f1385b6475a1">NewFeature</a> ()</td></tr>
+<tr class="separator:ad23cfd63b067e5600328f1385b6475a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">goemetry(shape) objects.</div></td></tr>
 <tr class="memitem:a7c190fb7012b9b779a08cf2d965b2ab0" id="r_a7c190fb7012b9b779a08cf2d965b2ab0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_point.html">Point</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7c190fb7012b9b779a08cf2d965b2ab0">NewPoint</a> ()=0</td></tr>
 <tr class="separator:a7c190fb7012b9b779a08cf2d965b2ab0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,8 +170,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adacf2456174e145d487cf1dc0becf955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93a1468b423d38acf0d8d8d864ae8db1" id="r_a93a1468b423d38acf0d8d8d864ae8db1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_layer.html">Layer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93a1468b423d38acf0d8d8d864ae8db1">NewLayer</a> ()</td></tr>
 <tr class="separator:a93a1468b423d38acf0d8d8d864ae8db1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe844520c9b4dbbb60d0b54a2b2e86ef" id="r_afe844520c9b4dbbb60d0b54a2b2e86ef"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_actor.html">Actor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe844520c9b4dbbb60d0b54a2b2e86ef">NewActor</a> ()=0</td></tr>
-<tr class="separator:afe844520c9b4dbbb60d0b54a2b2e86ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9240ab559e231dc840e71c934256b393" id="r_a9240ab559e231dc840e71c934256b393"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_actor.html">Actor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9240ab559e231dc840e71c934256b393">NewActor</a> ()</td></tr>
+<tr class="separator:a9240ab559e231dc840e71c934256b393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae46379b0a77ed15612715fdef87749d2" id="r_ae46379b0a77ed15612715fdef87749d2"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_point_symbolizer.html">PointSymbolizer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae46379b0a77ed15612715fdef87749d2">NewPointSymbolizer</a> ()</td></tr>
 <tr class="separator:ae46379b0a77ed15612715fdef87749d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad00147d1731ae11adf0827e86ba9021e" id="r_ad00147d1731ae11adf0827e86ba9021e"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_line_symbolizer.html">LineSymbolizer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad00147d1731ae11adf0827e86ba9021e">NewLineSymbolizer</a> ()</td></tr>
@@ -260,12 +261,12 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Clone the <a class="el" href="classgeo3dml_1_1_object_factory.html" title="Factory for Geo3DML objects. It is not thread safe.">ObjectFactory</a> itself. </p>
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a581a2053a9336aec2c018ef39941360d">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a581a2053a9336aec2c018ef39941360d">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a419939366e3bde437b8f590ee3377ba9">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
-<a id="afe844520c9b4dbbb60d0b54a2b2e86ef" name="afe844520c9b4dbbb60d0b54a2b2e86ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe844520c9b4dbbb60d0b54a2b2e86ef">&#9670;&#160;</a></span>NewActor()</h2>
+<a id="a9240ab559e231dc840e71c934256b393" name="a9240ab559e231dc840e71c934256b393"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9240ab559e231dc840e71c934256b393">&#9670;&#160;</a></span>NewActor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -282,12 +283,12 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a35a0c97c837a9af0f62c2740b2bd3f19">g3dvtk::ObjectFactory</a>.</p>
+<p>Reimplemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a35a0c97c837a9af0f62c2740b2bd3f19">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a043108d584806571ee829dbbcfa1fd9b">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -314,7 +315,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a4fd7c179707c0641707b2390f762fe38">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a4fd7c179707c0641707b2390f762fe38">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#ab2aa93e01cec7669fa0b8163ef0e320a">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -341,7 +342,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a1e9f12e8ae8302dcb970ba2361fa2a0a">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a1e9f12e8ae8302dcb970ba2361fa2a0a">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a90a5d8cfad511b2e269159f91c9057ed">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -377,7 +378,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a01a069a4684075d51a6a5599af4aa664">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a01a069a4684075d51a6a5599af4aa664">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a510b58e34906017f41957b7958970ecb">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -404,12 +405,12 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a660e34247fa4e97065b953a6b9a02ce2">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a660e34247fa4e97065b953a6b9a02ce2">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a29d40d6b165701c4a464861de1b0735a">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
-<a id="a8f0e497a29f90e1c40c222d285b1ce9e" name="a8f0e497a29f90e1c40c222d285b1ce9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f0e497a29f90e1c40c222d285b1ce9e">&#9670;&#160;</a></span>NewFeature()</h2>
+<a id="ad23cfd63b067e5600328f1385b6475a1" name="ad23cfd63b067e5600328f1385b6475a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad23cfd63b067e5600328f1385b6475a1">&#9670;&#160;</a></span>NewFeature()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,17 +427,15 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#af747cec2a8deffebcca4f2e03aea91ee">g3dvtk::ObjectFactory</a>.</p>
-
 </div>
 </div>
-<a id="a7d321d0460e8fb866374704a853dfbbb" name="a7d321d0460e8fb866374704a853dfbbb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7d321d0460e8fb866374704a853dfbbb">&#9670;&#160;</a></span>NewFeatureClass()</h2>
+<a id="ae6c8eb9d0bc1229c15bf23b57ce003ce" name="ae6c8eb9d0bc1229c15bf23b57ce003ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6c8eb9d0bc1229c15bf23b57ce003ce">&#9670;&#160;</a></span>NewFeatureClass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -453,12 +452,10 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a039822eb954186e7668c08c2c2e5685b">g3dvtk::ObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -577,7 +574,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#aff95e3e1a3aeb952fa7267f146a480b5">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#aff95e3e1a3aeb952fa7267f146a480b5">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#abea224966b005b5355c976fcced1d0f8">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -631,8 +628,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3ad2b6d941dad843fb584c373dc49efa" name="a3ad2b6d941dad843fb584c373dc49efa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ad2b6d941dad843fb584c373dc49efa">&#9670;&#160;</a></span>NewModel()</h2>
+<a id="ae06ddc1e180fb45f0722b3b7c9628d7c" name="ae06ddc1e180fb45f0722b3b7c9628d7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae06ddc1e180fb45f0722b3b7c9628d7c">&#9670;&#160;</a></span>NewModel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -649,12 +646,10 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#aecbbc853b7c1ba217ec360a0fa164da6">g3dvtk::ObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -681,7 +676,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a118d9d9c60c0e89fc90e2ab2f555ec86">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a118d9d9c60c0e89fc90e2ab2f555ec86">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a84dc4892e10d429c68621a0e83c77316">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -708,7 +703,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a3881e657862eb550b15b1db4d774cc1a">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a3881e657862eb550b15b1db4d774cc1a">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a7ef361ed3e2f79bbf4599db9caed814f">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -735,7 +730,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a54f01cec754cf08c0b80e61636f6ae16">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a54f01cec754cf08c0b80e61636f6ae16">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#af86b62055b19b4f10ddb9073bf3bd4d0">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -764,8 +759,8 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afe0e7998f92679c8a992ae5bfe2d25ee" name="afe0e7998f92679c8a992ae5bfe2d25ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe0e7998f92679c8a992ae5bfe2d25ee">&#9670;&#160;</a></span>NewProject()</h2>
+<a id="ade9b1678e69d595124ec9f65a3fe2440" name="ade9b1678e69d595124ec9f65a3fe2440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade9b1678e69d595124ec9f65a3fe2440">&#9670;&#160;</a></span>NewProject()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -782,12 +777,10 @@ Static Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#ac66e38e023a161a5e161b7737b11c4c0">g3dvtk::ObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -876,7 +869,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>构造的 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。该指针所指向的对象由调用者负责管理。 </dd></dl>
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#ae8758434c0ea3d44e5f4d0326fa63415">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#ae8758434c0ea3d44e5f4d0326fa63415">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a1f3b76ca7458bbbf801f42d743115c8f">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -964,7 +957,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a6f59018d376275e72f0ad31aa5b013ab">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a6f59018d376275e72f0ad31aa5b013ab">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a713f472693edca87e921ae2e19b40584">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -991,7 +984,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a6c1df7394edcca3c230808bf863b9f26">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a6c1df7394edcca3c230808bf863b9f26">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a53c36ef0676d36ced6290656bb326fcb">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1036,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a2f732ab20127df5b7eea2fb07937c162">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a2f732ab20127df5b7eea2fb07937c162">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#a5bdbf681469915f8a1d5d2e6056a726a">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -1070,7 +1063,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#ad6b25305ce4e22977c6e6fdc4d6f7776">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#ad6b25305ce4e22977c6e6fdc4d6f7776">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#ad983ee9ac8ec5a07b4a800a366a1398f">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -1097,7 +1090,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a5f8deee748aca14cde3a72dbc5cf6984">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a5f8deee748aca14cde3a72dbc5cf6984">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#ad7d896829da6f2eac0cc7f2ffdcb4e7b">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -1124,7 +1117,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a174a703cc6e30931fe7d0a4b70ef8d53">g3dvtk::ObjectFactory</a>.</p>
+<p>Implemented in <a class="el" href="classg3dvtk_1_1_object_factory.html#a174a703cc6e30931fe7d0a4b70ef8d53">g3dvtk::ObjectFactory</a>, and <a class="el" href="classgeo3dml_1_1_default_object_factory.html#ae8b1840917d5092d7df5102a39960c15">geo3dml::DefaultObjectFactory</a>.</p>
 
 </div>
 </div>

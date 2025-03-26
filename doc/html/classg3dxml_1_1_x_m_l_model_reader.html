@@ -158,6 +158,14 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ad5e6f3431636b14f1bb00d7272fbf2ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa98d3462fd6810e652b84afa87a14ad5" id="r_aa98d3462fd6810e652b84afa87a14ad5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa98d3462fd6810e652b84afa87a14ad5">ReadMetadataVRS</a> (xmlTextReaderPtr reader, <a class="el" href="classgeo3dml_1_1_model_metadata.html">geo3dml::ModelMetadata</a> &amp;meta)</td></tr>
 <tr class="separator:aa98d3462fd6810e652b84afa87a14ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f45d00bfaa5c135959f8496580f5205" id="r_a4f45d00bfaa5c135959f8496580f5205"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f45d00bfaa5c135959f8496580f5205">ReadFeatureRelation</a> (xmlTextReaderPtr reader, <a class="el" href="classgeo3dml_1_1_model.html">geo3dml::Model</a> *model)</td></tr>
+<tr class="separator:a4f45d00bfaa5c135959f8496580f5205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a945773ed0c7c51181b4a8bc40f1342b2" id="r_a945773ed0c7c51181b4a8bc40f1342b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a945773ed0c7c51181b4a8bc40f1342b2">ReadFeatureRelationContent</a> (xmlTextReaderPtr reader, const std::string &amp;relationElemTag, <a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *featureRelation)</td></tr>
+<tr class="separator:a945773ed0c7c51181b4a8bc40f1342b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5970370bb038c734bd2c384886e3ec" id="r_a8f5970370bb038c734bd2c384886e3ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f5970370bb038c734bd2c384886e3ec">ReadSourceFeatureInRelation</a> (xmlTextReaderPtr reader, <a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *featureRelation)</td></tr>
+<tr class="separator:a8f5970370bb038c734bd2c384886e3ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48b0e5b6d571c8778ec6f306df6f19c1" id="r_a48b0e5b6d571c8778ec6f306df6f19c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48b0e5b6d571c8778ec6f306df6f19c1">ReadTargetFeaturesInRelation</a> (xmlTextReaderPtr reader, <a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *featureRelation)</td></tr>
+<tr class="separator:a48b0e5b6d571c8778ec6f306df6f19c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -172,6 +180,8 @@ Static Private Attributes</h2></td></tr>
 <tr class="separator:a3efebf33092a5e8fd57b180813e58ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c748a8822981629ac0266bc34e4212" id="r_a33c748a8822981629ac0266bc34e4212"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a33c748a8822981629ac0266bc34e4212">Element_Type</a></td></tr>
 <tr class="separator:a33c748a8822981629ac0266bc34e4212"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6a707932523892d04e5efc647ef61ba" id="r_ab6a707932523892d04e5efc647ef61ba"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab6a707932523892d04e5efc647ef61ba">Element_FeatureRelation</a></td></tr>
+<tr class="separator:ab6a707932523892d04e5efc647ef61ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">元数据</div></td></tr>
 <tr class="memitem:a32e02fc3f7a61cf267752217d0f5d3c7" id="r_a32e02fc3f7a61cf267752217d0f5d3c7"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32e02fc3f7a61cf267752217d0f5d3c7">Element_Metadata</a></td></tr>
 <tr class="separator:a32e02fc3f7a61cf267752217d0f5d3c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -310,6 +320,69 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>parentNode</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4f45d00bfaa5c135959f8496580f5205" name="a4f45d00bfaa5c135959f8496580f5205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f45d00bfaa5c135959f8496580f5205">&#9670;&#160;</a></span>ReadFeatureRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g3dxml::XMLModelReader::ReadFeatureRelation </td>
+          <td>(</td>
+          <td class="paramtype">xmlTextReaderPtr</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgeo3dml_1_1_model.html">geo3dml::Model</a> *</td>          <td class="paramname"><span class="paramname"><em>model</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a945773ed0c7c51181b4a8bc40f1342b2" name="a945773ed0c7c51181b4a8bc40f1342b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a945773ed0c7c51181b4a8bc40f1342b2">&#9670;&#160;</a></span>ReadFeatureRelationContent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g3dxml::XMLModelReader::ReadFeatureRelationContent </td>
+          <td>(</td>
+          <td class="paramtype">xmlTextReaderPtr</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>relationElemTag</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *</td>          <td class="paramname"><span class="paramname"><em>featureRelation</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -512,6 +585,64 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a8f5970370bb038c734bd2c384886e3ec" name="a8f5970370bb038c734bd2c384886e3ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5970370bb038c734bd2c384886e3ec">&#9670;&#160;</a></span>ReadSourceFeatureInRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g3dxml::XMLModelReader::ReadSourceFeatureInRelation </td>
+          <td>(</td>
+          <td class="paramtype">xmlTextReaderPtr</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *</td>          <td class="paramname"><span class="paramname"><em>featureRelation</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a48b0e5b6d571c8778ec6f306df6f19c1" name="a48b0e5b6d571c8778ec6f306df6f19c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48b0e5b6d571c8778ec6f306df6f19c1">&#9670;&#160;</a></span>ReadTargetFeaturesInRelation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool g3dxml::XMLModelReader::ReadTargetFeaturesInRelation </td>
+          <td>(</td>
+          <td class="paramtype">xmlTextReaderPtr</td>          <td class="paramname"><span class="paramname"><em>reader</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgeo3dml_1_1_feature_relation.html">geo3dml::FeatureRelation</a> *</td>          <td class="paramname"><span class="paramname"><em>featureRelation</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a76aebdcd16558365815d9013329db389" name="a76aebdcd16558365815d9013329db389"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76aebdcd16558365815d9013329db389">&#9670;&#160;</a></span>Element</h2>
@@ -592,6 +723,28 @@ Additional Inherited Members</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">const std::string g3dxml::XMLModelReader::Element_Description</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab6a707932523892d04e5efc647ef61ba" name="ab6a707932523892d04e5efc647ef61ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6a707932523892d04e5efc647ef61ba">&#9670;&#160;</a></span>Element_FeatureRelation</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string g3dxml::XMLModelReader::Element_FeatureRelation</td>
         </tr>
       </table>
   </td>

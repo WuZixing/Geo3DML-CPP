@@ -95,6 +95,9 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="g3dvtk_2_object_factory_8h_source.html">ObjectFactory.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for g3dvtk::ObjectFactory:</div>
@@ -114,16 +117,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a07c7d6aaa98fc9680c90b99185943324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Overrided methods inherited from geo3dml::ObjectFactory.</div></td></tr>
 <tr class="memitem:a581a2053a9336aec2c018ef39941360d" id="r_a581a2053a9336aec2c018ef39941360d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classg3dvtk_1_1_object_factory.html">ObjectFactory</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a581a2053a9336aec2c018ef39941360d">Clone</a> () override</td></tr>
-<tr class="memdesc:a581a2053a9336aec2c018ef39941360d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone the <a class="el" href="classg3dvtk_1_1_object_factory.html">ObjectFactory</a> itself.  <br /></td></tr>
+<tr class="memdesc:a581a2053a9336aec2c018ef39941360d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone the <a class="el" href="classg3dvtk_1_1_object_factory.html" title="基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。">ObjectFactory</a> itself.  <br /></td></tr>
 <tr class="separator:a581a2053a9336aec2c018ef39941360d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac66e38e023a161a5e161b7737b11c4c0" id="r_ac66e38e023a161a5e161b7737b11c4c0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_project.html">geo3dml::Project</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac66e38e023a161a5e161b7737b11c4c0">NewProject</a> () override</td></tr>
-<tr class="separator:ac66e38e023a161a5e161b7737b11c4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecbbc853b7c1ba217ec360a0fa164da6" id="r_aecbbc853b7c1ba217ec360a0fa164da6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_model.html">geo3dml::Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aecbbc853b7c1ba217ec360a0fa164da6">NewModel</a> () override</td></tr>
-<tr class="separator:aecbbc853b7c1ba217ec360a0fa164da6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a039822eb954186e7668c08c2c2e5685b" id="r_a039822eb954186e7668c08c2c2e5685b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature_class.html">geo3dml::FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a039822eb954186e7668c08c2c2e5685b">NewFeatureClass</a> () override</td></tr>
-<tr class="separator:a039822eb954186e7668c08c2c2e5685b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af747cec2a8deffebcca4f2e03aea91ee" id="r_af747cec2a8deffebcca4f2e03aea91ee"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature.html">geo3dml::Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af747cec2a8deffebcca4f2e03aea91ee">NewFeature</a> () override</td></tr>
-<tr class="separator:af747cec2a8deffebcca4f2e03aea91ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54f01cec754cf08c0b80e61636f6ae16" id="r_a54f01cec754cf08c0b80e61636f6ae16"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_point.html">geo3dml::Point</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54f01cec754cf08c0b80e61636f6ae16">NewPoint</a> () override</td></tr>
 <tr class="separator:a54f01cec754cf08c0b80e61636f6ae16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3881e657862eb550b15b1db4d774cc1a" id="r_a3881e657862eb550b15b1db4d774cc1a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_multi_point.html">geo3dml::MultiPoint</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3881e657862eb550b15b1db4d774cc1a">NewMultiPoint</a> () override</td></tr>
@@ -163,6 +158,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1b6c795cd109efa5360858a77e4fa559 inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13c2472014e8cf7d51862abdaa72f5b8 inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_a13c2472014e8cf7d51862abdaa72f5b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_geometry.html">Geometry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#a13c2472014e8cf7d51862abdaa72f5b8">NewGeometry</a> (const std::string &amp;typeName)</td></tr>
 <tr class="separator:a13c2472014e8cf7d51862abdaa72f5b8 inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade9b1678e69d595124ec9f65a3fe2440 inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_ade9b1678e69d595124ec9f65a3fe2440"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_project.html">Project</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#ade9b1678e69d595124ec9f65a3fe2440">NewProject</a> ()</td></tr>
+<tr class="separator:ade9b1678e69d595124ec9f65a3fe2440 inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae06ddc1e180fb45f0722b3b7c9628d7c inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_ae06ddc1e180fb45f0722b3b7c9628d7c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_model.html">Model</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#ae06ddc1e180fb45f0722b3b7c9628d7c">NewModel</a> ()</td></tr>
+<tr class="separator:ae06ddc1e180fb45f0722b3b7c9628d7c inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6c8eb9d0bc1229c15bf23b57ce003ce inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_ae6c8eb9d0bc1229c15bf23b57ce003ce"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature_class.html">FeatureClass</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#ae6c8eb9d0bc1229c15bf23b57ce003ce">NewFeatureClass</a> ()</td></tr>
+<tr class="separator:ae6c8eb9d0bc1229c15bf23b57ce003ce inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad23cfd63b067e5600328f1385b6475a1 inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_ad23cfd63b067e5600328f1385b6475a1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature.html">Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#ad23cfd63b067e5600328f1385b6475a1">NewFeature</a> ()</td></tr>
+<tr class="separator:ad23cfd63b067e5600328f1385b6475a1 inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adacf2456174e145d487cf1dc0becf955 inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_adacf2456174e145d487cf1dc0becf955"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_map.html">Map</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#adacf2456174e145d487cf1dc0becf955">NewMap</a> ()</td></tr>
 <tr class="separator:adacf2456174e145d487cf1dc0becf955 inherit pub_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93a1468b423d38acf0d8d8d864ae8db1 inherit pub_methods_classgeo3dml_1_1_object_factory" id="r_a93a1468b423d38acf0d8d8d864ae8db1"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_layer.html">Layer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#a93a1468b423d38acf0d8d8d864ae8db1">NewLayer</a> ()</td></tr>
@@ -184,7 +187,9 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:a44aa7864b34964a35ade9ee25a3092fe inherit pub_static_methods_classgeo3dml_1_1_object_factory" id="r_a44aa7864b34964a35ade9ee25a3092fe"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object_factory.html#a44aa7864b34964a35ade9ee25a3092fe">TypeNameOfGeometry</a> (<a class="el" href="classgeo3dml_1_1_geometry.html">Geometry</a> *shape)</td></tr>
 <tr class="separator:a44aa7864b34964a35ade9ee25a3092fe inherit pub_static_methods_classgeo3dml_1_1_object_factory"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。 </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4576db34222d80d972ec10cefc5957a6" name="a4576db34222d80d972ec10cefc5957a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4576db34222d80d972ec10cefc5957a6">&#9670;&#160;</a></span>ObjectFactory()</h2>
 
@@ -253,7 +258,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Clone the <a class="el" href="classg3dvtk_1_1_object_factory.html">ObjectFactory</a> itself. </p>
+<p>Clone the <a class="el" href="classg3dvtk_1_1_object_factory.html" title="基于VTK实现的ObjectFactory。各几何对象的内核都是VTK的对应对象。">ObjectFactory</a> itself. </p>
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#aaa1b587b02dbe2097090f37ba557d5d2">geo3dml::ObjectFactory</a>.</p>
 
@@ -282,7 +287,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#afe844520c9b4dbbb60d0b54a2b2e86ef">geo3dml::ObjectFactory</a>.</p>
+<p>Reimplemented from <a class="el" href="classgeo3dml_1_1_object_factory.html#a9240ab559e231dc840e71c934256b393">geo3dml::ObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -403,60 +408,6 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="af747cec2a8deffebcca4f2e03aea91ee" name="af747cec2a8deffebcca4f2e03aea91ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af747cec2a8deffebcca4f2e03aea91ee">&#9670;&#160;</a></span>NewFeature()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_feature.html">geo3dml::Feature</a> * g3dvtk::ObjectFactory::NewFeature </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a8f0e497a29f90e1c40c222d285b1ce9e">geo3dml::ObjectFactory</a>.</p>
-
-</div>
-</div>
-<a id="a039822eb954186e7668c08c2c2e5685b" name="a039822eb954186e7668c08c2c2e5685b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a039822eb954186e7668c08c2c2e5685b">&#9670;&#160;</a></span>NewFeatureClass()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_feature_class.html">geo3dml::FeatureClass</a> * g3dvtk::ObjectFactory::NewFeatureClass </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a7d321d0460e8fb866374704a853dfbbb">geo3dml::ObjectFactory</a>.</p>
-
-</div>
-</div>
 <a id="aff95e3e1a3aeb952fa7267f146a480b5" name="aff95e3e1a3aeb952fa7267f146a480b5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aff95e3e1a3aeb952fa7267f146a480b5">&#9670;&#160;</a></span>NewLineString()</h2>
 
@@ -481,33 +432,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a49b8c2dc8e2b5aefcc9e77f872555603">geo3dml::ObjectFactory</a>.</p>
-
-</div>
-</div>
-<a id="aecbbc853b7c1ba217ec360a0fa164da6" name="aecbbc853b7c1ba217ec360a0fa164da6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecbbc853b7c1ba217ec360a0fa164da6">&#9670;&#160;</a></span>NewModel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_model.html">geo3dml::Model</a> * g3dvtk::ObjectFactory::NewModel </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a3ad2b6d941dad843fb584c373dc49efa">geo3dml::ObjectFactory</a>.</p>
 
 </div>
 </div>
@@ -589,33 +513,6 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a7c190fb7012b9b779a08cf2d965b2ab0">geo3dml::ObjectFactory</a>.</p>
-
-</div>
-</div>
-<a id="ac66e38e023a161a5e161b7737b11c4c0" name="ac66e38e023a161a5e161b7737b11c4c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac66e38e023a161a5e161b7737b11c4c0">&#9670;&#160;</a></span>NewProject()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_project.html">geo3dml::Project</a> * g3dvtk::ObjectFactory::NewProject </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#afe0e7998f92679c8a992ae5bfe2d25ee">geo3dml::ObjectFactory</a>.</p>
 
 </div>
 </div>

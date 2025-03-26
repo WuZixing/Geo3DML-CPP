@@ -55,6 +55,6 @@ FeatureRelation& FeatureRelation::SetTargetRole(const std::string& role) {
     return *this;
 }
 
-const std::string FeatureRelation::GetTargetRole() const {
+const std::string& FeatureRelation::GetTargetRole() const {
     return targetRole_;
 }

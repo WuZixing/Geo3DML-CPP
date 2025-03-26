@@ -90,6 +90,7 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classgeo3dml_1_1_geometry-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">geo3dml::Geometry Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
@@ -134,25 +135,44 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3d53b3cd3b262465ba7210a9592e672f" id="r_a3d53b3cd3b262465ba7210a9592e672f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d53b3cd3b262465ba7210a9592e672f">~Geometry</a> ()</td></tr>
 <tr class="separator:a3d53b3cd3b262465ba7210a9592e672f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd6111ed42f06c5ea187141d97fa094f" id="r_afd6111ed42f06c5ea187141d97fa094f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structgeo3dml_1_1_box3_d.html">Box3D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd6111ed42f06c5ea187141d97fa094f">GetMinimumBoundingRectangle</a> () const =0</td></tr>
+<tr class="memdesc:afd6111ed42f06c5ea187141d97fa094f"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算几何对象的最小外包矩形.  <br /></td></tr>
 <tr class="separator:afd6111ed42f06c5ea187141d97fa094f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae725e68dd3076822a4630ef4247708f9" id="r_ae725e68dd3076822a4630ef4247708f9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae725e68dd3076822a4630ef4247708f9">SetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *prop, <a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">ShapeProperty::SamplingTarget</a> t)=0</td></tr>
-<tr class="separator:ae725e68dd3076822a4630ef4247708f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a774444bdd0d0d366b40c81d6f62ea61c" id="r_a774444bdd0d0d366b40c81d6f62ea61c"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a774444bdd0d0d366b40c81d6f62ea61c">GetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">ShapeProperty::SamplingTarget</a> t) const =0</td></tr>
-<tr class="separator:a774444bdd0d0d366b40c81d6f62ea61c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44215d48ecfd06bb464d8c6076da766f" id="r_a44215d48ecfd06bb464d8c6076da766f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a44215d48ecfd06bb464d8c6076da766f">SetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *prop, <a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">ShapeProperty::SamplingTarget</a> t)</td></tr>
+<tr class="memdesc:a44215d48ecfd06bb464d8c6076da766f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置几何对象关联的属性场对象。  <br /></td></tr>
+<tr class="separator:a44215d48ecfd06bb464d8c6076da766f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbd5dd616200f703792b3c3885ff84e7" id="r_abbd5dd616200f703792b3c3885ff84e7"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbd5dd616200f703792b3c3885ff84e7">GetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">ShapeProperty::SamplingTarget</a> t) const</td></tr>
+<tr class="memdesc:abbd5dd616200f703792b3c3885ff84e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">取几何对象关联属性场。  <br /></td></tr>
+<tr class="separator:abbd5dd616200f703792b3c3885ff84e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
 <tr class="memitem:a9d1e9d56ffd3f4e6e4c568ef64fc1130 inherit pub_methods_classgeo3dml_1_1_object" id="r_a9d1e9d56ffd3f4e6e4c568ef64fc1130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9d1e9d56ffd3f4e6e4c568ef64fc1130">Object</a> ()</td></tr>
 <tr class="separator:a9d1e9d56ffd3f4e6e4c568ef64fc1130 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object" id="r_aba98285ff2a966457ab77c3843c4a511"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aba98285ff2a966457ab77c3843c4a511">~Object</a> ()</td></tr>
 <tr class="separator:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object" id="r_abaf76d9b74bc3ba18f5bba103b324625"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#abaf76d9b74bc3ba18f5bba103b324625">GetID</a> () const</td></tr>
-<tr class="separator:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object" id="r_a1345c5e0d1d09c3a83f703682baefa70"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a1345c5e0d1d09c3a83f703682baefa70">GetID</a> () const</td></tr>
+<tr class="separator:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object" id="r_aeff3db60972171b6b700227948c2ab55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aeff3db60972171b6b700227948c2ab55">SetID</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a11c26d127a7e4a18270cfdbb6604b6b1" id="r_a11c26d127a7e4a18270cfdbb6604b6b1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11c26d127a7e4a18270cfdbb6604b6b1">vertexProperty_</a></td></tr>
+<tr class="memdesc:a11c26d127a7e4a18270cfdbb6604b6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">顶点集合上的属性场。  <br /></td></tr>
+<tr class="separator:a11c26d127a7e4a18270cfdbb6604b6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1456248b72379e1af3c675a1946ba141" id="r_a1456248b72379e1af3c675a1946ba141"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1456248b72379e1af3c675a1946ba141">edgeProperty_</a></td></tr>
+<tr class="memdesc:a1456248b72379e1af3c675a1946ba141"><td class="mdescLeft">&#160;</td><td class="mdescRight">边（或棱）集合上的属性场。  <br /></td></tr>
+<tr class="separator:a1456248b72379e1af3c675a1946ba141"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4755bf16b71177f621970cf42438211b" id="r_a4755bf16b71177f621970cf42438211b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4755bf16b71177f621970cf42438211b">faceProperty_</a></td></tr>
+<tr class="memdesc:a4755bf16b71177f621970cf42438211b"><td class="mdescLeft">&#160;</td><td class="mdescRight">面片集合上的属性场。  <br /></td></tr>
+<tr class="separator:a4755bf16b71177f621970cf42438211b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e2b763540c31a4a51057074d12404fe" id="r_a3e2b763540c31a4a51057074d12404fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e2b763540c31a4a51057074d12404fe">voxelProperty_</a></td></tr>
+<tr class="memdesc:a3e2b763540c31a4a51057074d12404fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">体元集合上的属性场。  <br /></td></tr>
+<tr class="separator:a3e2b763540c31a4a51057074d12404fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
 <tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
+<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
 <tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -223,14 +243,16 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Compute the minimum bounding rectangle of the shape. </p><dl class="section return"><dt>Returns</dt><dd>In case of a null shape which means a geometry without any vertex, it will return an invalid <a class="el" href="structgeo3dml_1_1_box3_d.html">Box3D</a>. </dd></dl>
+
+<p>计算几何对象的最小外包矩形. </p>
+<dl class="section return"><dt>Returns</dt><dd>几何对象的最小外包矩形。 </dd></dl>
 
 <p>Implemented in <a class="el" href="classg3dvtk_1_1_annotation.html#a18a0771fab3b5a80b2eab545865051c2">g3dvtk::Annotation</a>, <a class="el" href="classg3dvtk_1_1_corner_point_grid.html#a7a277af7c5b3abbecda25adbfa5ede51">g3dvtk::CornerPointGrid</a>, <a class="el" href="classg3dvtk_1_1_cuboid_volume.html#a1c39b7b36b01c4f725878b5c8d84cf0b">g3dvtk::CuboidVolume</a>, <a class="el" href="classg3dvtk_1_1_line_string.html#aafdc074461116f08e3720d05b0664548">g3dvtk::LineString</a>, <a class="el" href="classg3dvtk_1_1_multi_line_string.html#a12c3088f0203ec54d12d8e9d68d3c4d8">g3dvtk::MultiLineString</a>, <a class="el" href="classg3dvtk_1_1_multi_point.html#a2cab676e290e6e99b49c42062822acaa">g3dvtk::MultiPoint</a>, <a class="el" href="classg3dvtk_1_1_point.html#a17228d5e5ec48a7680a771a93e6e62ed">g3dvtk::Point</a>, <a class="el" href="classg3dvtk_1_1_tetrahedron_volume.html#a8139dcaa98e95ce414222f001e2a1aa5">g3dvtk::TetrahedronVolume</a>, <a class="el" href="classg3dvtk_1_1_t_i_n.html#a5a29a0b55554abbc6a4716308e41e340">g3dvtk::TIN</a>, <a class="el" href="classg3dvtk_1_1_triangular_prism_volume.html#a68db4c97fae455ec441ee10961832c12">g3dvtk::TriangularPrismVolume</a>, <a class="el" href="classg3dvtk_1_1_truncated_regular_grid.html#a6180888410b79d21e79b233b6003d90f">g3dvtk::TruncatedRegularGrid</a>, and <a class="el" href="classgeo3dml_1_1_rectified_grid.html#a285917a4f0d2bb0845bca19094fd890d">geo3dml::RectifiedGrid</a>.</p>
 
 </div>
 </div>
-<a id="a774444bdd0d0d366b40c81d6f62ea61c" name="a774444bdd0d0d366b40c81d6f62ea61c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a774444bdd0d0d366b40c81d6f62ea61c">&#9670;&#160;</a></span>GetProperty()</h2>
+<a id="abbd5dd616200f703792b3c3885ff84e7" name="abbd5dd616200f703792b3c3885ff84e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbd5dd616200f703792b3c3885ff84e7">&#9670;&#160;</a></span>GetProperty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,17 +269,26 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_annotation.html#a277c9d1ae0c34d22fa8dcb63c337d88e">g3dvtk::Annotation</a>, <a class="el" href="classg3dvtk_1_1_corner_point_grid.html#a75cccb46a8ca9ad4d9efea0a0e2bfb44">g3dvtk::CornerPointGrid</a>, <a class="el" href="classg3dvtk_1_1_cuboid_volume.html#a2c58229af6705cb1fe3ff69b7c5eb484">g3dvtk::CuboidVolume</a>, <a class="el" href="classg3dvtk_1_1_line_string.html#a43a500ec4658a55dbb44b92777a1c355">g3dvtk::LineString</a>, <a class="el" href="classg3dvtk_1_1_multi_line_string.html#aa14c160a969415bc47db0120445dd425">g3dvtk::MultiLineString</a>, <a class="el" href="classg3dvtk_1_1_multi_point.html#adbc32ef331f3fac9845d173157290a49">g3dvtk::MultiPoint</a>, <a class="el" href="classg3dvtk_1_1_point.html#af6eaad40511bac4169b9b30329110997">g3dvtk::Point</a>, <a class="el" href="classg3dvtk_1_1_rectified_grid.html#a54947c2212505c787baa51d707d2abcc">g3dvtk::RectifiedGrid</a>, <a class="el" href="classg3dvtk_1_1_tetrahedron_volume.html#a07194ff7aa8c299de34d361ac02fae7a">g3dvtk::TetrahedronVolume</a>, <a class="el" href="classg3dvtk_1_1_t_i_n.html#aad8a49fd5a98b7d0ed3f2e2340939daf">g3dvtk::TIN</a>, <a class="el" href="classg3dvtk_1_1_triangular_prism_volume.html#a9f2326a9ff6f134237ec4d0df96811e5">g3dvtk::TriangularPrismVolume</a>, and <a class="el" href="classg3dvtk_1_1_truncated_regular_grid.html#a4bfa5e292a269418f940f699f70a7f7e">g3dvtk::TruncatedRegularGrid</a>.</p>
+<p>取几何对象关联属性场。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>属性场关联的目标位置。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>属性场对象。该属性场对象的内存将由本几何对象负责释放。 </dd></dl>
+
+<p>Reimplemented in <a class="el" href="classg3dvtk_1_1_annotation.html#a277c9d1ae0c34d22fa8dcb63c337d88e">g3dvtk::Annotation</a>, <a class="el" href="classg3dvtk_1_1_corner_point_grid.html#a75cccb46a8ca9ad4d9efea0a0e2bfb44">g3dvtk::CornerPointGrid</a>, <a class="el" href="classg3dvtk_1_1_cuboid_volume.html#a2c58229af6705cb1fe3ff69b7c5eb484">g3dvtk::CuboidVolume</a>, <a class="el" href="classg3dvtk_1_1_line_string.html#a3bc744a1d2529e3cb0d625fe53e912ce">g3dvtk::LineString</a>, <a class="el" href="classg3dvtk_1_1_multi_line_string.html#aa14c160a969415bc47db0120445dd425">g3dvtk::MultiLineString</a>, <a class="el" href="classg3dvtk_1_1_multi_point.html#adbc32ef331f3fac9845d173157290a49">g3dvtk::MultiPoint</a>, <a class="el" href="classg3dvtk_1_1_point.html#a2188e475df4c0d60e4272fa2fc5b6624">g3dvtk::Point</a>, <a class="el" href="classg3dvtk_1_1_rectified_grid.html#a54947c2212505c787baa51d707d2abcc">g3dvtk::RectifiedGrid</a>, <a class="el" href="classg3dvtk_1_1_tetrahedron_volume.html#a07194ff7aa8c299de34d361ac02fae7a">g3dvtk::TetrahedronVolume</a>, <a class="el" href="classg3dvtk_1_1_t_i_n.html#aad8a49fd5a98b7d0ed3f2e2340939daf">g3dvtk::TIN</a>, <a class="el" href="classg3dvtk_1_1_triangular_prism_volume.html#a9f2326a9ff6f134237ec4d0df96811e5">g3dvtk::TriangularPrismVolume</a>, and <a class="el" href="classg3dvtk_1_1_truncated_regular_grid.html#a4bfa5e292a269418f940f699f70a7f7e">g3dvtk::TruncatedRegularGrid</a>.</p>
 
 </div>
 </div>
-<a id="ae725e68dd3076822a4630ef4247708f9" name="ae725e68dd3076822a4630ef4247708f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae725e68dd3076822a4630ef4247708f9">&#9670;&#160;</a></span>SetProperty()</h2>
+<a id="a44215d48ecfd06bb464d8c6076da766f" name="a44215d48ecfd06bb464d8c6076da766f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44215d48ecfd06bb464d8c6076da766f">&#9670;&#160;</a></span>SetProperty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -278,12 +309,118 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classg3dvtk_1_1_annotation.html#a09b1bfba6b15d44b635ee62b2ae688c4">g3dvtk::Annotation</a>, <a class="el" href="classg3dvtk_1_1_corner_point_grid.html#acd77f058974dd69ea8bb3d9d240b0f02">g3dvtk::CornerPointGrid</a>, <a class="el" href="classg3dvtk_1_1_cuboid_volume.html#a7896380d72f6ff9612bab03d52f17de0">g3dvtk::CuboidVolume</a>, <a class="el" href="classg3dvtk_1_1_line_string.html#ae666792ca7cab35b8a5a781366170a32">g3dvtk::LineString</a>, <a class="el" href="classg3dvtk_1_1_multi_line_string.html#aaef8473c8ca4895e508405e907d03268">g3dvtk::MultiLineString</a>, <a class="el" href="classg3dvtk_1_1_multi_point.html#a3dc1421c1ee7eedda0f51d82ffd5b17c">g3dvtk::MultiPoint</a>, <a class="el" href="classg3dvtk_1_1_point.html#a49289f5f6191e2aa8bbb6bca8375f1a9">g3dvtk::Point</a>, <a class="el" href="classg3dvtk_1_1_rectified_grid.html#a2b77b90929dd4ae57c769f221ef4a8a8">g3dvtk::RectifiedGrid</a>, <a class="el" href="classg3dvtk_1_1_tetrahedron_volume.html#af8401c797a3e39c2030944a7a887121e">g3dvtk::TetrahedronVolume</a>, <a class="el" href="classg3dvtk_1_1_t_i_n.html#a347dab03a2d41ef89c7d658bee90f3fd">g3dvtk::TIN</a>, <a class="el" href="classg3dvtk_1_1_triangular_prism_volume.html#a70b71e67bdb246e99faf8128549a6104">g3dvtk::TriangularPrismVolume</a>, and <a class="el" href="classg3dvtk_1_1_truncated_regular_grid.html#a8007748ae99cfbb9d6d6fca0a435cdbc">g3dvtk::TruncatedRegularGrid</a>.</p>
+<p>设置几何对象关联的属性场对象。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prop</td><td>属性场对象。该属性场对象的内存将由本几何对象负责释放。 </td></tr>
+    <tr><td class="paramname">t</td><td>属性场关联的目标位置。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented in <a class="el" href="classg3dvtk_1_1_annotation.html#a09b1bfba6b15d44b635ee62b2ae688c4">g3dvtk::Annotation</a>, <a class="el" href="classg3dvtk_1_1_corner_point_grid.html#acd77f058974dd69ea8bb3d9d240b0f02">g3dvtk::CornerPointGrid</a>, <a class="el" href="classg3dvtk_1_1_cuboid_volume.html#a7896380d72f6ff9612bab03d52f17de0">g3dvtk::CuboidVolume</a>, <a class="el" href="classg3dvtk_1_1_line_string.html#ac3d74d256ea6f199a99862ef447f4e8b">g3dvtk::LineString</a>, <a class="el" href="classg3dvtk_1_1_multi_line_string.html#aaef8473c8ca4895e508405e907d03268">g3dvtk::MultiLineString</a>, <a class="el" href="classg3dvtk_1_1_multi_point.html#a3dc1421c1ee7eedda0f51d82ffd5b17c">g3dvtk::MultiPoint</a>, <a class="el" href="classg3dvtk_1_1_point.html#a0aa036d528e9a022fbe1e8e893236617">g3dvtk::Point</a>, <a class="el" href="classg3dvtk_1_1_rectified_grid.html#a2b77b90929dd4ae57c769f221ef4a8a8">g3dvtk::RectifiedGrid</a>, <a class="el" href="classg3dvtk_1_1_tetrahedron_volume.html#af8401c797a3e39c2030944a7a887121e">g3dvtk::TetrahedronVolume</a>, <a class="el" href="classg3dvtk_1_1_t_i_n.html#a347dab03a2d41ef89c7d658bee90f3fd">g3dvtk::TIN</a>, <a class="el" href="classg3dvtk_1_1_triangular_prism_volume.html#a70b71e67bdb246e99faf8128549a6104">g3dvtk::TriangularPrismVolume</a>, and <a class="el" href="classg3dvtk_1_1_truncated_regular_grid.html#a8007748ae99cfbb9d6d6fca0a435cdbc">g3dvtk::TruncatedRegularGrid</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a1456248b72379e1af3c675a1946ba141" name="a1456248b72379e1af3c675a1946ba141"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1456248b72379e1af3c675a1946ba141">&#9670;&#160;</a></span>edgeProperty_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a>* geo3dml::Geometry::edgeProperty_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>边（或棱）集合上的属性场。 </p>
+
+</div>
+</div>
+<a id="a4755bf16b71177f621970cf42438211b" name="a4755bf16b71177f621970cf42438211b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4755bf16b71177f621970cf42438211b">&#9670;&#160;</a></span>faceProperty_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a>* geo3dml::Geometry::faceProperty_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>面片集合上的属性场。 </p>
+
+</div>
+</div>
+<a id="a11c26d127a7e4a18270cfdbb6604b6b1" name="a11c26d127a7e4a18270cfdbb6604b6b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11c26d127a7e4a18270cfdbb6604b6b1">&#9670;&#160;</a></span>vertexProperty_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a>* geo3dml::Geometry::vertexProperty_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>顶点集合上的属性场。 </p>
+
+</div>
+</div>
+<a id="a3e2b763540c31a4a51057074d12404fe" name="a3e2b763540c31a4a51057074d12404fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e2b763540c31a4a51057074d12404fe">&#9670;&#160;</a></span>voxelProperty_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgeo3dml_1_1_shape_property.html">ShapeProperty</a>* geo3dml::Geometry::voxelProperty_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>体元集合上的属性场。 </p>
 
 </div>
 </div>

@@ -119,7 +119,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aebf3598843d5eb6e236d291f228f2f41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Overriding methods inherited from geo3dml::CornerPointGrid.</div></td></tr>
 <tr class="memitem:a7cb097d889c1e2e2f2f7cf2f928634b9" id="r_a7cb097d889c1e2e2f2f7cf2f928634b9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7cb097d889c1e2e2f2f7cf2f928634b9">Init</a> (int dimI, int dimJ, int dimK)</td></tr>
-<tr class="memdesc:a7cb097d889c1e2e2f2f7cf2f928634b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the grid.  <br /></td></tr>
 <tr class="separator:a7cb097d889c1e2e2f2f7cf2f928634b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a818fa30bd973eb11dcb01758891b70f8" id="r_a818fa30bd973eb11dcb01758891b70f8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a818fa30bd973eb11dcb01758891b70f8">GetDimensions</a> (int &amp;i, int &amp;j, int &amp;k) const</td></tr>
 <tr class="separator:a818fa30bd973eb11dcb01758891b70f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -148,8 +147,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9d1e9d56ffd3f4e6e4c568ef64fc1130 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object" id="r_aba98285ff2a966457ab77c3843c4a511"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aba98285ff2a966457ab77c3843c4a511">~Object</a> ()</td></tr>
 <tr class="separator:aba98285ff2a966457ab77c3843c4a511 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object" id="r_abaf76d9b74bc3ba18f5bba103b324625"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#abaf76d9b74bc3ba18f5bba103b324625">GetID</a> () const</td></tr>
-<tr class="separator:abaf76d9b74bc3ba18f5bba103b324625 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object" id="r_a1345c5e0d1d09c3a83f703682baefa70"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a1345c5e0d1d09c3a83f703682baefa70">GetID</a> () const</td></tr>
+<tr class="separator:a1345c5e0d1d09c3a83f703682baefa70 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object" id="r_aeff3db60972171b6b700227948c2ab55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aeff3db60972171b6b700227948c2ab55">SetID</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -161,10 +160,13 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af1066cf423dd165cabe044d5a85be0b9" id="r_af1066cf423dd165cabe044d5a85be0b9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classg3dvtk_1_1_shape_helper.html">ShapeHelper</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af1066cf423dd165cabe044d5a85be0b9">shapeHelper_</a></td></tr>
 <tr class="separator:af1066cf423dd165cabe044d5a85be0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a277af7c5b3abbecda25adbfa5ede51" id="r_a7a277af7c5b3abbecda25adbfa5ede51"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="structgeo3dml_1_1_box3_d.html">geo3dml::Box3D</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a277af7c5b3abbecda25adbfa5ede51">GetMinimumBoundingRectangle</a> () const override</td></tr>
+<tr class="memdesc:a7a277af7c5b3abbecda25adbfa5ede51"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算几何对象的最小外包矩形.  <br /></td></tr>
 <tr class="separator:a7a277af7c5b3abbecda25adbfa5ede51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd77f058974dd69ea8bb3d9d240b0f02" id="r_acd77f058974dd69ea8bb3d9d240b0f02"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd77f058974dd69ea8bb3d9d240b0f02">SetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html">geo3dml::ShapeProperty</a> *prop, <a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">geo3dml::ShapeProperty::SamplingTarget</a> t)</td></tr>
+<tr class="memdesc:acd77f058974dd69ea8bb3d9d240b0f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置几何对象关联的属性场对象。  <br /></td></tr>
 <tr class="separator:acd77f058974dd69ea8bb3d9d240b0f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75cccb46a8ca9ad4d9efea0a0e2bfb44" id="r_a75cccb46a8ca9ad4d9efea0a0e2bfb44"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_shape_property.html">geo3dml::ShapeProperty</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75cccb46a8ca9ad4d9efea0a0e2bfb44">GetProperty</a> (<a class="el" href="classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366">geo3dml::ShapeProperty::SamplingTarget</a> t) const</td></tr>
+<tr class="memdesc:a75cccb46a8ca9ad4d9efea0a0e2bfb44"><td class="mdescLeft">&#160;</td><td class="mdescRight">取几何对象关联属性场。  <br /></td></tr>
 <tr class="separator:a75cccb46a8ca9ad4d9efea0a0e2bfb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab706831ed03c609cdc9fa1a075cc173b" id="r_ab706831ed03c609cdc9fa1a075cc173b"><td class="memItemLeft" align="right" valign="top">vtkPolyData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab706831ed03c609cdc9fa1a075cc173b">GetPillars</a> () const</td></tr>
 <tr class="separator:ab706831ed03c609cdc9fa1a075cc173b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +183,7 @@ Public Member Functions</h2></td></tr>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
 <tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
+<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
 <tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -541,7 +544,9 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Compute the minimum bounding rectangle of the shape. </p><dl class="section return"><dt>Returns</dt><dd>In case of a null shape which means a geometry without any vertex, it will return an invalid Box3D. </dd></dl>
+
+<p>计算几何对象的最小外包矩形. </p>
+<dl class="section return"><dt>Returns</dt><dd>几何对象的最小外包矩形。 </dd></dl>
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_geometry.html#afd6111ed42f06c5ea187141d97fa094f">geo3dml::Geometry</a>.</p>
 
@@ -628,7 +633,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classgeo3dml_1_1_geometry.html#a774444bdd0d0d366b40c81d6f62ea61c">geo3dml::Geometry</a>.</p>
+<p>取几何对象关联属性场。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>属性场关联的目标位置。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>属性场对象。该属性场对象的内存将由本几何对象负责释放。 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgeo3dml_1_1_geometry.html#abbd5dd616200f703792b3c3885ff84e7">geo3dml::Geometry</a>.</p>
 
 </div>
 </div>
@@ -680,8 +694,15 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p>Initialize the grid. </p>
+<p>初始化网格。使用缺省的构造函数实例化对象后，需要调用本方法构造角点网格。 </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dimI</td><td>I轴（或X轴）方向划分的网格的数目。 </td></tr>
+    <tr><td class="paramname">dimJ</td><td>J轴（或Y轴）方向划分的网格的数目。 </td></tr>
+    <tr><td class="paramname">dimK</td><td>K轴（或Z轴）方向划分的网格的数目。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>返回true表示网格构造成功，否则表示失败。 </dd></dl>
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_corner_point_grid.html#a786dd82e16e85f8c4f3ffd49067141c6">geo3dml::CornerPointGrid</a>.</p>
 
@@ -832,7 +853,16 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implements <a class="el" href="classgeo3dml_1_1_geometry.html#ae725e68dd3076822a4630ef4247708f9">geo3dml::Geometry</a>.</p>
+<p>设置几何对象关联的属性场对象。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">prop</td><td>属性场对象。该属性场对象的内存将由本几何对象负责释放。 </td></tr>
+    <tr><td class="paramname">t</td><td>属性场关联的目标位置。 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classgeo3dml_1_1_geometry.html#a44215d48ecfd06bb464d8c6076da766f">geo3dml::Geometry</a>.</p>
 
 </div>
 </div>
