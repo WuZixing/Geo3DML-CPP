@@ -1,11 +1,6 @@
 #include <g3dxml/XMLModelReader.h>
 #include <g3dxml/XMLFeatureClassReader.h>
 #include <geo3dml/Utils.h>
-#include <geo3dml/BoundaryRelation.h>
-#include <geo3dml/ContactRelation.h>
-#include <geo3dml/GeologicalHistory.h>
-#include <geo3dml/GeologicalStructure.h>
-#include <geo3dml/AggregationRelation.h>
 
 using namespace g3dxml;
 
@@ -407,7 +402,7 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 		if (nodeType == XML_READER_TYPE_END_ELEMENT && geo3dml::IsiEqual(localName, Element_FeatureRelation)) {
 			break;
 		} else if (geo3dml::IsiEqual(localName, "BoundaryRelation")) {
-			geo3dml::BoundaryRelation* boundaryRelation = new geo3dml::BoundaryRelation();
+			geo3dml::FeatureRelation* boundaryRelation = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::BOUNDARY);
 			if (boundaryRelation != nullptr) {
 				if (ReadFeatureRelationContent(reader, "BoundaryRelation", boundaryRelation)) {
 					model->AddFeatureRelation(boundaryRelation);
@@ -417,7 +412,7 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 				}
 			}
 		} else if (geo3dml::IsiEqual(localName, "ContactRelation")) {
-			geo3dml::ContactRelation* contactRelation = new geo3dml::ContactRelation();
+			geo3dml::FeatureRelation* contactRelation = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::CONTACT);
 			if (contactRelation != nullptr) {
 				if (ReadFeatureRelationContent(reader, "ContactRelation", contactRelation)) {
 					model->AddFeatureRelation(contactRelation);
@@ -427,7 +422,7 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 				}
 			}
 		} else if (geo3dml::IsiEqual(localName, "GeologicalHistory")) {
-			geo3dml::GeologicalHistory* geologicalHistory = new geo3dml::GeologicalHistory();
+			geo3dml::FeatureRelation* geologicalHistory = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::GEOLOGICAL_HISTORY);
 			if (geologicalHistory != nullptr) {
 				if (ReadFeatureRelationContent(reader, "GeologicalHistory", geologicalHistory)) {
 					model->AddFeatureRelation(geologicalHistory);
@@ -437,7 +432,7 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 				}
 			}
 		} else if (geo3dml::IsiEqual(localName, "GeologicalStructure")) {
-			geo3dml::GeologicalStructure* geologicalStructure = new geo3dml::GeologicalStructure();
+			geo3dml::FeatureRelation* geologicalStructure = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::GEOLOGICAL_STRUCTURE);
 			if (geologicalStructure != nullptr) {
 				if (ReadFeatureRelationContent(reader, "GeologicalStructure", geologicalStructure)) {
 					model->AddFeatureRelation(geologicalStructure);
@@ -447,7 +442,7 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 				}
 			}
 		} else if (geo3dml::IsiEqual(localName, "AggregationRelation")) {
-			geo3dml::AggregationRelation* aggregationRelation = new geo3dml::AggregationRelation();
+			geo3dml::FeatureRelation* aggregationRelation = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::AGGREGATION);
 			if (aggregationRelation != nullptr) {
 				if (ReadFeatureRelationContent(reader, "AggregationRelation", aggregationRelation)) {
 					model->AddFeatureRelation(aggregationRelation);
@@ -456,8 +451,18 @@ bool XMLModelReader::ReadFeatureRelation(xmlTextReaderPtr reader, geo3dml::Model
 					break;
 				}
 			}
+		} else if (geo3dml::IsiEqual(localName, "IntrusiveRelation")) {
+			geo3dml::FeatureRelation* instrusiveRelation = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::INTRUSIVE);
+			if (instrusiveRelation != nullptr) {
+				if (ReadFeatureRelationContent(reader, "IntrusiveRelation", instrusiveRelation)) {
+					model->AddFeatureRelation(instrusiveRelation);
+				} else {
+					delete instrusiveRelation;
+					break;
+				}
+			}
 		} else if (geo3dml::IsiEqual(localName, "GeoFeatureRelation")) {
-			geo3dml::FeatureRelation* featureRelation = new geo3dml::FeatureRelation();
+			geo3dml::FeatureRelation* featureRelation = new geo3dml::FeatureRelation(geo3dml::FeatureRelation::RelationType::GENERAL);
 			if (featureRelation != nullptr) {
 				if (ReadFeatureRelationContent(reader, "GeoFeatureRelation", featureRelation)) {
 					model->AddFeatureRelation(featureRelation);

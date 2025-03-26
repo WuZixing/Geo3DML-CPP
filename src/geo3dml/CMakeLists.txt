@@ -65,13 +65,6 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TruncatedRegularGrid.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/DefaultObjectFactory.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/FeatureRelation.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/SpatialRelation.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/GeologicalRelation.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/ContactRelation.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/GeologicalHistory.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/GeologicalStructure.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/AggregationRelation.h
-	${PROJECT_SOURCE_DIR}/include/geo3dml/BoundaryRelation.h
 	${DEFAULT_OBJECT_SOURCES}
 )
 include_directories(${GEO3DML_INCLUDE_DIRS})

@@ -4,14 +4,33 @@
 #include "Feature.h"
 
 namespace geo3dml {
-    /// @brief 地质要素的关系的基类。可通过派生类型定义具体的要素关系。
-    /// @details 现在派生的类型有：ContactRelation，GeologicalHistory，GeologicalStructure，AggregationRelation，BoundaryRelation。
+    /// 地质要素的关系。
     class FeatureRelation : public Object {
     public:
-        FeatureRelation();
+        /// @brief 地质要素关系的类型。
+        enum class RelationType {
+            GENERAL,                ///< 通用的关系。
+            GEOLOGICAL_HISTORY,     ///< 地质历史（或地质年代）关系。
+            CONTACT,                ///< 接触关系。如不整合接触关系，源地质要素的角色是“上覆地层”（或“下伏地层”），目标地质要素的角色是“下伏地层”（或“上覆地层”）。
+            INTRUSIVE,              ///< 侵入体与围岩形成侵入关系，其中关系的名称是“侵入”，源地质要素的角色是“侵入体”，目标地质要素的角色是“围岩”。
+            GEOLOGICAL_STRUCTURE,   ///< 其它地质构造关系。
+            AGGREGATION,            ///< 聚合关系，表达地质要素由一个或多个其它地质要素聚合而成的关系。如某个断层面由多个小断面聚合而成，其中源表示被组成的地质要素，目标则是组成的部分。该关系可用于描述地质要素之间的普通聚合关系，不一定具有明确的地质含义。
+            BOUNDARY                ///< 地质要素由作为其边界的其它地质要素包围而成的关系。该关系的源是边界所围成的地质要素，目标则是组成边界的要素。
+        };
+        /// @name 地质要素关系的类型枚举值对应的名字。
+        ///@{
+        static RelationType NameToFeatureRelationType(const std::string& name);
+        static std::string FeatureRelationTypeToName(RelationType t);
+        ///@}
+
+    public:
+        FeatureRelation(RelationType type);
         virtual ~FeatureRelation();
 
     public:
+        /// 取地质要素关系的类别。
+        RelationType GetRelationType() const;
+
         /// @name 要素关系实例的名称（不是抽象关系的名称）。如“要素A与B的年代关系”等。
         ///@{
         FeatureRelation& SetName(const std::string& name);
@@ -65,6 +84,9 @@ namespace geo3dml {
         ///@}
 
     private:
+        /// 关系的类别。
+        RelationType type_;
+
         /// 关系的名称。
         std::string name_;
 

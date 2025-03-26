@@ -89,6 +89,7 @@ $(function(){ initResizable(false); });
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classgeo3dml_1_1_feature_relation-members.html">List of all members</a>  </div>
@@ -96,7 +97,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>地质要素的关系的基类。可通过派生类型定义具体的要素关系。  
+<p>地质要素的关系。  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_feature_relation_8h_source.html">FeatureRelation.h</a>&gt;</code></p>
@@ -106,23 +107,35 @@ Inheritance diagram for geo3dml::FeatureRelation:</div>
  <div class="center">
   <img src="classgeo3dml_1_1_feature_relation.png" usemap="#geo3dml::FeatureRelation_map" alt=""/>
   <map id="geo3dml::FeatureRelation_map" name="geo3dml::FeatureRelation_map">
-<area href="classgeo3dml_1_1_object.html" alt="geo3dml::Object" shape="rect" coords="425,0,604,24"/>
-<area href="classgeo3dml_1_1_geological_relation.html" title="要素关系中的地质类关系的基类。地质类关系如地质年代关系、不整合接触关系、侵入关系等。" alt="geo3dml::GeologicalRelation" shape="rect" coords="189,112,368,136"/>
-<area href="classgeo3dml_1_1_spatial_relation.html" title="要素关系中的几何对象之间的空间类关系的基类。空间关系如聚合关系、边界关系等。" alt="geo3dml::SpatialRelation" shape="rect" coords="661,112,840,136"/>
-<area href="classgeo3dml_1_1_contact_relation.html" title="接触关系。如不整合接触关系。" alt="geo3dml::ContactRelation" shape="rect" coords="0,168,179,192"/>
-<area href="classgeo3dml_1_1_geological_history.html" title="地质历史（或地质年代）关系。" alt="geo3dml::GeologicalHistory" shape="rect" coords="189,168,368,192"/>
-<area href="classgeo3dml_1_1_geological_structure.html" title="地质构造关系。" alt="geo3dml::GeologicalStructure" shape="rect" coords="378,168,557,192"/>
-<area href="classgeo3dml_1_1_aggregation_relation.html" title="聚合关系，表达地质要素由一个或多个其它地质要素聚合而成的关系。如某个断层面由多个小断面聚合而成，其中源表示被组成的地质要素，目标则是组成的部分。该关系可用于描述地质要素之间的普通聚合关系，不一定具有明确..." alt="geo3dml::AggregationRelation" shape="rect" coords="567,168,746,192"/>
-<area href="classgeo3dml_1_1_boundary_relation.html" title="地质要素由作为其边界的其它地质要素包围而成的关系。该关系的源是边界所围成的地质要素，目标则是组成边界的要素。" alt="geo3dml::BoundaryRelation" shape="rect" coords="756,168,935,192"/>
+<area href="classgeo3dml_1_1_object.html" alt="geo3dml::Object" shape="rect" coords="0,0,154,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a7931f9f098255e87c30f818df50e3cc1" id="r_a7931f9f098255e87c30f818df50e3cc1"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> { <br />
+&#160;&#160;<a class="el" href="#a7931f9f098255e87c30f818df50e3cc1ab61773b9b3968a9988d765d728985862">GENERAL</a>
+, <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1a5f97ae00ea99ebe654ca4662cb014e6f">GEOLOGICAL_HISTORY</a>
+, <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1ac0241eae411627c19ba9835b6d194b1c">CONTACT</a>
+, <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1a1bb190c32d6e18803c9c3e179da75485">INTRUSIVE</a>
+, <br />
+&#160;&#160;<a class="el" href="#a7931f9f098255e87c30f818df50e3cc1a3571e3239fa7d7c3305cf53f6a976a5e">GEOLOGICAL_STRUCTURE</a>
+, <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1af4c9f5462147735029052b713da1ce44">AGGREGATION</a>
+, <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1aa52f733b0e51d9a568fababbc8d3a518">BOUNDARY</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a7931f9f098255e87c30f818df50e3cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">地质要素关系的类型。  <a href="#a7931f9f098255e87c30f818df50e3cc1">More...</a><br /></td></tr>
+<tr class="separator:a7931f9f098255e87c30f818df50e3cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ade9d699d7188ea7a48c457590c70a130" id="r_ade9d699d7188ea7a48c457590c70a130"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ade9d699d7188ea7a48c457590c70a130">FeatureRelation</a> ()</td></tr>
-<tr class="separator:ade9d699d7188ea7a48c457590c70a130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f9c3fe877dd542f3fa5451884dbca23" id="r_a3f9c3fe877dd542f3fa5451884dbca23"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f9c3fe877dd542f3fa5451884dbca23">FeatureRelation</a> (<a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> type)</td></tr>
+<tr class="separator:a3f9c3fe877dd542f3fa5451884dbca23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af61136bddbe391594c32ad7ed3047f4c" id="r_af61136bddbe391594c32ad7ed3047f4c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af61136bddbe391594c32ad7ed3047f4c">~FeatureRelation</a> ()</td></tr>
 <tr class="separator:af61136bddbe391594c32ad7ed3047f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9277c7d5b6e8fa83fdd7152b5b63a648" id="r_a9277c7d5b6e8fa83fdd7152b5b63a648"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9277c7d5b6e8fa83fdd7152b5b63a648">GetRelationType</a> () const</td></tr>
+<tr class="memdesc:a9277c7d5b6e8fa83fdd7152b5b63a648"><td class="mdescLeft">&#160;</td><td class="mdescRight">取地质要素关系的类别。  <br /></td></tr>
+<tr class="separator:a9277c7d5b6e8fa83fdd7152b5b63a648"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">要素关系实例的名称（不是抽象关系的名称）。如“要素A与B的年代关系”等。</div></td></tr>
 <tr class="memitem:aa62ac76473834d8dff59342a659c553c" id="r_aa62ac76473834d8dff59342a659c553c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_feature_relation.html">FeatureRelation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa62ac76473834d8dff59342a659c553c">SetName</a> (const std::string &amp;name)</td></tr>
 <tr class="separator:aa62ac76473834d8dff59342a659c553c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,8 +180,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object" id="r_aeff3db60972171b6b700227948c2ab55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#aeff3db60972171b6b700227948c2ab55">SetID</a> (const std::string &amp;id)</td></tr>
 <tr class="separator:aeff3db60972171b6b700227948c2ab55 inherit pub_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">地质要素关系的类型枚举值对应的名字。</div></td></tr>
+<tr class="memitem:aaffc27f877c4985e5e4ceaf6ddd77a9e" id="r_aaffc27f877c4985e5e4ceaf6ddd77a9e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaffc27f877c4985e5e4ceaf6ddd77a9e">NameToFeatureRelationType</a> (const std::string &amp;name)</td></tr>
+<tr class="separator:aaffc27f877c4985e5e4ceaf6ddd77a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa691ab91a499e11322ce7442def121c" id="r_afa691ab91a499e11322ce7442def121c"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa691ab91a499e11322ce7442def121c">FeatureRelationTypeToName</a> (<a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> t)</td></tr>
+<tr class="separator:afa691ab91a499e11322ce7442def121c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
+<tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
+<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
+<tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
+<tr class="memitem:aa30899f508ad96a0a78714a23536c191" id="r_aa30899f508ad96a0a78714a23536c191"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa30899f508ad96a0a78714a23536c191">type_</a></td></tr>
+<tr class="memdesc:aa30899f508ad96a0a78714a23536c191"><td class="mdescLeft">&#160;</td><td class="mdescRight">关系的类别。  <br /></td></tr>
+<tr class="separator:aa30899f508ad96a0a78714a23536c191"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad49e23cfc18c0c39f83ca6e1d37344cb" id="r_ad49e23cfc18c0c39f83ca6e1d37344cb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad49e23cfc18c0c39f83ca6e1d37344cb">name_</a></td></tr>
 <tr class="memdesc:ad49e23cfc18c0c39f83ca6e1d37344cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">关系的名称。  <br /></td></tr>
 <tr class="separator:ad49e23cfc18c0c39f83ca6e1d37344cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -184,20 +212,53 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a5dcdcd8048a8c365225ceacf0c44b132" id="r_a5dcdcd8048a8c365225ceacf0c44b132"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5dcdcd8048a8c365225ceacf0c44b132">targetRole_</a></td></tr>
 <tr class="memdesc:a5dcdcd8048a8c365225ceacf0c44b132"><td class="mdescLeft">&#160;</td><td class="mdescRight">目标地质要素在关系中的角色。  <br /></td></tr>
 <tr class="separator:a5dcdcd8048a8c365225ceacf0c44b132"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classgeo3dml_1_1_object"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_static_methods_classgeo3dml_1_1_object')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a></td></tr>
-<tr class="memitem:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object" id="r_a9f8edb75ec9cfa7e45ea87ec452111f0"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgeo3dml_1_1_object.html#a9f8edb75ec9cfa7e45ea87ec452111f0">NewID</a> ()</td></tr>
-<tr class="memdesc:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成一个新的对象ID。  <br /></td></tr>
-<tr class="separator:a9f8edb75ec9cfa7e45ea87ec452111f0 inherit pub_static_methods_classgeo3dml_1_1_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>地质要素的关系的基类。可通过派生类型定义具体的要素关系。 </p>
-<p>现在派生的类型有：ContactRelation，GeologicalHistory，GeologicalStructure，AggregationRelation，BoundaryRelation。 </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ade9d699d7188ea7a48c457590c70a130" name="ade9d699d7188ea7a48c457590c70a130"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade9d699d7188ea7a48c457590c70a130">&#9670;&#160;</a></span>FeatureRelation()</h2>
+<div class="textblock"><p>地质要素的关系。 </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a7931f9f098255e87c30f818df50e3cc1" name="a7931f9f098255e87c30f818df50e3cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7931f9f098255e87c30f818df50e3cc1">&#9670;&#160;</a></span>RelationType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">geo3dml::FeatureRelation::RelationType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>地质要素关系的类型。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1ab61773b9b3968a9988d765d728985862" name="a7931f9f098255e87c30f818df50e3cc1ab61773b9b3968a9988d765d728985862"></a>GENERAL&#160;</td><td class="fielddoc"><p>通用的关系。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1a5f97ae00ea99ebe654ca4662cb014e6f" name="a7931f9f098255e87c30f818df50e3cc1a5f97ae00ea99ebe654ca4662cb014e6f"></a>GEOLOGICAL_HISTORY&#160;</td><td class="fielddoc"><p>地质历史（或地质年代）关系。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1ac0241eae411627c19ba9835b6d194b1c" name="a7931f9f098255e87c30f818df50e3cc1ac0241eae411627c19ba9835b6d194b1c"></a>CONTACT&#160;</td><td class="fielddoc"><p>接触关系。如不整合接触关系，源地质要素的角色是“上覆地层”（或“下伏地层”），目标地质要素的角色是“下伏地层”（或“上覆地层”）。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1a1bb190c32d6e18803c9c3e179da75485" name="a7931f9f098255e87c30f818df50e3cc1a1bb190c32d6e18803c9c3e179da75485"></a>INTRUSIVE&#160;</td><td class="fielddoc"><p>侵入体与围岩形成侵入关系，其中关系的名称是“侵入”，源地质要素的角色是“侵入体”，目标地质要素的角色是“围岩”。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1a3571e3239fa7d7c3305cf53f6a976a5e" name="a7931f9f098255e87c30f818df50e3cc1a3571e3239fa7d7c3305cf53f6a976a5e"></a>GEOLOGICAL_STRUCTURE&#160;</td><td class="fielddoc"><p>其它地质构造关系。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1af4c9f5462147735029052b713da1ce44" name="a7931f9f098255e87c30f818df50e3cc1af4c9f5462147735029052b713da1ce44"></a>AGGREGATION&#160;</td><td class="fielddoc"><p>聚合关系，表达地质要素由一个或多个其它地质要素聚合而成的关系。如某个断层面由多个小断面聚合而成，其中源表示被组成的地质要素，目标则是组成的部分。该关系可用于描述地质要素之间的普通聚合关系，不一定具有明确的地质含义。 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a7931f9f098255e87c30f818df50e3cc1aa52f733b0e51d9a568fababbc8d3a518" name="a7931f9f098255e87c30f818df50e3cc1aa52f733b0e51d9a568fababbc8d3a518"></a>BOUNDARY&#160;</td><td class="fielddoc"><p>地质要素由作为其边界的其它地质要素包围而成的关系。该关系的源是边界所围成的地质要素，目标则是组成边界的要素。 </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3f9c3fe877dd542f3fa5451884dbca23" name="a3f9c3fe877dd542f3fa5451884dbca23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f9c3fe877dd542f3fa5451884dbca23">&#9670;&#160;</a></span>FeatureRelation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +266,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">geo3dml::FeatureRelation::FeatureRelation </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -264,6 +325,31 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="afa691ab91a499e11322ce7442def121c" name="afa691ab91a499e11322ce7442def121c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa691ab91a499e11322ce7442def121c">&#9670;&#160;</a></span>FeatureRelationTypeToName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::string geo3dml::FeatureRelation::FeatureRelationTypeToName </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a9b3245f5cb64aa134043ce052674caaa" name="a9b3245f5cb64aa134043ce052674caaa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b3245f5cb64aa134043ce052674caaa">&#9670;&#160;</a></span>GetName()</h2>
 
@@ -278,6 +364,25 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9277c7d5b6e8fa83fdd7152b5b63a648" name="a9277c7d5b6e8fa83fdd7152b5b63a648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9277c7d5b6e8fa83fdd7152b5b63a648">&#9670;&#160;</a></span>GetRelationType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> geo3dml::FeatureRelation::GetRelationType </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取地质要素关系的类别。 </p>
 
 </div>
 </div>
@@ -384,6 +489,31 @@ Additional Inherited Members</h2></td></tr>
 
 <p>取目标地质要素在关系中的角色。 </p>
 <dl class="section return"><dt>Returns</dt><dd>目标地质要素在关系中的角色。 </dd></dl>
+
+</div>
+</div>
+<a id="aaffc27f877c4985e5e4ceaf6ddd77a9e" name="aaffc27f877c4985e5e4ceaf6ddd77a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaffc27f877c4985e5e4ceaf6ddd77a9e">&#9670;&#160;</a></span>NameToFeatureRelationType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> geo3dml::FeatureRelation::NameToFeatureRelationType </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -600,6 +730,30 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>目标地质要素在关系中的角色。 </p>
+
+</div>
+</div>
+<a id="aa30899f508ad96a0a78714a23536c191" name="aa30899f508ad96a0a78714a23536c191"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa30899f508ad96a0a78714a23536c191">&#9670;&#160;</a></span>type_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a7931f9f098255e87c30f818df50e3cc1">RelationType</a> geo3dml::FeatureRelation::type_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关系的类别。 </p>
 
 </div>
 </div>

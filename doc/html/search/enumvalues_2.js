@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['default_0',['Default',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268ba7a1920d61156abc05a60135aefe8bc67',1,'geo3dml::Texture']]],
-  ['double_1',['Double',['../classgeo3dml_1_1_field.html#ac7ae774520c4637de74495c6bdca3da6a7283b51b7b12d9efbda78282c9c30194',1,'geo3dml::Field']]],
-  ['drill_2',['Drill',['../classgeo3dml_1_1_model.html#a5a9fcfcd8614425eff5e47ee3e1e35b3aa3d1732e13fab68e62bf5a308a22ca72',1,'geo3dml::Model']]]
+  ['category_0',['Category',['../classgeo3dml_1_1_field.html#ac7ae774520c4637de74495c6bdca3da6a39ef62ae67495c30098f50ed2671f038',1,'geo3dml::Field']]],
+  ['clamptoborder_1',['ClampToBorder',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268bafb07f88f6f11cc5ab9c951290716f147',1,'geo3dml::Texture']]],
+  ['clamptoedge_2',['ClampToEdge',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268ba74556551231333c36debc3d373261134',1,'geo3dml::Texture']]],
+  ['contact_3',['CONTACT',['../classgeo3dml_1_1_feature_relation.html#a7931f9f098255e87c30f818df50e3cc1ac0241eae411627c19ba9835b6d194b1c',1,'geo3dml::FeatureRelation']]]
 ];

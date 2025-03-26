@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['valuetype_0',['ValueType',['../classgeo3dml_1_1_field.html#ac7ae774520c4637de74495c6bdca3da6',1,'geo3dml::Field']]]
+  ['type_0',['Type',['../classgeo3dml_1_1_light.html#a81acbfe09f78d093206a4bf83b36a72b',1,'geo3dml::Light']]]
 ];

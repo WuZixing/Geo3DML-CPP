@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_0',['Type',['../classgeo3dml_1_1_light.html#a81acbfe09f78d093206a4bf83b36a72b',1,'geo3dml::Light']]]
+  ['samplingtarget_0',['SamplingTarget',['../classgeo3dml_1_1_shape_property.html#ab000da11fd54f0f7ec1fdffd2a1c8366',1,'geo3dml::ShapeProperty']]],
+  ['schemaversion_1',['SchemaVersion',['../namespaceg3dxml.html#a0f69feabadae2b0ab142a46de5546871',1,'g3dxml']]]
 ];

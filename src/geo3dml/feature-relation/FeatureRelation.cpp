@@ -3,12 +3,55 @@
 
 using namespace geo3dml;
 
-FeatureRelation::FeatureRelation() {
+FeatureRelation::RelationType FeatureRelation::NameToFeatureRelationType(const std::string& name) {
+    if (name.compare("GeologicalHistory")) {
+        return RelationType::GEOLOGICAL_HISTORY;
+    } else if (name.compare("ContactRelation")) {
+        return RelationType::CONTACT;
+    } else if (name.compare("IntrusiveRelation")) {
+        return RelationType::INTRUSIVE;
+    } else if (name.compare("GeologicalStructure")) {
+        return RelationType::GEOLOGICAL_STRUCTURE;
+    } else if (name.compare("AggregationRelation")) {
+        return RelationType::AGGREGATION;
+    } else if (name.compare("BoundaryRelation")) {
+        return RelationType::BOUNDARY;
+    } else {
+        return RelationType::GENERAL;
+    }
+}
 
+std::string FeatureRelation::FeatureRelationTypeToName(FeatureRelation::RelationType t) {
+    switch (t) {
+    case RelationType::GENERAL:
+        return std::string("GeoFeatureRelation");
+    case RelationType::GEOLOGICAL_HISTORY:
+        return std::string("GeologicalHistory");
+    case RelationType::CONTACT:
+        return std::string("ContactRelation");
+    case RelationType::INTRUSIVE:
+        return std::string("IntrusiveRelation");
+    case RelationType::GEOLOGICAL_STRUCTURE:
+        return std::string("GeologicalStructure");
+    case RelationType::AGGREGATION:
+        return std::string("AggregationRelation");
+    case RelationType::BOUNDARY:
+        return std::string("BoundaryRelation");
+    default:
+        return std::string("GeoFeatureRelation");
+    }
+}
+
+FeatureRelation::FeatureRelation(RelationType type) {
+    type_ = type;
 }
 
 FeatureRelation::~FeatureRelation() {
 
+}
+
+FeatureRelation::RelationType FeatureRelation::GetRelationType() const {
+    return type_;
 }
 
 FeatureRelation& FeatureRelation::SetName(const std::string& name) {

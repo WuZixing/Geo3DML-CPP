@@ -1,10 +1,5 @@
 // UTF-8编码
 #include "XMLFeatureRelationWriter.h"
-#include <geo3dml/AggregationRelation.h>
-#include <geo3dml/BoundaryRelation.h>
-#include <geo3dml/ContactRelation.h>
-#include <geo3dml/GeologicalHistory.h>
-#include <geo3dml/GeologicalStructure.h>
 
 using namespace g3dxml;
 
@@ -55,32 +50,5 @@ void XMLFeatureRelationWriter::WriteFeature(const std::string& id, std::ostream&
 }
 
 std::string XMLFeatureRelationWriter::GetRelationTagName(const geo3dml::FeatureRelation* fr) const {
-    const geo3dml::AggregationRelation* aggregation = dynamic_cast<const geo3dml::AggregationRelation*>(fr);
-    if (aggregation != nullptr) {
-        return std::string("AggregationRelation");
-    } else {
-        const geo3dml::BoundaryRelation* boundary = dynamic_cast<const geo3dml::BoundaryRelation*>(fr);
-        if (boundary != nullptr) {
-            return std::string("BoundaryRelation");
-        } else {
-            const geo3dml::ContactRelation* contact = dynamic_cast<const geo3dml::ContactRelation*>(fr);
-            if (contact != nullptr) {
-                return std::string("ContactRelation");
-            } else {
-                const geo3dml::GeologicalHistory* geoHistory = dynamic_cast<const geo3dml::GeologicalHistory*>(fr);
-                if (geoHistory != nullptr) {
-                    return std::string("GeologicalHistory");
-                } else {
-                    const geo3dml::GeologicalStructure* geoStructure = dynamic_cast<const geo3dml::GeologicalStructure*>(fr);
-                    if (geoStructure != nullptr) {
-                        return std::string("GeologicalStructure");
-                    } else {
-                        return std::string("GeoFeatureRelation");   // 通用的要素关系。
-                    }
-                }
-            }
-        }
-    }
-
-    return std::string();
+    return geo3dml::FeatureRelation::FeatureRelationTypeToName(fr->GetRelationType());
 }

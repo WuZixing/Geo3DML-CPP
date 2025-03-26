@@ -79,12 +79,13 @@ var searchData=
   ['rebuildactorsfromfeaturesbystyle_76',['RebuildActorsFromFeaturesByStyle',['../classgeo3dml_1_1_layer.html#afa6c4d1571da9fd3e05cc1067f5cfda5',1,'geo3dml::Layer']]],
   ['rectifiedgrid_77',['RectifiedGrid',['../classg3dvtk_1_1_rectified_grid.html',1,'g3dvtk::RectifiedGrid'],['../classgeo3dml_1_1_rectified_grid.html',1,'geo3dml::RectifiedGrid'],['../classg3dvtk_1_1_rectified_grid.html#a1c16636cdb87226a9df9034f20428a09',1,'g3dvtk::RectifiedGrid::RectifiedGrid(const geo3dml::Point3D &amp;origin, const geo3dml::Vector3D &amp;vecI, const geo3dml::Vector3D &amp;vecJ, const geo3dml::Vector3D &amp;vecK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0)'],['../classg3dvtk_1_1_rectified_grid.html#a50425aa081e46f27e678a1ed39b3a153',1,'g3dvtk::RectifiedGrid::RectifiedGrid(const geo3dml::Point3D &amp;origin, double stepI, double stepJ, double stepK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0)'],['../classgeo3dml_1_1_rectified_grid.html#a4dedf4c16421596c2c3bbb2863e78056',1,'geo3dml::RectifiedGrid::RectifiedGrid(const Point3D &amp;origin, const Vector3D &amp;vecI, const Vector3D &amp;vecJ, const Vector3D &amp;vecK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0)'],['../classgeo3dml_1_1_rectified_grid.html#a466f153afe2b809c8e98ed1b47cf0b0d',1,'geo3dml::RectifiedGrid::RectifiedGrid(const Point3D &amp;origin, double stepI, double stepJ, double stepK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0)']]],
   ['rectifiedgrid_2eh_78',['RectifiedGrid.h',['../g3dvtk_2_rectified_grid_8h.html',1,'(Global Namespace)'],['../geo3dml_2_rectified_grid_8h.html',1,'(Global Namespace)']]],
-  ['removefeatureclass_79',['RemoveFeatureClass',['../classgeo3dml_1_1_model.html#a484f26b33dcbc770249ee352abfe148e',1,'geo3dml::Model']]],
-  ['removefeaturerelation_80',['RemoveFeatureRelation',['../classgeo3dml_1_1_model.html#a3fa4ff6a418048f0c95194604a58c33f',1,'geo3dml::Model']]],
-  ['removemapat_81',['RemoveMapAt',['../classgeo3dml_1_1_project.html#a82e9bfac4bb709aee2bf8e2124893843',1,'geo3dml::Project']]],
-  ['removemodelat_82',['RemoveModelAt',['../classgeo3dml_1_1_project.html#a7631b48f8c2ed800037435460c5d3e6b',1,'geo3dml::Project']]],
-  ['repeat_83',['Repeat',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268ba7020426cfb0a204051be4b3053d2acc8',1,'geo3dml::Texture']]],
-  ['reserved_84',['Reserved',['../classgeo3dml_1_1_feature_type_style.html#ad49b1392be80213ec825955e069e1f8c',1,'geo3dml::FeatureTypeStyle::Reserved()'],['../classgeo3dml_1_1_style.html#ab4ebfe55b1c7eac2ef74496a791a1ebe',1,'geo3dml::Style::Reserved()']]],
-  ['roughness_5f_85',['roughness_',['../classgeo3dml_1_1_p_b_r_material.html#a924ce930ac8d2a8ee2c438c305108402',1,'geo3dml::PBRMaterial']]],
-  ['rules_5f_86',['rules_',['../classgeo3dml_1_1_style.html#a34fe7585464d1b989c253ebdcff3b03d',1,'geo3dml::Style']]]
+  ['relationtype_79',['RelationType',['../classgeo3dml_1_1_feature_relation.html#a7931f9f098255e87c30f818df50e3cc1',1,'geo3dml::FeatureRelation']]],
+  ['removefeatureclass_80',['RemoveFeatureClass',['../classgeo3dml_1_1_model.html#a484f26b33dcbc770249ee352abfe148e',1,'geo3dml::Model']]],
+  ['removefeaturerelation_81',['RemoveFeatureRelation',['../classgeo3dml_1_1_model.html#a3fa4ff6a418048f0c95194604a58c33f',1,'geo3dml::Model']]],
+  ['removemapat_82',['RemoveMapAt',['../classgeo3dml_1_1_project.html#a82e9bfac4bb709aee2bf8e2124893843',1,'geo3dml::Project']]],
+  ['removemodelat_83',['RemoveModelAt',['../classgeo3dml_1_1_project.html#a7631b48f8c2ed800037435460c5d3e6b',1,'geo3dml::Project']]],
+  ['repeat_84',['Repeat',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268ba7020426cfb0a204051be4b3053d2acc8',1,'geo3dml::Texture']]],
+  ['reserved_85',['Reserved',['../classgeo3dml_1_1_feature_type_style.html#ad49b1392be80213ec825955e069e1f8c',1,'geo3dml::FeatureTypeStyle::Reserved()'],['../classgeo3dml_1_1_style.html#ab4ebfe55b1c7eac2ef74496a791a1ebe',1,'geo3dml::Style::Reserved()']]],
+  ['roughness_5f_86',['roughness_',['../classgeo3dml_1_1_p_b_r_material.html#a924ce930ac8d2a8ee2c438c305108402',1,'geo3dml::PBRMaterial']]],
+  ['rules_5f_87',['rules_',['../classgeo3dml_1_1_style.html#a34fe7585464d1b989c253ebdcff3b03d',1,'geo3dml::Style']]]
 ];

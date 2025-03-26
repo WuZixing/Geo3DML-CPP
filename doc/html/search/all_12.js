@@ -29,6 +29,6 @@ var searchData=
   ['truncatedregulargrid_26',['TruncatedRegularGrid',['../classg3dvtk_1_1_truncated_regular_grid.html',1,'g3dvtk::TruncatedRegularGrid'],['../classgeo3dml_1_1_truncated_regular_grid.html',1,'geo3dml::TruncatedRegularGrid'],['../classg3dvtk_1_1_truncated_regular_grid.html#aa8828504bc8359d580c3f2f3dae24988',1,'g3dvtk::TruncatedRegularGrid::TruncatedRegularGrid()'],['../classgeo3dml_1_1_truncated_regular_grid.html#a532b883ca1630e0ef4c87b25f522ea56',1,'geo3dml::TruncatedRegularGrid::TruncatedRegularGrid()']]],
   ['truncatedregulargrid_2eh_27',['TruncatedRegularGrid.h',['../g3dvtk_2_truncated_regular_grid_8h.html',1,'(Global Namespace)'],['../geo3dml_2_truncated_regular_grid_8h.html',1,'(Global Namespace)']]],
   ['type_28',['Type',['../classgeo3dml_1_1_light.html#a81acbfe09f78d093206a4bf83b36a72b',1,'geo3dml::Light']]],
-  ['type_5f_29',['type_',['../classgeo3dml_1_1_model.html#a195e85717af32f7fddcd00e03f8723cc',1,'geo3dml::Model']]],
+  ['type_5f_29',['type_',['../classgeo3dml_1_1_feature_relation.html#aa30899f508ad96a0a78714a23536c191',1,'geo3dml::FeatureRelation::type_'],['../classgeo3dml_1_1_model.html#a195e85717af32f7fddcd00e03f8723cc',1,'geo3dml::Model::type_']]],
   ['typenameofgeometry_30',['TypeNameOfGeometry',['../classgeo3dml_1_1_object_factory.html#a44aa7864b34964a35ade9ee25a3092fe',1,'geo3dml::ObjectFactory']]]
 ];
