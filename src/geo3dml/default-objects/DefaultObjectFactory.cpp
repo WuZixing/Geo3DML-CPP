@@ -1,5 +1,6 @@
 // UTF-8编码
 #include <geo3dml/DefaultObjectFactory.h>
+#include "Actor.h"
 #include "ShapeProperty.h"
 #include "Annotation.h"
 #include "CornerPointGrid.h"
@@ -93,5 +94,5 @@ ShapeProperty* DefaultObjectFactory::NewShapeProperty() {
 }
 
 Actor* DefaultObjectFactory::NewActor() {
-	return nullptr;
+	return new geometry::Actor();
 }

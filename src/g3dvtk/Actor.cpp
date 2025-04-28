@@ -262,17 +262,24 @@ geo3dml::Symbolizer* Actor::MakeSymbozier() const {
 				ToLineSymbolizer(actor->GetProperty(), lineSym);
 				return lineSym;
 			} else {
-				g3dvtk::Point* point = dynamic_cast<g3dvtk::Point*>(bindingGeometry_);
-				if (point != nullptr) {
-					geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
-					ToPointSymbolizer(actor->GetProperty(), pointSym);
-					return pointSym;
+                g3dvtk::MultiLineString* mLineString = dynamic_cast<g3dvtk::MultiLineString*>(bindingGeometry_);
+				if (mLineString != nullptr) {
+					geo3dml::LineSymbolizer* lineSym = g3dFactory.NewLineSymbolizer();
+					ToLineSymbolizer(actor->GetProperty(), lineSym);
+					return lineSym;
 				} else {
-					g3dvtk::MultiPoint* mPoint = dynamic_cast<g3dvtk::MultiPoint*>(bindingGeometry_);
-					if (mPoint != nullptr) {
+					g3dvtk::Point* point = dynamic_cast<g3dvtk::Point*>(bindingGeometry_);
+					if (point != nullptr) {
 						geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
 						ToPointSymbolizer(actor->GetProperty(), pointSym);
 						return pointSym;
+					} else {
+						g3dvtk::MultiPoint* mPoint = dynamic_cast<g3dvtk::MultiPoint*>(bindingGeometry_);
+						if (mPoint != nullptr) {
+							geo3dml::PointSymbolizer* pointSym = g3dFactory.NewPointSymbolizer();
+							ToPointSymbolizer(actor->GetProperty(), pointSym);
+							return pointSym;
+						}
 					}
 				}
 			}
