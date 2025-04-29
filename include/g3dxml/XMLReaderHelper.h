@@ -9,8 +9,9 @@ namespace g3dxml {
 	class XMLReaderHelper {
 	public:
 		/// Detect file's encoding.
-		static std::string DectectFileEncoding(const std::string& file);
+		static std::string DectectFileEncoding(const std::string& filePath);
 		static bool IsUTF8(const std::string& encodingName);
+		static std::string FormatErrorMessageAboutEncoding(const std::string& encodingName, const std::string& filePath);
 
 		/// Check whether a path is relative.
 		static bool IsRelativePath(const std::string& path);

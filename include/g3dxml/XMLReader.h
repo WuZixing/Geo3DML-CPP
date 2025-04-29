@@ -13,8 +13,9 @@ namespace g3dxml {
 		XMLReader(geo3dml::ObjectFactory* factory = nullptr);
 		virtual ~XMLReader();
 
-		/// Load Geo3DML data from XML file.
-		/// The current working directory should be set as the file's direcotry before calling this method.
+		///@brief 从XML文件中读取Geo3DML数据。
+        ///@param file XML文件的路径。要求该文件为UTF-8编码。传入的参数file也应是UTF-8编码。
+        ///@return 返回读取的Geo3DML对象。如果读取失败，则返回nullptr。返回的对象有调用者负责销毁。
 		geo3dml::Object* LoadXMLFile(const std::string& file);
 
 	private:

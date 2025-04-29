@@ -52,10 +52,10 @@ void MultiLineString::GetVertexOfLineString(int lineIndex, int vertexIndex, doub
 		return;
 	}
 	vtkIdType cellSize = 0;
-	const vtkIdType* idList = NULL;
-	lineArray->GetCell(lineIndex, cellSize, idList);
+	const vtkIdType* pts = nullptr;
+	lineArray->GetCellAtId(lineIndex, cellSize, pts);
 	if (vertexIndex >= 0 && vertexIndex < cellSize) {
-		vtkIdType ptIndex = idList[vertexIndex];
+		vtkIdType ptIndex = pts[vertexIndex];
 		double coords[3];
 		polyData_->GetPoints()->GetPoint(ptIndex, coords);
 		x = coords[0];

@@ -71,7 +71,7 @@ geo3dml::Map* XMLMapReader::ReadMap(xmlTextReaderPtr reader) {
 geo3dml::Map* XMLMapReader::LoadFromFile(const std::string& file) {
 	std::string fileEncoding = XMLReaderHelper::DectectFileEncoding(file);
 	if (!XMLReaderHelper::IsUTF8(fileEncoding)) {
-		SetStatus(false, "unsupported encoding " + fileEncoding + " of file " + file);
+		SetStatus(false, XMLReaderHelper::FormatErrorMessageAboutEncoding(fileEncoding, file));
 		return NULL;
 	}
 	geo3dml::Map* map = NULL;

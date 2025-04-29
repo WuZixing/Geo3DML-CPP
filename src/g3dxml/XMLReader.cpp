@@ -25,12 +25,12 @@ XMLReader::~XMLReader() {
 
 geo3dml::Object* XMLReader::LoadXMLFile(const std::string& file) {
 	if (g3dFactory_ == nullptr) {
-		SetStatus(false, "G3DObjectFactory is NULL");
+		SetStatus(false, "ObjectFactory is NULL");
 		return nullptr;
 	}
 	std::string fileEncoding = XMLReaderHelper::DectectFileEncoding(file);
 	if (!XMLReaderHelper::IsUTF8(fileEncoding)) {
-		SetStatus(false, "unsupported encoding " + fileEncoding + " of file " + file);
+		SetStatus(false, XMLReaderHelper::FormatErrorMessageAboutEncoding(fileEncoding, file));
 		return nullptr;
 	}
 	LIBXML_TEST_VERSION

@@ -36,19 +36,19 @@ __Win32UTF8ToWChar(const char *u8String) {
 }
 #endif
 
-std::string XMLReaderHelper::DectectFileEncoding(const std::string& file) {
+std::string XMLReaderHelper::DectectFileEncoding(const std::string& filePath) {
 #if defined(_WIN32)
 	std::ifstream f;
-	wchar_t* wPath = __Win32UTF8ToWChar(file.c_str());
+	wchar_t* wPath = __Win32UTF8ToWChar(filePath.c_str());
 	if (wPath) {
 		f.open(wPath);
 		free(wPath);
 		wPath = NULL;
 	} else {
-		f.open(file);
+		f.open(filePath);
 	}
 #else
-	std::ifstream f(file);
+	std::ifstream f(filePath);
 #endif
 	if (f.is_open()) {
 		std::string firstLine;
@@ -81,6 +81,10 @@ bool XMLReaderHelper::IsUTF8(const std::string& encodingName) {
 		return true;
 	}
 	return false;
+}
+
+std::string XMLReaderHelper::FormatErrorMessageAboutEncoding(const std::string& encodingName, const std::string& filePath) {
+	return std::string("Can not open the file, or encoding[") + encodingName + std::string("] of the file is not UTF-8: ") + filePath;
 }
 
 bool XMLReaderHelper::IsRelativePath(const std::string& path) {
