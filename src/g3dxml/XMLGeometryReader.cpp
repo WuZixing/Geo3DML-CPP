@@ -3,6 +3,7 @@
 #include <g3dxml/XMLCornerPointGridReader.h>
 #include <g3dxml/XMLGeoDiscreteCoverageReader.h>
 #include <g3dxml/XMLLineStringReader.h>
+#include <g3dxml/XMLMultiLineStringReader.h>
 #include <g3dxml/XMLPointReader.h>
 #include <g3dxml/XMLMultiPointReader.h>
 #include <g3dxml/XMLAnnotationReader.h>
@@ -84,6 +85,12 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				geo = lineStringReader.ReadLineString(reader);
 				if (geo == nullptr) {
 					SetStatus(false, lineStringReader.Error());
+				}
+			} else if (geo3dml::IsiEqual(localName, XMLMultiLineStringReader::Element)) {
+                XMLMultiLineStringReader mLineStringReader(g3dFactory_);
+				geo = mLineStringReader.ReadMultiLineString(reader);
+				if (geo == nullptr) {
+					SetStatus(false, mLineStringReader.Error());
 				}
 			} else if (geo3dml::IsiEqual(localName, XMLPointReader::Element)) {
 				XMLPointReader pointReader(g3dFactory_);

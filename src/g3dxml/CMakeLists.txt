@@ -82,7 +82,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLGeoDiscreteCoverageReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLineStringReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLPointReader.h
-  ${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLAnnotationReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiPointReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLLayerWriter.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMapReader.h
@@ -100,6 +100,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTetrahedronVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLCuboidVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTruncatedRegularGridReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiLineStringReader.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

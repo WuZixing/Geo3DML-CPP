@@ -5,6 +5,7 @@
 #include <geo3dml/TIN.h>
 #include <geo3dml/Annotation.h>
 #include <geo3dml/LineString.h>
+#include <geo3dml/MultiLineString.h>
 #include <geo3dml/Point.h>
 #include <geo3dml/MultiPoint.h>
 #include <geo3dml/CornerPointGrid.h>
@@ -27,6 +28,7 @@ namespace g3dxml {
 	private:
 		void WriteTIN(geo3dml::TIN* tin, std::ostream& output);
 		void WriteLineString(geo3dml::LineString* line, std::ostream& output);
+		void WriteMultiLineString(geo3dml::MultiLineString* mLine, std::ostream& output);
 		void WritePoint(geo3dml::Point* point, std::ostream& output);
 		void WriteAnnotation(geo3dml::Annotation* annotation, std::ostream& output);
 		void WriteMultiPoint(geo3dml::MultiPoint* mPoint, std::ostream& output);
