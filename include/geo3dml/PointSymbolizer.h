@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Symbolizer.h"
@@ -9,6 +10,11 @@ namespace geo3dml {
 	public:
 		PointSymbolizer();
 		virtual ~PointSymbolizer();
+
+		///@name 实现父类定义的接口。
+		///@{
+		virtual Symbolizer* Clone() const override;
+		///@}
 
 		void SetSize(float s = 2);
 		float GetSize() const;

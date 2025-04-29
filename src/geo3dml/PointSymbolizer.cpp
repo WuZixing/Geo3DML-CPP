@@ -1,3 +1,4 @@
+// UTF-8编码
 #include <geo3dml/PointSymbolizer.h>
 
 using namespace geo3dml;
@@ -8,6 +9,13 @@ PointSymbolizer::PointSymbolizer() {
 
 PointSymbolizer::~PointSymbolizer() {
 
+}
+
+Symbolizer* PointSymbolizer::Clone() const {
+    PointSymbolizer* sym = new PointSymbolizer();
+	sym->pointSize_ = pointSize_;
+    sym->material_ = material_;
+	return sym;
 }
 
 void PointSymbolizer::SetSize(float s) {

@@ -1,3 +1,4 @@
+// UTF-8编码
 #include <geo3dml/LineSymbolizer.h>
 
 using namespace geo3dml;
@@ -8,6 +9,13 @@ LineSymbolizer::LineSymbolizer() {
 
 LineSymbolizer::~LineSymbolizer() {
 
+}
+
+Symbolizer* LineSymbolizer::Clone() const {
+    LineSymbolizer* sym = new LineSymbolizer();
+    sym->lineWidth_ = lineWidth_;
+    sym->material_ = material_;
+    return sym;
 }
 
 void LineSymbolizer::SetWidth(float w) {

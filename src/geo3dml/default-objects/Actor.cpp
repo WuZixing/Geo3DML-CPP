@@ -37,8 +37,9 @@ void Actor::SetVisible(bool show) {
 }
 
 geo3dml::Symbolizer* Actor::MakeSymbozier() const {
-	if (bindingGeometry_ == nullptr) {
-		return nullptr;
-	}
-	return nullptr;
+    if (symbolizer_ != nullptr) {
+        return symbolizer_->Clone();
+    } else {
+        return nullptr;
+    }
 }

@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Symbolizer.h"
@@ -9,6 +10,11 @@ namespace geo3dml {
 	public:
 		LineSymbolizer();
 		virtual ~LineSymbolizer();
+
+		///@name 实现父类定义的接口。
+		///@{
+		virtual Symbolizer* Clone() const override;
+		///@}
 
 		void SetWidth(float w = 2);
 		float GetWidth() const;

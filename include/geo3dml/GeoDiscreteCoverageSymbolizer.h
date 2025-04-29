@@ -1,3 +1,4 @@
+// UTF-8编码
 #pragma once
 
 #include "Symbolizer.h"
@@ -9,5 +10,10 @@ namespace geo3dml {
 	public:
 		GeoDiscreteCoverageSymbolizer();
 		virtual ~GeoDiscreteCoverageSymbolizer();
+
+		///@name 实现父类定义的接口。
+		///@{
+		virtual Symbolizer* Clone() const override;
+		///@}
 	};
 }

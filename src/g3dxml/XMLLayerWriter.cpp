@@ -30,8 +30,13 @@ bool XMLLayerWriter::Write(geo3dml::Layer* layer, std::ostream& output, SchemaVe
 		for (int m = 0; m < actorNumber; ++m) {
 			geo3dml::Actor* actor = layer->GetActorAt(m);
 			geo3dml::StyleRuleEqualTo* eqRule = new geo3dml::StyleRuleEqualTo(fieldDef.Name(), actor->GetBindingFeature()->GetID());
-			eqRule->SetSymbolizer(actor->MakeSymbozier());
-			featureStyle->AddRule(eqRule);
+			geo3dml::Symbolizer* sym = actor->MakeSymbozier();
+			if (sym != nullptr) {
+				eqRule->SetSymbolizer(actor->MakeSymbozier());
+				featureStyle->AddRule(eqRule);
+			} else {
+				delete eqRule;
+			}
 		}
 		layer->AddStyle(featureStyle);
 		styleNumber = 1;
