@@ -15,7 +15,7 @@ namespace g3dxml {
 
 		///@brief 从XML文件中读取Geo3DML数据。
         ///@param file XML文件的路径。要求该文件为UTF-8编码。传入的参数file也应是UTF-8编码。
-        ///@return 返回读取的Geo3DML对象。如果读取失败，则返回nullptr。返回的对象有调用者负责销毁。
+        ///@return 返回读取的Geo3DML对象。如果读取失败，则返回nullptr。返回的对象由调用者负责销毁。
 		geo3dml::Object* LoadXMLFile(const std::string& file);
 
 	private:
