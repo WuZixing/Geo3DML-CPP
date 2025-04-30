@@ -4,7 +4,7 @@
 #include "Volume.h"
 
 namespace geo3dml {
-    /// @brief 四面体构成的体。
+    /// @brief 四面体构成的体。从v2版本开始支持。
     class TetrahedronVolume : public Volume {
     public:
         TetrahedronVolume();

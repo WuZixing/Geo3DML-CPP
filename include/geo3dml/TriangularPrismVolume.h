@@ -5,7 +5,7 @@
 
 namespace geo3dml {
 
-    /// @brief 广义三棱柱构成的体。
+    /// @brief 广义三棱柱构成的体。从v2版本开始支持。
     class TriangularPrismVolume : public Volume {
     public:
         TriangularPrismVolume();

@@ -306,6 +306,7 @@ void XMLWriter::OpenXMLFileForOutput(const std::string& xmlFilePath, std::ofstre
 #else
 	xmlFile.open(xmlFilePath);
 #endif
+	xmlFile.imbue(std::locale::classic());
 	xmlFile.setf(std::ios_base::fixed);
 	xmlFile.precision(6);
 }

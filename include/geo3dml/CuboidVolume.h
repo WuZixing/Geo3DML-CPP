@@ -4,7 +4,7 @@
 #include "Volume.h"
 
 namespace geo3dml {
-    /// @brief 大小不一的六面体（如长方体）单元构成的体。
+    /// @brief 大小不一的六面体（如长方体）单元构成的体。从v2版本开始支持。
     class CuboidVolume : public Volume {
     public:
         CuboidVolume();

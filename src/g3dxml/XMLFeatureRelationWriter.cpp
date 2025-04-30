@@ -21,7 +21,8 @@ bool XMLFeatureRelationWriter::Write(geo3dml::FeatureRelation* fr, std::ostream&
         SetStatus(false, "unknown feature relation");
         return false;
     }
-    output << "<" << rTag << " gml:id=\"" << fr->GetID() << "\">" << std::endl
+    output << "<Relation>" << std::endl
+        << "<" << rTag << " gml:id=\"" << fr->GetID() << "\">" << std::endl
         << "<gml:name>" << fr->GetName() << "</gml:name>" << std::endl
         << "<Source>" << std::endl;
     const std::string& sourceRole = fr->GetSourceRole();
@@ -41,7 +42,8 @@ bool XMLFeatureRelationWriter::Write(geo3dml::FeatureRelation* fr, std::ostream&
         WriteFeature(featureId, output);
     }
     output << "</Targets>" << std::endl
-        << "</" << rTag << ">" << std::endl;
+        << "</" << rTag << ">" << std::endl
+        << "</Relation>" << std::endl;
     return true;
 }
 

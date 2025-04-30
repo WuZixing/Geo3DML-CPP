@@ -7,7 +7,7 @@
 
 namespace geo3dml {
 
-    /// @brief 三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。
+    /// @brief 三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。
     class RectifiedGrid : public Volume {
     public:
         /// @brief 构造函数。

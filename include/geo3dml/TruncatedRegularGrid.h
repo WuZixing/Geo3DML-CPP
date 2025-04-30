@@ -5,7 +5,7 @@
 #include "Volume.h"
 
 namespace geo3dml {
-    /// @brief TruncatedRegularGrid：截断规则网格。
+    /// @brief TruncatedRegularGrid：截断规则网格。从v2版本开始支持。
     class TruncatedRegularGrid : public Volume {
     public:
         TruncatedRegularGrid();
