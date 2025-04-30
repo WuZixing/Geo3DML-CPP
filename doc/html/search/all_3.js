@@ -3,7 +3,7 @@ var searchData=
   ['dataset_5f_0',['dataSet_',['../classg3dvtk_1_1_shape_property.html#a7b39df04737aa243bdcae5b8d4c614e4',1,'g3dvtk::ShapeProperty']]],
   ['datatype_1',['DataType',['../classgeo3dml_1_1_field.html#aab43e3e7ed2d5a47c59825a7877bff38',1,'geo3dml::Field::DataType(ValueType t)'],['../classgeo3dml_1_1_field.html#ab42931bb2a4f886aa9bf1f02e54ac656',1,'geo3dml::Field::DataType() const']]],
   ['datestamp_5f_2',['dateStamp_',['../classgeo3dml_1_1_model_metadata.html#a48d45776767ba5dcdb08bd5f28933a42',1,'geo3dml::ModelMetadata']]],
-  ['dectectfileencoding_3',['DectectFileEncoding',['../classg3dxml_1_1_x_m_l_reader_helper.html#a9a49fc9c20ae52a2eb69555eb94b9b22',1,'g3dxml::XMLReaderHelper']]],
+  ['dectectfileencoding_3',['DectectFileEncoding',['../classg3dxml_1_1_x_m_l_reader_helper.html#a12b331ce86ae1ea9aa733a1411df6dc7',1,'g3dxml::XMLReaderHelper']]],
   ['default_4',['Default',['../classgeo3dml_1_1_texture.html#aa67c4c2da387f2fd1d5dbadd0924268ba7a1920d61156abc05a60135aefe8bc67',1,'geo3dml::Texture']]],
   ['defaultobjectfactory_5',['DefaultObjectFactory',['../classgeo3dml_1_1_default_object_factory.html',1,'geo3dml::DefaultObjectFactory'],['../classgeo3dml_1_1_default_object_factory.html#af03825e68c92a0b7d849a91ff53ea20d',1,'geo3dml::DefaultObjectFactory::DefaultObjectFactory()']]],
   ['defaultobjectfactory_2eh_6',['DefaultObjectFactory.h',['../_default_object_factory_8h.html',1,'']]],

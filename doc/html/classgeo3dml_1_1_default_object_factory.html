@@ -129,6 +129,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84dc4892e10d429c68621a0e83c77316"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad983ee9ac8ec5a07b4a800a366a1398f" id="r_ad983ee9ac8ec5a07b4a800a366a1398f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_t_i_n.html">geo3dml::TIN</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad983ee9ac8ec5a07b4a800a366a1398f">NewTIN</a> () override</td></tr>
 <tr class="separator:ad983ee9ac8ec5a07b4a800a366a1398f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a31604647b599fd93fa2f3ee5ec63a649" id="r_a31604647b599fd93fa2f3ee5ec63a649"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_multi_t_i_n.html">geo3dml::MultiTIN</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31604647b599fd93fa2f3ee5ec63a649">NewMultiTIN</a> () override</td></tr>
+<tr class="separator:a31604647b599fd93fa2f3ee5ec63a649"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90a5d8cfad511b2e269159f91c9057ed" id="r_a90a5d8cfad511b2e269159f91c9057ed"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_corner_point_grid.html">geo3dml::CornerPointGrid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90a5d8cfad511b2e269159f91c9057ed">NewCornerPointGrid</a> () override</td></tr>
 <tr class="separator:a90a5d8cfad511b2e269159f91c9057ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a510b58e34906017f41957b7958970ecb" id="r_a510b58e34906017f41957b7958970ecb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_corner_point_grid.html">geo3dml::CornerPointGrid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a510b58e34906017f41957b7958970ecb">NewCornerPointGrid</a> (int dimI, int dimJ, int dimK) override</td></tr>
@@ -138,10 +140,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad7d896829da6f2eac0cc7f2ffdcb4e7b" id="r_ad7d896829da6f2eac0cc7f2ffdcb4e7b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_triangular_prism_volume.html">geo3dml::TriangularPrismVolume</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7d896829da6f2eac0cc7f2ffdcb4e7b">NewTriangularPrismVolume</a> () override</td></tr>
 <tr class="separator:ad7d896829da6f2eac0cc7f2ffdcb4e7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f3b76ca7458bbbf801f42d743115c8f" id="r_a1f3b76ca7458bbbf801f42d743115c8f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_rectified_grid.html">geo3dml::RectifiedGrid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f3b76ca7458bbbf801f42d743115c8f">NewRectifiedGrid</a> (const <a class="el" href="structgeo3dml_1_1_point3_d.html">geo3dml::Point3D</a> &amp;origin, const <a class="el" href="classgeo3dml_1_1_vector3_d.html">geo3dml::Vector3D</a> &amp;vecI, const <a class="el" href="classgeo3dml_1_1_vector3_d.html">geo3dml::Vector3D</a> &amp;vecJ, const <a class="el" href="classgeo3dml_1_1_vector3_d.html">geo3dml::Vector3D</a> &amp;vecK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0) override</td></tr>
-<tr class="memdesc:a1f3b76ca7458bbbf801f42d743115c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。  <br /></td></tr>
+<tr class="memdesc:a1f3b76ca7458bbbf801f42d743115c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。">RectifiedGrid</a> 对象。  <br /></td></tr>
 <tr class="separator:a1f3b76ca7458bbbf801f42d743115c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a713f472693edca87e921ae2e19b40584" id="r_a713f472693edca87e921ae2e19b40584"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_rectified_grid.html">geo3dml::RectifiedGrid</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a713f472693edca87e921ae2e19b40584">NewRectifiedGrid</a> (const <a class="el" href="structgeo3dml_1_1_point3_d.html">geo3dml::Point3D</a> &amp;origin, double stepI, double stepJ, double stepK, int highI, int highJ, int highK, int lowI=0, int lowJ=0, int lowK=0) override</td></tr>
-<tr class="memdesc:a713f472693edca87e921ae2e19b40584"><td class="mdescLeft">&#160;</td><td class="mdescRight">在网格局部坐标系与全局坐标系重合的条件下，构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。  <br /></td></tr>
+<tr class="memdesc:a713f472693edca87e921ae2e19b40584"><td class="mdescLeft">&#160;</td><td class="mdescRight">在网格局部坐标系与全局坐标系重合的条件下，构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。">RectifiedGrid</a> 对象。  <br /></td></tr>
 <tr class="separator:a713f472693edca87e921ae2e19b40584"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bdbf681469915f8a1d5d2e6056a726a" id="r_a5bdbf681469915f8a1d5d2e6056a726a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_tetrahedron_volume.html">geo3dml::TetrahedronVolume</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bdbf681469915f8a1d5d2e6056a726a">NewTetrahedronVolume</a> () override</td></tr>
 <tr class="separator:a5bdbf681469915f8a1d5d2e6056a726a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -489,6 +491,33 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a id="a31604647b599fd93fa2f3ee5ec63a649" name="a31604647b599fd93fa2f3ee5ec63a649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31604647b599fd93fa2f3ee5ec63a649">&#9670;&#160;</a></span>NewMultiTIN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_multi_t_i_n.html">geo3dml::MultiTIN</a> * geo3dml::DefaultObjectFactory::NewMultiTIN </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a45c218d6c1994ffe90bff3dc539b9ac5">geo3dml::ObjectFactory</a>.</p>
+
+</div>
+</div>
 <a id="af86b62055b19b4f10ddb9073bf3bd4d0" name="af86b62055b19b4f10ddb9073bf3bd4d0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af86b62055b19b4f10ddb9073bf3bd4d0">&#9670;&#160;</a></span>NewPoint()</h2>
 
@@ -583,7 +612,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。 </p>
+<p>构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。">RectifiedGrid</a> 对象。 </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">origin</td><td>网格划分的起始点在全局坐标系中的坐标。 </td></tr>
@@ -599,7 +628,7 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>构造的 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。该指针所指向的对象由调用者负责管理。 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>构造的 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。">RectifiedGrid</a> 对象。该指针所指向的对象由调用者负责管理。 </dd></dl>
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_object_factory.html#a0bef483efa9a1592bd41bfa0b87a63db">geo3dml::ObjectFactory</a>.</p>
 
@@ -672,7 +701,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>在网格局部坐标系与全局坐标系重合的条件下，构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。">RectifiedGrid</a> 对象。 </p>
+<p>在网格局部坐标系与全局坐标系重合的条件下，构造一个 <a class="el" href="classgeo3dml_1_1_rectified_grid.html" title="三维环境下的gml:RectifiedGrid。定义规则网格，以及带坐标变换的规则网格。从v2版本开始支持。">RectifiedGrid</a> 对象。 </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">origin</td><td>网格划分的起始点在全局坐标系中的坐标。 </td></tr>

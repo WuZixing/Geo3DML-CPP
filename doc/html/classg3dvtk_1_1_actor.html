@@ -140,6 +140,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae68bd4dbf6882574491e20cee3ef8025" id="r_ae68bd4dbf6882574491e20cee3ef8025"><td class="memItemLeft" align="right" valign="top">vtkSmartPointer&lt; vtkProp &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae68bd4dbf6882574491e20cee3ef8025">vtkProp_</a></td></tr>
 <tr class="separator:ae68bd4dbf6882574491e20cee3ef8025"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0bc2cc3c3f45590b5390c782af4a9d3" id="r_ac0bc2cc3c3f45590b5390c782af4a9d3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0bc2cc3c3f45590b5390c782af4a9d3">BindGeometry</a> (<a class="el" href="classgeo3dml_1_1_feature.html">geo3dml::Feature</a> *feature, <a class="el" href="classgeo3dml_1_1_geometry.html">geo3dml::Geometry</a> *geo, <a class="el" href="classgeo3dml_1_1_symbolizer.html">geo3dml::Symbolizer</a> *sym)</td></tr>
+<tr class="memdesc:ac0bc2cc3c3f45590b5390c782af4a9d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定要素及其关联的几何体和可视化参数。  <br /></td></tr>
 <tr class="separator:ac0bc2cc3c3f45590b5390c782af4a9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3746bd8a4b8b15ea4170b89cc4d00023" id="r_a3746bd8a4b8b15ea4170b89cc4d00023"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_feature.html">geo3dml::Feature</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3746bd8a4b8b15ea4170b89cc4d00023">GetBindingFeature</a> () const</td></tr>
 <tr class="separator:a3746bd8a4b8b15ea4170b89cc4d00023"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,6 +261,16 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>绑定要素及其关联的几何体和可视化参数。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">feature</td><td>要素。指针所指向的对象由调用者负责管理。 </td></tr>
+    <tr><td class="paramname">geo</td><td>关联的几何对象。指针所指向的对象由调用者负责管理。 </td></tr>
+    <tr><td class="paramname">sym</td><td>关联的可视化参数。指针所指向的对象由调用者负责管理。 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implements <a class="el" href="classgeo3dml_1_1_actor.html#a6a957370c124e46ac50f29cf45869b44">geo3dml::Actor</a>.</p>
 

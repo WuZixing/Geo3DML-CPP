@@ -13,7 +13,8 @@ var searchData=
   ['tomaterial_10',['ToMaterial',['../classg3dvtk_1_1_actor.html#ae777be05ed27c103d0720c27b78199a2',1,'g3dvtk::Actor']]],
   ['topointsymbolizer_11',['ToPointSymbolizer',['../classg3dvtk_1_1_actor.html#a6181d67765e6405d3e6a17dc28c2259c',1,'g3dvtk::Actor']]],
   ['tosurfacesymbolizer_12',['ToSurfaceSymbolizer',['../classg3dvtk_1_1_actor.html#a161414733093db5accc412fd09f61360',1,'g3dvtk::Actor']]],
-  ['triangularprismvolume_13',['TriangularPrismVolume',['../classg3dvtk_1_1_triangular_prism_volume.html#a6b65a335afbe0312b1e319261bae33fb',1,'g3dvtk::TriangularPrismVolume::TriangularPrismVolume()'],['../classgeo3dml_1_1_triangular_prism_volume.html#ab0af56d7f25c3f9c51099ff3b99951eb',1,'geo3dml::TriangularPrismVolume::TriangularPrismVolume()']]],
-  ['truncatedregulargrid_14',['TruncatedRegularGrid',['../classg3dvtk_1_1_truncated_regular_grid.html#aa8828504bc8359d580c3f2f3dae24988',1,'g3dvtk::TruncatedRegularGrid::TruncatedRegularGrid()'],['../classgeo3dml_1_1_truncated_regular_grid.html#a532b883ca1630e0ef4c87b25f522ea56',1,'geo3dml::TruncatedRegularGrid::TruncatedRegularGrid()']]],
-  ['typenameofgeometry_15',['TypeNameOfGeometry',['../classgeo3dml_1_1_object_factory.html#a44aa7864b34964a35ade9ee25a3092fe',1,'geo3dml::ObjectFactory']]]
+  ['triangle_13',['Triangle',['../structg3dvtk_1_1_multi_t_i_n_1_1_triangle.html#a4e1f8ff04656942e37aa44aa3d4edf0f',1,'g3dvtk::MultiTIN::Triangle']]],
+  ['triangularprismvolume_14',['TriangularPrismVolume',['../classg3dvtk_1_1_triangular_prism_volume.html#a6b65a335afbe0312b1e319261bae33fb',1,'g3dvtk::TriangularPrismVolume::TriangularPrismVolume()'],['../classgeo3dml_1_1_triangular_prism_volume.html#ab0af56d7f25c3f9c51099ff3b99951eb',1,'geo3dml::TriangularPrismVolume::TriangularPrismVolume()']]],
+  ['truncatedregulargrid_15',['TruncatedRegularGrid',['../classg3dvtk_1_1_truncated_regular_grid.html#aa8828504bc8359d580c3f2f3dae24988',1,'g3dvtk::TruncatedRegularGrid::TruncatedRegularGrid()'],['../classgeo3dml_1_1_truncated_regular_grid.html#a532b883ca1630e0ef4c87b25f522ea56',1,'geo3dml::TruncatedRegularGrid::TruncatedRegularGrid()']]],
+  ['typenameofgeometry_16',['TypeNameOfGeometry',['../classgeo3dml_1_1_object_factory.html#a44aa7864b34964a35ade9ee25a3092fe',1,'geo3dml::ObjectFactory']]]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['datatype_0',['DataType',['../classgeo3dml_1_1_field.html#aab43e3e7ed2d5a47c59825a7877bff38',1,'geo3dml::Field::DataType(ValueType t)'],['../classgeo3dml_1_1_field.html#ab42931bb2a4f886aa9bf1f02e54ac656',1,'geo3dml::Field::DataType() const']]],
-  ['dectectfileencoding_1',['DectectFileEncoding',['../classg3dxml_1_1_x_m_l_reader_helper.html#a9a49fc9c20ae52a2eb69555eb94b9b22',1,'g3dxml::XMLReaderHelper']]],
+  ['dectectfileencoding_1',['DectectFileEncoding',['../classg3dxml_1_1_x_m_l_reader_helper.html#a12b331ce86ae1ea9aa733a1411df6dc7',1,'g3dxml::XMLReaderHelper']]],
   ['defaultobjectfactory_2',['DefaultObjectFactory',['../classgeo3dml_1_1_default_object_factory.html#af03825e68c92a0b7d849a91ff53ea20d',1,'geo3dml::DefaultObjectFactory']]],
   ['definition_3',['Definition',['../classgeo3dml_1_1_field.html#a1c825099ad02e26053cac48c1dc4042b',1,'geo3dml::Field::Definition(const std::string &amp;s)'],['../classgeo3dml_1_1_field.html#a89a6c214cc53d4097b558b53c3200566',1,'geo3dml::Field::Definition() const']]],
   ['deleteallactors_4',['DeleteAllActors',['../classgeo3dml_1_1_layer.html#a54f009d009fd84d6e44b18f6621157c3',1,'geo3dml::Layer']]],

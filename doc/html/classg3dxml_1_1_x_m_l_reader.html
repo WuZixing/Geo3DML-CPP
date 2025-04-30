@@ -117,6 +117,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1013297dd99a998f061fdfaf6eaa3931" id="r_a1013297dd99a998f061fdfaf6eaa3931"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1013297dd99a998f061fdfaf6eaa3931">~XMLReader</a> ()</td></tr>
 <tr class="separator:a1013297dd99a998f061fdfaf6eaa3931"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a87fb083bfb77a1f82901e1d810c838" id="r_a7a87fb083bfb77a1f82901e1d810c838"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgeo3dml_1_1_object.html">geo3dml::Object</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a87fb083bfb77a1f82901e1d810c838">LoadXMLFile</a> (const std::string &amp;file)</td></tr>
+<tr class="memdesc:a7a87fb083bfb77a1f82901e1d810c838"><td class="mdescLeft">&#160;</td><td class="mdescRight">从XML文件中读取Geo3DML数据。  <br /></td></tr>
 <tr class="separator:a7a87fb083bfb77a1f82901e1d810c838"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classg3dxml_1_1_x_m_l_i_o"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classg3dxml_1_1_x_m_l_i_o')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classg3dxml_1_1_x_m_l_i_o.html">g3dxml::XMLIO</a></td></tr>
 <tr class="memitem:a2aa9d1d66c6d34a09487e3858411b8b6 inherit pub_methods_classg3dxml_1_1_x_m_l_i_o" id="r_a2aa9d1d66c6d34a09487e3858411b8b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classg3dxml_1_1_x_m_l_i_o.html#a2aa9d1d66c6d34a09487e3858411b8b6">XMLIO</a> ()</td></tr>
@@ -208,7 +209,15 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Load Geo3DML data from XML file. The current working directory should be set as the file's direcotry before calling this method. </p>
+
+<p>从XML文件中读取Geo3DML数据。 </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td>XML文件的路径。要求该文件为UTF-8编码。传入的参数file也应是UTF-8编码。 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>返回读取的Geo3DML对象。如果读取失败，则返回nullptr。返回的对象有调用者负责销毁。 </dd></dl>
 
 </div>
 </div>

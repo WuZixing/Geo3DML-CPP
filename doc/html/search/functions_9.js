@@ -9,5 +9,6 @@ var searchData=
   ['modelmetadata_6',['ModelMetadata',['../classgeo3dml_1_1_model_metadata.html#a5477d6af74f1a05ead11f3b1416a83ca',1,'geo3dml::ModelMetadata']]],
   ['modeltypetoname_7',['ModelTypeToName',['../classgeo3dml_1_1_model.html#a047d43012963f13c3534fc9dbc940dbd',1,'geo3dml::Model']]],
   ['multilinestring_8',['MultiLineString',['../classg3dvtk_1_1_multi_line_string.html#a04a4b745fd62dd1f85b19c027028cf05',1,'g3dvtk::MultiLineString::MultiLineString()'],['../classgeo3dml_1_1_multi_line_string.html#ac7b9b5e6bf6476c086a9cf889f3220d0',1,'geo3dml::MultiLineString::MultiLineString()']]],
-  ['multipoint_9',['MultiPoint',['../classg3dvtk_1_1_multi_point.html#ab065756b3ab106c156477196089ef739',1,'g3dvtk::MultiPoint::MultiPoint()'],['../classgeo3dml_1_1_multi_point.html#a01f95e39464248b7d7e0585372fd0fab',1,'geo3dml::MultiPoint::MultiPoint()']]]
+  ['multipoint_9',['MultiPoint',['../classg3dvtk_1_1_multi_point.html#ab065756b3ab106c156477196089ef739',1,'g3dvtk::MultiPoint::MultiPoint()'],['../classgeo3dml_1_1_multi_point.html#a01f95e39464248b7d7e0585372fd0fab',1,'geo3dml::MultiPoint::MultiPoint()']]],
+  ['multitin_10',['MultiTIN',['../classg3dvtk_1_1_multi_t_i_n.html#a98f187011ffeadede258e5e18238a8ad',1,'g3dvtk::MultiTIN::MultiTIN()'],['../classg3dxml_1_1_multi_t_i_n.html#a5653f6caff4bd7538f7cc5583590013e',1,'g3dxml::MultiTIN::MultiTIN()'],['../classgeo3dml_1_1_multi_t_i_n.html#ad1ab6ad972736607225f3374b1ead6ea',1,'geo3dml::MultiTIN::MultiTIN()']]]
 ];

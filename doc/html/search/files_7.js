@@ -6,5 +6,6 @@ var searchData=
   ['model_2eh_3',['Model.h',['../_model_8h.html',1,'']]],
   ['modelmetadata_2eh_4',['ModelMetadata.h',['../_model_metadata_8h.html',1,'']]],
   ['multilinestring_2eh_5',['MultiLineString.h',['../g3dvtk_2_multi_line_string_8h.html',1,'(Global Namespace)'],['../geo3dml_2_multi_line_string_8h.html',1,'(Global Namespace)']]],
-  ['multipoint_2eh_6',['MultiPoint.h',['../g3dvtk_2_multi_point_8h.html',1,'(Global Namespace)'],['../geo3dml_2_multi_point_8h.html',1,'(Global Namespace)']]]
+  ['multipoint_2eh_6',['MultiPoint.h',['../g3dvtk_2_multi_point_8h.html',1,'(Global Namespace)'],['../geo3dml_2_multi_point_8h.html',1,'(Global Namespace)']]],
+  ['multitin_2eh_7',['MultiTIN.h',['../g3dvtk_2_multi_t_i_n_8h.html',1,'(Global Namespace)'],['../g3dxml_2_multi_t_i_n_8h.html',1,'(Global Namespace)'],['../geo3dml_2_multi_t_i_n_8h.html',1,'(Global Namespace)']]]
 ];

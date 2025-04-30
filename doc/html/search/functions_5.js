@@ -14,5 +14,6 @@ var searchData=
   ['filltextvalue_11',['FillTextValue',['../classg3dvtk_1_1_shape_property.html#a528987573eff013eeaf2cd9f0cfa6aec',1,'g3dvtk::ShapeProperty::FillTextValue()'],['../classgeo3dml_1_1_shape_property.html#a0ad868e758d3e3a9a182cb9fede9ee22',1,'geo3dml::ShapeProperty::FillTextValue()']]],
   ['findfeaturebyid_12',['FindFeatureById',['../classgeo3dml_1_1_model.html#a6adee2907db57e828f75664bd99da1e1',1,'geo3dml::Model']]],
   ['findfeatureclass_13',['FindFeatureClass',['../classgeo3dml_1_1_project.html#a797f62465794bc28ee55380a6e292d6a',1,'geo3dml::Project']]],
-  ['formaterrormessagewithposition_14',['FormatErrorMessageWithPosition',['../classg3dxml_1_1_x_m_l_reader_helper.html#a686e04fd2babd4e061012381c221b749',1,'g3dxml::XMLReaderHelper']]]
+  ['formaterrormessageaboutencoding_14',['FormatErrorMessageAboutEncoding',['../classg3dxml_1_1_x_m_l_reader_helper.html#a199b6170ff3d8ea2be14a35e249362e3',1,'g3dxml::XMLReaderHelper']]],
+  ['formaterrormessagewithposition_15',['FormatErrorMessageWithPosition',['../classg3dxml_1_1_x_m_l_reader_helper.html#a686e04fd2babd4e061012381c221b749',1,'g3dxml::XMLReaderHelper']]]
 ];

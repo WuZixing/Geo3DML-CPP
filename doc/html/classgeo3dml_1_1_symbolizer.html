@@ -91,7 +91,7 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classgeo3dml_1_1_symbolizer-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">geo3dml::Symbolizer Class Reference</div></div>
+  <div class="headertitle"><div class="title">geo3dml::Symbolizer Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -118,6 +118,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af748da319e6d14348fbfc6f5ccec416c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0fb3841d5a06142506481e9120761d7" id="r_ae0fb3841d5a06142506481e9120761d7"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae0fb3841d5a06142506481e9120761d7">~Symbolizer</a> ()</td></tr>
 <tr class="separator:ae0fb3841d5a06142506481e9120761d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c7b36e27d58ee5d01d55f4e5ea5d5d" id="r_aa9c7b36e27d58ee5d01d55f4e5ea5d5d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgeo3dml_1_1_symbolizer.html">Symbolizer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa9c7b36e27d58ee5d01d55f4e5ea5d5d">Clone</a> () const =0</td></tr>
+<tr class="memdesc:aa9c7b36e27d58ee5d01d55f4e5ea5d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">复制可视化参数对象。  <br /></td></tr>
+<tr class="separator:aa9c7b36e27d58ee5d01d55f4e5ea5d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Visualization parameter. </p>
@@ -161,6 +164,37 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa9c7b36e27d58ee5d01d55f4e5ea5d5d" name="aa9c7b36e27d58ee5d01d55f4e5ea5d5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c7b36e27d58ee5d01d55f4e5ea5d5d">&#9670;&#160;</a></span>Clone()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classgeo3dml_1_1_symbolizer.html">Symbolizer</a> * geo3dml::Symbolizer::Clone </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>复制可视化参数对象。 </p>
+<dl class="section return"><dt>Returns</dt><dd>复制的可视化参数对象。该指针所指向的对象由调用者负责管理。 </dd></dl>
+
+<p>Implemented in <a class="el" href="classgeo3dml_1_1_geo_discrete_coverage_symbolizer.html#a174d70ecbd30b41ec427013a55a9119b">geo3dml::GeoDiscreteCoverageSymbolizer</a>, <a class="el" href="classgeo3dml_1_1_line_symbolizer.html#aa6d7295684126ffb823ec70f63ed9e6f">geo3dml::LineSymbolizer</a>, <a class="el" href="classgeo3dml_1_1_point_symbolizer.html#ac19df94021f4c1a294a61f60ee0e201f">geo3dml::PointSymbolizer</a>, and <a class="el" href="classgeo3dml_1_1_surface_symbolizer.html#aa2bb5f88564bf09ce16c21bfe0568566">geo3dml::SurfaceSymbolizer</a>.</p>
 
 </div>
 </div>
