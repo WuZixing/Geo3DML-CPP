@@ -31,6 +31,7 @@ list(APPEND G3DVTK_HEADERS
 	Utils.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ObjectFactory.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/TIN.h
+	${PROJECT_SOURCE_DIR}/include/g3dvtk/MultiTIN.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/CornerPointGrid.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/ShapeProperty.h
 	${PROJECT_SOURCE_DIR}/include/g3dvtk/LineString.h

@@ -1,5 +1,6 @@
 #include <g3dxml/XMLGeometryReader.h>
 #include <g3dxml/XMLTINReader.h>
+#include <g3dxml/MultiTIN.h>
 #include <g3dxml/XMLCornerPointGridReader.h>
 #include <g3dxml/XMLGeoDiscreteCoverageReader.h>
 #include <g3dxml/XMLLineStringReader.h>
@@ -139,6 +140,12 @@ geo3dml::Geometry* XMLGeometryReader::ReadShape(xmlTextReaderPtr reader) {
 				geo = trGridReader.ReadGrid(reader);
 				if (geo == nullptr) {
 					SetStatus(false, trGridReader.Error());
+				}
+			} else if (geo3dml::IsiEqual(localName, MultiTIN::Element)) {
+				g3dxml::MultiTIN mTinReader(g3dFactory_);
+                geo = mTinReader.Read(reader);
+				if (geo == nullptr) {
+                    SetStatus(false, mTinReader.Error());
 				}
 			}
 		}

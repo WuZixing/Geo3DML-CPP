@@ -6,8 +6,10 @@
 #include "FeatureClass.h"
 #include "Feature.h"
 #include "TIN.h"
+#include "MultiTIN.h"
 #include "CornerPointGrid.h"
 #include "LineString.h"
+#include "MultiLineString.h"
 #include "Point.h"
 #include "MultiPoint.h"
 #include "Map.h"
@@ -17,7 +19,6 @@
 #include "GeoDiscreteCoverageSymbolizer.h"
 #include "FeatureTypeStyle.h"
 #include "Annotation.h"
-#include "MultiLineString.h"
 #include "TriangularPrismVolume.h"
 #include "RectifiedGrid.h"
 #include "TetrahedronVolume.h"
@@ -59,6 +60,8 @@ namespace geo3dml {
 		virtual MultiLineString* NewMultiLineString() = 0;
 
 		virtual TIN* NewTIN() = 0;
+
+		virtual MultiTIN* NewMultiTIN() = 0;
 
 		virtual CornerPointGrid* NewCornerPointGrid() = 0;
 

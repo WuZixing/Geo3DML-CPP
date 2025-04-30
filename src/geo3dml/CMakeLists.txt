@@ -21,6 +21,7 @@ list(APPEND GEO3DML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/geo3dml/ObjectFactory.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Geometry.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/TIN.h
+	${PROJECT_SOURCE_DIR}/include/geo3dml/MultiTIN.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/CornerPointGrid.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/Context.h
 	${PROJECT_SOURCE_DIR}/include/geo3dml/SceneStyle.h

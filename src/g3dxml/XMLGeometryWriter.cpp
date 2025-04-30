@@ -1,4 +1,5 @@
 #include <g3dxml/XMLGeometryWriter.h>
+#include <g3dxml/MultiTIN.h>
 
 using namespace g3dxml;
 
@@ -16,50 +17,56 @@ bool XMLGeometryWriter::Write(geo3dml::Geometry* geo, std::ostream& output, Sche
 	if (tin != nullptr) {
 		WriteTIN(tin, output);
 	} else {
-		geo3dml::LineString* line = dynamic_cast<geo3dml::LineString*>(geo);
-		if (line != nullptr) {
-			WriteLineString(line, output);
+		geo3dml::MultiTIN* mTin = dynamic_cast<geo3dml::MultiTIN*>(geo);
+		if (mTin != nullptr) {
+			MultiTIN mTinWriter(nullptr);
+			mTinWriter.Write(mTin, output);
 		} else {
-			geo3dml::MultiLineString* mLine = dynamic_cast<geo3dml::MultiLineString*>(geo);
-			if (mLine != nullptr) {
-				WriteMultiLineString(mLine, output);
+			geo3dml::LineString* line = dynamic_cast<geo3dml::LineString*>(geo);
+			if (line != nullptr) {
+				WriteLineString(line, output);
 			} else {
-				geo3dml::Point* point = dynamic_cast<geo3dml::Point*>(geo);
-				if (point != nullptr) {
-					WritePoint(point, output);
+				geo3dml::MultiLineString* mLine = dynamic_cast<geo3dml::MultiLineString*>(geo);
+				if (mLine != nullptr) {
+					WriteMultiLineString(mLine, output);
 				} else {
-					geo3dml::Annotation* annotation = dynamic_cast<geo3dml::Annotation*>(geo);
-					if (annotation != nullptr) {
-						WriteAnnotation(annotation, output);
+					geo3dml::Point* point = dynamic_cast<geo3dml::Point*>(geo);
+					if (point != nullptr) {
+						WritePoint(point, output);
 					} else {
-						geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
-						if (mPoint != nullptr) {
-							WriteMultiPoint(mPoint, output);
+						geo3dml::Annotation* annotation = dynamic_cast<geo3dml::Annotation*>(geo);
+						if (annotation != nullptr) {
+							WriteAnnotation(annotation, output);
 						} else {
-							geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
-							if (cornerGrid != nullptr) {
-								WriteCornerPointGrid(cornerGrid, output);
+							geo3dml::MultiPoint* mPoint = dynamic_cast<geo3dml::MultiPoint*>(geo);
+							if (mPoint != nullptr) {
+								WriteMultiPoint(mPoint, output);
 							} else {
-								if (v != Schema_1_0) {
-									geo3dml::TriangularPrismVolume* gtpGrid = dynamic_cast<geo3dml::TriangularPrismVolume*>(geo);
-									if (gtpGrid != nullptr) {
-										WriteTriangularPrismVolume(gtpGrid, output);
-									} else {
-										geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
-										if (rectGrid != nullptr) {
-											WriteRectifiedGrid(rectGrid, output);
+								geo3dml::CornerPointGrid* cornerGrid = dynamic_cast<geo3dml::CornerPointGrid*>(geo);
+								if (cornerGrid != nullptr) {
+									WriteCornerPointGrid(cornerGrid, output);
+								} else {
+									if (v != Schema_1_0) {
+										geo3dml::TriangularPrismVolume* gtpGrid = dynamic_cast<geo3dml::TriangularPrismVolume*>(geo);
+										if (gtpGrid != nullptr) {
+											WriteTriangularPrismVolume(gtpGrid, output);
 										} else {
-											geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
-											if (tetraVolume != nullptr) {
-												WriteTetrahedronVolume(tetraVolume, output);
+											geo3dml::RectifiedGrid* rectGrid = dynamic_cast<geo3dml::RectifiedGrid*>(geo);
+											if (rectGrid != nullptr) {
+												WriteRectifiedGrid(rectGrid, output);
 											} else {
-												geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
-												if (cuboidVolume != nullptr) {
-													WriteCuboidVolume(cuboidVolume, output);
+												geo3dml::TetrahedronVolume* tetraVolume = dynamic_cast<geo3dml::TetrahedronVolume*>(geo);
+												if (tetraVolume != nullptr) {
+													WriteTetrahedronVolume(tetraVolume, output);
 												} else {
-													geo3dml::TruncatedRegularGrid* trGrid = dynamic_cast<geo3dml::TruncatedRegularGrid*>(geo);
-													if (trGrid != nullptr) {
-														WriteTruncatedRegularGrid(trGrid, output);
+													geo3dml::CuboidVolume* cuboidVolume = dynamic_cast<geo3dml::CuboidVolume*>(geo);
+													if (cuboidVolume != nullptr) {
+														WriteCuboidVolume(cuboidVolume, output);
+													} else {
+														geo3dml::TruncatedRegularGrid* trGrid = dynamic_cast<geo3dml::TruncatedRegularGrid*>(geo);
+														if (trGrid != nullptr) {
+															WriteTruncatedRegularGrid(trGrid, output);
+														}
 													}
 												}
 											}

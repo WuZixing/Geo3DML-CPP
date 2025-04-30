@@ -1,5 +1,6 @@
 #include <g3dvtk/ObjectFactory.h>
 #include <g3dvtk/TIN.h>
+#include <g3dvtk/MultiTIN.h>
 #include <g3dvtk/CornerPointGrid.h>
 #include <g3dvtk/LineString.h>
 #include <g3dvtk/ShapeProperty.h>
@@ -46,6 +47,10 @@ geo3dml::MultiLineString* ObjectFactory::NewMultiLineString() {
 
 geo3dml::TIN* ObjectFactory::NewTIN() {
 	return new TIN();
+}
+
+geo3dml::MultiTIN* ObjectFactory::NewMultiTIN() {
+	return new MultiTIN();
 }
 
 geo3dml::CornerPointGrid* ObjectFactory::NewCornerPointGrid() {

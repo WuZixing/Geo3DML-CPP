@@ -101,6 +101,7 @@ list(APPEND G3DXML_HEADERS
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLCuboidVolumeReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLTruncatedRegularGridReader.h
 	${PROJECT_SOURCE_DIR}/include/g3dxml/XMLMultiLineStringReader.h
+	${PROJECT_SOURCE_DIR}/include/g3dxml/MultiTIN.h
 )
 
 include_directories(${GEO3DML_INCLUDE_DIRS})

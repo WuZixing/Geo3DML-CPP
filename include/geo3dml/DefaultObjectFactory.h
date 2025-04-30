@@ -19,6 +19,7 @@ namespace geo3dml {
 		virtual geo3dml::LineString* NewLineString() override;
 		virtual geo3dml::MultiLineString* NewMultiLineString() override;
 		virtual geo3dml::TIN* NewTIN() override;
+		virtual geo3dml::MultiTIN* NewMultiTIN() override;
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid() override;
 		virtual geo3dml::CornerPointGrid* NewCornerPointGrid(int dimI, int dimJ, int dimK) override;
 		virtual geo3dml::Annotation* NewAnnotation() override;

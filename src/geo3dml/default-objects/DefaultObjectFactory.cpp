@@ -10,6 +10,7 @@
 #include "MultiLineString.h"
 #include "Point.h"
 #include "TIN.h"
+#include "MultiTIN.h"
 #include "TetrahedronVolume.h"
 #include "TriangularPrismVolume.h"
 #include "TruncatedRegularGrid.h"
@@ -46,6 +47,10 @@ MultiLineString* DefaultObjectFactory::NewMultiLineString() {
 
 TIN* DefaultObjectFactory::NewTIN() {
 	return new geometry::TIN();
+}
+
+MultiTIN* DefaultObjectFactory::NewMultiTIN() {
+	return new geometry::MultiTIN();
 }
 
 CornerPointGrid* DefaultObjectFactory::NewCornerPointGrid() {
