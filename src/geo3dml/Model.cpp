@@ -1,5 +1,6 @@
 #include <geo3dml/Model.h>
 #include <geo3dml/Utils.h>
+#include <algorithm>
 
 using namespace geo3dml;
 
